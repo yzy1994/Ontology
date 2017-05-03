@@ -1,0 +1,49 @@
+﻿.centerLogin {
+	position: absolute;
+	width: 664px;
+	height: 339px;
+	left: 50%;
+	top: 50%;
+	margin-left: -332px;
+	margin-top: -170px;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.login {
+	margin-top: 100px;
+	margin-left: 380px;
+}
+
+.login li {
+	height: 35px;
+	overflow: hidden;
+}
+
+#password {
+	margin-left: 10px;
+}
+
+.btn {
+	margin-left: 435px;
+	margin-top: 20px;
+}
+
+.txt {
+	width: 150px;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+	border: 0px;
+	padding-left: 3px;
+	color: #999999;
+	background: url(../../images/login/txt.png) no-repeat left center;
+}
+
+#submitBt {
+	display: none;
+}

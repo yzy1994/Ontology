@@ -1,0 +1,76 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:task="http://www.springframework.org/schema/task"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		        http://www.springframework.org/schema/aop 
+		        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		        http://www.springframework.org/schema/context 
+		        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		        http://www.springframework.org/schema/task
+				http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		         http://www.springframework.org/schema/util
+				http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	
+	<!-- 开启AOP监听 只对当前配置文件有效 -->
+	<aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="true"/>
+	
+	<context:annotation-config />
+
+	<!-- 扫描注解Bean -->
+	<context:component-scan base-package="com.philips"/>
+	
+	<import resource="spring/spring-cache.xml" />
+	<import resource="spring/spring-dao.xml" />
+	
+		
+	<!-- <import resource="spring/spring-dao-default.xml" /> -->
+	<import resource="spring/spring-dao-audit-default.xml" />
+	<import resource="spring/spring-validation.xml" />
+    <import resource="spring/spring-audit.xml" />
+    <import resource="spring/spring-el.xml" />
+	<import resource="spring/spring-enumitem.xml" />
+	<import resource="spring/spring-log.xml" />
+	<import resource="spring/spring-scope.xml" />
+	<import resource="spring/spring-menu.xml" />
+	<import resource="spring/spring-permission.xml" />
+    <import resource="security/shiro-security.xml" />
+    <import resource="spring/spring-functionArea.xml" />
+	<import resource="spring/spring-config.xml" />
+	
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:config/application.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+    <bean id="operatorProvider" class="com.philips.ci.pixiu.web.util.ProductOperatorProvider"/>
+    
+	<bean id="resourceBundleProvider" class="com.philips.ci.core.web.util.JSFResourceBundleProvider"/>
+	
+	<bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+	
+  	<bean id="logLevelConfig" class="com.philips.ci.pixiu.web.util.AppLogLevelConfig"/>
+  	
+  	<bean id="defaultConfig" class="com.philips.ci.core.config.DefaultConfiguration">
+  		<property name="internalConfig">
+  			<bean class="com.philips.ci.core.config.CenterConfiguration">
+  				<constructor-arg index="0" value="classpath:config/config-center.xml"/>
+  			</bean>
+  		</property>
+	</bean>
+	
+	<util:set id="supportLanguages" set-class="java.util.HashSet">  
+	    <value>zh-cn</value>
+	    <value>en</value>
+	</util:set>
+
+</beans>

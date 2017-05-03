@@ -1,0 +1,120 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Microsoft YaHei', Verdana, 'SimSun', 'Lucida Grande',
+		'Trebuchet MS', Helvetica, sans-serif;
+	letter-spacing: normal;
+}
+
+body {
+	padding: 0;
+	font-size: 14px;
+	height: 1%;
+	color: black;
+	background: url("../../images/login/page-bg.jpg") repeat left top;
+}
+
+#Container {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto; /*设置整个容器在浏览器中水平居中*/
+	/*background: red;*/
+}
+
+#Header {
+	height: 80px;
+	/*background: purple;*/
+	background: url("../images/login/title.jpg");
+}
+
+#logo {
+	padding-left: 50px;
+	padding-top: 20px;
+	padding-bottom: 50px;
+}
+
+#Content {
+	height: 600px;
+	/*此处对容器设置了高度，一般不建议对容器设置高度，一般使用overflow:auto;属性设置容器根据内容自适应高度，如果不指定高度或不设置自适应高度，容器将默认为1个字符高度，容器下方的布局元素（footer）设置margin-top:属性将无效*/
+	margin-top: 10px; /*此处讲解margin的用法，设置content与上面header元素之间的距离*/
+	margin-bottom: 10px;
+	/*background: green;*/
+}
+
+#Content-Left {
+	height: 100%;
+	width: 18%;
+	/*margin: 20px; 设置元素跟其他元素的距离为20像素*/
+	margin-left: 1%;
+	float: left; /*设置浮动，实现多列效果，div+Css布局中很重要的*/
+	/*background: yellow;*/
+	background: rgb(175, 222, 252);
+}
+
+#Content-Main {
+	height: 100%;
+	width: 79%;
+	margin-left: 1%;
+	margin-right: 1%;
+	/*margin: 20px;设置元素跟其他元素的距离为20像素*/
+	float: left;
+	/*设置浮动，实现多列效果，div+Css布局中很重要的*/
+	background: orange;
+	background: rgb(213, 231, 253);
+	float: left;
+}
+
+ul {
+	margin-top: 10%;
+	margin-left: 10%;
+}
+
+li {
+	margin-top: 5%;
+}
+
+.secTitle {
+	margin-top: 5px;
+	text-align: center;
+	font-size: 24px;
+}
+
+#secLabel1 {
+	margin-top: 10px;
+}
+
+.thrTitle {
+	margin-top: 2px;
+	margin-bottom: 3px;
+}
+
+#thrLabel1 {
+	margin-left: 5%;
+}
+
+#thrLabel2 {
+	margin-left: 5%;
+}
+
+#thrLabel3 {
+	margin-left: 5%;
+}
+
+#calBut {
+	margin-left: 5%;
+}
+/*注：Content-Left和Content-Main元素是Content元素的子元素，两个元素使用了float:left;设置成两列，这个两个元素的宽度和这个两个元素设置的padding、margin的和一定不能大于父层Content元素的宽度，否则设置列将失败*/
+#Footer {
+	height: 37px;
+	background: pink;
+	background: rgb(185, 214, 253);
+}
+
+.allTable {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.Clear {
+	clear: both;
+}

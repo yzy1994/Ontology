@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root className="com.shu.sil.eo.buildont.pojo.EventCls">
+  <EventCls>
+    <eid>sdfa</eid>
+    <ecn>sdfsdf</ecn>
+    <ets>从左边选择你的地区,</ets>
+    <Time>
+      <timeType>确切时间</timeType>
+    </Time>
+    <Environ>
+      <envType>虚拟环境</envType>
+      <ets>高速公路</ets>
+    </Environ>
+  </EventCls>
+</root>

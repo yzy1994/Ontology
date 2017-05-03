@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.shu.skytorif.mapper.EnvOntLatMapper">
+	<resultMap id="BaseResultMap" type="com.di.ifin.zeus.admin.bont.pojo.EnvOntLat">
+		<id column="oid" property="oid" jdbcType="INTEGER" />
+		<result column="latsid" property="latsid" jdbcType="VARCHAR" />
+		<result column="latname" property="latname" jdbcType="VARCHAR" />
+		<result column="parentsid" property="parentsid" jdbcType="VARCHAR" />
+		<result column="latnote" property="latnote" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		oid, latsid, latname, parentsid, latnote
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from env_ont_lat
+		where oid = #{oid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		env_ont_lat
+		where oid = #{oid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.di.ifin.zeus.admin.bont.pojo.EnvOntLat">
+		insert into env_ont_lat (oid,
+		latsid, latname,
+		parentsid, latnote)
+		values (#{oid,jdbcType=INTEGER},
+		#{latsid,jdbcType=VARCHAR},
+		#{latname,jdbcType=VARCHAR},
+		#{parentsid,jdbcType=VARCHAR}, #{latnote,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.di.ifin.zeus.admin.bont.pojo.EnvOntLat">
+		insert into env_ont_lat
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="oid != null">
+				oid,
+			</if>
+			<if test="latsid != null">
+				latsid,
+			</if>
+			<if test="latname != null">
+				latname,
+			</if>
+			<if test="parentsid != null">
+				parentsid,
+			</if>
+			<if test="latnote != null">
+				latnote,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="oid != null">
+				#{oid,jdbcType=INTEGER},
+			</if>
+			<if test="latsid != null">
+				#{latsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latname != null">
+				#{latname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentsid != null">
+				#{parentsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latnote != null">
+				#{latnote,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.di.ifin.zeus.admin.bont.pojo.EnvOntLat">
+		update env_ont_lat
+		<set>
+			<if test="latsid != null">
+				latsid = #{latsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latname != null">
+				latname = #{latname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentsid != null">
+				parentsid = #{parentsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latnote != null">
+				latnote = #{latnote,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where oid = #{oid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.di.ifin.zeus.admin.bont.pojo.EnvOntLat">
+		update env_ont_lat
+		set latsid = #{latsid,jdbcType=VARCHAR},
+		latname =
+		#{latname,jdbcType=VARCHAR},
+		parentsid = #{parentsid,jdbcType=VARCHAR},
+		latnote = #{latnote,jdbcType=VARCHAR}
+		where oid =
+		#{oid,jdbcType=INTEGER}
+	</update>
+	<select id="queryAllEnvOntLatList" resultType="envOntLat">
+		select * from
+		env_ont_lat
+	</select>
+
+	<select id="queryObjOntLatSonByLatSid" parameterType="string"
+		resultType="eveOntLat">
+		select * from env_ont_lat where parentsid=#{value}
+	</select>
+
+	<delete id="removeObjOntLatByLatSid" parameterType="string">
+		delete from
+		env_ont_lat where latsid=#{value}
+	</delete>
+
+	<insert id="createOntLat" parameterType="envOntLat"
+		useGeneratedKeys="true" keyProperty="oid">
+		insert into env_ont_lat
+		(latsid,latname,parentsid,latnote)
+		values(#{latSid},#{latName},#{parentSid},#{latNote})
+	</insert>
+	<update id="updateOntLat" parameterType="envOntLat">
+		update env_ont_lat
+		set
+		latsid=#{latSid},latname=#{latName},parentsid=#{parentSid},latnote=#{latNote}
+		where oid=#{oid}
+	</update>
+	<select id="queryOntLatByLatSid" parameterType="string"
+		resultType="envOntLat">
+		select * from env_ont_lat where latsid=#{value}
+	</select>
+
+	<select id="queryOntLatByLatName" parameterType="string"
+		resultType="envOntLat">
+		select * from env_ont_lat where latname=#{value}
+	</select>
+</mapper>

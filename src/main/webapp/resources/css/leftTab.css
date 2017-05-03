@@ -1,0 +1,11 @@
+.leftContainer{background:#FFF; width:100%; clear:both; margin-top:1px; _margin-top:-1px;} 
+.sub-con{height:570px; width:100%; background:#FFF; display:block;} 
+.cur-sub-con{ display:block;} 
+.sub-con a{ line-height:40px} 
+.sub-con p{ text-align:center} 
+.leftNav{ width:100%; height:28px; margin-left:10px;} 
+.leftNav ul{width:100%;; height:28px;} 
+.leftNav ul li{ list-style:none; display:inline-block;width:60px; height:28px;line-height:28px; text-align:center;margin-left:-9px;*float:left;*margin-left:-1px;} 
+.leftNav ul li a{ background:#fff;border:1px solid #3CF; text-decoration:none; color:#000; height:28px;display:block;} 
+.leftNav ul li a:hover{ background:#CCEDFB} 
+.leftNav ul li a.cur{ z-index:9999;border-bottom:1px solid #FFF; color:#F00;} 

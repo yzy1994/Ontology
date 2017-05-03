@@ -1,0 +1,1209 @@
+﻿asdfASDASDADFSF
+SDFSADFHSDFHSDF
+
+SD
+FSADFASDFSAFD
+中国
+
+
+var findNextPub;
+var findStrPub;
+
+var findNextPub;
+var findStrPub;
+var findResultPub;
+
+
+ <input type="text" id="oldTextId" />输入替换的字符
+     <input type="text" id="replaceTextId" />输入新字符
+
+
+
+
+/**
+* 如果爬虫需要抽取Javascript生成的数据，可以使用HtmlUnitDriver
+* HtmlUnitDriver可以用page.getDriver来生成
+* @author hu
+*/
+public class DemoJSCrawler extends DeepCrawler{
+
+public DemoJSCrawler(String crawlPath) {
+super(crawlPath);
+}
+
+@Override
+public Links visitAndGetNextLinks(Page page) {
+/*HtmlUnitDriver可以抽取JS生成的数据*/
+HtmlUnitDriver driver=page.getDriver(BrowserVersion.CHROME);
+/*HtmlUnitDriver也可以像Jsoup一样用CSS SELECTOR抽取数据
+关于HtmlUnitDriver的文档请查阅selenium相关文档*/
+List<WebElement> divInfos=driver.findElementsByCssSelector("h3>a[id^=uigs]");
+for(WebElement divInfo:divInfos){
+System.out.println(divInfo.getText());
+}
+return null;
+}
+
+public static void main(String[] args) throws Exception{
+DemoJSCrawler crawler=new DemoJSCrawler("/home/hu/data/wb");
+for(int page=1;page<=5;page++)
+crawler.addSeed("http://www.sogou.com/web?query="+URLEncoder.encode("编程")+"&page="+page);
+crawler.start(1);
+}
+
+
+
+
+}
+
+
+         import cn.edu.hfut.dmic.webcollector.crawler.DeepCrawler;
+	import cn.edu.hfut.dmic.webcollector.model.Links;
+	import cn.edu.hfut.dmic.webcollector.model.Page;
+	import com.gargoylesoftware.htmlunit.BrowserVersion;
+	import java.net.URLEncoder;
+	import java.util.List;
+	import org.openqa.selenium.WebElement;
+	import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+
+
+<!--?xml version="1.0" encoding="GBK"?-->
+<html class="ks-trident0 ks-trident ks-ie8 ks-ie">
+ <head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+  <meta charset="gbk" /> 
+  <meta name="format-detection" content="telephone=no, address=no" /> 
+  <link rel="dns-prefetch" href="//detailskip.taobao.com" /> 
+  <link rel="dns-prefetch" href="//g.alicdn.cn" /> 
+  <link rel="dns-prefetch" href="//gtms01.alicdn.com" /> 
+  <link rel="dns-prefetch" href="//gtms02.alicdn.com" /> 
+  <link rel="dns-prefetch" href="//gtms03.alicdn.com" /> 
+  <link rel="dns-prefetch" href="//gtms04.alicdn.com" /> 
+  <link rel="dns-prefetch" href="//gd1.alicdn.com" /> 
+  <link rel="dns-prefetch" href="//gd2.alicdn.com" /> 
+  <link rel="dns-prefetch" href="//gd3.alicdn.com" /> 
+  <link rel="dns-prefetch" href="//gd4.alicdn.com" /> 
+  <meta name="renderer" content="webkit" /> 
+  <meta name="description" content="欢迎前来淘宝网实力旺铺，选购正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具,想了解更多正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具，请进入广州樱花卫厨有限公司的高端品牌电器商城实力旺铺，更多商品任你选购" /> 
+  <meta name="keywords" content="淘宝,掏宝,网上购物,店铺, 正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具 ." /> 
+  <meta name="data-spm" content="2013" /> 
+  <meta name="microscope-data" content="pageId=570372042;prototypeId=2;siteId=4; shopId=108247715; userid=1934332207;" /> 
+  <title>
+      正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具-淘宝网
+    </title> 
+  <link rel="stylesheet" href="http://g.tbcdn.cn/tb/??global/3.3.9/global-min.css,item-detail/2.0.91/index-min.css" /> 
+  <script>
+//<![CDATA[
+
+ function now(){ return +new Date}
+ g_config = {
+ startTime: now,
+ online:  true ,
+ prefetch:[],
+ beacon:{},   timing:[],   clock:[],   t:"20131018",  ver:"2.0.91",
+ st:"201404041900",
+ shopVer:2,
+ appId: 1 ,
+ itemId:"37389077469",
+ shopId:"108247715",
+ pageId:"37389077469",
+ assetsHost:"http://a.tbcdn.cn",
+ sellerNick:"广州樱花卫厨有限公司",
+ sellerId:"1934332207",
+ shopName: "\u9AD8\u7AEF\u54C1\u724C\u7535\u5668\u5546\u57CE",
+ enable:true,  newDomain:true,  webp:true,  descWebP:false,   asyncStock:true,
+ sibFirst:true,   cdn:true,  m_ratio:20,
+ p:1.0,     type:"cex"
+   ,counterApi:"http://count.tbcdn.cn/counter3?inc=ICVT_7_37389077469&sign=953802fd93850492068721eeb682df073060a&keys=DFX_200_1_37389077469,ICVT_7_37389077469,ICCP_1_37389077469,SCCP_2_108247715"
+     ,rateCounterApi:"http://count.tbcdn.cn/counter3?keys=SM_368_sm-1934332207,ICE_3_feedcount-37389077469,SM_368_dsr-1934332207"
+     ,priceCutUrl:"http://detailskip.taobao.com/json/pricecutStatic.htm?id=37389077469&rootCatId=50022703"
+     ,toolbar:{delay:30, startTime:1417363200000,endTime:1418399999000}     ,lazyload:'#J_DivItemDesc'   ,ap_mods: {poc: [0.001],exit: [0.005],jstracker: [0.0001]}
+ ,delayInsurance: false
+,tadComponetCdn: true
+   };
+
+     g_config.tadInfo = {"tad_second_area":[{"name":"掌柜推荐","type":4}],"tad_first_area":[{"name":"掌柜推荐","type":4},{"name":"搭配套餐","type":8}]};
+ 
+     g_config.hasContract = true;
+ 
+   
+         
+ g_config.dynamicScript = function(f,c){var e=document,d=e.createElement("script");d.src=f;if(c){for(var b in c){d[b]=c[b];}};e.getElementsByTagName("head")[0].appendChild(d)};
+   g_config.dynamicScript("http://dsc.taobaocdn.com/i2/370/890/37389077469/TB1QMMOGVXXXXcvXXXX8qtpFXXX.desc%7Cvar%5Edesc%3Bsign%5E3b50e0238ca95148cb3aa66314094d55%3Blang%5Egbk%3Bt%5E1419603349")    
+//]]>
+    </script> 
+  <script src="http://dsc.taobaocdn.com/i2/370/890/37389077469/TB1QMMOGVXXXXcvXXXX8qtpFXXX.desc%7Cvar%5Edesc%3Bsign%5E3b50e0238ca95148cb3aa66314094d55%3Blang%5Egbk%3Bt%5E1419603349">
+    </script> 
+  <link rel="shortcut icon" href="http://www.taobao.com/favicon.ico" type="image/x-icon" /> 
+  <link rel="canonical" href="http://item.taobao.com/item.htm?id=37389077469" /> 
+  <script type="text/javascript" src="http://a.tbcdn.cn/s/fdc/??spm.js,spmact.js?v=141204">
+    </script> 
+  <script src="http://detailskip.taobao.com/json/sib.htm?itemId=37389077469&amp;sellerId=1934332207&amp;p=1&amp;rcid=50022703&amp;sts=404508672,1170940490141417476,70368744210432,70373041259523&amp;chnl=pc&amp;price=69800&amp;shopId=&amp;vd=1&amp;skil=false&amp;pf=1&amp;al=false&amp;ap=1&amp;ss=1&amp;free=0&amp;st=1&amp;ct=1&amp;ns=1&amp;prior=1&amp;ref=">
+    </script> 
+ </head> 
+ <body data-spm="1" class=" tab-active-index-0 page-detail   detached  "> 
+  <script id="tb-beacon-aplus" src="//a.tbcdn.cn/s/aplus_v2.js" exparams="category=item%5f50015382&amp;userid=&amp;at_isb=0&amp;at_autype=5%5f108247715&amp;aplus&amp;yunid=&amp;&amp;asid=AADKSqFUS1IW5OQQWZs=">
+    </script> 
+  <script>
+//<![CDATA[
+
+with(document)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("exparams","category=item%5f50015382&userid=&at_isb=0&at_autype=5%5f108247715&aplus&yunid=&&asid=AADKSqFUS1IW5OQQWZs=",id="tb-beacon-aplus",src=(location>"https"?"//s":"//a")+".tbcdn.cn/s/aplus_v2.js")
+
+//]]>
+    </script> 
+  <script>
+//<![CDATA[
+
+if(!g_config.vdata){g_config.vdata={};}
+g_config.vdata.viewer={"id":"", "ct":"", "tnik":unescape(unescape(""))};
+g_config.vdata.sys={"now":1419856586000};
+
+//]]>
+    </script> 
+  <script>
+//<![CDATA[
+g_config.vdata.sys.toggle={
+ "thumb": false,
+ "v":{"s1212v":"1"},
+ "p":1.0,
+ "dcP":"true",
+ "sl":3000
+}
+//]]>
+    </script> 
+  <script>
+//<![CDATA[
+
+(function(){
+      g_config.DyBase={iurl:"http://item.taobao.com",purl:"http://paimai.taobao.com",spurl:"http://archer.taobao.com",durl:"http://design.taobao.com",lgurl:"https://login.taobao.com/member/login.jhtml?redirectURL=http%3A%2F%2Flocal_jboss%2Fitem.htm%3Fspm%3Da219r.lm5179.14.1.1OudwS%26id%3D37389077469%26ns%3D1%26abbucket%3D11%26mt%3D%26mt%3D",
+surl:"http://upload.taobao.com", shurl:"http://shuo.taobao.com", murl:"http://meal.taobao.com" }; g_config.idata={
+ item:{
+ id:"37389077469",title:"\u6B63\u54C1WONDERFLOWER\u71C3\u6C14\u7076\u5D4C\u5165\u5F0F\u7164\u6C14\u7076\u53CC\u7076\u53F0\u5F0F\u6DB2\u5316\u5929\u7136\u6C14\u7076\u5177\u7089\u5177",
+ skuComponentFirst: 'true',
+  sellerNickGBK:'%B9%E3%D6%DD%D3%A3%BB%A8%CE%C0%B3%F8%D3%D0%CF%DE%B9%AB%CB%BE',
+ sellerNick:'广州樱花卫厨有限公司',
+ rcid:'50022703', cid:'50015382', virtQuantity:'2', holdQuantity:'0', edit:true, status:0,xjcc:false,
+desc:false,
+price:698.00,
+ bnow:true, prepay:true, dbst:1419603349000,tka:false,
+ chong:false, ju:false, iju: false, cu: false,  fcat:false, auto:"false", jbid:"",stepdata:{},
+  jmark:"",   quickAdd: 0,
+     initSizeJs:false,
+             auctionImages:[
+   "http://img03.taobaocdn.com/bao/uploaded/i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg"
+   ,
+     "http://img02.taobaocdn.com/bao/uploaded/i2/1934332207/TB259lPaXXXXXcjXXXXXXXXXXXX_!!1934332207.jpg"
+   ,
+     "http://img01.taobaocdn.com/bao/uploaded/i1/1934332207/TB2l.0NaXXXXXXzXpXXXXXXXXXX_!!1934332207.jpg"
+   ,
+     "http://img04.taobaocdn.com/bao/uploaded/i4/1934332207/TB247FTaXXXXXXSXXXXXXXXXXXX_!!1934332207.jpg"
+     ],
+   pic: "http://img03.taobaocdn.com/bao/uploaded/i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg"
+}, seller:{
+ id:1934332207,
+ mode: 0,   goldSeller:1,     tad:1,                  shopAge:0,
+  status:0
+}, shop:{
+ id:"108247715",
+ url: "http://shop108247715.taobao.com/",
+ pid:"570372042",
+ sid:"4",
+ xshop:true }     ,toggle:{
+ "addCartJump":10
+ }
+ } })();
+
+//]]>
+    </script> 
+  <script>
+//<![CDATA[
+if(!g_config.vdata.sys.toggle){g_config.vdata.sys.toggle={
+ "thumb": false,
+ "v":{"s1212v":"1"},
+ "p":1.0,
+ "dcP":"true",
+ "sl":3000
+}}
+//]]>
+    </script> 
+  <script>
+//<![CDATA[
+
+ (function(){var b="http://detailskip.taobao.com/json/sib.htm?itemId=37389077469&sellerId=1934332207&p=1&rcid=50022703&sts=404508672,1170940490141417476,70368744210432,70373041259523&chnl=pc&price=69800&shopId=&vd=1&skil=false&pf=1&al=false&ap=1&ss=1&free=0&st=1&ct=1&ns=1&prior=1",a="&ref="+encodeURIComponent(document.referrer.replace(/userid=%s/gi,""));if(b.length+a.length<2000){b+=a}g_config.dynamicScript(b,{onerror:function(){g_config.RequstPrior='falure'}})})();
+ 
+
+//]]>
+    </script> 
+  <div id="J_SiteNav" class="site-nav"> 
+   <div id="J_SiteNavBd" class="site-nav-bd"> 
+    <ul id="J_SiteNavBdL" class="site-nav-bd-l"> 
+    </ul> 
+    <ul id="J_SiteNavBdR" class="site-nav-bd-r"> 
+    </ul> 
+   </div> 
+  </div> 
+  <!-- 2014新版页头 --> 
+  <div id="J_Header"> 
+  </div> 
+  <div id="page"> 
+   <div id="content" class="eshop tb-content " data-cat="J_Cat"> 
+    <p id="J_dcpg" class="design-page" style="display: none;"> </p> 
+    <div class="J_AsyncDC hidden" data-type="css"> 
+    </div> 
+    <div id="J_DcHead" class="J_AsyncDC tb-async-head tb-shop" data-type="head"> 
+    </div> 
+    <div id="bd"> 
+     <div id="detail"> 
+      <input type="hidden" value="" name="tb_token" id="J_TokenField" /> 
+      <div class="tb-detail-hd"> 
+       <div class="tb-crumbs"> 
+        <div class="tb-notice">
+          诚邀您对新版详情页进行反馈， 
+         <a href="http://ur.taobao.com/survey/view.htm?id=1869" target="_blank"> 查看详情 </a> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="tb-detail-bd tb-clear"> 
+       <div class="tb-summary tb-clear"> 
+        <div class="tb-item-info tb-clearfix"> 
+         <div class="tb-item-info-l"> 
+          <div class="tb-gallery"> 
+           <div class="tb-booth tb-pic tb-main-pic" data-spm="20140008"> 
+            <a href="javascript:;" rel="nofollow" data-spm-click="gostr=/tbdetail;locaid=d1" target="_blank"> <img id="J_ImgBooth" data-src="http://img03.taobaocdn.com/bao/uploaded/i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg_400x400.jpg" data-haszoom="700" src="http://gd3.alicdn.com/bao/uploaded/i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg_400x400.jpg" /> </a> 
+            <div class="zoom-icon hidden tb-iconfont" id="J_ZoomIcon">
+              ő 
+            </div> 
+           </div> 
+           <ul id="J_UlThumb" class="tb-thumb tb-clearfix" data-spm="20140009"> 
+            <li class="tb-selected"> 
+             <div class="tb-pic tb-s50"> 
+              <a href="#" data-spm-click="gostr=/tbdetail;locaid=d1"> <img data-src="http://img03.taobaocdn.com/bao/uploaded/i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg_50x50.jpg" src="http://gd3.alicdn.com/bao/uploaded/i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg_50x50.jpg" /> </a> 
+             </div> </li> 
+            <li> 
+             <div class="tb-pic tb-s50"> 
+              <a href="#" data-spm-click="gostr=/tbdetail;locaid=d2"> <img data-src="http://img02.taobaocdn.com/imgextra/i2/1934332207/TB259lPaXXXXXcjXXXXXXXXXXXX_!!1934332207.jpg_50x50.jpg" src="http://gd2.alicdn.com/imgextra/i2/1934332207/TB259lPaXXXXXcjXXXXXXXXXXXX_!!1934332207.jpg_50x50.jpg" /> </a> 
+             </div> </li> 
+            <li> 
+             <div class="tb-pic tb-s50"> 
+              <a href="#" data-spm-click="gostr=/tbdetail;locaid=d3"> <img data-src="http://img01.taobaocdn.com/imgextra/i1/1934332207/TB2l.0NaXXXXXXzXpXXXXXXXXXX_!!1934332207.jpg_50x50.jpg" src="http://gd1.alicdn.com/imgextra/i1/1934332207/TB2l.0NaXXXXXXzXpXXXXXXXXXX_!!1934332207.jpg_50x50.jpg" /> </a> 
+             </div> </li> 
+            <li> 
+             <div class="tb-pic tb-s50"> 
+              <a href="#" data-spm-click="gostr=/tbdetail;locaid=d4"> <img data-src="http://img04.taobaocdn.com/imgextra/i4/1934332207/TB247FTaXXXXXXSXXXXXXXXXXXX_!!1934332207.jpg_50x50.jpg" src="http://gd4.alicdn.com/imgextra/i4/1934332207/TB247FTaXXXXXXSXXXXXXXXXXXX_!!1934332207.jpg_50x50.jpg" /> </a> 
+             </div> </li> 
+           </ul> 
+           <script>
+//<![CDATA[
+
+ (function(){if(this.WebP)return;this.WebP={},WebP._cb=function(e,t){this.isSupport=function(t){t(e)},t(e),(window.chrome||window.opera&&window.localStorage)&&window.localStorage.setItem("webpsupport",e)},WebP.isSupport=function(e){if(!e)return;if(!window.chrome&&!window.opera)return WebP._cb(!1,e);if(window.localStorage&&window.localStorage.getItem("webpsupport")!==null){var t=window.localStorage.getItem("webpsupport");WebP._cb(t==="true",e);return}var n=new Image;n.src="data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA",n.onload=n.onerror=function(){WebP._cb(n.width===2&&n.height===2,e)}},WebP.run=function(e){this.isSupport(function(t){t&&e()})}})();
+ (function(e,f){var d,c=function(g){return document.getElementById(g)},a=function(g){var h=g.getAttribute("data-src");if(!h){return}if(d&&e){h+="_.webp";f=true}g.src=f?h.replace(/img0(\d)\.taobaocdn\.com/,"gd$1.alicdn.com"):h},b=function(h){if(h){for(var g=0;g<h.length;g++){a(h[g])}}};WebP.isSupport(function(g){d=g;a(c("J_ImgBooth"));b(c("J_UlThumb").getElementsByTagName("img"));if(d){g_config.beacon.webp=1}})})(true,true);
+
+//]]>
+                      </script> 
+          </div> 
+          <div id="J_Social" data-spm="20140010" class="tb-social tb-clearfix"> 
+           <ul> 
+            <li class="tb-social-share"> <a data-spm-click="gostr=/tbdetail;locaid=d2" class="J_Share" href="javascript:;" data-init="false" shortcut-key="f" shortcut-label="分享宝贝" shortcut-effect="click"> <i class="tb-icon"></i> 分享 </a> </li> 
+            <li data-spm="d1" class="tb-social-fav"> <a data-spm-click="gostr=/tbdetail;locaid=d2" class="J_TDialogTrigger" href="http://favorite.taobao.com/popup/add_collection.htm?id=37389077469&amp;itemtype=1&amp;scjjc=1" data-closebtn="true" data-height="260" data-width="440" data-spm-protocol="" shortcut-key="c" shortcut-label="收藏宝贝" shortcut-effect="click"> <i class="tb-icon"></i> 收藏宝贝 <em class="J_FavCount"></em> </a> </li> 
+            <li class="tb-social-pk"> <a data-spm-click="gostr=/tbdetail;locaid=d4" class="J_TbPK" href="javascript:;" data-closebtn="true" data-height="260" data-width="440" shortcut-key="d" shortcut-label="加入对比" shortcut-effect="click"> <i class="tb-icon"></i> 加入对比 <em class="J_PK"></em> </a> </li> 
+           </ul> 
+          </div> 
+         </div> 
+         <div class="tb-item-info-r"> 
+          <div class="tb-property tb-property-x"> 
+           <div class="tb-wrap"> 
+            <div id="J_Title" class="tb-title" shortcut-key="t" shortcut-label="查看宝贝标题" shortcut-effect="focus"> 
+             <h3 class="tb-main-title" data-title="正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具"> 正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具 </h3> 
+             <p class="tb-subtitle"> ①【性价比最高】：带熄火报警装置燃气灶全网销量第一！同配置全网性价比第一！！ ②【大品牌授权】：全新正品，多重防伪辨认，欢迎验证！！！！！！！！！！！！ ③【全国联保】：全国6000多家售后网点，整机五年全国联保，让您售后无忧！ </p> 
+             <div id="J_TEditItem" class="tb-editor-menu"> 
+             </div> 
+            </div> 
+            <ul class="tb-meta"> 
+             <li id="J_StrPriceModBox" class="tb-detail-price tb-clearfix" shortcut-key="p" shortcut-label="查看价格" shortcut-effect="focus"> <span class="tb-property-type"> 价格 </span> 
+              <div class="tb-property-cont"> 
+               <strong id="J_StrPrice"> <em class="tb-rmb"> &yen; </em> <em class="tb-rmb-num"> 698.00 </em> </strong> 
+              </div> </li> 
+             <li id="J_PromoPrice" class="tb-detail-price tb-clearfix tb-promo-price tb-hidden"> <span class="tb-property-type"> 促销 </span> 
+              <div class="tb-property-cont"> 
+               <div id="J_Promo" class="tb-promo-mod"> 
+                <div id="J_PromoHd" class="tb-promo-hd tb-promo-item"> 
+                </div> 
+                <div id="J_PromoBd" class="tb-promo-bd"> 
+                </div> 
+               </div> 
+              </div> </li> 
+             <li class="tb-clearfix tb-hidden" id="J_OtherDiscount"> 
+              <div class="tb-other-discount"> 
+               <div id="J_RedGift" class="tb-red-gift"> 
+               </div> 
+               <div id="J_GoldCoin" class="tb-coin"> 
+               </div> 
+              </div> </li> 
+             <li id="J_Counter" class="tb-counter"> <span class="tb-property-type"> 销量 </span> 
+              <div class="tb-counter-bd"> 
+               <div class="tb-rate-counter"> 
+                <a id="J_ReviewTabTrigger" href="javascript:;"> <strong id="J_RateCounter"> - </strong> <span> 累计评论 </span> </a> 
+               </div> 
+               <div class="tb-sell-counter"> 
+                <a href="javascript:;"> <strong id="J_SellCounter"> - </strong> <span> 交易成功 </span> </a> 
+               </div> 
+              </div> </li> 
+             <li id="J_MorePromoSlider" class="tb-more-promo-slider tb-clearfix" style="display: none"> 
+              <ul id="J_MorePromoList"> 
+              </ul> 
+              <div class="post-script">
+                以上价格可在付款时选择享用 
+              </div> </li> 
+            </ul> 
+            <div class="sep-line"> 
+            </div> 
+            <div id="J_isku" data-spm="20140002" class="tb-key tb-key-sku " shortcut-key="i" shortcut-label="挑选宝贝" shortcut-effect="focus"> 
+             <div class="tb-skin "> 
+              <dl class="J_Prop tb-prop tb-clearfix
+     J_Prop_Color
+         "> 
+               <dt class="tb-property-type">
+                 颜色分类 
+               </dt> 
+               <dd> 
+                <ul data-property="颜色分类" class="J_TSaleProp tb-clearfix tb-img"> 
+                 <li data-value="1627207:28332"> <a href="#" style="background:url(http://img04.taobaocdn.com/bao/uploaded/i4/1934332207/TB2P6NPaXXXXXcHXXXXXXXXXXXX_!!1934332207.jpg_30x30.jpg) center no-repeat;"> <span> 2014年 新品首发 </span> </a> <i> 已选中 </i> </li> 
+                 <li data-value="1627207:3232483"> <a href="#" style="background:url(http://img02.taobaocdn.com/bao/uploaded/i2/1934332207/TB2gAxSaXXXXXbeXXXXXXXXXXXX_!!1934332207.jpg_30x30.jpg) center no-repeat;"> <span> 新品 精钢拉丝不锈钢面板 </span> </a> <i> 已选中 </i> </li> 
+                </ul> 
+               </dd> 
+              </dl> 
+              <dl class="J_Prop tb-prop tb-clearfix
+           "> 
+               <dt class="tb-property-type">
+                 适用气源 
+               </dt> 
+               <dd> 
+                <ul data-property="适用气源" class="J_TSaleProp tb-clearfix"> 
+                 <li data-value="122216654:7191691"> <a href="#"> <span> 天然气 </span> </a> <i> 已选中 </i> </li> 
+                 <li data-value="122216654:20992863"> <a href="#"> <span> 液化气 </span> </a> <i> 已选中 </i> </li> 
+                 <li data-value="122216654:7713119"> <a href="#"> <span> 人工煤气 </span> </a> <i> 已选中 </i> </li> 
+                </ul> 
+               </dd> 
+              </dl> 
+              <dl class="tb-amount tb-clearfix"> 
+               <dt class="tb-property-type">
+                 数量 
+               </dt> 
+               <dd> 
+                <span class="tb-stock" id="J_Stock"> <a href="#" hidefocus="" class="tb-reduce J_Reduce tb-iconfont "> ƛ </a> <input id="J_IptAmount" type="text" class="tb-text" value="1" maxlength="8" title="请输入购买量" /> <a href="#" hidefocus="" class="tb-increase J_Increase tb-iconfont "> ƚ </a> 件 </span> 
+                <em> (库存 <span id="J_SpanStock" class="tb-count"> 2 </span> 件) </em> 
+               </dd> 
+              </dl> 
+              <dl id="J_DlChoice" class="tb-choice tb-clearfix"> 
+               <dt>
+                 请选择： 
+               </dt> 
+               <dd> 
+                <em> &quot;颜色分类&quot; </em> 
+                <em> &quot;适用气源&quot; </em> 
+               </dd> 
+              </dl> 
+              <div class="tb-sure" id="J_SureSKU"> 
+               <p class="tb-choice"> 请勾选您要的商品信息 </p> 
+               <p class="tb-sure-continue"> <a href="#" id="J_SureContinue"> 确定 </a> </p> 
+               <span class="close J_Close tb-iconfont"> &szlig; </span> 
+              </div> 
+              <div id="J_juValid" class="tb-action tb-clearfix "> 
+               <div class="tb-btn-buy"> 
+                <a href="#" data-addfastbuy="true" title="点击此按钮，到下一步确认购买信息" class="J_LinkBuy" data-spm-click="gostr=/tbdetail;locaid=d1" shortcut-key="b" shortcut-label="立即购买" shortcut-effect="click"> 立即购买 </a> 
+               </div> 
+               <div class="tb-btn-add"> 
+                <a href="#" title="加入购物车" class="J_LinkAdd" data-spm-click="gostr=/tbdetail;locaid=d2" shortcut-key="a" shortcut-label="加入购物车" shortcut-effect="click"> <i class="tb-iconfont"> ŭ </i> 加入购物车 </a> 
+               </div> 
+              </div> 
+             </div> 
+            </div> 
+            <div class="tb-extra" id="J_tbExtra"> 
+             <dl id="J_ServiceIcon" class="tb-service-icon" data-spm="1000126"> 
+              <dt>
+                承诺 
+              </dt> 
+              <dd id="J_ServiceIconBd"> 
+              </dd> 
+             </dl> 
+             <dl data-spm="1000126"> 
+              <dt>
+                支付 
+              </dt> 
+              <dd> 
+               <a href="http://abc.alipay.com/cool/jfb.html" target="_blank" title="集分宝" data-spm="d19"> <i class="tb-icon-jifen"></i> 集分宝 </a> 
+               <a href="http://help.alipay.com/lab/150006-210220/0-210220.htm#A5" target="_blank" title="支付宝支付" data-spm=""> <i class="tb-icon-alipay"></i> 支付宝支付 </a> 
+              </dd> 
+             </dl> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="tb-sidebar tb-clear"> 
+        <div data-spm="1000126" id="J_ShopInfo" class="tb-shop-info" data-creditscore="23386" data-creditflag="cap" data-rateurl="http://rate.taobao.com/user-rate-f72227ae054b7c7373eb7a2167839634.htm"> 
+         <a class="J_ShopInfoHeader tb-shop-info-bg" href="javascript:;" target="_blank"> </a> 
+         <div class="tb-shop-info-wrap"> 
+          <div class="tb-shop-info-hd"> 
+           <div class="tb-shop-name"> 
+            <dl> 
+             <dd> 
+              <strong> <a href="http://shop108247715.taobao.com" title="高端品牌电器商城" target="_blank"> 高端品牌电器商城 </a> </strong> 
+             </dd> 
+            </dl> 
+           </div> 
+           <div class="tb-shop-rank tb-rank-cap"> 
+            <dl> 
+             <dt>
+               信誉： 
+             </dt> 
+             <dd> 
+              <a href="http://rate.taobao.com/user-rate-f72227ae054b7c7373eb7a2167839634.htm" target="_blank"> <i></i> <i></i> </a> 
+             </dd> 
+            </dl> 
+           </div> 
+           <div class="tb-shop-seller"> 
+            <dl> 
+             <dt>
+               掌柜： 
+             </dt> 
+             <dd> 
+              <a class="tb-seller-name" href="http://shop108247715.taobao.com" target="_blank" title="广州樱花卫厨有限公司"> 广州樱花卫厨有限... </a> 
+             </dd> 
+            </dl> 
+           </div> 
+           <div class="tb-shop-ww"> 
+            <dl> 
+             <dt>
+               联系： 
+             </dt> 
+             <dd> 
+              <span class="J_WangWang" data-nick="广州樱花卫厨有限公司" data-tnick="%E5%BB%A3%E5%B7%9E%E6%AB%BB%E8%8A%B1%E8%A1%9B%E5%BB%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8" data-encode="true"> </span> 
+             </dd> 
+            </dl> 
+           </div> 
+           <div class="tb-shop-icon"> 
+            <dl> 
+             <dt>
+               资质： 
+             </dt> 
+             <dd> 
+              <a class="tb-icon tb-icon-alipay-persion-auth" href="http://help.alipay.com/lab/210120-210321/0-210321.htm?spm=2013.1.1000126.12" target="_blank" title="支付宝个人认证2014-01-01" data-spm="d12"> </a> 
+              <a class="tb-seller-bail" href="http://www.taobao.com/go/act/special/index.php" target="_blank" title="已缴纳1000元保证金"> <span class="tb-icon tb-icon-bail"> </span> <span class="tb-seller-bail-text"> 1000 <span class="tb-seller-bail-unit"> 元 </span> </span> </a> 
+             </dd> 
+            </dl> 
+           </div> 
+          </div> 
+          <div class="tb-shop-info-bd"> 
+           <div class="tb-shop-rate"> 
+            <dl> 
+             <dt>
+               描述 
+             </dt> 
+             <dd class="tb-rate-higher"> 
+              <a href="http://rate.taobao.com/user-rate-f72227ae054b7c7373eb7a2167839634.htm" target="_blank" title="计算规则:(同行业平均分-店铺得分)/(同行业平均分-同行业店铺最低得分)"> 4.9 </a> 
+             </dd> 
+            </dl> 
+            <dl> 
+             <dt>
+               服务 
+             </dt> 
+             <dd class="tb-rate-higher"> 
+              <a href="http://rate.taobao.com/user-rate-f72227ae054b7c7373eb7a2167839634.htm" target="_blank" title="计算规则:(同行业平均分-店铺得分)/(同行业平均分-同行业店铺最低得分)"> 4.9 </a> 
+             </dd> 
+            </dl> 
+            <dl> 
+             <dt>
+               物流 
+             </dt> 
+             <dd class="tb-rate-higher"> 
+              <a href="http://rate.taobao.com/user-rate-f72227ae054b7c7373eb7a2167839634.htm" target="_blank" title="计算规则:(同行业平均分-店铺得分)/(同行业平均分-同行业店铺最低得分)"> 4.9 </a> 
+             </dd> 
+            </dl> 
+           </div> 
+          </div> 
+          <div class="tb-shop-info-ft"> 
+           <a data-spm="d21" href="http://shop108247715.taobao.com" target="_blank"> 进入店铺 </a> 
+           <a class="J_TDialogTrigger J_TokenSign" data-spm="d22" href="http://favorite.taobao.com/popup/add_collection.htm?id=108247715&amp;itemid=108247715&amp;itemtype=0&amp;ownerid=f72227ae054b7c7373eb7a2167839634&amp;scjjc=2" data-info="param=SCCP_2_108247715&amp;countUrl=http://count.tbcdn.cn/counter3&amp;mecuryUrl=http://favorite.taobao.com/collect_item_relation---108247715-0-.htm" mercury:params="id=108247715&amp;itemid=108247715&amp;itemtype=0&amp;ownerid=f72227ae054b7c7373eb7a2167839634&amp;scjjc=5" data-closebtn="true" data-width="440" data-height="260"> 收藏店铺 </a> 
+          </div> 
+         </div> 
+        </div> 
+        <div id="J_Pine" data-spm="20141001" class="tb-pine" data-sellerid="1934332207" data-catid="50015382" data-rootid="50022703" data-itemid="37389077469"> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="J_PPayGuide"> 
+      </div> 
+      <div id="promote" class="tb-hidden" data-default="http://tds.alicdn.com/json/promotionNew.htm?user_id=1934332207&amp;item_id=37389077469&amp;mjs=1&amp;meal=1&amp;v=1" data-combo="http://detailskip.taobao.com/json/mealDetailNew.htm?item_id=37389077469" data-mjs="http://detailskip.taobao.com/json/mjsDetailNew.htm?user_id=1934332207"> 
+      </div> 
+      <div data-spm="3" id="tad_first_area"> 
+      </div> 
+      <form id="J_FrmBid" name="bidForm" action="http://buy.taobao.com/auction/buy_now.jhtml" method="post"> 
+       <input type="hidden" value="" name="onekey" /> 
+       <input type="hidden" value="" name="gmtCreate" /> 
+       <input type="hidden" value="" name="checkCodeIds" /> 
+       <input type="hidden" value="" name="secStrNoCCode" /> 
+       <input type="hidden" value="" name="tb_token" id="J_frmTokenField" /> 
+       <input id="J_ireferer" type="hidden" name="item_url_refer" value="" /> 
+       <input type="hidden" name="item_id" value="37389077469" /> 
+       <input type="hidden" name="item_id_num" value="37389077469" /> 
+       <input type="hidden" name="auction_type" value="b" /> 
+       <input type="hidden" name="from" value="item_detail" /> 
+       <input type="hidden" name="frm" value="" id="J_From" /> 
+       <input type="hidden" name="current_price" value="698.00" /> 
+       <input type="hidden" name="activity" value="" /> 
+       <input type="hidden" name="auto_post1" value="" /> 
+       <input type="hidden" id="quantity" name="quantity" value="1" /> 
+       <input type="hidden" id="skuId" name="skuId" value="" /> 
+       <input type="hidden" id="skuInfo" name="skuInfo" value="" /> 
+       <input type="hidden" id="J_TBuyerFrom" name="buyer_from" value="" /> 
+       <input type="hidden" id="J_ChargeTypeId" name="chargeTypeId" value="" /> 
+      </form> 
+     </div> 
+     <div class="tb-tabbar-wrap tb-clearfix" data-spm="20140004" id="J_TabBarWrap"> 
+      <div class="tb-tabbar-mid-wrap tb-clearfix"> 
+       <div class="tb-shop-search"> 
+        <div class="search-panel"> 
+         <form target="_top" action="http://shop108247715.taobao.com/search.htm" name="search http://shop108247715.taobao.com/" id="J_TShopSearchForm" class="search-panel-focused"> 
+          <div class="search-button"> 
+           <button id="J_ShopSearchIcon" class="tb-iconfont" type="submit"> ő </button> 
+          </div> 
+          <div class="search-panel-fields"> 
+           <input data-spm-click="gostr=/tbdetail;locaid=d6" id="q" name="q" aria-label="输本店" placeholder="搜本店" accesskey="s" autocomplete="off" type="text" /> 
+          </div> 
+          <input type="hidden" name="searcy_type" value="item" /> 
+          <input type="hidden" value="newHeader" name="s_from" /> 
+          <input type="hidden" name="source" /> 
+          <input type="hidden" name="ssid" value="s5-e" /> 
+          <input type="hidden" name="search" value="y" /> 
+          <input type="hidden" id="J_TSearchSPM" name="spm" value="a1z10.1.1996643285.d4916901" /> 
+          <input type="hidden" name="initiative_id" value="" /> 
+         </form> 
+        </div> 
+       </div> 
+       <div class="tb-tabbar-inner-wrap"> 
+        <ul class="tb-tabbar clear" id="J_TabBar"> 
+         <li class="tb-first selected"> <a class="tb-tab-anchor" href="javascript:void(0);" hidefocus="true" data-spm-click="gostr=/tbdetail;locaid=d1" shortcut-key="g d" shortcut-label="查看宝贝详情" shortcut-effect="click" data-index="0"> 宝贝详情 </a> 
+          <div class="tb-selected-indicator"> 
+          </div> </li> 
+         <li> <a class="tb-tab-anchor" href="javascript:void(0);" hidefocus="true" data-index="1" data-spm-click="gostr=/tbdetail;locaid=d2" shortcut-key="g c" shortcut-label="查看累计评论" shortcut-effect="click"> 累计评论 <em class="J_ReviewsCount"> 0 </em> </a> 
+          <div class="tb-selected-indicator"> 
+          </div> </li> 
+         <li class="tb-last"> <a class="tb-tab-anchor" href="javascript:void(0);" hidefocus="true" data-spm-click="gostr=/tbdetail;locaid=d3" shortcut-key="g r" shortcut-label="查看成交记录" shortcut-effect="click" data-index="2"> 成交记录 <em class="J_TDealCount"> 0 </em> </a> 
+          <div class="tb-selected-indicator"> 
+          </div> </li> 
+         <li id="J_ServiceTab"> <a class="tb-tab-anchor" href="javascript:void(0);" hidefocus="true" data-spm-click="gostr=/tbdetail;locaid=d4" shortcut-key="g z" shortcut-label="查看专享服务" shortcut-effect="click" data-index="4"> 专享服务 </a> 
+          <div class="tb-selected-indicator"> 
+          </div> </li> 
+         <li class="tb-shop-cart"> <a class="tb-tab-anchor" id="J_TabShopCart" href="javascript:void(0);" data-spm-click="gostr=/tbdetail;locaid=d5" data-index="3"> <i class="tb-iconfont"> Ů </i> 加入购物车 </a> </li> 
+         <li class="tb-ids-mod"> <a class="tb-tab-anchor" href="javascript:void(0);" style="cursor:default;"> 快速直达 </a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="layout grid-s5m0 tb-main-layout "> 
+      <div class="col-main clearfix"> 
+       <div class="main-wrap J_TRegion" id="J_MainWrap"> 
+        <div class="sub-wrap" id="J_SubWrap"> 
+         <div id="attributes" class="attributes"> 
+          <ul class="attributes-list"> 
+           <li title=" WONDERFLOWER"> 品牌: WONDERFLOWER </li> 
+           <li title=" D13"> 型号: D13 </li> 
+           <li title=" 脉冲电子点火"> 点火方式: 脉冲电子点火 </li> 
+           <li title=" 离子感应"> 熄火保护装置: 离子感应 </li> 
+           <li title=" 全进风"> 进风方式: 全进风 </li> 
+           <li title=" 2014年 新品首发 新品 精钢拉丝不锈钢面板"> 颜色分类: 2014年 新品首发 新品 精钢拉丝不锈钢面板 </li> 
+           <li title=" 4kW及以上"> 额定热负荷: 4kW及以上 </li> 
+           <li title=" 天然气 液��气 人工煤气"> 适用气源: 天然气 液化气 人工煤气 </li> 
+           <li title=" 2个"> 灶眼数量: 2个 </li> 
+           <li title=" 台嵌两用"> 气灶结构: 台嵌两用 </li> 
+           <li title=" 不锈钢"> 面板材质: 不锈钢 </li> 
+           <li title=" 全国联保"> 售后服务: 全国联保 </li> 
+           <li title=" 同城送货上门"> 同城服务: 同城送货上门 </li> 
+          </ul> 
+         </div> 
+         <div class="tb-sec-pic" id="J_TSecPic" style="border: 1px solid #D7D7D7;"> 
+          <div class="tb-sec-pic-small" style="height:138px;width:748px; background-image: url(http://img01.taobaocdn.com/tps/i1/T16yF9FfVgXXb2HDIA-748-138.png);"> 
+          </div> 
+          <div class="tb-sec-pic-big" style="height:138px;width:948px;background-image: url(http://img01.taobaocdn.com/tps/i1/T12S4_FnFaXXcJVO.g-948-138.png);"> 
+          </div> 
+         </div> 
+         <div id="service" data-item-id="37389077469"> 
+         </div> 
+         <div id="tad_second_area" class="tad-stage" data-spm="4"> 
+         </div> 
+         <div id="description" class="tshop-psm ke-post J_DetailSection"> 
+          <div class="content" id="J_DivItemDesc">
+            描述加载中 
+          </div> 
+         </div> 
+         <div id="reviews" data-reviewapi="http://rate.taobao.com/detail_rate.htm?userNumId=1934332207&amp;auctionNumId=37389077469&amp;showContent=1&amp;currentPage=1&amp;ismore=0&amp;siteID=4" data-reviewcountapi="" data-listapi="http://rate.taobao.com/feedRateList.htm?userNumId=1934332207&amp;auctionNumId=37389077469&amp;siteID=4" data-commonapi="http://orate.alicdn.com/detailCommon.htm?userNumId=1934332207&amp;auctionNumId=37389077469&amp;siteID=4" data-usefulapi="http://rate.taobao.com/vote_useful.htm?userNumId=1934332207&amp;auctionNumId=37389077469"> 
+         </div> 
+         <div id="deal-record"> 
+          <div class="tb-public-panel" id="J_PriceCutContainer"> 
+          </div> 
+          <div class="tb-public-panel"> 
+           <div class="tb-public-notice"> 
+            <p class="tb-public-price"> 原价： <em class="tb-rmb"> &yen; </em> <em class="tb-rmb-num"> 698.00 </em> <span> 拍下价格的不同可能会由促销和打折引起的，详情可以咨询卖家。 </span> </p> 
+           </div> 
+           <div id="J_showBuyerList"> 
+            <div class="tb-clearfix msg msg-attention-shortcut tb-hidden J_TNoDealRecords"> 
+             <p class="attention naked"> 暂时还没有买家购买此宝贝，最近30天成交记录为0。 </p> 
+            </div> 
+            <div id="J_showListIndicator" class="J_TAjaxIndicator"> 
+            </div> 
+            <button id="J_listBuyerOnView" type="button" class="J_TAjaxTrigger hidden J_TAjaxTriggerButton" data-api="http://detailskip.taobao.com/json/show_buyer_list.htm?step=false&amp;bid_page=1&amp;page_size=15&amp;item_type=b&amp;ends=1420208149000&amp;starts=1419603349000&amp;item_id=37389077469&amp;user_tag=404508672&amp;old_quantity=38197&amp;zhichong=true&amp;sold_total_num=16&amp;seller_num_id=1934332207&amp;dk=0&amp;title=%D5%FD%C6%B7WONDERFLOWER%C8%BC%C6%F8%D4%EE%C7%B6%C8%EB%CA%BD%C3%BA%C6%F8%D4%EE%CB%AB%D4%EE%CC%A8%CA%BD%D2%BA%BB%AF%CC%EC%C8%BB%C6%F8%D4%EE%BE%DF%C2%AF%BE%DF&amp;sbn=2e71ca3a757dbb95e4a0f8d6c55c6712&amp;isTKA=false&amp;msc=1"> c </button> 
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="J_AsyncDC tb-custom-area tb-shop" data-type="main" id="J_AsyncDCMain"> 
+        </div> 
+       </div> 
+       <div class="correlative-items J_TAjaxContainer" data-spm="20141002" id="detail-recommend-viewed" data-sellerid="1934332207" data-catid="50015382" data-rootid="50022703" data-itemid="37389077469"> 
+       </div> 
+       <div class="correlative-items J_TAjaxContainer" data-spm="20141003" id="detail-recommend-bought" data-sellerid="1934332207" data-catid="50015382" data-rootid="50022703" data-itemid="37389077469"> 
+       </div> 
+       <div class="J_AsyncDC" data-type="dr"> 
+       </div> 
+      </div> 
+      <div class="J_AsyncDC tb-shop col-sub J_TRegion" data-type="side"> 
+      </div> 
+     </div> 
+    </div> 
+    <div id="ft" class="tb-shop J_AsyncDC" data-type="foot"> 
+    </div> 
+    <div id="copyright"> 
+    </div> 
+    <!--tbfooter--> 
+   </div> 
+  </div> 
+  <style>
+      
+  .footer_2014{
+    width: 1190px;
+    margin: 0 auto;
+  }
+  .w990 .footer_2014{
+    width: 990px;
+  }
+
+
+    </style> 
+  <div class="footer_2014"> 
+   <style>
+        
+.footer{position:relative;margin:0 auto;padding:7px 0 9px;border-top:1px solid #ddd}.footer .footer-bd p,.footer .footer-hd p{padding-bottom:8px;overflow:hidden;*zoom:1}.footer .footer-bd a,.footer .footer-hd a{display:inline;float:left;margin:0 4px;white-space:nowrap;color:#6c6c6c}.footer .footer-bd a:hover,.footer .footer-hd a:hover{color:#f40;text-decoration:none}.footer .footer-bd b,.footer .footer-hd b{display:inline;float:left;margin:0 3px;font-weight:400;color:#ddd}.footer .footer-bd em,.footer .footer-bd span,.footer .footer-hd em,.footer .footer-hd span{display:inline;float:left;white-space:nowrap;color:#9c9c9c}.footer .footer-bd em,.footer .footer-hd em{margin-left:30px}.footer .footer-bd span,.footer .footer-hd span{margin:0 4px}.footer .footer-bd span a,.footer .footer-hd span a{float:none}.footer .footer-hd p{margin-bottom:8px;line-height:27px;border-bottom:1px solid #ddd}.footer .foot-ft{display:none}
+
+      </style> 
+   <div class="footer" data-spm="1997523009"> 
+    <div class="footer-hd"> 
+     <p> <a href="//www.alibabagroup.com/cn/global/home"> 阿里巴巴集团 </a> <b> | </b> <a href="//www.taobao.com"> 淘宝网 </a> <b> | </b> <a href="//www.tmall.com"> 天猫 </a> <b> | </b> <a href="//ju.taobao.com"> 聚划算 </a> <b> | </b> <a href="//www.aliexpress.com"> 全球速卖通 </a> <b> | </b> <a href="//www.alibaba.com/"> 阿里巴巴国际交易市场 </a> <b> | </b> <a href="//www.1688.com"> 1688 </a> <b> | </b> <a href="//www.alimama.com"> 阿里妈妈 </a> <b> | </b> <a href="//trip.taobao.com"> 阿里旅行 &middot; 去啊 </a> <b> | </b> <a href="//www.aliyun.com"> 阿里云计算 </a> <b> | </b> <a href="//www.yunos.com"> YunOS </a> <b> | </b> <a href="//www.aliqin.cn/"> 阿里通信 </a> <b> | </b> <a href="//www.net.cn"> 万网 </a> <b> | </b> <a href="//www.autonavi.com/"> 高德 </a> <b> | </b> <a href="//www.uc.cn/"> 优视 </a> <b> | </b> <a href="//www.umeng.com/"> 友盟 </a> <br /> <a href="//kanbox.com?ref=taobao"> 酷盘 </a> <b> | </b> <a href="//www.xiami.com"> 虾米 </a> <b> | </b> <a href="//www.ttpod.com/"> 天天动听 </a> <b> | </b> <a href="//www.laiwang.com/"> 来往 </a> <b> | </b> <a href="//www.alipay.com"> 支付宝 </a> </p> 
+    </div> 
+    <div class="footer-bd"> 
+     <p> <a href="//www.taobao.com/about"> 关于淘宝 </a> <a href="//www.taobao.com/about/partners.php"> 合作伙伴 </a> <a href="//pro.taobao.com"> 营销中心 </a> <a href="//jubao.alibaba.com"> 廉正举报 </a> <a href="//service.taobao.com/support/main/service_route.htm"> 联系客服 </a> <a href="//open.taobao.com"> 开放平台 </a> <a href="//www.taobao.com/about/join.php"> 诚征英才 </a> <a href="//www.taobao.com/about/contact.php"> 联系我们 </a> <a href="//www.taobao.com/sitemap.php"> 网站地图 </a> <a href="//www.taobao.com/go/chn/tb-fp/2014/law.php"> 法律声明 </a> <em> &copy; 2003-2014 Taobao.com 版权所有 </em> </p> 
+     <p> <span> 网络文化经营许可证： <a href="//img04.taobaocdn.com/tps/i4/T1ysdvXtNeXXcPpEkQ-972-636.jpg"> 文网文[2010]040号 </a> </span> <b> | </b> <span data-spm-protocol="i"> 增值电信业务经营许可证： <a href="http://zcainfo.miitbeian.gov.cn/state/outPortal/loginPortal.action"> 浙B2-20080224-1 </a> </span> <b> | </b> <span> 信息网络传播视听节目许可证：1109364号 </span> <b> | </b> <span> 互联网违法和不良信息举报电话:0571-81683755 </span> </p> 
+    </div> 
+    <div class="footer-ft"> 
+     <a href="//www.pingpinganan.gov.cn/" class="mod " title=""> <img width="36" height="36" src="//img01.taobaocdn.com/tps/i1/T1FeW3XXNfXXXXXXXX-36-36.gif" /> </a> 
+     <a href="//idinfo.zjaic.gov.cn/bscx.do?spm=1.7274553.1997523009.28.alN7ce&amp;method=hddoc&amp;id=33018400000067" class="mod mod-a" title=""> </a> 
+     <a href="//idinfo.zjaic.gov.cn/bscx.do?spm=1.7274553.1997523009.29.alN7ce&amp;method=hddoc&amp;id=33018400000067" class="mod mod-b" title=""> </a> 
+     <a href="//www.theclimategroup.org.cn/about/friend?spm=1.7274553.1997523009.30.alN7ce" class="mod mod-c" title=""> </a> 
+     <a href="https://ss.knet.cn/verifyseal.dll?spm=1.7274553.1997523009.31.alN7ce&amp;&amp;sn=2010062300100001357&amp;pa=20100701" class="mod mod-d" title=""> </a> 
+     <a href="//www.ppaaol.com/verifySite.do?spm=1.7274553.1997523009.32.alN7ce&amp;id=1051" class="mod mod-e" title=""> </a> 
+    </div> 
+   </div> 
+  </div> 
+  <div id="LineZing" pagetype="2" shopid="108247715" tmplid="" itemid="37389077469"> 
+  </div> 
+  <div id="server-num">
+    detail010178032078.n.et2 
+  </div> 
+  <div id="J_cookieDomain" data-value=".taobao.com"> 
+  </div> 
+  <div id="J_itemViewed" catid="50015382" data-value="{&quot;url&quot;:&quot;http://item.taobao.com/item.htm?id=37389077469&quot;,&quot;itemId&quot;:&quot;37389077469&quot;,&quot;xid&quot;:&quot;&quot;,&quot;pic&quot;:&quot;i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg&quot;,&quot;price&quot;:&quot;69800&quot;,&quot;itemIdStr&quot;:&quot;37389077469&quot;,&quot;title&quot;:&quot;正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具&quot;}"> 
+  </div> 
+  <div id="J_showContract" data-value="{&quot;1&quot;:&quot;true&quot;,&quot;3&quot;:&quot;false&quot;,&quot;2&quot;:&quot;false&quot;,&quot;8&quot;:&quot;false&quot;,&quot;7&quot;:&quot;false&quot;,&quot;4&quot;:&quot;false&quot;,&quot;5&quot;:&quot;false&quot;,&quot;9&quot;:&quot;false&quot;,&quot;J_TokenCatePathUrl&quot;:&quot;http://detailskip.taobao.com/json/show_indemnification.htm?catpath=50022703-122014001-50015382&quot;,&quot;J_TokenInvoice&quot;:&quot;false&quot;,&quot;open_security_btn&quot;:&quot;true&quot;}"> 
+  </div> 
+  <script>
+//<![CDATA[
+
+Hub={};
+Hub.config = {
+ config: {},
+ get: function (key) { if (key in this.config) { return this.config[key]; } return null; },
+ set: function (key, val) { this.config[key] = val;}
+};
+
+Hub.config.set('init',{
+ loader: ['#content', {
+ pipeHost: 'http://detailskip.taobao.com',
+ assetsHost: 'http://a.tbcdn.cn',
+ htmlSuffix: '',
+ preloadColumnCls: ['.col-sub']
+ }]
+ });
+
+Hub.config.set('sku',{
+       
+   rstShopId:108247715,    rstItemId:37389077469,
+ rstdk: 0 ,
+ rstShopcatlist:",968650461,",
+ valLoginIndicator: "http://buy.taobao.com/auction/buy.htm?from=itemDetail&x_id=&id=37389077469",
+ valFastBuyUrl: "http://buy.taobao.com/auction/fastbuy/fast_buy.htm",  valItemId: "37389077469",
+ valImageInfo:{},
+   "valCartInfo":{"hotItemsUrl":"http://detailskip.taobao.com/json/cart_recommend_items.htm?shop_id=108247715&seller_id_num=1934332207","itemId" : "37389077469","dbNum" : "","cartUrl": "http://cart.taobao.com/cart.htm"},  "apiRelateMarket": "http://tui.taobao.com/recommend?appid=16&count=4&itemid=37389077469",
+ "apiAddCart" : "http://cart.taobao.com/add_cart_item.htm?item_id=37389077469&bankfrom=",
+ "valVipRate":0,
+ "valPointRate" : "0",
+       "apiInsurance":"http://baoxian.taobao.com/json/queryTxbInfo.do?itemId=37389077469",
+   "wholeSibUrl":"http://detailskip.taobao.com/json/sib.htm?itemId=37389077469&sellerId=1934332207&p=1&rcid=50022703&sts=404508672,1170940490141417476,70368744210432,70373041259523&chnl=pc&price=69800&shopId=&vd=1&skil=false&pf=1&al=false&ap=1&ss=1&free=0&st=1&ct=1&ns=1",        "apiItemViews": "http://count.tbcdn.cn/counter3?keys=ICVT_7_37389077469&inc=ICVT_7_37389077469&callback=page_viewcount&sign=151202fd93850492068721eeb682df073060a",  "apiItemReviews": "http://count.tbcdn.cn/counter3?keys=ICE_3_feedcount-37389077469",
+ "apiItemCollects": "http://count.tbcdn.cn/counter3?keys=ICCP_1_37389077469",
+ "apiBidCount": "http://detailskip.taobao.com/json/show_bid_count.htm?itemNumId=37389077469&old_quantity=38197&date=1419603349000",
+     "apiOnSiteSetup": "fuwu.home.taobao.com/new_fuwu_4_detail.do?",  "valTimeLeft": "355528",
+   "apiItemDesc":"http://dsc.taobaocdn.com/i2/370/890/37389077469/TB1QMMOGVXXXXcvXXXX8qtpFXXX.desc%7Cvar%5Edesc%3Bsign%5E3b50e0238ca95148cb3aa66314094d55%3Blang%5Egbk%3Bt%5E1419603349",    "valItemIdStr":"37389077469",
+ "valReviewsApi":"http://rate.taobao.com/detail_rate.htm?userNumId=1934332207&auctionNumId=37389077469&showContent=1&currentPage=1&ismore=0&siteID=4",
+ "reportApi": "http://item.taobao.com/json/report_api.htm",     "redirectUrl":  "http://item.taobao.com/report_redirect_url.htm" ,   "valShowReviews": false ,
+ "valPostFee":{currCityDest:''},
+     "apiItemInfo":"http://detailskip.taobao.com/json/ifq.htm?stm=1419603349000&id=37389077469&sid=1934332207&sbn=2e71ca3a757dbb95e4a0f8d6c55c6712&q=1&ex=0&exs=0&shid=&at=b&ct=1&t=1&reCode=2013.1.4.0",
+         coupon:{"couponApi":"http://detailskip.taobao.com/json/activity.htm?itemId=37389077469&sellerId=1934332207",
+ "couponWidgetDomain":"http://a.tbcdn.cn",
+ "cbUrl":"/cross.htm?type=weibo"},
+       "valItemInfo":
+ {
+   "defSelected":
+   [],
+
+     "skuMap":
+ {
+     ";1627207:3232483;122216654:7191691;":
+ {
+ "skuId" : "46465667847",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:3232483;122216654:20992863;":
+ {
+ "skuId" : "46465667848",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:3232483;122216654:7713119;":
+ {
+ "skuId" : "46465667849",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:28332;122216654:20992863;":
+ {
+ "skuId" : "59786444778",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:28332;122216654:7191691;":
+ {
+ "skuId" : "59786444779",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:28332;122216654:7713119;":
+ {
+ "skuId" : "59786444780",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+       }
+     ,"propertyMemoMap": {
+  "1627207:28332": "2014\u5E74 \u65B0\u54C1\u9996\u53D1" ,  "1627207:3232483": "\u65B0\u54C1 \u7CBE\u94A2\u62C9\u4E1D\u4E0D\u9508\u94A2\u9762\u677F"    }
+   
+   }
+});
+
+Hub.config.set('async_sys', {
+ api: 'http://sd3.tbcdn.cn/asyn.htm?g=sys&v=2'
+});
+
+Hub.config.set('async_dc', {
+ newDc: true
+ ,api: 'http://hdc1.alicdn.com/asyn.htm?userId=1934332207&pageId=570372042&v=2014'
+});
+
+Hub.config.set('support',{
+ url:'http://dsc.taobaocdn.com/designsystem/TB1bfWIFFXXXXXoaVXXUxnn4FXX.groupmember|var^groupMember;sign^ecc8c9ffc08d7925d3d920beda4b1ab0;lang^gbk;t^1419839007000'
+});
+
+Hub.config.set('desc',{
+ dummy:false
+           ,apiImgInfo:"http://otds.alicdn.com/json/item_imgs.htm?t=TB1pX7jGVXXXXXkaXXXXXXXXXXX&sid=1934332207&id=37389077469&s=578561563858fe526e2cfb602361f971&v=2&m=1"      ,similarItems: {
+ api: "http://tds.alicdn.com/recommended_same_type_items.htm?v=1",
+   rstShopId:108247715,    rstItemId:37389077469,
+ rstdk: 0 ,
+ rstShopcatlist: ",968650461,"
+ }
+     })
+
+
+
+
+Hub.config.set('isv',{
+ nickName: '%E5%B9%BF%E5%B7%9E%E6%A8%B1%E8%8A%B1%E5%8D%AB%E5%8E%A8%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8',
+ userId: '1934332207',
+ shopId: '108247715',
+ itemId: '',
+ itemNumId: 37389077469,
+ shopStats: '',
+ validatorUrl: 'http://store.taobao.com/tadget/shop_stats.htm',
+ templateName: '',
+ templateId: ''
+});
+
+
+
+Hub.config.set('cart_text',{text:""});
+
+
+
+
+
+
+       Hub.config.set("greeting", {tms:"/go/rgn/relationrecommend/detail_all_recommend.php?v=new"});
+ 
+//]]>
+    </script> 
+  <script>
+//<![CDATA[
+
+
+;(function () {
+    var isDaily = !!~location.hostname.indexOf('daily');
+    var DAILY_ASSETS_HOST = 'http://g.assets.daily.taobao.net/';
+    var PUBLISH_ASSETS_HOST = 'http://g.tbcdn.cn/';
+    var DAILY = 'daily';
+    var PRE = 'pre';
+    var PUB = 'pub';
+    var env = location.host.indexOf(DAILY) > -1 ? DAILY : (location.host.indexOf(PRE) > -1 ? PRE : PUB);
+
+    function getBase(path) {
+        if (typeof path === 'object') {
+            path = path[env] || path[PUB];
+        }
+        var host = isDaily ? DAILY_ASSETS_HOST : PUBLISH_ASSETS_HOST;
+        return host + path;
+    }
+
+    function getAlias(path) {
+        if (typeof path === 'object') {
+            path = path[env] || path[PUB];
+        }
+        return path;
+    }
+
+    Config = {
+        packages: {
+            tbc: {
+                base: getBase('tbc/'),
+                ignorePackageNameInUri: true,
+                group: 'i'
+            },
+            tb: {
+                base: getBase('tb/'),
+                ignorePackageNameInUri: true,
+                group: 'i'
+            },
+            kg: {
+                base: getBase('kg/'),
+                ignorePackageNameInUri: true,
+                group: 'i'
+            },
+            pledge: {
+                base: getBase('tb/contract/1.5.0/pages/pledge/page/'),
+                ignorePackageNameInUri: true
+            },
+            charity: {
+                base: getBase('tb/charity/0.1.2/'),
+                ignorePackageNameInUri: true
+            },
+            recommend: {
+                base: getBase('tb/relationrecommendplug/1.3.5/')
+            },
+            'address-detail': {
+                base: getBase({
+                    pub: 'ccc/address-detail/1.0.4/',
+                    pre: 'ccc/address-detail/1.0.1/',
+                    daily: 'ccc/address-detail/1.0.4/'
+                }),
+                debug: true,
+                ignorePackageNameInUri: true
+            },
+            oneclick: {
+                base: getBase('tb/oneclick/0.1.2/'),
+                ignorePackageNameInUri: true
+            },
+            //o2o
+            cbase: {
+                base: getBase('cm/base/0.3.8/'),
+                ignorePackageNameInUri: true
+            },
+            //先用后付
+            installment: {
+                base: getBase('tb/installment/1.0.1/'),
+                ignorePackageNameInUri: true
+            },
+            'sd/data_sufei': {
+                base: getBase({ pub: 'sd/data_sufei/1.1.3/sufei', pre: 'sd/data_sufei/1.2.1/sufei'}),
+                ignorePackageNameInUri: true
+            }
+        },
+        modules: {
+            datalazyload: {
+                alias: ['kg/datalazyload/2.0.0/']
+            },
+            'gallery/datalazyload/1.0.1/': {
+                alias: ['kg/datalazyload/2.0.0/']
+            },
+            'gallery/datalazyload/1.0/': {
+                alias: ['kg/datalazyload/2.0.0/']
+            },
+            switchable: {
+                alias: ['kg/switchable/2.0.0/']
+            },
+            imagezoom: {
+                alias: ['kg/imagezoom/2.0.0/']
+            },
+            kscroll: {
+                alias: ['gallery/kscroll/1.1/']
+            },
+            rainlib: {
+                alias: ['gallery/rainlib/1.0/']
+            },
+            log: {
+                alias: ['tbc/log/']
+            },
+            sku: {
+                alias: ['tbc/sku/1.0.6/']
+            },
+            header: {
+                alias: ['tbc/header/1.3.1/']
+            },
+            tbar: {
+                alias: [getAlias({
+                    pre: 'tbc/tbar/0.3.3/',
+                    pub: 'tbc/tbar/0.3.3/'
+                })]
+            },
+            favorite: {
+                alias: [getAlias({
+                    pre: 'tbc/favorite/1.0.8/',
+                    pub: 'tbc/favorite/1.0.8/'
+                })]
+            },
+            doctor: {
+                alias: ['tbc/doctor/0.1.1/']
+            },
+            shortcuts: {
+                alias: ['tbc/shortcuts/0.1.0/']
+            },
+            slide: {
+                alias: ['kg/slide/2.0.2/']
+            },
+            'item-detail/index': {
+                requires: [
+                    'core',
+                    'overlay',
+                    'xtemplate',
+                    'imagezoom',
+                    'switchable',
+                    'datalazyload',
+                    'sku',
+                    'header',
+                    'tbar',
+                    'log'
+                ]
+            },
+            'address-detail/wlroute': {
+                requires: ["node", "io", "xtemplate", "overlay", "event", "address-detail/wlroute.css"]
+            }
+        }
+    };
+})();
+Components = [
+{"name":"detail","pub":"item-detail\/index","load":"main"},{"name":"pine","pub":"recommend\/detail\/page_pine_module\/page_pine_module","init":"new Component({height: KISSY.one('.tb-detail-bd', '#detail').height() - KISSY.one('#J_ShopInfo').height() })","load":"core","retry":"1"},
+{"name":"viewed","pub":"recommend\/detail\/viewed_bought_module\/viewed_bought_module","init":"new Component()","precondition":"document.getElementById('detail-recommend-viewed')","load":"lazy","trigger":"scroll:#detail-recommend-viewed","retry":"1"},
+{"name":"offline","pub":"recommend\/detail\/offline_module\/offline_module","init":"new Component()","precondition":"document.getElementsByClassName('tb-key-off-sale')[0]","retry":"1"},
+{"name":"contract","pub":"pledge\/init","precondition":"g_config.hasContract","load":"lazy","trigger":"click:#J_ServiceTab"},
+{"name":"charity","pub":"http:\/\/g.tbcdn.cn\/tb\/charity\/0.1.2\/deps.js","init":"KISSY.use('charity\/components\/detailModule\/index', function (S, Charity) {  Charity.initView('#J_PublicWelfare', {itemId: g_config.itemId});  })","precondition":"g_config.hasCharity"},
+{"name":"tad","pub":"\/\/g.alicdn.com\/tb\/item-recommend\/0.1.19\/config.js","pre":"\/\/g.alicdn.com\/tb\/item-recommend\/0.1.19\/config.js","init":"KISSY.use('item-recommend\/p\/tad\/',  function(S, Tad){ new Tad({ data: g_config.tadInfo }); });","precondition":"g_config.tadInfo","retry":"1"},
+{"name":"paimai","pub":"\/\/g.alicdn.com\/tb\/pmp\/1.3.0\/config.js","init":"XCake.config({  name:'pmp',  base:'\/\/g.alicdn.com\/tb\/pmp\/1.3.0' });  KISSY.use('pmp\/c\/sku\/index');","precondition":"g_config.idata.item.auction","retry":"1"},
+{"name":"size","pub":"\/\/g.alicdn.com\/tb\/mysize\/0.0.6\/config.js","init":"XCake_MySize.config({ name: 'mysize', base: '\/\/g.alicdn.com\/tb\/mysize\/0.0.6\/', combine: true }); KISSY.use('mysize\/c\/showsize\/', function(S, ShowSize){ var itemData = g_config.idata.item;   var valItemInfo = Hub.config.get('sku').valItemInfo;   ShowSize(  g_config.itemId , g_config.sellerId ,  valItemInfo && valItemInfo.propertyMemoMap ,  '.J_Prop_measurement',   itemData.footType ,  '.tb-foot-type' ,   itemData.sizeGroupName ,   itemData.isShowSizeTemplate , itemData.sizeTempId );   });","precondition":"g_config.idata.item.initSizeJs","retry":"1"},
+{"name":"detail","pub":"cbase\/p\/o2o-service\/tb-detail","precondition":"g_config.supportO2OService","load":"main"}]
+
+//]]>
+    </script> 
+  <script charset="utf-8" src="http://g.tbcdn.cn/??kissy/k/1.4.7/seed-min.js,tb/global/3.3.9/global-min.js,tb/item-detail/2.0.91/platform-min.js">
+    </script> 
+  <script>
+//<![CDATA[
+
+try{TB.Global.writeLoginInfo({"memberServer": "http://member1.taobao.com", "outmemServer" : "", "loginServer": "https://login.taobao.com", redirectUrl:"", logoutUrl : ""},true);}catch(e){};
+
+//]]>
+    </script> 
+  <script>
+//<![CDATA[
+
+g_config.endTime = now();
+
+//]]>
+    </script>   
+ </body>
+</html>
+��许可证： <a href="//img04.taobaocdn.com/tps/i4/T1ysdvXtNeXXcPpEkQ-972-636.jpg"> 文网文[2010]040号 </a> </span> <b> | </b> <span data-spm-protocol="i"> 增值电信业务经营许可证： <a href="http://zcainfo.miitbeian.gov.cn/state/outPortal/loginPortal.action"> 浙B2-20080224-1 </a> </span> <b> | </b> <span> 信息网络传播视听节目许可证：1109364号 </span> <b> | </b> <span> 互联网违法和不良信息举报电话:0571-81683755 </span> </p> 
+    </div> 
+    <div class="footer-ft"> 
+     <a href="//www.pingpinganan.gov.cn/" class="mod " title=""> <img width="36" height="36" src="//img01.taobaocdn.com/tps/i1/T1FeW3XXNfXXXXXXXX-36-36.gif" /> </a> 
+     <a href="//idinfo.zjaic.gov.cn/bscx.do?spm=1.7274553.1997523009.28.alN7ce&amp;method=hddoc&amp;id=33018400000067" class="mod mod-a" title=""> </a> 
+     <a href="//idinfo.zjaic.gov.cn/bscx.do?spm=1.7274553.1997523009.29.alN7ce&amp;method=hddoc&amp;id=33018400000067" class="mod mod-b" title=""> </a> 
+     <a href="//www.theclimategroup.org.cn/about/friend?spm=1.7274553.1997523009.30.alN7ce" class="mod mod-c" title=""> </a> 
+     <a href="https://ss.knet.cn/verifyseal.dll?spm=1.7274553.1997523009.31.alN7ce&amp;&amp;sn=2010062300100001357&amp;pa=20100701" class="mod mod-d" title=""> </a> 
+     <a href="//www.ppaaol.com/verifySite.do?spm=1.7274553.1997523009.32.alN7ce&amp;id=1051" class="mod mod-e" title=""> </a> 
+    </div> 
+   </div> 
+  </div> 
+  <div id="LineZing" pagetype="2" shopid="108247715" tmplid="" itemid="37389077469"> 
+  </div> 
+  <div id="server-num">
+    detail010178032078.n.et2 
+  </div> 
+  <div id="J_cookieDomain" data-value=".taobao.com"> 
+  </div> 
+  <div id="J_itemViewed" catid="50015382" data-value="{&quot;url&quot;:&quot;http://item.taobao.com/item.htm?id=37389077469&quot;,&quot;itemId&quot;:&quot;37389077469&quot;,&quot;xid&quot;:&quot;&quot;,&quot;pic&quot;:&quot;i3/TB1sbzmFVXXXXbwXXXXXXXXXXXX_!!0-item_pic.jpg&quot;,&quot;price&quot;:&quot;69800&quot;,&quot;itemIdStr&quot;:&quot;37389077469&quot;,&quot;title&quot;:&quot;正品WONDERFLOWER燃气灶嵌入式煤气灶双灶台式液化天然气灶具炉具&quot;}"> 
+  </div> 
+  <div id="J_showContract" data-value="{&quot;1&quot;:&quot;true&quot;,&quot;3&quot;:&quot;false&quot;,&quot;2&quot;:&quot;false&quot;,&quot;8&quot;:&quot;false&quot;,&quot;7&quot;:&quot;false&quot;,&quot;4&quot;:&quot;false&quot;,&quot;5&quot;:&quot;false&quot;,&quot;9&quot;:&quot;false&quot;,&quot;J_TokenCatePathUrl&quot;:&quot;http://detailskip.taobao.com/json/show_indemnification.htm?catpath=50022703-122014001-50015382&quot;,&quot;J_TokenInvoice&quot;:&quot;false&quot;,&quot;open_security_btn&quot;:&quot;true&quot;}"> 
+  </div> 
+  <script>
+//<![CDATA[
+
+Hub={};
+Hub.config = {
+ config: {},
+ get: function (key) { if (key in this.config) { return this.config[key]; } return null; },
+ set: function (key, val) { this.config[key] = val;}
+};
+
+Hub.config.set('init',{
+ loader: ['#content', {
+ pipeHost: 'http://detailskip.taobao.com',
+ assetsHost: 'http://a.tbcdn.cn',
+ htmlSuffix: '',
+ preloadColumnCls: ['.col-sub']
+ }]
+ });
+
+Hub.config.set('sku',{
+       
+   rstShopId:108247715,    rstItemId:37389077469,
+ rstdk: 0 ,
+ rstShopcatlist:",968650461,",
+ valLoginIndicator: "http://buy.taobao.com/auction/buy.htm?from=itemDetail&x_id=&id=37389077469",
+ valFastBuyUrl: "http://buy.taobao.com/auction/fastbuy/fast_buy.htm",  valItemId: "37389077469",
+ valImageInfo:{},
+   "valCartInfo":{"hotItemsUrl":"http://detailskip.taobao.com/json/cart_recommend_items.htm?shop_id=108247715&seller_id_num=1934332207","itemId" : "37389077469","dbNum" : "","cartUrl": "http://cart.taobao.com/cart.htm"},  "apiRelateMarket": "http://tui.taobao.com/recommend?appid=16&count=4&itemid=37389077469",
+ "apiAddCart" : "http://cart.taobao.com/add_cart_item.htm?item_id=37389077469&bankfrom=",
+ "valVipRate":0,
+ "valPointRate" : "0",
+       "apiInsurance":"http://baoxian.taobao.com/json/queryTxbInfo.do?itemId=37389077469",
+   "wholeSibUrl":"http://detailskip.taobao.com/json/sib.htm?itemId=37389077469&sellerId=1934332207&p=1&rcid=50022703&sts=404508672,1170940490141417476,70368744210432,70373041259523&chnl=pc&price=69800&shopId=&vd=1&skil=false&pf=1&al=false&ap=1&ss=1&free=0&st=1&ct=1&ns=1",        "apiItemViews": "http://count.tbcdn.cn/counter3?keys=ICVT_7_37389077469&inc=ICVT_7_37389077469&callback=page_viewcount&sign=151202fd93850492068721eeb682df073060a",  "apiItemReviews": "http://count.tbcdn.cn/counter3?keys=ICE_3_feedcount-37389077469",
+ "apiItemCollects": "http://count.tbcdn.cn/counter3?keys=ICCP_1_37389077469",
+ "apiBidCount": "http://detailskip.taobao.com/json/show_bid_count.htm?itemNumId=37389077469&old_quantity=38197&date=1419603349000",
+     "apiOnSiteSetup": "fuwu.home.taobao.com/new_fuwu_4_detail.do?",  "valTimeLeft": "355528",
+   "apiItemDesc":"http://dsc.taobaocdn.com/i2/370/890/37389077469/TB1QMMOGVXXXXcvXXXX8qtpFXXX.desc%7Cvar%5Edesc%3Bsign%5E3b50e0238ca95148cb3aa66314094d55%3Blang%5Egbk%3Bt%5E1419603349",    "valItemIdStr":"37389077469",
+ "valReviewsApi":"http://rate.taobao.com/detail_rate.htm?userNumId=1934332207&auctionNumId=37389077469&showContent=1&currentPage=1&ismore=0&siteID=4",
+ "reportApi": "http://item.taobao.com/json/report_api.htm",     "redirectUrl":  "http://item.taobao.com/report_redirect_url.htm" ,   "valShowReviews": false ,
+ "valPostFee":{currCityDest:''},
+     "apiItemInfo":"http://detailskip.taobao.com/json/ifq.htm?stm=1419603349000&id=37389077469&sid=1934332207&sbn=2e71ca3a757dbb95e4a0f8d6c55c6712&q=1&ex=0&exs=0&shid=&at=b&ct=1&t=1&reCode=2013.1.4.0",
+         coupon:{"couponApi":"http://detailskip.taobao.com/json/activity.htm?itemId=37389077469&sellerId=1934332207",
+ "couponWidgetDomain":"http://a.tbcdn.cn",
+ "cbUrl":"/cross.htm?type=weibo"},
+       "valItemInfo":
+ {
+   "defSelected":
+   [],
+
+     "skuMap":
+ {
+     ";1627207:3232483;122216654:7191691;":
+ {
+ "skuId" : "46465667847",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:3232483;122216654:20992863;":
+ {
+ "skuId" : "46465667848",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:3232483;122216654:7713119;":
+ {
+ "skuId" : "46465667849",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:28332;122216654:20992863;":
+ {
+ "skuId" : "59786444778",
+ "oversold":
+     "false"
+ ,
+     "price" : "698.00",
+     "stock" :
+       "2"
+       }
+   ,
+     ";1627207:28332

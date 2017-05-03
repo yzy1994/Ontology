@@ -1,0 +1,154 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Microsoft YaHei', Verdana, 'SimSun', 'Lucida Grande', 'Trebuchet MS', Helvetica, sans-serif;
+	letter-spacing: normal;
+}
+/*html * {
+	font-size: 14px
+}*/
+body {
+	padding: 0;
+	font-size: 14px;
+	height: 1%;
+	color: black;
+	background: url("../../images/common/page-bg.jpg") repeat left top;
+}
+p {
+	line-height: 16px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+a {
+	color: #024572;
+	text-decoration: none;
+}
+a:focus, a:hover, a:active {
+	color: #024572;
+}
+a img {
+	text-decoration: none;
+	border: none;
+}
+.clear {
+	clear: both !important;
+	width: 0px !important;
+	height: 0px !important;
+	line-height: 0px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	float: none !important;
+	position: static !important;
+	background: none !important;
+}
+#nav_main {
+	position: relative;
+	width: 936px;
+	margin: 100px auto;
+	background: url("../../images/common/nav-main-bg1.png") no-repeat right top;
+	padding-right: 24px;
+}
+#nav_main .inner1 {
+	background: url("../../images/common/nav-main-bg1.png") no-repeat left top;
+}
+#nav_main .inner2 {
+	background: url("../../images/common/nav-main-bg2.png") repeat left top;
+	margin-left: 24px;
+	cursor: hand;
+}
+#nav_main_bar {
+	width: 912px;
+	height: 52px;
+}
+#nav_main li {
+	float: left;
+	list-style: none;
+	text-align: center;
+	position: relative;
+	width: 113px;
+	height: 52px;
+	padding: 0;
+}
+#nav_main .bm {
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	z-index: 10;
+	text-align: center;
+	width: 113px;
+	height: 52px;
+	text-align: center;
+	background: none;
+}
+#nav_main .bm a {
+	background: none;
+	color: #0C46A5;
+	display: block;
+	padding-top: 5px;
+}
+#nav_main .bm a:hover {
+	color: #FFF;
+}
+#nav_main .current .bm {
+	top: -8px;
+	height: 68px;
+	text-align: center;
+}
+#nav_main .current .inner {
+	background: url("../../images/common/nav-main-current-left.png") no-repeat left center;
+	padding-left: 13px;
+}
+#nav_main .current .inner3 {
+	background: url("../../images/common/nav-main-current-right.png") no-repeat right center;
+	padding-right: 13px;
+}
+#nav_main .current .inner4 {
+	background: url("../../images/common/nav-main-current-center.png") repeat-x left center;
+	height: 68px;
+}
+#nav_main .current .bm a {
+	background: none;
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	padding-top: 12px;
+}
+#nav_main .current .bm a:hover {
+	color: #FFF;
+}
+#nav_main .lm {
+	position: absolute;
+	z-index: 9;
+	left: 0px;
+	top: 0px;
+	display: none;
+}
+#nav_main .lm .inner5 {
+	background: url("../../images/common/nav-main-sub-top.png") no-repeat left top;
+	padding-top: 13px;
+}
+#nav_main .lm .inner6 {
+	background: url("../../images/common/nav-main-sub-bottom.png") no-repeat left bottom;
+	padding-bottom: 13px;
+}
+#nav_main .lm ul {
+	background: url("../../images/common/nav-main-sub-center.png") repeat-y left top;
+	width: 205px;
+	padding-top: 12px;
+}
+#nav_main .lm li {
+	position: static;
+	width: auto;
+	height: auto;
+	padding: 5px 0 0 12px;
+	text-align: left;
+}
+#nav_main .lm a {
+	background: none;
+	padding-left: 20px;
+	color: #FFF;
+}
+#nav_main .lm a:hover {
+	background: url("../../images/common/nav-main-sub-item-bg.png") no-repeat left center;
+}

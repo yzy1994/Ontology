@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.shu.skytorif.mapper.PeoOntLatMapper">
+	<select id="queryAllOntLatList" resultType="peoOntLat">
+		select * from peo_ont_lat
+	</select>
+
+	<select id="queryOntLatByOid" parameterType="Integer"
+		resultType="peoOntLat">
+		select * from peo_ont_lat where oid=#{value}
+	</select>
+
+	<select id="queryOntLatByLatSid" parameterType="string"
+		resultType="peoOntLat">
+		select * from peo_ont_lat where latsid=#{value}
+	</select>
+
+	<select id="queryOntLatByLatName" parameterType="string"
+		resultType="peoOntLat">
+		select * from peo_ont_lat where latname=#{value}
+	</select>
+
+	<insert id="createOntLat" parameterType="peoOntLat"
+		useGeneratedKeys="true" keyProperty="oid">
+		insert into peo_ont_lat
+		(latsid,latname,parentsid,latnote)
+		values(#{latSid},#{latName},#{parentSid},#{latNote})
+	</insert>
+
+	<delete id="removeOntLat" parameterType="Integer">
+		delete from
+		peo_ont_lat where oid=#{value}
+	</delete>
+
+	<update id="updateOntLat" parameterType="peoOntLat">
+		update peo_ont_lat
+		set
+		latsid=#{latSid},latname=#{latName},parentsid=#{parentSid},latnote=#{latNote}
+		where oid=#{oid}
+	</update>
+
+	<select id="queryObjOntLatSonByLatSid" parameterType="string"
+		resultType="peoOntLat">
+		select * from peo_ont_lat where parentsid=#{value}
+	</select>
+
+	<delete id="removeOntLatByLatSid" parameterType="string">
+		delete from
+		peo_ont_lat where latsid=#{value}
+	</delete>
+</mapper>

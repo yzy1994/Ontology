@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+
+
+	<constant name="struts.convention.package.locators" value="actions,struts2" />
+	<!-- 将对象交给spring管理 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.custom.i18n.resources" value="resource/ApplicationResources"></constant>
+
+	<package name="default_test" namespace="/"
+		extends="struts-default,json-default">
+		<global-results>
+			<result name="unauthorizedException">/unauthorized.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping result="unauthorizedException"
+				exception="org.apache.shiro.authz.AuthorizationException"></exception-mapping>
+		</global-exception-mappings>
+
+
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="success" type="redirect">/pages/AllMachine.jsp?username=${userInfo.getUsername()}
+			</result>
+			<result name="erro">/pages/Login.jsp</result>
+		</action>
+		<action name="userAction2_*" class="userAction" method="{1}">
+
+			<result name="success">/pages/index.jsp</result>
+			<result name="error">/pages/login/Login.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="default" namespace="/" extends="struts-default,json-default">
+		<action name="login" class="loginAction">
+			<result name="success">/pages/main.jsp</result>
+		</action>
+
+		<action name="mjolnir_*" class="mjolnirAction" method="{1}">
+			<result type="json">               <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+			</result>
+		</action>
+
+		<action name="upLoadProductTypeInfoImg" class="mjolnirAction"
+			method="upLoadProductTypeInfoImg">
+			<!-- 指定格式,图片上传拦截器,image/jpeg 这个一定要写上 -->
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg,txt</param>
+				<param name="maximumSize">20000000000</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+			<result name="success"></result>
+		</action>
+		<action name="upload" class="uploadAction" method="upload">
+			<param name="savePath">/uploaccxxcd</param>
+			<result type="json" name="success">
+				<param name="contentType">text/html</param>
+			</result>
+			<result type="json" name="error">
+				<param name="contentType">html/html</param>
+			</result>
+		</action>
+		<action name="download" class="uploadAction" method="download">
+			<param name="savePath">/uploaccxxcd</param>
+			<result type="json" name="success">
+				<param name="contentType">text/html</param>
+			</result>
+			<result type="json" name="error">
+				<param name="contentType">html/html</param>
+			</result>
+		</action>
+		<action name="openFile" class="openFileAction" method="upload">
+			<param name="savePath">/uploaccxxcd</param>
+			<result type="json" name="success">
+				<param name="contentType">text/html</param>
+			</result>
+			<result type="json" name="error">
+				<param name="contentType">html/html</param>
+			</result>
+		</action>
+		<action name="comOnt" class="comOntAction" method="commonActive">
+			<result type="json" name="success">
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+
+		<action name="eveOnt_*" class="eveOntAction" method="{1}">
+			<result type="json">               <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+			</result>
+		</action>
+
+		<action name="objOntAction_*" class="objOntAction" method="{1}">
+			<result type="json">               <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+			</result>
+		</action>
+
+		<action name="mainOntAction_*" class="mainOntAction" method="{1}">
+			<result type="json">               <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
+			</result>
+		</action>
+		
+		<action name="filedownload" class="filedownload">
+			<result type="stream">
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="contentType">application/octet-stream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+	</package>
+
+</struts> 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root> 
+  <field type="emergency"> 
+    <ontology type="event"> 
+      <eventCls> 
+        <eid>e1</eid>  
+        <ecn>地震</ecn>  
+        <creatTime>2015-10-12</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <eid>e2</eid>  
+        <ecn>火灾</ecn>  
+        <creatTime>2015-10-13</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <eid>e4</eid>  
+        <ecn>恐怖袭击</ecn>  
+        <creatTime>2015-10-13</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <eid>e5</eid>  
+        <ecn>食物中毒</ecn>  
+        <creatTime>2015-10-13</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <creatTime>2016-04-23</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <eid>e1</eid>  
+        <ecn>ss</ecn>  
+        <creatTime>2016-04-23</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <creatTime>2016-05-30</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <creatTime>2016-05-30</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <creatTime>2016-05-30</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <creatTime>2016-05-30</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <eid>sdfa</eid>  
+        <ecn>sdfsdf</ecn>  
+        <creatTime>2016-05-30</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls>  
+      <eventCls> 
+        <eid>sdfa</eid>  
+        <ecn>sdfsdf</ecn>  
+        <creatTime>2016-05-30</creatTime>  
+        <author>zhangyajun</author> 
+      </eventCls> 
+    </ontology>  
+    <ontology type="object"> 
+      <eventCls> 
+        <eid>e_e_2</eid>  
+        <ecn>恐怖袭击</ecn>  
+        <creatTime>2015-10-1 18:30</creatTime>  
+        <author>Zhang</author> 
+      </eventCls> 
+    </ontology> 
+  </field>  
+  <field type="if"> 
+    <ontology type="event"> 
+      <eventCls> 
+        <eid>e_e_2</eid>  
+        <ecn>恐怖袭击</ecn>  
+        <creatTime>2015-10-1 18:30</creatTime>  
+        <author>Zhang</author> 
+      </eventCls> 
+    </ontology> 
+  </field> 
+</root>

@@ -1,0 +1,207 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%
+	    String path = request.getContextPath();
+	    String basePath = request.getScheme() + "://"
+	            + request.getServerName() + ":" + request.getServerPort()
+	            + path + "/";
+	%>	 
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+	<html>
+	  <head>
+	    <base href="<%=basePath%>">
+	    
+	    <title>文件上传</title>
+	    
+	 <link href="css/uploadify.css" rel="stylesheet" type="text/css" />
+	 <script type="text/javascript" src="scripts/jquery-1.7.2.min.js"></script>
+	 <script type="text/javascript" src="scripts/jquery.uploadify-3.1.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	 $("#uploadify").uploadify({
+		 			'auto'           : false,
+	                'swf'       	 : '<%=path%>/scripts/uploadify.swf',
+	                'uploader'       : '<%=path%>/scripts/uploadify',//后台处理的请求
+	                'queueID'        : 'fileQueue',//与下面的id对应
+	                'queueSizeLimit' :1,
+	                'fileTypeDesc'   : 'rar文件或zip文件',
+	                'fileTypeExts' 	 : '*.rar;*.zip', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+	                'multi'          : true,
+	                'buttonText'     : '上传'
+	 });
+	});
+	</script>
+	 </head>
+	<body>
+	 		<div id="fileQueue"></div>
+	        <input type="file" name="uploadify" id="uploadify" />
+	        <p>
+		        <a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a>&nbsp;
+		        <a href="javascript:$('#uploadify').uplaodify('cancel','*')">取消上传</a>
+	        </p>
+	  </body>
+	</html>
+http://localhost:8080/zeus-clientweb-web/pages/mjolnir/mjolnir.jsp
+http://localhost:8080/zeus-clientweb-web/pages/mjolnir/test2.html
+http://localhost:8080/zeus-clientweb-web/pages/mjolnir/testPrint.jsp
+http://localhost:8080/zeus-clientweb-web/pages/mjolnir/MyJsp.jsp
+点击复制我输入要复制的内容sdfaf-->http://localhost:8080/zeus-clientweb-web/pages/mjolnir/MyJsp.jsp
+.tabpanel_mover li div {
+  color: #23508E;
+  
+  insertType('+typeTemp[0]
+																	+' );
+  
+  textShow
+}
+http://localhost:8080/zeus-clientweb-web/pages/mjolnir/MyJsp.jsp
+
+src="resources/images/newFile.png"
+    $("#btn_upload").click(function(){        $("#loading").ajaxStart(function(){            $(this).show();// 开始上传        }).ajaxComplete(function(){            $(this).hide();// 上传结束        });                 $.ajaxFileUpload({            url:"upload",// 文件上传服务器请求Action            secureuri:true,// 安全提交，默认为false            fileElementId:"file_upload",// 文件类型的id            dataType:"json",// 返回值类型            success:function(data){// 服务器响应成功                $("#span_title2").text(data.message).css("color","red");                $("#upload_result").show();                $(this).attr("src","/FESWork/img/right2.png");            },            error:function(data){// 服务器响应失败                $("#span_title2").text(data.message).css("color","red");            }        })        return false;    });
+
+ $("#btn_upload").click(function(){  
+ alert("sfdaff");
+ }
+  <action name="upload" class="fes.andy.frame.action.UploadAction" method="upload">     
+  <param name="savePath">/upload</param>  
+  <result type="json" name="success">     
+  <param name="contentType">text/html</param>      
+  </result>    
+  <result type="json" name="error">            
+  <param name="contentType">html/html</param>  
+  </result>    
+  </action>
+  
+  
+  <div>
+	<div id="leftDiv"></div>
+</div>
+  
+  	<div>
+	<hr class="hr1"></hr>
+	</div>
+	<table>
+<tr>
+<td><img src="resources/images/new.png"></img></td>
+<td><img src="resources/images/open.png"></td>
+<td><img src="resources/images/save.png"></td>
+<td><img src="resources/images/print.png"></td>
+
+<td><img src="resources/images/gap.png" class="gap"></td>
+
+<td><img src="resources/images/cut.png"></td>
+<td><img src="resources/images/copy.png"></td>
+<td><img src="resources/images/paste.png"></td>
+<td><img src="resources/images/undo.png"></td>
+<td><img src="resources/images/undo.png"></td>
+
+<td><img src="resources/images/gap.png" class="gap"></td>
+
+<td><img src="resources/images/show.png"></td>
+
+<td><img src="resources/images/gap.png" class="gap"></td>
+
+<td><img src="resources/images/check.png"></td>
+<td><img src="resources/images/delete.png"></td>
+</tr>
+
+</table>
+<div>
+<hr class="hr1"></hr>
+</div>
+  
+  
+   $(document).ready(function(){   	
+ //$("#btn_upload").click(function(){ 
+ //alert("sdfsadf");
+ //})
+  $("#btn_upload").click(function(){  
+       alert("sdfsadf");
+    	$("#loading").ajaxStart(function(){       
+    		$(this).show();// 开始上传
+    		}).ajaxComplete(function(){            
+    			$(this).hide();// 上传结束
+    			});                 
+    	$.ajaxFileUpload({            url:"upload",// 文件上传服务器请求Action
+    		secureuri:true,// 安全提交，默认为false
+    		fileElementId:"file_upload",// 文件类型的id
+    		dataType:"json",// 返回值类型
+    		success:function(data){// 服务器响应成功
+    			$("#span_title2").text(data.message).css("color","red");              
+    			$("#upload_result").show();           
+    			$(this).attr("src","/FESWork/img/right2.png");            },          
+    			error:function(data){// 服务器响应失败
+    				$("#span_title2").text(data.message).css("color","red");        
+    				}     
+    			})     
+    				return false;    });
+ 
+});
+  		<table boder="1px">
+			<tr>
+				<td width="30%">é??????????????</td>
+				<td width="70%"><input type="file" name="upload"
+					id="file_upload" style="width: 360px"> <span
+					id="span_upload"></span></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right"><input value="UPLOAD"
+					type="button" id="btn_upload" align="middle"
+					style="width: 100px; height: 30px">
+				</td>
+			</tr>
+		</table>
+  
+  
+  import java.io.File; import fes.andy.frame.util.FileUtil; /** * @包名 ：fes.andy.frame.action<br> * @文件名 ：UploadAction.java<br> * @类描述 ：上传Jsp文件的Action<br> * @作者 ：Andy.wang<br> * @创建时间 ：2013-9-11上午10:24:43<br> * @更改人 ：<br> * @更改时间 ：<br> */public class UploadAction extends SelfActionSupport {     private static final long serialVersionUID = 1L;    private File upload;// 上传文件    private String uploadContentType;// 上传文件类型的属性    private String uploadFileName;// 上传文件名    private String savePath;// 上传路径（struts.xml 中配置的参数）     private String message = "";     /**     *      * @方法名 ：upload<br>     * @方法描述 ：上传文件<br>     * @创建者 ：Andy.wang<br>     * @创建时间 ：2013-9-11上午11:21:51 <br>     * @return 返回类型 ：String     */    public String upload() {        try {            File targetFile = new File(getServerPath() + savePath);            if (!targetFile.exists()) {                targetFile.mkdirs();            }            targetFile = new File(targetFile, getUploadFileName());            boolean b = FileUtil.copyPaste(getUpload(), targetFile);            if (b)                message = "文件上传成功，文件名为：" + uploadFileName + "。";            else                message = "文件上传失败，文件名为：" + uploadFileName + "。";        } catch (Exception e) {            // TODO: handle exception            e.printStackTrace();        }        return SUCCESS;    }     public File getUpload() {        return upload;    }     public void setUpload(File upload) {        this.upload = upload;    }     public String getUploadContentType() {        return uploadContentType;    }     public void setUploadContentType(String uploadContentType) {        this.uploadContentType = uploadContentType;    }     public String getUploadFileName() {        return uploadFileName;    }     public void setUploadFileName(String uploadFileName) {        this.uploadFileName = uploadFileName;    }     public String getSavePath() {        return savePath;    }     public void setSavePath(String savePath) {        this.savePath = savePath;    }     public String getMessage() {        return message;    }     public void setMessage(String message) {        this.message = message;    } }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+     <script type="text/javascript">    
+	 $(function(){      
+	 var emails = [            
+	 { name: "Peter", to: "peter@pan.de" },
+	 { name: "Molly", to: "molly@yahoo.com" },  
+	 { name: "Forneria", to: "live@japan.jp" },  
+	 { name: "Master <em>Sync</em>", to: "205bw@samsung.com" },   
+	 { name: "Dr. <strong>Tech</strong> de Log", to: "g15@logitech.com" },   
+	 { name: "Don Corleone", to: "don@vegas.com" },           
+	 { name: "Mc Chick", to: "info@donalds.org" },       
+     { name: "Donnie Darko", to: "dd@timeshift.info" },  
+	 { name: "Quake The Net", to: "webmaster@quakenet.org" },    
+	 { name: "Dr. Write", to: "write@writable.com" },  
+	 { name: "GG Bond", to: "Bond@qq.com" },     
+	 { name: "Zhuzhu Xia", to: "zhuzhu@qq.com" }   ];       
+	 $("#autocomplete").autocomplete(emails,{         
+	 minChars: 0,//自动完成激活之前填入的最小字符    
+	 max:12,//列表条目数           
+	 width: 400,//提示的宽度             
+	 scrollHeight: 300,//提示的高度      
+	 matchContains: true,//是否只要包含文本框里的就可以 
+	 autoFill:false,//自动填充             
+	 formatItem: function(data, i, max) {
+	 //格式化列表中的条目 row:条目对象,i:当前条目数,max:总条目数
+	 return i + '/' + max + ':"' + data.name + '"[' + data.to + ']';            },            
+	 formatMatch: function(data, i, max) {
+	 //配合formatItem使用，作用在于，由于使用了formatItem，所以条目中的内容有所改变，而我们要匹配的是原始的数据，所以用formatMatch做一个调整，使之匹配原始数据
+	 return data.name + data.to;            },           
+	 formatResult: function(data) {
+	 //定义最终返回的数据，比如我们还是要返回原始数据，而不是formatItem过的数据
+	 return data.to;            }        }).result(function(event,data,formatted){ 
+	 alert(data.to);        });    });   
+	 </script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              

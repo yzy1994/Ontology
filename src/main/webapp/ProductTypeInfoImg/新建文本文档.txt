@@ -1,0 +1,34 @@
+               <?xml version="1.0" encoding="GB2312"?>                
+                  <Body>   <Title> 四川抗震救灾转入安置阶段</Title>
+                 <ReportTime> 2013年04月30日 07:13:30 </ReportTime>来源： 人民日报海外版 
+
+
+　<Content>　<Paragraph><Sentence><Event eid="e1"><Time tid="t1" type="relTime">4月28日</Time>，<Participant sid="s1">四川省委
+
+</Participant>召开常委（扩大）<Denoter did="d1">会议</Denoter></Event></Sentence>。<Sentence><Event eid="e2" type="thoughtevent">会议<Denoter did="d2" type="statement">认为</Denoter></Event>，<Event eid="e3"><Object oid="o1">“4·20”芦山强烈地震抢险救援工作</Object>基本<Denoter did="d3" type="stateChange">完成</Denoter></Event>，<Event eid="e4"><Object oid="o2">抗震
+
+救灾斗争</Object>取得阶段性<Denoter did="d4" type="stateChange">胜利</Denoter></Event></Sentence>。<Sentence>会议研究决定，抗震救灾工作由抢险救援阶段转入过渡安置阶段，同时着手启动灾后恢复
+
+重建规划工作。</Sentence></Paragraph>
+
+　　<Paragraph><Sentence>下一阶段，四川将坚持把受灾群众安置作为当前抗震救灾工作的中心任务，进一步巩固应急安置成果，有序推进
+
+过渡安置，全面恢复灾区正常生产生活秩序，为顺利推进灾后重建、实现人民安居乐业打下坚实基础</Sentence>。</Paragraph>
+
+　<Paragraph>　<Sentence>会议要求，坚持把防治次生地质灾害作为抗震救灾的重大任务，进一步加大隐患排查、气象预报、监测预警、交
+
+通管控、排险除危、信息发布和避灾演练力度。</Sentence>（张忠 张文）</Paragraph></Content></Body>
+
+import java.io.BufferedOutputStream;  import java.io.BufferedReader;  import java.io.FileOutputStream;  import java.io.IOException;  import java.io.InputStream;  import java.io.InputStreamReader;  import java.net.MalformedURLException;  import java.net.URL;  import java.net.URLConnection;  import java.util.ArrayList;  import java.util.List;  import java.util.regex.Matcher;  import java.util.regex.Pattern;      public class GetImage {      /**      * @param args      */      private List<String> imageUrl = new ArrayList<String>();//用于存储图片的url      private int count = 0;//图片计数器      public static void main(String[] args) {          String netUrl = "http://www.qbhwx.com/product/category/?&page=13";//要爬的网页        //String netUrl = "http://sejie.wanxun.org/post/2012-09-25/40039413449";              new GetImage().init(netUrl);      }      public void init(String netUrl)      {          getPage(netUrl);          while(imageUrl.size()!=0)          {              getImage(imageUrl.remove(0));          }      }      //获取网页信息line中的图片url并加入到集合中      public  void getImageUrl(String line)      {          String regex = "src=\"http://.{1,}.jpg";          Pattern pat = Pattern.compile(regex);          Matcher matcher=pat.matcher(line);          String str =null;          while(matcher.find())          {              str = matcher.group();              imageUrl.add(str.substring(5));          }         }      //爬取网页中的信息。      public  void getPage(String netUrl)       {          BufferedReader mybr = null;          try {              URL myurl = new URL(netUrl);              URLConnection myconn = myurl.openConnection();              InputStream myin = myconn.getInputStream();              mybr = new BufferedReader(new InputStreamReader(myin,"UTF-8"));              String line;              while((line = mybr.readLine())!= null)              {                  getImageUrl(line);//判断网页中的jpg图片              }                          } catch (MalformedURLException e) {              System.out.println("url异常");          } catch (IOException e) {              System.out.println("url连接异常");          }finally          {              if( mybr != null)              {                  try {                      mybr.close();                  } catch (IOException e) {                      System.out.println("读入流关闭异常");                  }              }          }      }      //下载该图片！      public  void getImage(String imageUrl)       {          InputStream myin = null;          BufferedOutputStream myos = null;          try {              URL myurl = new URL(imageUrl);              URLConnection myconn = myurl.openConnection();              myin = myconn.getInputStream();              myos = new BufferedOutputStream(new FileOutputStream(count+".jpg"));              byte[] buff = new byte[1024];              int num = 0;              while((num = myin.read(buff))!= -1)              {                  myos.write(buff, 0, num);                  myos.flush();              }              count++;          } catch (MalformedURLException e) {              System.out.println("url异常");          }  catch (IOException e) {              System.out.println("url连接异常");          }          finally          {              if( myin != null)              {                  try {                      myos.close();                  } catch (IOException e) {                      System.out.println("读入流关闭异常");                  }              }              if( myos != null)              {                  try {                      myos.close();                  } catch (IOException e) {                      System.out.println("输出流关闭异常");                  }              }          }      }      }
+
+
+
+
+
+
+开发背景
+主要功能模块简介
+界面展示
+半自动标注流程图
+其他功能简介
+总结

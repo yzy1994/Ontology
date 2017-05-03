@@ -1,0 +1,29 @@
+label.delOnt {
+	color: #2233FF;
+}
+
+label.delOnt:hover {
+	text-decoration: underline;
+}
+
+label.exportOnt {
+	color: #2233FF;
+}
+
+label.exportOnt:hover {
+	text-decoration: underline;
+}
+
+label.newOnt {
+	color: #2233FF;
+}
+
+label.newOnt:hover {
+	text-decoration: underline;
+}
+
+.ontform {
+	margin-left: 10px;
+	text-align: center;
+}
+

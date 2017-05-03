@@ -1,0 +1,3 @@
+function Time() {
+	var timeType;
+}

@@ -1,0 +1,365 @@
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, code, del, dfn, em,
+	img, strong, dd, dl, dt, li, ol, ul, fieldset, form, label, button,
+	input, table, caption, tbody, tfoot, thead, tr, th, td, menu {
+	margin: 0;
+	padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav,
+	section {
+	display: block
+}
+
+audio, canvas, video {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1
+}
+
+audio:not ([controls] ) {
+	display: none
+} /* �������?����֮�� www.lanrenzhijia.com */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+}
+
+ol, ul, menu {
+	list-style: none
+}
+
+img {
+	border: 0
+}
+
+a:focus {
+	outline: none
+}
+
+em, i {
+	font-style: normal;
+}
+
+button, input, select, textarea {
+	font-size: 100%;
+	margin: 0;
+	vertical-align: -3px;
+	outline: none;
+}
+
+button, input {
+	border: 1px solid;
+	outline: none;
+	line-height: normal;
+	*overflow: visible
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+	border: 0;
+	padding: 0
+}
+
+button, input[type="button"], input[type="reset"], input[type="submit"]
+	{
+	cursor: pointer;
+	-webkit-appearance: button
+}
+
+input[type="search"] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box
+}
+
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none
+}
+
+textarea {
+	overflow: auto;
+	vertical-align: top
+}
+
+::selection {
+	background: #72d0eb;
+	color: #fff;
+	text-shadow: none
+}
+
+::-moz-selection {
+	background: #72d0eb;
+	color: #fff;
+	text-shadow: none
+}
+
+*[hidden] {
+	display: none
+}
+
+a {
+	color: #0088DB;
+	text-decoration: none;
+	cursor: pointer
+}
+
+a:hover {
+	color: #2A5E8E
+}
+
+.clearfix:after, .central:after, .widget ul:after, .paging:after,
+	.pagenav:after, .base-tit:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+
+.clearfix, .central, .widget ul, .paging, .pagenav, .base-tit { *+
+	height: 1%;
+}
+
+body, button, input, select, textarea, code {
+	font-size: 12px;
+	font-family: microsoft yahei;
+	color: #444;
+}
+/*window*/
+
+/* input */
+.ipt {
+	border: solid 1px #d2d2d2;
+	border-left-color: #ccc;
+	border-top-color: #ccc;
+	border-radius: 2px;
+	box-shadow: inset 0 1px 0 #f8f8f8;
+	background-color: #fff;
+	padding: 4px 6px;
+	height: 21px;
+	line-height: 21px;
+	color: #555;
+	width: 180px;
+	vertical-align: baseline;
+}
+
+.ipt-mini {
+	width: 140px;
+	padding: 1px 3px;
+}
+
+.ipt:focus {
+	border-color: #95C8F1;
+	box-shadow: 0 0 4px #95C8F1;
+}
+/* btn */
+.btn {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 12px;
+	font-weight: bold;
+	height: 27px;
+	line-height: 27px;
+	min-width: 52px;
+	padding: 0 12px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 2px;
+	border: 1px solid #ddd;
+	color: #666;
+	background-color: #f5f5f5;
+	background: -webkit-linear-gradient(top, #F5F5F5, #F1F1F1);
+	background: -moz-linear-gradient(top, #F5F5F5, #F1F1F1);
+	background: linear-gradient(top, #F5F5F5, #F1F1F1);
+}
+
+input.btn {
+	height: 29px;
+}
+
+.btn:hover {
+	border-color: #c6c6c6;
+	color: #333;
+	background-color: #f8f8f8;
+	background: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
+	background: -moz-linear-gradient(top, #f8f8f8, #f1f1f1);
+	background: linear-gradient(top, #f8f8f8, #f1f1f1);
+	box-shadow: #ddd 0 1px 1px 0;
+}
+
+.btn:active, .btn.btn-active {
+	box-shadow: #ddd 0 1px 2px 0 inset;
+	border-color: #c6c6c6;
+}
+
+.btn:focus {
+	border-color: #4d90fe;
+	outline: none
+}
+
+.btn-primary {
+	border-color: #3079ED;
+	color: #F3F7FC;
+	background-color: #4D90FE;
+	background: -webkit-linear-gradient(top, #4D90FE, #4787ED);
+	background: -moz-linear-gradient(top, #4D90FE, #4787ED);
+	background: linear-gradient(top, #4D90FE, #4787ED);
+}
+
+.btn-primary:hover {
+	border-color: #2F5BB7;
+	color: #fff;
+	background-color: #4D90FE;
+	background: -webkit-linear-gradient(top, #4D90FE, #357AE8);
+	background: -moz-linear-gradient(top, #4D90FE, #357AE8);
+	background: linear-gradient(top, #4D90FE, #357AE8);
+}
+
+.btn-primary:active, .btn-primary.btn-active {
+	box-shadow: #2176D3 0 1px 2px 0 inset;
+	border-color: #3079ED;
+}
+
+.btn-primary:focus {
+	border-color: #4d90fe;
+	outline: none
+}
+
+.ShowOnt-popover {
+	z-index: 9999;
+	position: fixed;
+	top: 35%;
+	left: 30%;
+	width: 1200px;
+	height: 600px;
+	margin: -180px 0 0 -330px;
+	border-radius: 5px;
+	border: solid 0px #666;
+	background-color: #fff;
+	display: none;
+	box-shadow: 0 0 10px #666;
+}
+
+.ShowOnt-popover-mask {
+	z-index: 9998;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.4;
+	filter: alpha(opacity = 40);
+	display: none
+}
+
+.ShowOnt-poptit {
+	border-bottom: 1px solid;
+	padding: 10px;
+	position: relative;
+	height: 59px;
+}
+
+.ShowOnt-svg {
+	height: 520px;
+	width: 1200px;
+	overflow-x: auto;
+	overflow-y: auto;
+}
+
+.ShowOnt-poptit .close {
+	float: right;
+	color: #999;
+	padding: 5px;
+	margin: -2px -5px -5px;
+	font: bold 14px/14px simsun;
+	text-shadow: 0 1px 0 #ddd
+}
+
+.theme-popover12 {
+	z-index: 6;
+	position: relative;
+	width: 1000px;
+    height: 500px;
+    margin-left:100px;
+	top: 0;
+	left: 100px;
+	border-radius: 1px;
+	border: solid 1px #666;
+	background-color: #fff;
+
+}
+
+.dform12 {
+	margin-left:180px;
+	padding:20px 20px 10px 70px;
+	text-align: center;
+}
+.theme-popover-mask {
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.4;
+	filter: alpha(opacity = 40);
+	display: none;
+}
+
+.theme-popover {
+	z-index: 12;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 660px;
+	height: 360px;
+	margin: -180px 0 0 -330px;
+	border-radius: 5px;
+	border: solid 2px #666;
+	background-color: #fff;
+	display: none;
+	box-shadow: 0 0 10px #666;
+}
+
+.theme-poptit {
+	border-bottom: 1px solid #ddd;
+	padding: 12px;
+	position: relative;
+	
+}
+.dform {
+	margin-left:20px;
+	padding:20px 20px 10px 70px;
+	text-align: center;
+}
+.theme-poptit .close {
+	float: right;
+	color: #999;
+	padding: 5px;
+	margin: -2px -5px -5px;
+	font: bold 14px/14px simsun;
+	text-shadow: 0 1px 0 #ddd
+}
+.theme-poptit .close2 {
+	float: right;
+	color: #999;
+	padding: 5px;
+	margin: -2px -5px -5px;
+	font: bold 14px/14px simsun;
+	text-shadow: 0 1px 0 #ddd
+}
+.selectOption {
+	position: relative;
+	margin-left: 260px;
+	margin-top: 10px;
+}
+.selectLable{
+	position: relative;
+	margin-left: 260px;
+    margin-top: 10px;
+}

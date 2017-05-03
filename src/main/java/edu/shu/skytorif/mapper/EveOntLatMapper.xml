@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.shu.skytorif.mapper.EveOntLatMapper">
+	<resultMap id="BaseResultMap" type="com.di.ifin.zeus.admin.bont.pojo.EveOntLat">
+		<id column="oid" property="oid" jdbcType="INTEGER" />
+		<result column="latsid" property="latsid" jdbcType="VARCHAR" />
+		<result column="latname" property="latname" jdbcType="VARCHAR" />
+		<result column="parentsid" property="parentsid" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.di.ifin.zeus.admin.bont.pojo.EveOntLat"
+		extends="BaseResultMap">
+		<result column="latnote" property="latnote" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		oid, latsid, latname, parentsid
+	</sql>
+	<sql id="Blob_Column_List">
+		latnote
+	</sql>
+	<select id="queryAllEveOntLatList" resultType="eveOntLat">
+		select * from
+		eve_ont_lat
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from eve_ont_lat
+		where oid = #{oid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		eve_ont_lat
+		where oid = #{oid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.di.ifin.zeus.admin.bont.pojo.EveOntLat">
+		insert into eve_ont_lat (oid,
+		latsid, latname,
+		parentsid, latnote)
+		values (#{oid,jdbcType=INTEGER},
+		#{latsid,jdbcType=VARCHAR},
+		#{latname,jdbcType=VARCHAR},
+		#{parentsid,jdbcType=VARCHAR}, #{latnote,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.di.ifin.zeus.admin.bont.pojo.EveOntLat">
+		insert into eve_ont_lat
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="oid != null">
+				oid,
+			</if>
+			<if test="latsid != null">
+				latsid,
+			</if>
+			<if test="latname != null">
+				latname,
+			</if>
+			<if test="parentsid != null">
+				parentsid,
+			</if>
+			<if test="latnote != null">
+				latnote,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="oid != null">
+				#{oid,jdbcType=INTEGER},
+			</if>
+			<if test="latsid != null">
+				#{latsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latname != null">
+				#{latname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentsid != null">
+				#{parentsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latnote != null">
+				#{latnote,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.di.ifin.zeus.admin.bont.pojo.EveOntLat">
+		update eve_ont_lat
+		<set>
+			<if test="latsid != null">
+				latsid = #{latsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latname != null">
+				latname = #{latname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentsid != null">
+				parentsid = #{parentsid,jdbcType=VARCHAR},
+			</if>
+			<if test="latnote != null">
+				latnote = #{latnote,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where oid = #{oid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.di.ifin.zeus.admin.bont.pojo.EveOntLat">
+		update
+		eve_ont_lat
+		set latsid = #{latsid,jdbcType=VARCHAR},
+		latname =
+		#{latname,jdbcType=VARCHAR},
+		parentsid = #{parentsid,jdbcType=VARCHAR},
+		latnote = #{latnote,jdbcType=LONGVARCHAR}
+		where oid =
+		#{oid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.di.ifin.zeus.admin.bont.pojo.EveOntLat">
+		update eve_ont_lat
+		set latsid = #{latsid,jdbcType=VARCHAR},
+		latname =
+		#{latname,jdbcType=VARCHAR},
+		parentsid = #{parentsid,jdbcType=VARCHAR}
+		where oid = #{oid,jdbcType=INTEGER}
+	</update>
+
+	<select id="queryObjOntLatSonByLatSid" parameterType="string"
+		resultType="eveOntLat">
+		select * from eve_ont_lat where parentsid=#{value}
+	</select>
+
+	<delete id="removeObjOntLatByLatSid" parameterType="string">
+		delete from
+		eve_ont_lat where latsid=#{value}
+	</delete>
+
+	<insert id="createOntLat" parameterType="eveOntLat"
+		useGeneratedKeys="true" keyProperty="oid">
+		insert into eve_ont_lat
+		(latsid,latname,parentsid,latnote,peoelement,objelement,envelement)
+		values(#{latSid},#{latName},#{parentSid},#{latNote},#{peoElement},#{objElement},#{envElement})
+	</insert>
+	<update id="updateOntLat" parameterType="eveOntLat">
+		update eve_ont_lat
+		set
+		latsid=#{latSid},latname=#{latName},parentsid=#{parentSid},latnote=#{latNote},peoelement=#{peoElement},objelement=#{objElement},envelement=#{envElement}
+		where oid=#{oid}
+	</update>
+	<select id="queryOntLatByLatSid" parameterType="string"
+		resultType="eveOntLat">
+		select * from eve_ont_lat where latsid=#{value}
+	</select>
+
+	<select id="queryOntLatByLatName" parameterType="string"
+		resultType="eveOntLat">
+		select * from eve_ont_lat where latname=#{value}
+	</select>
+</mapper>
