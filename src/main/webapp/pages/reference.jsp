@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 <base href="<%=basePath%>">
+<jsp:include page="/pages/common/header.jsp"></jsp:include>
 <head>
 <link rel="shortcut icon" href="resources/images/title.ico"
 	type="image/x-icon" />

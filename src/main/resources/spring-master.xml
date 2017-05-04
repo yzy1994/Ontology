@@ -84,6 +84,7 @@
 				<!-- /pages/buildont/buildont.jsp=authc,roles[builder] -->
 				/pages/drawont/Bont.jsp = authc
 				/pages/label/label.jsp = authc
+				/pages/drawont/OntoEdit.jsp = authc
 			</value>
 		</property>
 	</bean>

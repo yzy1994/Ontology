@@ -5,25 +5,9 @@ $(document).ready(function() {
 	});
 })
 function ajaxSubmit(frm) {
-	var array = $(frm).serializeArray();
 	var ontinfo = {};
-	ontinfo["ontname"] = "";
-	ontinfo["ontfield"] = "";
-	ontinfo["element"] = "";
-	$.each(array, function() {
-		var labname = this.name;
-		if (labname == "element") {
-			ontinfo[labname] += this.value + ",";
-		}
-		if (labname == "ontname") {
-			labname = "name";
-			ontinfo[labname] = this.value;
-		}
-		if (labname == "ontfield") {
-			labname = "field";
-			ontinfo[labname] = this.value;
-		}
-	});
+	ontinfo["name"] = $('#ontname').val();
+	ontinfo["field"] = $('#ontfield').val();
 	var str = JSON.stringify(ontinfo);
 	console.log(str);
 	$.ajax({
@@ -36,6 +20,23 @@ function ajaxSubmit(frm) {
 		success : function(data) {
 			if(data.resultStr=="existed"){
 				alert("本体已存在！")
+			}else{
+				var input = {};
+				input["ontname"] = $('#ontname').val();
+				input["latname"] = "根节点";
+				input["parentlatname"] = "root";
+				input["latnote"] = "";
+				var inputstr = JSON.stringify(input)
+ 				$.ajax({
+ 					url: ecEditUrl,
+ 			        type: "post",
+ 			        async: true,
+ 			        data: {
+ 			            inputStr: inputstr,
+ 			        },
+ 			        success: function(data){
+ 			        }
+				})
 			}
 		}
 	});

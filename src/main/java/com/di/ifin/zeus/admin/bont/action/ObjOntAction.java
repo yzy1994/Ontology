@@ -50,6 +50,7 @@ import com.mongodb.MongoClient;
 import com.opensymphony.xwork2.ActionSupport;
 import com.shu.global.Global;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller("objOntAction")
@@ -100,11 +101,11 @@ public class ObjOntAction extends ActionSupport {
 	@Inject
 	@Named("EnvElementService")
 	private EnvElementService envElementService;
-	
+
 	@Inject
 	@Named("AssertionElementService")
 	private AssertionElementService assertionElementService;
-	
+
 	@Inject
 	@Named("LanguageElementService")
 	private LanguageElementService languageElementService;
@@ -186,6 +187,66 @@ public class ObjOntAction extends ActionSupport {
 
 	public void setResultStr(String resultStr) {
 		this.resultStr = resultStr;
+	}
+
+	private String lanInfo;
+
+	private String assertInfo;
+
+	private String actInfo;
+
+	private String objInfo;
+
+	private String timeInfo;
+
+	private String envInfo;
+
+	public String getLanInfo() {
+		return lanInfo;
+	}
+
+	public void setLanInfo(String lanInfo) {
+		this.lanInfo = lanInfo;
+	}
+
+	public String getAssertInfo() {
+		return assertInfo;
+	}
+
+	public void setAssertInfo(String assertInfo) {
+		this.assertInfo = assertInfo;
+	}
+
+	public String getActInfo() {
+		return actInfo;
+	}
+
+	public void setActInfo(String actInfo) {
+		this.actInfo = actInfo;
+	}
+
+	public String getObjInfo() {
+		return objInfo;
+	}
+
+	public void setObjInfo(String objInfo) {
+		this.objInfo = objInfo;
+	}
+
+	public String getTimeInfo() {
+		return timeInfo;
+	}
+
+	public void setTimeInfo(String timeInfo) {
+		this.timeInfo = timeInfo;
+	}
+
+	public String getEnvInfo() {
+		return envInfo;
+	}
+
+	public void setEnvInfo(String envInfo) {
+		this.envInfo = envInfo;
 	}
 
 	/*
@@ -430,13 +491,12 @@ public class ObjOntAction extends ActionSupport {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
 		String evelatname = json.getString("evelatname");
-		List<TimeLat> list = timeelementservice.queryTimeElement(ontname, evelatname);
-		if (list.size() == 0) {
+		TimeLat tl = timeelementservice.queryTimeElement(ontname, evelatname);
+		if (tl == null) {
 			operateMsg = "cannot find";
 			resultStr = "";
 			return SUCCESS;
 		} else {
-			TimeLat tl = list.get(0);
 			operateMsg = "suc";
 			resultStr = gsonTemp.toJson(tl);
 			return SUCCESS;
@@ -490,11 +550,11 @@ public class ObjOntAction extends ActionSupport {
 	public String delConceptLat() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String latname = json.getString("latname");
-		if(conceptlatservice.IsExistsChildNode(latname)){
+		if (conceptlatservice.IsExistsChildNode(latname)) {
 			this.operateMsg = "existcn";
 			return SUCCESS;
 		}
-		
+
 		conceptlatservice.delete(latname);
 		this.operateMsg = "delsuc";
 		return SUCCESS;
@@ -556,14 +616,14 @@ public class ObjOntAction extends ActionSupport {
 		envElementService.editEnvLat(envlat);
 		return SUCCESS;
 	}
-	
-	//断言要素CRUD
-	public String queryAssertionLat(){
+
+	// 断言要素CRUD
+	public String queryAssertionLat() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
 		String evelatname = json.getString("evelatname");
 		AssertionLat assertionlat = assertionElementService.query(ontname, evelatname);
-		
+
 		if (assertionlat != null) {
 			resultStr = gsonTemp.toJson(assertionlat);
 			operateMsg = "Finded";
@@ -573,16 +633,16 @@ public class ObjOntAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	public String editAssertionLat(){
+
+	public String editAssertionLat() {
 		AssertionLat assertionlat = gsonTemp.fromJson(inputStr, new TypeToken<AssertionLat>() {
 		}.getType());
 		assertionElementService.upsert(assertionlat);
 		return SUCCESS;
 	}
 
-	//语言表现要素CRUD
-	public String queryLanguageLat(){
+	// 语言表现要素CRUD
+	public String queryLanguageLat() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
 		String evelatname = json.getString("evelatname");
@@ -596,37 +656,44 @@ public class ObjOntAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
-	public String editLanguageLat(){
+
+	public String editLanguageLat() {
 		LanguageLat lan = gsonTemp.fromJson(inputStr, new TypeToken<LanguageLat>() {
 		}.getType());
 		languageElementService.upsert(lan);
 		return SUCCESS;
 	}
-	
+
 	// 事件类CRUD
-	public String IsExistsChildren(){
+	public String IsExistsChildren() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
 		String latname = json.getString("latname");
-		if(latservice.IsExistChildren(Global.eventclass, ontname, latname)){
-			this.resultStr="true";
-		}else{
-			this.resultStr="false";
+		if (latservice.IsExistChildren(Global.eventclass, ontname, latname)) {
+			this.resultStr = "true";
+		} else {
+			this.resultStr = "false";
 		}
 		return SUCCESS;
 	}
-	
+
 	public String removeEC() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
 		String latname = json.getString("latname");
-		if(latservice.IsExistChildren(Global.eventclass, ontname, latname)){
+		if (latservice.IsExistChildren(Global.eventclass, ontname, latname)) {
 			this.operateMsg = "existcn";
 			return SUCCESS;
 		}
 		latservice.removeByLatname(Global.eventclass, ontname, latname);
 		this.operateMsg = "delesuc";
+		return SUCCESS;
+	}
+	
+	public String removeECByOntname(){
+		JSONObject json = JSONObject.fromObject(inputStr);
+		String ontname = json.getString("ontname");
+		latservice.removeByOntname(Global.eventclass, ontname);
 		return SUCCESS;
 	}
 
@@ -659,8 +726,33 @@ public class ObjOntAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	
-	//研究团队和文献内容
+	public String queryECInfo() {
+		JSONObject json = JSONObject.fromObject(inputStr);
+		String ontname = json.getString("ontname");
+		String evelatname = json.getString("evelatname");
+
+		OntLat ol = latservice.queryByLatname(Global.eventclass, ontname, evelatname).get(0);
+		this.setResultStr(gsonTemp.toJson(ol));
+
+		ActionLat al = actionelementservice.query(evelatname, ontname);
+		this.setActInfo(gsonTemp.toJson(al));
+
+		TimeLat tl = timeelementservice.queryTimeElement(ontname, evelatname);
+		this.setTimeInfo(gsonTemp.toJson(tl));
+
+		EnvLat el = envElementService.queryEnvLat(ontname, evelatname);
+		this.setEnvInfo(gsonTemp.toJson(el));
+
+		AssertionLat asl = assertionElementService.query(ontname, evelatname);
+		this.setAssertInfo(gsonTemp.toJson(asl));
+
+		LanguageLat ll = languageElementService.query(ontname, evelatname);
+		this.setLanInfo(gsonTemp.toJson(ll));
+
+		return SUCCESS;
+	}
+
+	// 研究团队和文献内容
 	public String queryAllResearcher() {
 		List<Researcher> list = researcherService.queryAllResearcher();
 		if (list.size() != 0) {

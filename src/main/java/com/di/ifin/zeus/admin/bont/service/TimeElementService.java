@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface TimeElementService {
-	public List<TimeLat> queryTimeElement(String ontname,String evelatname);
+	public TimeLat queryTimeElement(String ontname,String evelatname);
 	
 	public String insertTimeElement(TimeLat timelat);
 	

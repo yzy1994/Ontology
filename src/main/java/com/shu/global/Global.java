@@ -19,5 +19,5 @@ public class Global {
 	public static final String collectionid = "global_setting";
 	public static final String evelatsid = "evelatsid";
 	public static final String conceptsid = "conceptsid";
-	
+	public static final String ontid = "ontid";
 }

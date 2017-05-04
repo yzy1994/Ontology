@@ -1,9 +1,9 @@
 package com.di.ifin.zeus.admin.bont.pojo;
 
 public class OntInfo {
+	private String oid;
 	private String name;
 	private String field;
-	private String element;
 
 	public String getName() {
 		return name;
@@ -21,15 +21,12 @@ public class OntInfo {
 		this.field = field;
 	}
 
-	public String getElement() {
-		return element;
+	public String getOid() {
+		return oid;
 	}
 
-	public void setElement(String element) {
-		this.element = element;
+	public void setOid(String oid) {
+		this.oid = oid;
 	}
 
-	public String toString() {
-		return name + " " + field + " " + element;
-	}
 }

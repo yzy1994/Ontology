@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 <base href="<%=basePath%>">
+<jsp:include page="/pages/common/header.jsp"></jsp:include>
 <head>
 <link rel="shortcut icon" href="resources/images/title.ico"
 	type="image/x-icon" />
@@ -30,7 +31,7 @@
 		<div class="list-wrap w-1140">
 			<div>
 				<div class="link-title">
-					<a href="https://github.com/shijiebei2009/CEC-Corpus">
+					<a href="https://github.com/daselab/CEC-Corpus">
 						事件本体以及突发事件语料库--CEC（Chinese Emergency Corpus） </a>
 				</div>
 				
@@ -39,10 +40,10 @@
 
 					<ul>
 						<li><h4 class="name">
-								<a href="https://github.com/shijiebei2009/CEC-Corpus"><b>CEC语料库下载地址</b></a>
+								<a href="https://github.com/daselab/CEC-Corpus"><b>CEC语料库下载地址</b></a>
 							</h4></li>
 							
-						<li><h4><a href="https://github.com/shijiebei2009/CEEC-Corpus"><b>环境污染语料库下载地址</b></a></h4></li>
+						<li><h4><a href="https://github.com/daselab/CEEC-Corpus"><b>环境污染语料库下载地址</b></a></h4></li>
 						<li><h4>目录</h4></li>
 						<li><a href="pages/corpus_profile.jsp#什么是本体"><h5>什么是本体?</h5></a></li>
 						<li><a href="pages/corpus_profile.jsp#什么是事件"><h5>什么是事件?</h5></a></li>
@@ -51,6 +52,7 @@
 						<li><a href="pages/corpus_profile.jsp#cec如何构建"><h5>CEC如何构建？</h5></a></li>
 						<li><a href="pages/corpus_profile.jsp#主要标签图结构图"><h5>主要标签图结构图</h5></a></li>
 						<li><a href="pages/corpus_profile.jsp#cec标注统计"><h5>CEC标注统计</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#cec语料库引用"><h5>CEC语料库引用方式</h5></a></li>
 					</ul>
 				</div>
 				<div id="article-content" class="article-content">
@@ -145,8 +147,9 @@
 							<img width="800px"
 								src="resources/images/bont/statisticsofcec.png" alt="CEC标注统计"
 								title="">
-
-							<p>参考文献：面向事件的本体研究 刘宗田等 上海大学计算机工程与科学学院</p>
+							
+							<h3 id="cec语料库引用">8、CEC语料库引用方式</h3>
+							<p>上海大学-语义智能实验室 中文突发事件语料库(Chinese Emergency Corpus)[DB/OL].https://github.com/daselab/CEC-Corpus,2015</p>
 						</div>
 					</div>
 				</div>

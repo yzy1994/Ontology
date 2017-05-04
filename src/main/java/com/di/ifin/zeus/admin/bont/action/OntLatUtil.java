@@ -52,14 +52,14 @@ public class OntLatUtil {
 		return map;
 	}
 	
-	public static Map<String, String> getnoaddmap(String collection, String ontname, String latsid) {
+	public static Map<String, String> getnoaddmap(String collection, String ontname, String latname) {
 		// TODO Auto-generated method stub
 		MongoClient mc = new MongoClient("localhost", 27017);
 		DB db = mc.getDB("ontology");
 		DBCollection dbcollection = db.getCollection(collection);
 		DBObject searchObj = new BasicDBObject();
 		String result;
-		searchObj.put("latsid", latsid);
+		searchObj.put("latname", latname);
 		searchObj.put("ontname", ontname);
 		DBCursor cursor = dbcollection.find(searchObj);
 		if (cursor.hasNext()) {

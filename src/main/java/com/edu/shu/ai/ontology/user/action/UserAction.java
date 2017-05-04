@@ -63,7 +63,7 @@ public class UserAction extends ActionSupport {
 		return "success";
 	}
 
-	public void logout() {  
+	public String logout() throws Exception{  
 	    Subject subject = SecurityUtils.getSubject();  
 	    if (subject.isAuthenticated()) {  
 	        subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存  
@@ -71,6 +71,7 @@ public class UserAction extends ActionSupport {
 	            LOG.debug("用户" + username + "退出登录");  
 	        }  
 	    }  
+	    return SUCCESS;
 	}  
 	
 	@RequiresRoles("builder")

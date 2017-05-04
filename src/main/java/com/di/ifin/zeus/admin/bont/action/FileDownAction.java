@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
@@ -20,14 +19,22 @@ import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
 import org.springframework.stereotype.Controller;
 
+import com.di.ifin.zeus.admin.bont.pojo.ObjLat;
 import com.di.ifin.zeus.admin.bont.pojo.OntInfo;
 import com.di.ifin.zeus.admin.bont.pojo.OntLat;
-import com.di.ifin.zeus.admin.bont.service.EveOntLatServicem;
+import com.di.ifin.zeus.admin.bont.service.ActionElementService;
+import com.di.ifin.zeus.admin.bont.service.AssertionElementService;
+import com.di.ifin.zeus.admin.bont.service.EnvElementService;
+import com.di.ifin.zeus.admin.bont.service.GlobalMongoService;
+import com.di.ifin.zeus.admin.bont.service.LanguageElementService;
 import com.di.ifin.zeus.admin.bont.service.LatService;
+import com.di.ifin.zeus.admin.bont.service.ObjElementService;
 import com.di.ifin.zeus.admin.bont.service.OntService;
+import com.di.ifin.zeus.admin.bont.service.TimeElementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
+import com.shu.global.Global;
 
 import net.sf.json.JSONObject;
 
@@ -40,6 +47,34 @@ public class FileDownAction extends ActionSupport {
 	@Inject
 	@Named("LatService")
 	private LatService latservice;
+	
+	@Inject
+	@Named("TimeElementService")
+	private TimeElementService timeelementservice;
+
+	@Inject
+	@Named("ObjElementService")
+	private ObjElementService objelementservice;
+
+	@Inject
+	@Named("ActionElementService")
+	private ActionElementService actionelementservice;
+
+	@Inject
+	@Named("GlobalMongoService")
+	private GlobalMongoService globalMongoService;
+
+	@Inject
+	@Named("EnvElementService")
+	private EnvElementService envElementService;
+
+	@Inject
+	@Named("AssertionElementService")
+	private AssertionElementService assertionElementService;
+
+	@Inject
+	@Named("LanguageElementService")
+	private LanguageElementService languageElementService;
 
 	Gson gsonTemp = new GsonBuilder().disableHtmlEscaping().create();
 	InputStream fileInputStream;
@@ -78,6 +113,7 @@ public class FileDownAction extends ActionSupport {
 		Element info = new Element("OntInfo");
 		
 		ontname = URLDecoder.decode(ontname);
+		System.err.println(ontname);
 		OntInfo ontinfo = ontservice.findInfoByName(ontname);
 		String jsonstring = gsonTemp.toJson(ontinfo);
 		JSONObject json1 = JSONObject.fromObject(jsonstring);
@@ -89,48 +125,47 @@ public class FileDownAction extends ActionSupport {
 		root.addContent(info);
 
 		Element eve_lats = new Element("Eve_Lats");
-		List<OntLat> evelatlist = latservice.queryall("eve_ont_lat", ontname);
+		List<OntLat> evelatlist = latservice.queryall(Global.eventclass, ontname);
 		for (OntLat lat : evelatlist) {
 			Element eve_lat = new Element("Eve_Lat");
-			Map<String,String> map1= OntLatUtil.getnoaddmap("eve_ont_lat", ontname, lat.getLatsid());
+			OntLatUtil.injectElementFromObject(eve_lat,lat);
+			/*Map<String,String> map1= OntLatUtil.getnoaddmap("eve_ont_lat", ontname, lat.getLatname());
 			for (Entry<String, String> entry : map1.entrySet())
-				eve_lat.addContent(new Element(entry.getKey()).setText(entry.getValue()));
+				eve_lat.addContent(new Element(entry.getKey()).setText(entry.getValue()));*/
+			Element action = new Element("Action_Element");
+			OntLatUtil.injectElementFromObject(action, actionelementservice.query(lat.getLatname(), ontname));
+			eve_lat.addContent(action);
+			
+			Element objects = new Element("Objects_Element");
+			List<ObjLat> list = objelementservice.queryObjElement(ontname, lat.getLatname());
+			if(list.size()!=0){
+				for(ObjLat ol:list){
+					Element object =  new Element("Object_Element");
+					OntLatUtil.injectElementFromObject(object, ol);
+					objects.addContent(object);
+				}
+			}
+			eve_lat.addContent(objects);
+			
+			Element time = new Element("Time_Element");
+			OntLatUtil.injectElementFromObject(time, timeelementservice.queryTimeElement(ontname, lat.getLatname()));
+			eve_lat.addContent(time);
+			
+			Element env = new Element("Environment_Element");
+			OntLatUtil.injectElementFromObject(env, envElementService.queryEnvLat(ontname, lat.getLatname()));
+			eve_lat.addContent(env);
+			
+			Element assertion = new Element("Assertion_Element");
+			OntLatUtil.injectElementFromObject(assertion, assertionElementService.query(ontname, lat.getLatname()));
+			eve_lat.addContent(assertion);
+			
+			Element language = new Element("Language_Element");
+			OntLatUtil.injectElementFromObject(language, languageElementService.query(ontname, lat.getLatname()));
+			eve_lat.addContent(language);
+			
 			eve_lats.addContent(eve_lat);
 		}
 		root.addContent(eve_lats);
-
-		Element elements = new Element("Elements");
-		String[] aelement = selement.split(",");
-		for (String s : aelement) {
-			String collectionname = "";
-			String elementname = "";
-			switch (s) {
-
-			case "参与者":
-				collectionname = "peo_ont_lat";
-				elementname = "Peo_Lat";
-				break; // 可选
-			case "对象":
-				collectionname = "obj_ont_lat";
-				elementname = "Obj_Lat";
-				break;
-			case "环境":
-				collectionname = "env_ont_lat";
-				elementname = "Env_Lat";
-				break;
-			}
-			Element element = new Element(elementname + "s");
-			List<OntLat> latlist = latservice.queryall(collectionname, ontname);
-			for (OntLat lat : latlist) {
-				Element eve_lat = new Element(elementname);
-				Map<String,String> map1= OntLatUtil.getnoaddmap(collectionname, ontname, lat.getLatsid());
-				for (Entry<String, String> entry : map1.entrySet())
-					eve_lat.addContent(new Element(entry.getKey()).setText(entry.getValue()));
-				element.addContent(eve_lat);
-			}
-			elements.addContent(element);
-		}
-		root.addContent(elements);
 
 		XMLOutputter XMLOut = new XMLOutputter();
 

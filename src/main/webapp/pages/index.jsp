@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 <base href="<%=basePath%>">
+<jsp:include page="/pages/common/header.jsp"></jsp:include>
 <head>
 <link rel="shortcut icon" href="resources/images/title.ico"
 	type="image/x-icon" />
@@ -30,7 +31,7 @@
 		<jsp:include page="/pages/common/nav.jsp" />
 		<div class="div3 w-1140">
 			<div class="col-xs-3 m-t-20">
-				<a href="pages/drawont/Bont.jsp"><img class="img2"
+				<a href="pages/drawont/OntoEdit.jsp"><img class="img2"
 					src="resources/images/navigation_images/list-icon1.png"></img></a>
 				<div class="m-t-20">
 					<p class="description">

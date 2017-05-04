@@ -15,11 +15,12 @@
  <!DOCTYPE html>
  <html xmlns="http://www.w3.org/1999/xhtml">-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" >
+<base href="<%=basePath%>">
+<jsp:include page="../common/header.jsp"></jsp:include>
 <head>
 <link rel="shortcut icon" href="resources/images/title.ico"
 	type="image/x-icon" />
 <html xmlns="http://www.w3.org/1999/xhtml">
-<base href="<%=basePath%>">
 <title>可视化本体构建工具</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -52,12 +53,14 @@
 <script type="text/javascript" src="resources/js/jquery.svgdom.js"></script>
 <script type="text/javascript" src="resources/js/jquery.svganim.js"></script>
 <script type="text/javascript" src="resources/js/jquery.color.js"></script>
+<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="resources/js/common/NavMenu.js"></script>
 <script type="text/javascript" src="resources/js/common/ArrayList.js"></script>
 <script type="text/javascript" src="resources/js/common/Config.js"></script>
 <script type="text/javascript" src="resources/js/common/ObjOntGV.js"></script>
 <script type="text/javascript" src="resources/js/leftmenu/LeftMenu.js"></script>
 <script type="text/javascript" src="resources/js/tab/Tab.js"></script>
+<script type="text/javascript" src="resources/js/bont/setcookie.js"></script>
 <script type="text/javascript" src="resources/js/bont/ObjOntWin.js"></script>
 <script type="text/javascript" src="resources/js/bont/ObjOntSvg.js"></script>
 <script type="text/javascript" src="resources/js/bont/EventCls.js"></script>

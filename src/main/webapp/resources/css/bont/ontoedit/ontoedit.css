@@ -14,16 +14,11 @@ label.exportOnt:hover {
 	text-decoration: underline;
 }
 
-label.newOnt {
-	color: #2233FF;
-}
-
-label.newOnt:hover {
+label#newOnt:hover {
 	text-decoration: underline;
 }
 
 .ontform {
 	margin-left: 10px;
-	text-align: center;
+	margin-right: 10px;
 }
-

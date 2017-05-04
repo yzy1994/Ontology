@@ -15,12 +15,14 @@ import org.jdom.input.SAXBuilder;
 import org.springframework.stereotype.Controller;
 
 import com.di.ifin.zeus.admin.bont.pojo.OntInfo;
+import com.di.ifin.zeus.admin.bont.service.GlobalMongoService;
 import com.di.ifin.zeus.admin.bont.service.LatService;
 import com.di.ifin.zeus.admin.bont.service.OntService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
+import com.shu.global.Global;
 
 @Controller("mainOntAction")
 public class MainOntAction extends ActionSupport {
@@ -61,6 +63,10 @@ public class MainOntAction extends ActionSupport {
 	@Inject
 	@Named("LatService")
 	private LatService latservice;
+	
+	@Inject
+	@Named("GlobalMongoService")
+	private GlobalMongoService globalMongoService;
 
 	Gson gsonTemp = new GsonBuilder().disableHtmlEscaping().create();
 
@@ -128,11 +134,17 @@ public class MainOntAction extends ActionSupport {
 	public String addOnt() {
 		OntInfo ontinfo = gsonTemp.fromJson(inputStr, new TypeToken<OntInfo>() {
 		}.getType());
+		if(ontinfo.getName()==null||ontinfo.getName()==""){
+			resultStr = "";
+			return SUCCESS;
+		}
+		
 		if (ontservice.findByName(ontinfo.getName()) == true) {
 			resultStr = "existed";
 			return SUCCESS;
 		}
-		System.out.println(ontinfo.toString());
+		String oid = "o" + globalMongoService.getid(Global.ontid).toString();
+		ontinfo.setOid(oid);
 		ontservice.addOnt(ontinfo);
 		resultStr = "success";
 		return SUCCESS;
@@ -147,7 +159,6 @@ public class MainOntAction extends ActionSupport {
 			Element eontinfo = root.getChild("OntInfo");
 			OntInfo ontinfo =new OntInfo();
 			String ontname = eontinfo.getChild("name").getText();
-			ontinfo.setElement(eontinfo.getChild("element").getText());
 			ontinfo.setField(eontinfo.getChild("field").getText());
 			ontinfo.setName(eontinfo.getChild("name").getText());
 			ontservice.addOnt(ontinfo);

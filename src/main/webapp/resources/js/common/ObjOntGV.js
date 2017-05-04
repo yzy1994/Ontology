@@ -14,6 +14,8 @@ var ecEditUrl = "objOntAction!upsertEC.action";
 
 var ecDelurl = "objOntAction!removeEC.action";
 
+var ecInfoEditUrl = "objOntAction!queryECInfo.action";
+
 var timeElementEditUrl = "objOntAction!editTimeLat.action";
 
 var timeElementFindUrl = "objOntAction!queryTimeLat.action";

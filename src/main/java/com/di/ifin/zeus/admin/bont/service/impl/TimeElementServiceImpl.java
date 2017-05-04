@@ -26,11 +26,15 @@ public class TimeElementServiceImpl implements TimeElementService{
 	public static String collectionName=Global.timeelement;
 	
 	@Override
-	public List<TimeLat> queryTimeElement(String ontname, String evelatname) {
+	public TimeLat queryTimeElement(String ontname, String evelatname) {
 		// TODO Auto-generated method stub
 		Criteria c = Criteria.where("ontname").is(ontname);
 		c.andOperator(Criteria.where("evelatname").is(evelatname));
-		return mongoTemplate.find(new Query(c), TimeLat.class,collectionName);
+		List<TimeLat> list = mongoTemplate.find(new Query(c), TimeLat.class,collectionName);
+		if(list.size()!=0)
+			return list.get(0);
+		else
+			return null;
 	}
 
 	@Override
@@ -42,8 +46,8 @@ public class TimeElementServiceImpl implements TimeElementService{
 	@Override
 	public String editTimeElement(TimeLat timelat) {
 		// TODO Auto-generated method stub
-		List<TimeLat> list = this.queryTimeElement(timelat.getOntname(), timelat.getEvelatname());
-		if(list.size()==0){
+		TimeLat tl = this.queryTimeElement(timelat.getOntname(), timelat.getEvelatname());
+		if(tl==null){
 			//insert
 			mongoTemplate.insert(timelat, collectionName);
 			return "ins_suc";

@@ -13,30 +13,21 @@ $(document).ready(function(){
 	});
 	for (var i = 0; i < templist.length; i++) {
 		var temp = templist[i];
-		$("tbody#tbo").append("<tr><td><a class=\"bont\" id="+temp.name+" href=\"pages/drawont/Bont.jsp\">"+temp.name+"</a></td><td>"+temp.field+"</td><td><label class=\"delOnt\" id=\""+temp.name+"\">"+"删除本体"+"</label></td>"+"</td><td><label class=\"exportOnt\" id=\""+temp.name+"\">"+"导出本体"+"</label></td>"+"</tr>");
+		$("tbody#tbo").append("<tr><td><a class=\"bont\" id="+temp.name+" href=\"pages/drawont/Bont.jsp\">"+temp.name+"</a></td><td>"+temp.field+"</td>" +
+				"<td><button type=\"button\" class=\"button  btn-danger delbtn\" id=\""+temp.name+"\">删除本体</button>"
+				+"&nbsp<button type=\"button\" class=\"button  btn-info exportbtn\" id=\""+temp.name+"\">导出本体</button></td>"+"</tr>");
 		elements[temp.name]=temp.element;
 	}
 	
 	$('#dealObjOntLat').hide();
 	$('#delalert').hide();
-	$('label#newOnt').click(function(){
+	$('button#addOnt').click(function(){
 		$('#dealObjOntLat').show();
 	})
 	
-	/*$('label.delOnt').click(function(){
-		var labelid=this.id;
-		$.ajax({
-			url : "mainOntAction!delOnt.action",
-			type : "post",
-			async : false,
-			data : {ontname:labelid},
-			success : function(data) {
-			}
-		});
-		window.location.reload();
-	})*/
 	
-	$('label.exportOnt').click(function(){
+	//导出本体
+	$('button.exportbtn').click(function(){
 		var ontname = this.id;
 		var url= "filedownload.action"+"?ontname="+ ontname;
 		/*$.ajax({
@@ -78,8 +69,23 @@ $(document).ready(function(){
 			async : false,
 			data : {ontname:delontname},
 			success : function(data) {
+				
 			}
 		});
+		
+		var input = {};
+		input["ontname"]=delontname;
+		var inputstr = JSON.stringify(input);
+		$.ajax({
+			url : "objOntAction!removeECByOntname.action",
+			type : "post",
+			async : true,
+			data : {
+				inputStr : inputstr
+			},
+			success : function(data){}
+		});
+		
 		$('a#dclose').click();
 		window.location.reload();
 	})
@@ -90,9 +96,17 @@ $(document).ready(function(){
 		
 	})
 	
-	$('label.delOnt').click(function(){
+	$('button.delbtn').click(function(){
 		delontname=this.id;
+		if(delontname=="突发事件本体"){
+			alert("不能删除系统默认本体")
+			return ;
+		}
 		$('#delalert').show();	
+	})
+	
+	$('#importo').click(function(){
+		alert('请选择文件');
 	})
 	
 	$('label#importOnt').click(function(){

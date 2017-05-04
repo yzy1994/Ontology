@@ -615,25 +615,26 @@ function showObjFormConParRewrite(gList , dci , objDelStatusGV)/*dci:data-contex
 		}
 		formRest();
 		//$('#objOid').val(objOntLat.oid);
-		console.log(objOntLat);
 		$('#eclatname').val(objOntLat.latname);
 		$('#ecparentlatname').val(objOntLat.parentlatname);
 		$('#eclatnote').val(objOntLat.latnote);
-		updateTimeElement(objOntLat.latname);
+		/*updateTimeElement(objOntLat.latname);
 		updateObjElement(objOntLat.latname);
 		updateActionElement(objOntLat.latname);
 		updateEnvElement(objOntLat.latname);
 		updateLanElement(objOntLat.latname);
-		updateAssertElement(objOntLat.latname);
+		updateAssertElement(objOntLat.latname);*/
 		
-		var objLatList = queryLatList("obj_ont_lat");
+		updateECInfo(objOntLat.latname);
+		updateObjElement(objOntLat.latname);
+		/*var objLatList = queryLatList("obj_ont_lat");
 		var sval='';
 		for(var i=0;i<objLatList.length;i++){
 			var temp = objLatList[i];
 			if(temp.evelatsid == objOntLat.latSid){
 				sval += temp.latname;
 			}
-		}
+		}*/
 		/*$('#leai').text(sval);*/
 		
 		$('#dealObjOntLat').fadeIn(fadeTime);
@@ -1362,4 +1363,64 @@ function ResetECInfo(){
 	$('#leei').text("");
 	$('#leasi').text("");
 	$('#lelei').text("");
+}
+
+function updateECInfo(latname){
+	var input = {};
+	input["ontname"] = preontname;
+	input["evelatname"] = latname;
+	var inputstr = JSON.stringify(input);
+	$.ajax({
+		url : ecInfoEditUrl,
+		type : "post",
+		async : false,
+		data : {
+			inputStr : inputstr
+		},
+		success : function(data) {
+			var actionstr = $.parseJSON(data.actInfo);
+			var timestr = $.parseJSON(data.timeInfo);
+			var envstr = $.parseJSON(data.envInfo);
+			var assertstr = $.parseJSON(data.assertInfo);
+			var lanstr = $.parseJSON(data.lanInfo);
+			console.log(actionstr);
+			console.log(timestr);
+			console.log(envstr);
+			console.log(assertstr);
+			console.log(lanstr);
+			
+			if(actionstr!=null){
+				var temp = actionstr;
+				$('#sDegree').val(temp.degree);
+				$('#iTool').val(temp.tool);
+				$('#iMethod').val(temp.method);
+				$('label#leai').text("程度:"+temp.degree + " 工具:" + temp.tool+ " 方法:" +temp.method);	
+			}
+			if(timestr!=null){
+				var temp = timestr;
+				$('label#leti').append("开始时间:"+temp.start + " 延续时间:" + temp.length);
+				$('#tsStart').val(temp.start);
+				$('#tsLength').val(temp.length);
+			}
+			if(envstr!=null){
+				var temp = envstr;
+				$('#envsConcept').val(temp.conceptlatname);
+				$('#iEnvlane').val(temp.envlane);
+				$('label#leei').text("所属概念:"+temp.conceptlatname+" 语言表现:"+temp.envlane);
+			}
+			if(assertstr!=null){
+				var temp = assertstr;
+				$('#leasi').text("前置状态"+temp.prestate+"中间断言"+temp.massert+"后置状态"+temp.poststate);
+				$('#iPrestate').val(temp.prestate);
+				$('#iMassert').val(temp.massert);
+				$('#iPoststate').val(temp.poststate);
+			}
+			if(lanstr!=null){
+				var temp = lanstr;
+				$('#lelei').text("触发词:"+temp.triggerwords+" 搭配:"+temp.collocation);
+				$('#iTriggerWords').val(temp.triggerwords);
+				$('#iCollocation').val(temp.collocation);
+			}
+		}
+	})
 }

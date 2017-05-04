@@ -4,18 +4,10 @@ preontname="突发事件本体";
 $(document).ready(function() {
 			conceptListGV = queryConceptLatList();
 			updateConceptList();
-			/*preontname = $.cookie('ontname');
-			element = $.cookie('element');*/
+			preontname = $.cookie('ontname');
+			element = $.cookie('element')
 			/*preontname="突发事件本体";*/
-			element="";
-			$("dl#参与者").hide();
-			$("dl#环境").hide();
-			$("dl#对象").hide();
-			var elements = element.split(",");
-			for (var i = 0; i < elements.length; i++) {
-				if (elements[i] != "")
-					$("dl#" + elements[i]).show();
-			}
+
 
 			var fadeTime = 100;
 			var slideTime = 200;

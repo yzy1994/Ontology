@@ -33,7 +33,7 @@ public class ObjElementServiceImpl implements ObjElementService {
 	public List<ObjLat> queryObjElement(String ontname, String evelatname) {
 		// TODO Auto-generated method stub
 		Criteria c = Criteria.where("ontname").is(ontname).andOperator(Criteria.where("evelatname").is(evelatname));
-		return mongoTemplate.find(new Query(c), ObjLat.class,collectionName);
+		return mongoTemplate.find(new Query(c), ObjLat.class, collectionName);
 	}
 
 	@Override

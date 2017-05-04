@@ -140,4 +140,5 @@ public class LatServiceImpl implements LatService {
 		return false;
 	}
 
+
 }

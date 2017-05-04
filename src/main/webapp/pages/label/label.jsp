@@ -9,10 +9,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- <!DOCTYPE html>-->
 <html xmlns="http://www.w3.org/1999/xhtml">
+<base href="<%=basePath%>">
+<jsp:include page="../common/header.jsp"></jsp:include>
 <head>
 <link rel="shortcut icon" href="resources/images/title.ico"
 	type="image/x-icon" />
-<base href="<%=basePath%>">
 <title>My JSP 'mjolnir.jsp' starting page</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
