@@ -27,13 +27,13 @@
 	<!--new -->
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongo" ref="mongo" />
-		<constructor-arg name="databaseName" value="ontology" />
+		<constructor-arg name="databaseName" value="${mongo.dbname}" />
 	</bean>
 
 	<!-- Factory bean that creates the Mongo instance -->
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-		<property name="host" value="localhost" />
-		<property name="port" value="27017" />
+		<property name="host" value="${mongo.host}" />
+		<property name="port" value="${mongo.port}" />
 	</bean>
 	<!-- -->
 
@@ -76,7 +76,7 @@
 		<property name="securityManager" ref="securityManager" />
 
 		<property name="loginUrl" value="/pages/login/Login.jsp" />
-		<property name="successUrl" value="/login_success.jsp" />
+		<property name="successUrl" value="/pages/index.jsp" />
 		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
 
 		<property name="filterChainDefinitions">
@@ -92,8 +92,6 @@
 	<!-- <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" 
 		depends-on="lifecycleBeanPostProcessor"/> <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> 
 		<property name="securityManager" ref="securityManager"/> </bean> -->
-
-
 
 	<aop:config proxy-target-class="true"></aop:config>
 	<bean

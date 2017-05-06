@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
@@ -102,24 +103,32 @@
 						<dt>
 							事件类层次图<img src="resources/images/leftmenu/select_xl01.png">
 						</dt>
-						<dd class="first_dd">
-							<label id="EveOnt" class="viewOnt">查看</label>
-						</dd>
-						<dd>
-							<label id="EveOnt" class="editOnt">编辑</label>
-						</dd>
+						<shiro:lacksRole name="builder">
+							<dd class="first_dd">
+								<label id="EveOnt" class="viewOnt">查看</label>
+							</dd>
+						</shiro:lacksRole>
+						<shiro:hasRole name="builder">
+							<dd>
+								<label id="EveOnt" class="editOnt">编辑</label>
+							</dd>
+						</shiro:hasRole>
 					</dl>
 
 					<dl class="system_log" id="概念">
 						<dt>
 							概念层次图<img src="resources/images/leftmenu/select_xl01.png">
 						</dt>
-						<dd class="first_dd">
-							<label id="Concept" class="viewOnt">查看</label>
-						</dd>
-						<dd>
-							<label id="Concept" class="editOnt">编辑</label>
-						</dd>
+						<shiro:lacksRole name="builder">
+							<dd class="first_dd">
+								<label id="Concept" class="viewOnt">查看</label>
+							</dd>
+						</shiro:lacksRole>
+						<shiro:hasRole name="builder">
+							<dd>
+								<label id="Concept" class="editOnt">编辑</label>
+							</dd>
+						</shiro:hasRole>
 					</dl>
 				</div>
 			</div>
@@ -235,8 +244,8 @@
 					id="objOntZoomin" src="resources/images/common/zoomin.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img> <img
 					id="objOntReload" src="resources/images/common/reload.png"> <img
-					src="resources/images/common/gap.png" class="gap"></img> <img
-					id="objOntClean" src="resources/images/common/save.png"> <img
+					src="resources/images/common/gap.png" class="gap"></img> <!-- <img
+					id="objOntClean" src="resources/images/common/save.png"> --> <img
 					id="objOntPrinter" src="resources/images/common/printer.png">
 			</div>
 			<div id="objOntSvg"></div>
@@ -286,7 +295,7 @@
 						<label id="lelei" style="width: 300px;"></label></li>
 					<li id="lisubmit">
 						<button class="submit" type="submit" id="saveObj">保存</button>
-						<button class="submit" type="reset" id="restObj">重置</button> <input
+						<button class="submit" type="reset" id="resetObj">重置</button> <input
 						name="objOid" type="text" id="objOid" style="display: none">
 					</li>
 
@@ -328,7 +337,7 @@
 				</div>
 				<li id="lisubmit">
 					<button class="submit" type="submit" id="saveAction">保存</button>
-					<button class="submit" type="reset" id="restAction">重置</button>
+					<button class="submit" type="reset" id="resetAction">重置</button>
 				</li>
 			</form>
 		</div>
@@ -375,7 +384,7 @@
 				</div>
 				<li id="lisubmit">
 					<button class="submit" type="submit" id="saveObj">保存</button>
-					<button class="submit" type="reset" id="restObj">重置</button> <input
+					<button class="submit" type="reset" id="resetObj">重置</button> <input
 					name="objOid" type="text" id="objOid" style="display: none">
 				</li>
 			</form>
@@ -414,7 +423,7 @@
 				</div>
 				<li id="lisubmit">
 					<button class="submit" type="submit" id="saveObj">保存</button>
-					<button class="submit" type="reset" id="restObj">重置</button> <input
+					<button class="submit" type="reset" id="resetObj">重置</button> <input
 					name="objOid" type="text" id="objOid" style="display: none">
 				</li>
 			</form>
@@ -444,7 +453,7 @@
 				</div>
 				<li id="lisubmit">
 					<button class="submit" type="submit" id="saveEnv">保存</button>
-					<button class="submit" type="reset" id="restEnv">重置</button>
+					<button class="submit" type="reset" id="resetEnv">重置</button>
 				</li>
 			</form>
 		</div>
@@ -482,7 +491,7 @@
 				</div>
 				<li id="lisubmit">
 					<button class="submit" type="submit" id="saveAssert">保存</button>
-					<button class="submit" type="reset" id="restAssert">重置</button>
+					<button class="submit" type="reset" id="resetAssert">重置</button>
 				</li>
 			</form>
 		</div>
@@ -555,8 +564,8 @@
 					id="conceptZoomin" src="resources/images/common/zoomin.png">
 				<img src="resources/images/common/gap.png" class="gap"></img> <img
 					id="conceptReload" src="resources/images/common/reload.png">
-				<img src="resources/images/common/gap.png" class="gap"></img> <img
-					id="conceptClean" src="resources/images/common/save.png"> <img
+				<img src="resources/images/common/gap.png" class="gap"></img> <!-- <img
+					id="conceptClean" src="resources/images/common/save.png">  --><img
 					id="conceptPrinter" src="resources/images/common/printer.png">
 			</div>
 		</div>
@@ -591,7 +600,7 @@
 
 					<li id="lisubmit">
 						<button class="submit" type="submit" id="saveConcept">保存</button>
-						<button class="submit" type="reset" id="restConcept">重置</button> <img
+						<button class="submit" type="reset" id="resetConcept">重置</button> <img
 						src="resources/images/add.png" id="conceptimgadd" />
 					</li>
 
@@ -612,6 +621,7 @@
 	</div>
 
 	<iframe id="id_iframe" name="nm_iframe" style="display: none;"></iframe>
+
 </body>
 
 </html>

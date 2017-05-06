@@ -59,7 +59,6 @@ public class UserAction extends ActionSupport {
 			message = "用户名或密码错误！";
 			return "error";
 		}
-		
 		return "success";
 	}
 

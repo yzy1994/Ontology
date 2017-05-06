@@ -11,8 +11,8 @@
 		<shiro:guest>
 			<li><a href="pages/login/Login.jsp">登录</a></li>
 		</shiro:guest>
-		<shiro:hasRole name="builder">
+		<shiro:authenticated>
 			<li><a href="userAction2!logout.action">登出</a></li>
-		</shiro:hasRole>
+		</shiro:authenticated>
 	</ul>
 </div>

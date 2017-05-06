@@ -61,6 +61,9 @@
 
                 for (i = 0; i < l; i++) {
                     var item = options.items[i];
+                    
+                    var role;
+                    	
                     var el = $('<li/>');
 
                     if (item.divider) {
@@ -90,7 +93,7 @@
                         a.html(item.text);
                     }
 
-                    menu.append(el);
+                    	menu.append(el);
                 }
 
                 var currentMenu = $("#" + options.menuId);

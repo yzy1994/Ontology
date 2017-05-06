@@ -1,25 +1,22 @@
 var whichOnt;
 var conceptList = [];
+var role = "";
 preontname="突发事件本体";
 $(document).ready(function() {
 			conceptListGV = queryConceptLatList();
 			updateConceptList();
 			preontname = $.cookie('ontname');
-			element = $.cookie('element')
+			//element = $.cookie('element')
 			/*preontname="突发事件本体";*/
 
 
 			var fadeTime = 100;
 			var slideTime = 200;
 			$("label.viewOnt").click(function(){
-				$('img#objOntAdd').hide();
-				$('img#objOntDel').hide();
-				$('img#objOntEdit').hide();
+				role = "notbuilder";
 			})
 			$("label.editOnt").click(function(){
-				$('img#objOntAdd').show();
-				$('img#objOntDel').show();
-				$('img#objOntEdit').show();
+				role = "isbuilder";
 			})
 			
 			$("label#ObjOnt").click(function() {
@@ -55,7 +52,7 @@ $(document).ready(function() {
 				}
 			});
 
-			$("label#PeoOnt").click(function() {
+			/*$("label#PeoOnt").click(function() {
 				whichOnt = 'peo_ont_lat';
 				$('li#liconcept').show();
 				if ($("#objOntWin").is(":hidden")) {
@@ -66,9 +63,9 @@ $(document).ready(function() {
 					// $("#objOnt").hide();
 					$('#objOntWin').slideUp(slideTime);
 				}
-			});
+			});*/
 
-			$('label#EnvOnt').click(function() {
+			/*$('label#EnvOnt').click(function() {
 				whichOnt = 'env_ont_lat';
 				$('li#liconcept').hide();
 				if ($("#objOntWin").is(":hidden")) {
@@ -79,7 +76,7 @@ $(document).ready(function() {
 					// $("#objOnt").hide();
 					$('#objOntWin').slideUp(slideTime);
 				}
-			});
+			});*/
 
 			$('label#Concept').click(function() {
 				whichOnt = CTN;

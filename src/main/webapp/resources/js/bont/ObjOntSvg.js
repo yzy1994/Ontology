@@ -19,6 +19,11 @@ $(document).ready(function() {
 			svgDiv.appendChild(svgElem);
 			var rectclass = "drawrect";
 			
+			if(role != "isbuilder"){
+				ecNotEditable();
+				conceptNotEditable();
+			}
+			
 			updateConceptList();
 			for(var temp in conceptList){
 				if(temp=="remove")
@@ -137,72 +142,108 @@ $(document).ready(function() {
 				console.log(conceptListGV.size());
 				
 				//上下文菜单
-				var options = {
-					items : [ {
-						header : '功能菜单'
-					}, {
-						text : '插入子事件类',
-						onclick : function(eve){
-							$('#eclatname').prop('readOnly',false);
-							objDelStatusGV = 'add';
-							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-							var gList = svgElem.getElementsByTagName("g")
-							var gid;
-							for (var j = 0; j < gList.length; j++) {
-								tempG = gList[j];
-								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-									gid = tempG.getAttribute("id");
-									console.log(gid);
-									break;
+				if(role == "isbuilder"){
+					var options = {
+							items : [ {
+								header : '功能菜单'
+							}, 
+							{
+								text : '插入子事件类',
+								onclick : function(eve){
+									$('#eclatname').prop('readOnly',false);
+									objDelStatusGV = 'add';
+									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+									var gList = svgElem.getElementsByTagName("g")
+									var gid;
+									for (var j = 0; j < gList.length; j++) {
+										tempG = gList[j];
+										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+											gid = tempG.getAttribute("id");
+											console.log(gid);
+											break;
+										}
+									}
+									formRest();
+									$('#dealObjOntLat').fadeIn(fadeTime);
+									$('#ecparentlatname').val(gid);
 								}
-							}
-							formRest();
-							$('#dealObjOntLat').fadeIn(fadeTime);
-							$('#ecparentlatname').val(gid);
-						}
-					}, {
-						text : '编辑事件类',
-						onclick : function(eve) {
-							objDelStatusGV = 'edit';
-							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-							var gList = svgElem.getElementsByTagName("g");
-							showObjFormConParRewrite(gList,dci , "find");
-							var gid;
-							for (var j = 0; j < gList.length; j++) {
-								tempG = gList[j];
-								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-									gid = tempG.getAttribute("id");
-									console.log(gid);
-									break;
+							}, {
+								text : '编辑事件类',
+								onclick : function(eve) {
+									objDelStatusGV = 'edit';
+									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+									var gList = svgElem.getElementsByTagName("g");
+									showObjFormConParRewrite(gList,dci , "find");
+									var gid;
+									for (var j = 0; j < gList.length; j++) {
+										tempG = gList[j];
+										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+											gid = tempG.getAttribute("id");
+											console.log(gid);
+											break;
+										}
+									}
+									$('#ecname').text(gid);
+									$('.ecname').text(gid);
 								}
-							}
-							$('#ecname').text(gid);
-							$('.ecname').text(gid);
-						}
-					}, {
-						text : '删除事件类',
-						onclick : function(eve) {
-							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-							var gList = svgElem.getElementsByTagName("g")
-							var gid;
-							for (var j = 0; j < gList.length; j++) {
-								tempG = gList[j];
-								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-									gid = tempG.getAttribute("id");
-									console.log(gid);
-									break;
+							}, {
+								text : '删除事件类',
+								onclick : function(eve) {
+									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+									var gList = svgElem.getElementsByTagName("g")
+									var gid;
+									for (var j = 0; j < gList.length; j++) {
+										tempG = gList[j];
+										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+											gid = tempG.getAttribute("id");
+											console.log(gid);
+											break;
+										}
+									}
+									delOntLatRewrite(gid,ELTN);
 								}
-							}
-							delOntLatRewrite(gid,ELTN);
-						}
-					}, {
-						text : '返回',
-						onclick : function(eve) {
-							$('#contextify-menu').attr('display','none');
-							//console.log(eve.target.parentNode.parentNode.getAttribute('data-contextify-id'));
-						}
-					}, ]
-				};
+							}, {
+								text : '返回',
+								onclick : function(eve) {
+									$('#contextify-menu').attr('display','none');
+									//console.log(eve.target.parentNode.parentNode.getAttribute('data-contextify-id'));
+								}
+							}, ]
+						};
+				}
+				else{
+					var options = {
+							items : [ {
+								header : '功能菜单'
+							}, 
+							{
+								text : '查看事件类',
+								onclick : function(eve) {
+									objDelStatusGV = 'edit';
+									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+									var gList = svgElem.getElementsByTagName("g");
+									showObjFormConParRewrite(gList,dci , "find");
+									var gid;
+									for (var j = 0; j < gList.length; j++) {
+										tempG = gList[j];
+										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+											gid = tempG.getAttribute("id");
+											break;
+										}
+									}
+									$('#ecname').text(gid);
+									$('.ecname').text(gid);
+								}
+							}, {
+								text : '返回',
+								onclick : function(eve) {
+									$('#contextify-menu').attr('display','none');
+									//console.log(eve.target.parentNode.parentNode.getAttribute('data-contextify-id'));
+								}
+							}, ]
+						};
+					
+				}
 				$('.drawrect').contextify(options);
 			});
 
@@ -279,6 +320,8 @@ $(document).ready(function() {
 			})
 			
 			InitConceptSubGraph();
+			
+			
 })
 
 function clinkG() {
@@ -917,63 +960,86 @@ function InitconceptWin(){
 		drawLatLink(csvgElem,conceptListGV,"conceptSvg");
 		
 		//上下文菜单
-		var conceptoptions = {
-			items : [ {
-				header : '功能菜单'
-			}, {
-				text : '插入子概念',
-				onclick : function(eve){
-					$('#conceptlatname').prop('readOnly',false);
-					addition=0;
-					objDelStatusGV = 'add';
-					var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-					var gList = csvgElem.getElementsByTagName("g")
-					var gid;
-					for (var j = 0; j < gList.length; j++) {
-						tempG = gList[j];
-						if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-							gid = tempG.getAttribute("id");
-							break;
+		if(role=="isbuilder"){
+			var conceptoptions = {
+					items : [ {
+						header : '功能菜单'
+					}, {
+						text : '插入子概念',
+						onclick : function(eve){
+							$('#conceptlatname').prop('readOnly',false);
+							addition=0;
+							objDelStatusGV = 'add';
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = csvgElem.getElementsByTagName("g")
+							var gid;
+							for (var j = 0; j < gList.length; j++) {
+								tempG = gList[j];
+								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+									gid = tempG.getAttribute("id");
+									break;
+								}
+							}
+							formReset("conceptEditForm");
+							$('#conceptparentlatname').val(gid);
+							$('#conceptEditWin').show();
 						}
-					}
-					formReset("conceptEditForm");
-					$('#conceptparentlatname').val(gid);
-					$('#conceptEditWin').show();
-				}
-			}, {
-				text : '编辑概念',
-				onclick : function(eve) {
-					$('#conceptlatname').prop('readOnly',true);
-					objDelStatusGV = 'edit';
-					var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-					var gList = csvgElem.getElementsByTagName("g");
-					showConceptFormConPar(gList, dci, "edit");
-				}
-			}, {
-				text : '删除概念',
-				onclick : function(eve) {
-					console.log("删除概念")
-					var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-					var gList = csvgElem.getElementsByTagName("g")
-					var gid;
-					for (var j = 0; j < gList.length; j++) {
-						tempG = gList[j];
-						if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-							gid = tempG.getAttribute("id");
-							console.log(gid);
-							break;
+					}, {
+						text : '编辑概念',
+						onclick : function(eve) {
+							$('#conceptlatname').prop('readOnly',true);
+							objDelStatusGV = 'edit';
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = csvgElem.getElementsByTagName("g");
+							showConceptFormConPar(gList, dci, "edit");
 						}
-					}
-					delOntLatRewrite(gid,CTN);
-					$('#conceptReload').click();
-				}
-			}, {
-				text : '返回',
-				onclick : function(eve) {
-					$('#contextify-menu').attr('display','none');
-				}
-			}, ]
-		};
+					}, {
+						text : '删除概念',
+						onclick : function(eve) {
+							console.log("删除概念")
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = csvgElem.getElementsByTagName("g")
+							var gid;
+							for (var j = 0; j < gList.length; j++) {
+								tempG = gList[j];
+								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+									gid = tempG.getAttribute("id");
+									console.log(gid);
+									break;
+								}
+							}
+							delOntLatRewrite(gid,CTN);
+							$('#conceptReload').click();
+						}
+					}, {
+						text : '返回',
+						onclick : function(eve) {
+							$('#contextify-menu').attr('display','none');
+						}
+					}, ]
+				};
+		}else{
+			var conceptoptions = {
+					items : [ {
+						header : '功能菜单'
+					}, {
+						text : '查看概念',
+						onclick : function(eve) {
+							$('#conceptlatname').prop('readOnly',true);
+							objDelStatusGV = 'edit';
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = csvgElem.getElementsByTagName("g");
+							showConceptFormConPar(gList, dci, "edit");
+						}
+					}, {
+						text : '返回',
+						onclick : function(eve) {
+							$('#contextify-menu').attr('display','none');
+						}
+					}, ]
+				};
+		}
+		
 		$('.conceptrect').contextify(conceptoptions);
 	})
 }
@@ -1019,7 +1085,7 @@ function addProVal(){
     var liid = "li" + additionnum;
     var proid = "pro" + liid;
     var attid = "att" + liid;
-    $('div#divproval').append("<li class=\"addli\" id=\"" + liid + "\"><input required=\"required\" id=\"" + proid + "\"><input required=\"required\" id=\"" + attid + "\"><img class=\"delattr\" id=\"" + liid + "\" src=\"resources/images/delete.png\"></img></li>");
+    $('div#divproval').append("<li class=\"addli\" id=\"" + liid + "\"><input class=\"cpro\" required=\"required\" id=\"" + proid + "\"><input required=\"required\" class=\"cval\" id=\"" + attid + "\"><img class=\"delattr\" id=\"" + liid + "\" src=\"resources/images/delete.png\"></img></li>");
     $('img#' + liid).click(function() {
         console.log("delete");
         $('li#' + liid).remove();
@@ -1032,9 +1098,9 @@ function addProVal(){
 function addObj(){
 	objnum++;
 	console.log("addObjElement");
-	$('#objFormItem').append("<div class=\"form-col\" id=\"col"+ objnum.toString() +"\"><ul><li class=\"objname\"></li><li>数量：</li><li><select name=\"amount\" id=\"sAmount"+objnum.toString()+"\"><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"少许\">少许</option><option value=\"近半\">近半</option><option value=\"半\">半</option><option value=\"多半\">多半</option><option value=\"大量\">大量</option></select></li>"+
+	$('#objFormItem').append("<div class=\"form-col\" id=\"col"+ objnum.toString() +"\"><ul><li class=\"objname\"></li><li>数量：</li><li><select name=\"amount\" class=\"sActAmout\" id=\"sAmount"+objnum.toString()+"\"><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"少许\">少许</option><option value=\"近半\">近半</option><option value=\"半\">半</option><option value=\"多半\">多半</option><option value=\"大量\">大量</option></select></li>"+
 							"<li>所属概念：</li>"+
-							"<li><select name=\"conceptsid\" id=\"sConcept"+objnum.toString()+"\"></select></li><li>语言称谓：</li><li><input name=\"lane\" id=\"iLE"+objnum.toString()+"\" type=\"text\"></li></ul></div>");
+							"<li><select name=\"conceptsid\" class=\"sActConcept\" id=\"sConcept"+objnum.toString()+"\"></select></li><li>语言称谓：</li><li><input name=\"lane\" class=\"iActLE\" id=\"iLE"+objnum.toString()+"\" type=\"text\"></li></ul></div>");
 	/*for(var temp in conceptList){
 		if(temp=="remove")
 			continue;
@@ -1314,17 +1380,6 @@ function reloadConceptSubGraph(conceptname){
 		}
 	}
 		
-	/*for(var i=0 ;i<conceptSubGraphList.size();i++){
-		var temp = {};
-		temp.latname = conceptSubGraphList.get(i).latname;
-		temp.parentlatname = conceptSubGraphList.get(i).parentlatname;
-		var drawOntLat = new DrawOntLat(temp);
-		x += 100;
-		drawOntLat.locX = x;
-		drawOntLat.locY = y;
-		var g = drawOntLat.drawLat(rectclass);
-		csgsvgElem.appendChild(g);
-	}*/
 	drawLatLink(csgsvgElem,conceptSubGraphList,"conceptSubGraphSvg");
 }
 
@@ -1423,4 +1478,41 @@ function updateECInfo(latname){
 			}
 		}
 	})
+}
+
+function ecNotEditable(){
+	$('#ecparentlatname').prop('readOnly',true);
+	$('#eclatnote').prop('readOnly',true);
+	$('.submit').hide();
+	
+	$('#sDegree').prop('readOnly',true);
+	$('#iTool').prop('readOnly',true);
+	$('#iMethod').prop('readOnly',true);
+	
+	$('.sActConcept').prop('readOnly',true);
+	$('.sActAmout').prop('readOnly',true);
+	$('.iActLE').prop('readOnly',true);
+	
+	$('#tsStart').prop('readOnly',true);
+	$('#tsLength').prop('readOnly',true);
+	
+	$('#envsConcept').prop('readOnly',true);
+	$('#iEnvlane').prop('readOnly',true);
+	
+	$('#iPrestate').prop('readOnly',true);
+	$('#iMassert').prop('readOnly',true);
+	$('#iPoststate').prop('readOnly',true);
+	
+	$('#iTriggerWords').prop('readOnly',true);
+	$('#iCollocation').prop('readOnly',true);
+	
+	$('#removeobj').hide();
+	$('#addobj').hide();
+}
+
+function conceptNotEditable(){
+	$('#conceptparentlatname').prop('readOnly',true);
+	$('.cpro').prop('readOnly',true);
+	$('.cval').prop('readOnly',true);
+	$('#conceptimgadd').hide();
 }
