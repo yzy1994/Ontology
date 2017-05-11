@@ -1,13 +1,21 @@
 package com.edu.shu.ai.ontology.user.action;
 
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import edu.shu.skytorif.mapper.UserMapper;
@@ -23,6 +31,15 @@ public class UserAction extends ActionSupport {
 	private String username;
 	private String password;
 	private String message;
+	private String url;
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	
 	public String getUsername() {
 		return username;
@@ -57,9 +74,20 @@ public class UserAction extends ActionSupport {
 			subject.login(token);
 		}catch(Exception e){
 			message = "用户名或密码错误！";
-			return "error";
+			return ERROR;
 		}
-		return "success";
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if(WebUtils.getSavedRequest(request)==null){
+			this.url = "/pages/index.jsp";
+			return SUCCESS;
+		}
+		String s = WebUtils.getSavedRequest(request).getRequestUrl();		
+		if(!s.isEmpty()&&!s.equals("")&&!(s==null)){
+			this.url = s.substring(9);
+		}else{
+			this.url = "/pages/index.jsp";
+		}
+		return SUCCESS;
 	}
 
 	public String logout() throws Exception{  
@@ -70,6 +98,7 @@ public class UserAction extends ActionSupport {
 	            LOG.debug("用户" + username + "退出登录");  
 	        }  
 	    }  
+	    this.url = "/pages/index.jsp";
 	    return SUCCESS;
 	}  
 	

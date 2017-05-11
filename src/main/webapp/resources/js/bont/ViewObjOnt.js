@@ -6,17 +6,16 @@ $(document).ready(function() {
 			conceptListGV = queryConceptLatList();
 			updateConceptList();
 			preontname = $.cookie('ontname');
-			//element = $.cookie('element')
-			/*preontname="突发事件本体";*/
-
 
 			var fadeTime = 100;
 			var slideTime = 200;
 			$("label.viewOnt").click(function(){
 				role = "notbuilder";
+				ecNotEditable();
+				conceptNotEditable();
 			})
 			$("label.editOnt").click(function(){
-				role = "isbuilder";
+				role = "builder";
 			})
 			
 			$("label#ObjOnt").click(function() {
@@ -52,32 +51,6 @@ $(document).ready(function() {
 				}
 			});
 
-			/*$("label#PeoOnt").click(function() {
-				whichOnt = 'peo_ont_lat';
-				$('li#liconcept').show();
-				if ($("#objOntWin").is(":hidden")) {
-					// $("#objOnt").show();
-					$('#objOntReload').click();
-					$('#objOntWin').fadeIn(fadeTime);
-				} else {
-					// $("#objOnt").hide();
-					$('#objOntWin').slideUp(slideTime);
-				}
-			});*/
-
-			/*$('label#EnvOnt').click(function() {
-				whichOnt = 'env_ont_lat';
-				$('li#liconcept').hide();
-				if ($("#objOntWin").is(":hidden")) {
-					// $("#objOnt").show();
-					$('#objOntReload').click();
-					$('#objOntWin').fadeIn(fadeTime);
-				} else {
-					// $("#objOnt").hide();
-					$('#objOntWin').slideUp(slideTime);
-				}
-			});*/
-
 			$('label#Concept').click(function() {
 				whichOnt = CTN;
 				$('li#liconcept').hide();
@@ -98,7 +71,16 @@ $(document).ready(function() {
 								+ temp.latname + "</option>");
 			}*/
 			/* <option value="audi">Audi</option> */
-		});
+			
+			$('label#ecRelation').click(function(){
+				$('#ecRelationWin').show();
+			})
+			
+			$('#ecRelationWinClose').click(function(){
+				$('#ecRelationWin').hide();
+			})			
+			
+});
 
 
 function queryLatList(ontname) {

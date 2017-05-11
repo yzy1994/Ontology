@@ -3,6 +3,7 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
 
 
 	<constant name="struts.convention.package.locators" value="actions,struts2" />
@@ -21,15 +22,8 @@
 				exception="org.apache.shiro.authz.AuthorizationException"></exception-mapping>
 		</global-exception-mappings>
 
-
-		<action name="userAction_*" class="userAction" method="{1}">
-			<result name="success" type="redirect">/pages/AllMachine.jsp?username=${userInfo.getUsername()}
-			</result>
-			<result name="erro">/pages/Login.jsp</result>
-		</action>
 		<action name="userAction2_*" class="userAction" method="{1}">
-
-			<result name="success">/pages/index.jsp</result>
+			<result name="success">${url}</result>
 			<result name="error">/pages/login/Login.jsp</result>
 		</action>
 	</package>
@@ -97,10 +91,18 @@
 			<result type="json">               <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
 			</result>
 		</action>
+		
+		<action name="echartsAction_*" class="echartsAction" method="{1}">
+			<result type="json"></result>
+		</action>
 
 		<action name="mainOntAction_*" class="mainOntAction" method="{1}">
 			<result type="json">               <!-- 这里指定将被Struts2序列化的属性，该属性在action中必须有对应的getter方法 -->
 			</result>
+		</action>
+		
+		<action name="referenceAction" class="referenceAction">
+			<result name="success">/pages/reference.jsp</result>
 		</action>
 		
 		<action name="filedownload" class="filedownload">
@@ -110,6 +112,10 @@
 				<param name="contentType">application/octet-stream</param>
 				<param name="bufferSize">1024</param>
 			</result>
+		</action>
+		
+		<action name="ecRelationAction_*" class="ecRelationAction" method="{1}">
+			
 		</action>
 	</package>
 

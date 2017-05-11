@@ -63,8 +63,8 @@
 			<b class="top-title">本体管理</b>
 
 			<div class="ontform m-t-20">
-				<button type="button" class="button  btn-success" id="addOnt">新建本体</button>
-				<button type="button" class="button  btn-success" id="importo">导入本体</button>
+				<shiro:hasRole name="builder"><button type="button" class="button  btn-success" id="addOnt">新建本体</button>
+				<button type="button" class="button  btn-success" id="importo">导入本体</button></shiro:hasRole>
 			</div>
 			<!-- <input
 						type="file" name="file" id="file" /> <label class="newOnt"
@@ -81,9 +81,6 @@
 				</table>
 			</div>
 		</div>
-
-		<div id="buttomDiv"></div>
-
 
 		<div class="dealObjOntLat-popover" id="dealObjOntLat"
 			style="width: 400px; height: 280px; display: block;">
@@ -129,6 +126,7 @@
 				</li>
 			</form>
 		</div>
+		<jsp:include page="/pages/common/foot.jsp" />
 	</div>
 </body>
 

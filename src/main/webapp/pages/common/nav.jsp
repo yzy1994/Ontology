@@ -7,7 +7,7 @@
 		<li><a href="pages/drawont/OntoEdit.jsp">事件本体本体构建工具</a></li>
 		<li><a href="pages/label/label.jsp">文本事件标注工具</a></li>
 		<li><a href="pages/corpus_profile.jsp">中文事件语料库</a></li>
-		<li><a href="pages/reference.jsp">事件本体研究团队</a></li>
+		<li><a href="referenceAction">事件本体研究团队</a></li>
 		<shiro:guest>
 			<li><a href="pages/login/Login.jsp">登录</a></li>
 		</shiro:guest>

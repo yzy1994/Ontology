@@ -1,5 +1,6 @@
 package com.di.ifin.zeus.admin.bont.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,9 @@ import java.util.Map.Entry;
 
 import org.jdom.Element;
 
+import com.di.ifin.zeus.admin.bont.pojo.ECRelation;
+import com.di.ifin.zeus.admin.bont.pojo.ECRelationDef;
+import com.di.ifin.zeus.admin.bont.pojo.Link;
 import com.di.ifin.zeus.admin.bont.pojo.OntLat;
 import com.di.ifin.zeus.admin.bont.service.LatService;
 import com.google.gson.Gson;
@@ -24,7 +28,7 @@ import net.sf.json.JSONObject;
 public class OntLatUtil {
 	static Gson gsonTemp = new GsonBuilder().disableHtmlEscaping().create();
 
-	public static Map<String, String> getmap(String latsid,String collection) {
+	public static Map<String, String> getmap(String latsid, String collection) {
 		String result;
 		MongoClient mc = new MongoClient("localhost", 27017);
 		DB db = mc.getDB("ontology");
@@ -51,7 +55,7 @@ public class OntLatUtil {
 		map.remove("latnote");
 		return map;
 	}
-	
+
 	public static Map<String, String> getnoaddmap(String collection, String ontname, String latname) {
 		// TODO Auto-generated method stub
 		MongoClient mc = new MongoClient("localhost", 27017);
@@ -83,12 +87,12 @@ public class OntLatUtil {
 		for (Entry<String, String> entry : map.entrySet())
 			e.addContent(new Element(entry.getKey()).setText(entry.getValue()));
 	}
-	
-	public static void importLats(Element Lats,LatService latservice,String collection){
-		Map<String,String> mapadd = new HashMap<String,String>();
+
+	public static void importLats(Element Lats, LatService latservice, String collection) {
+		Map<String, String> mapadd = new HashMap<String, String>();
 		List<Element> latslist = Lats.getChildren();
-		OntLat ontlat =new OntLat();
-		for(Element lat:latslist){
+		OntLat ontlat = new OntLat();
+		for (Element lat : latslist) {
 			mapadd.clear();
 			ontlat.setLatname(lat.getChild("latname").getText());
 			ontlat.setParentlatname(lat.getChild("parentlatname").getText());
@@ -99,14 +103,37 @@ public class OntLatUtil {
 			lat.removeChild("latsid");
 			lat.removeChild("latnote");
 			List<Element> latlist = lat.getChildren();
-			if(latlist.size()>0)
-			{
-				for(Element e:latlist)
-				{
+			if (latlist.size() > 0) {
+				for (Element e : latlist) {
 					mapadd.put(e.getName(), e.getText());
 				}
 			}
 			latservice.insert("eve_ont_lat", ontlat, mapadd);
 		}
+	}
+
+	public static List<Link> toLinkList(List<ECRelation> list, List<ECRelationDef> deflist) {
+		List<Link> resultlist = new ArrayList<Link>();
+		for (ECRelation ecr : list) {
+			Link link = new Link(ecr);
+			String value = "";
+			String[] a1 = { "pin", "pin" };
+			Integer[] a2 = { 0, 0 };
+
+			for (ECRelationDef def : deflist) {
+				if (def.getRid().equals(link.getValue()))
+				{
+					value = def.getRdes();
+					a1 = def.getSymbol();
+					a2 = def.getSymbolSize();
+					break;
+				}
+			}
+			link.setValue(value);
+			link.setSymbol(a1);
+			link.setSymbolSize(a2);
+			resultlist.add(link);
+		}
+		return resultlist;
 	}
 }

@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<div class="col-xs-3 m-t-20">
-				<a href="pages/reference.jsp"><img class="img2"
+				<a href="referenceAction"><img class="img2"
 					src="resources/images/navigation_images/list-icon4.png"></img></a>
 				<div class="m-t-20">
 					<p class="description">

@@ -10,7 +10,8 @@ public class Global {
 	public static final String assertelement ="assertion_element";
 	public static final String languageelement="language_element";
 	public static final String ec_relationship = "ec_relationship";
-	public static final String ec_relationship_def = "";
+	public static final String ec_relationship_def = "ec_relationship_def";
+	public static final String ont_info = "ont_info";
 	
 	
 	public static final String oresearcher = "ontology_researcher";
@@ -20,4 +21,5 @@ public class Global {
 	public static final String evelatsid = "evelatsid";
 	public static final String conceptsid = "conceptsid";
 	public static final String ontid = "ontid";
+	public static final String ecrid = "ecrid";
 }

@@ -5,7 +5,6 @@ function DrawConLine(startId, endId,svgId) {
 	if(beginG!=null){
 		var btoLinkNode = beginG.childNodes[3];
 		var svgdiv = document.getElementById(svgId);
-		console.log(svgdiv);
 		var endG = svgdiv.getElementById(endId);
 		var topLinkNode = endG.childNodes[2];
 		var startX = btoLinkNode.getAttribute("cx");

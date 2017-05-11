@@ -1,5 +1,6 @@
 package com.di.ifin.zeus.admin.bont.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import com.di.ifin.zeus.admin.bont.pojo.ActionLat;
 import com.di.ifin.zeus.admin.bont.pojo.AssertionLat;
 import com.di.ifin.zeus.admin.bont.pojo.ConceptLat;
+import com.di.ifin.zeus.admin.bont.pojo.ECRelation;
+import com.di.ifin.zeus.admin.bont.pojo.ECRelationDef;
 import com.di.ifin.zeus.admin.bont.pojo.EnvLat;
 import com.di.ifin.zeus.admin.bont.pojo.EnvOntLat;
 import com.di.ifin.zeus.admin.bont.pojo.EveOntLat;
 import com.di.ifin.zeus.admin.bont.pojo.LanguageLat;
+import com.di.ifin.zeus.admin.bont.pojo.Node;
 import com.di.ifin.zeus.admin.bont.pojo.ObjLat;
 import com.di.ifin.zeus.admin.bont.pojo.OntLat;
 import com.di.ifin.zeus.admin.bont.pojo.OntLatWithOntName;
@@ -26,6 +30,7 @@ import com.di.ifin.zeus.admin.bont.pojo.TimeLat;
 import com.di.ifin.zeus.admin.bont.service.ActionElementService;
 import com.di.ifin.zeus.admin.bont.service.AssertionElementService;
 import com.di.ifin.zeus.admin.bont.service.ConceptLatService;
+import com.di.ifin.zeus.admin.bont.service.ECRelationService;
 import com.di.ifin.zeus.admin.bont.service.EnvElementService;
 import com.di.ifin.zeus.admin.bont.service.EnvOntLatService;
 import com.di.ifin.zeus.admin.bont.service.EveOntLatService;
@@ -50,7 +55,6 @@ import com.mongodb.MongoClient;
 import com.opensymphony.xwork2.ActionSupport;
 import com.shu.global.Global;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller("objOntAction")
@@ -189,6 +193,26 @@ public class ObjOntAction extends ActionSupport {
 		this.resultStr = resultStr;
 	}
 
+	private String nodes;
+
+	private String links;
+
+	public String getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(String nodes) {
+		this.nodes = nodes;
+	}
+
+	public String getLinks() {
+		return links;
+	}
+
+	public void setLinks(String links) {
+		this.links = links;
+	}
+
 	private String lanInfo;
 
 	private String assertInfo;
@@ -271,7 +295,7 @@ public class ObjOntAction extends ActionSupport {
 	 * this.objOntLatStr = gsonTemp.toJson(objOntLat); return SUCCESS; }
 	 */
 
-	public String createEveOntLat() {
+	/*public String createEveOntLat() {
 		System.out.println("objOntLatStr" + objOntLatStr);
 		EveOntLat eveOntLat = gsonTemp.fromJson(objOntLatStr, new TypeToken<EveOntLat>() {
 		}.getType());
@@ -351,7 +375,7 @@ public class ObjOntAction extends ActionSupport {
 		peoOntLatService.updateOntLat(peoOntLat);
 		operateMsg = OperateMsg.create.CRESUC.toString();
 		return SUCCESS;
-	}
+	}*/
 
 	// 概念和事件类的CRUD
 	public String queryLatByMongo() {
@@ -689,8 +713,8 @@ public class ObjOntAction extends ActionSupport {
 		this.operateMsg = "delesuc";
 		return SUCCESS;
 	}
-	
-	public String removeECByOntname(){
+
+	public String removeECByOntname() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
 		latservice.removeByOntname(Global.eventclass, ontname);
@@ -733,6 +757,12 @@ public class ObjOntAction extends ActionSupport {
 
 		OntLat ol = latservice.queryByLatname(Global.eventclass, ontname, evelatname).get(0);
 		this.setResultStr(gsonTemp.toJson(ol));
+		
+		List<ObjLat> list = objelementservice.queryObjElement(ontname, evelatname);
+		if(list.size()==0)
+			this.setObjInfo("");
+		else
+			this.setObjInfo(gsonTemp.toJson(list));
 
 		ActionLat al = actionelementservice.query(evelatname, ontname);
 		this.setActInfo(gsonTemp.toJson(al));
@@ -772,4 +802,6 @@ public class ObjOntAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+
+	
 }

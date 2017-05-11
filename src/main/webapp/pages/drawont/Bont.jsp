@@ -48,7 +48,8 @@
 <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
 	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 	crossorigin="anonymous"></script> -->
-<script type="text/javascript" src="resources/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="resources/js/echarts.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.svg.js"></script>
 <script type="text/javascript" src="resources/js/jquery.svgdom.js"></script>
@@ -61,7 +62,10 @@
 <script type="text/javascript" src="resources/js/common/ObjOntGV.js"></script>
 <script type="text/javascript" src="resources/js/leftmenu/LeftMenu.js"></script>
 <script type="text/javascript" src="resources/js/tab/Tab.js"></script>
-<script type="text/javascript" src="resources/js/bont/setcookie.js"></script>
+<script type="text/javascript" src="resources/js/bont/setCookie.js"></script>
+
+<script type="text/javascript" src="resources/js/bont/ecGraph.js"></script>
+
 <script type="text/javascript" src="resources/js/bont/ObjOntWin.js"></script>
 <script type="text/javascript" src="resources/js/bont/ObjOntSvg.js"></script>
 <script type="text/javascript" src="resources/js/bont/EventCls.js"></script>
@@ -94,7 +98,7 @@
 				src="resources/images/navigation_images/head-background2.png" />
 		</div>
 		<jsp:include page="/pages/common/nav.jsp" />
-		<div class="row m-t-20">
+		<div class="row m-t-20 w-1140">
 			<div class="col-xs-2">
 				<div class="leftsidebar_box">
 					<div class="line"></div>
@@ -130,6 +134,16 @@
 							</dd>
 						</shiro:hasRole>
 					</dl>
+
+					<dl class="cloud">
+						<dt>
+							非分类关系图<img src="resources/images/leftmenu/select_xl01.png">
+						</dt>
+						<dd class="first_dd">
+							<label id="ecRelation">查看</label>
+						</dd>
+					</dl>
+
 				</div>
 			</div>
 			<div class="col-xs-10">
@@ -137,7 +151,7 @@
 					<ul id="tabs">
 						<li><a href="#" name="#tab0">事件本体</a></li>
 						<li><a href="#" name="#tab1">事件</a></li>
-						<li><a href="#" name="#tab2">参与者</a></li>
+						<li><a href="#" name="#tab2">断言</a></li>
 						<li><a href="#" name="#tab3">对象</a></li>
 						<li><a href="#" name="#tab4">时间</a></li>
 						<li><a href="#" name="#tab5">环境</a></li>
@@ -155,8 +169,9 @@
 									分别表示动作、对象、时间、环境、断言、语言表现。</p>
 							</div>
 							<div id="tab2">
-								<h2>参与者要素</h2>
-								<p></p>
+								<h2>断言要素</h2>
+								<p>断言描述的是事件的作用。前置条件表示的是事件发生 之前的状态特点，也是事件发生的条件。中间断言表示事件
+									进行过程中的状态特点，也就是在开始后和结束前各状态共 同的特点。后置条件是事件结束状态的特点。</p>
 							</div>
 							<div id="tab3">
 								<h2>对象要素</h2>
@@ -195,7 +210,7 @@
 
 			</div>
 		</div>
-	</div>
+		<jsp:include page="/pages/common/foot.jsp" />
 	</div>
 
 	<div id="buttomDiv"></div>
@@ -220,13 +235,13 @@
 		<div class="resizeLB"></div>
 		<div class="content">
 			<div class="objOntToolMenu">
-				<%-- <shiro:hasRole name="builder">
+				<shiro:hasRole name="builder">
 					<img id="objOntAdd" src="resources/images/common/add.png">
 				</shiro:hasRole>
 
 				<img src="resources/images/common/gap.png" class="gap"></img>
 
-				<shiro:hasRole name="builder">
+				<%--<shiro:hasRole name="builder">
 					<img id="objOntDel" src="resources/images/common/del.png">
 				</shiro:hasRole>
 
@@ -244,9 +259,10 @@
 					id="objOntZoomin" src="resources/images/common/zoomin.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img> <img
 					id="objOntReload" src="resources/images/common/reload.png"> <img
-					src="resources/images/common/gap.png" class="gap"></img> <!-- <img
-					id="objOntClean" src="resources/images/common/save.png"> --> <img
-					id="objOntPrinter" src="resources/images/common/printer.png">
+					src="resources/images/common/gap.png" class="gap"></img>
+				<!-- <img
+					id="objOntClean" src="resources/images/common/save.png"> -->
+				<img id="objOntPrinter" src="resources/images/common/printer.png">
 			</div>
 			<div id="objOntSvg"></div>
 		</div>
@@ -540,12 +556,12 @@
 		</div>
 		<div class="content">
 			<div class="objOntToolMenu">
-				<%-- <shiro:hasRole name="builder">
+				<shiro:hasRole name="builder">
 					<img id="conceptAdd" src="resources/images/common/add.png">
 				</shiro:hasRole>
 
 				<img src="resources/images/common/gap.png" class="gap"></img>
-
+				<%-- 
 				<shiro:hasRole name="builder">
 					<img id="conceptDel" src="resources/images/common/del.png">
 				</shiro:hasRole>
@@ -564,9 +580,10 @@
 					id="conceptZoomin" src="resources/images/common/zoomin.png">
 				<img src="resources/images/common/gap.png" class="gap"></img> <img
 					id="conceptReload" src="resources/images/common/reload.png">
-				<img src="resources/images/common/gap.png" class="gap"></img> <!-- <img
-					id="conceptClean" src="resources/images/common/save.png">  --><img
-					id="conceptPrinter" src="resources/images/common/printer.png">
+				<img src="resources/images/common/gap.png" class="gap"></img>
+				<!-- <img
+					id="conceptClean" src="resources/images/common/save.png">  -->
+				<img id="conceptPrinter" src="resources/images/common/printer.png">
 			</div>
 		</div>
 		<div id="conceptSvgDiv"></div>
@@ -600,8 +617,8 @@
 
 					<li id="lisubmit">
 						<button class="submit" type="submit" id="saveConcept">保存</button>
-						<button class="submit" type="reset" id="resetConcept">重置</button> <img
-						src="resources/images/add.png" id="conceptimgadd" />
+						<button class="submit" type="reset" id="resetConcept">重置</button>
+						<img src="resources/images/add.png" id="conceptimgadd" />
 					</li>
 
 				</ul>
@@ -620,8 +637,26 @@
 		<div id="conceptSubGraphSvgDiv"></div>
 	</div>
 
+	<div class="conceptSvgWinc" id="ecRelationWin">
+		<div class="title draggable" id="ecRelationTitle">
+			<h2>事件本体非分类关系图</h2>
+			<div>
+				<a id="ecRelationWinClose" class="conceptSvgWinClosec"
+					href="javascript:;" title="关闭"></a>
+			</div>
+		</div>
+		<div style="width: 1200px; height: 500px; overflow: auto;">
+			<div style="width: 200px; float: left;" class="m-t-20">
+				<img width="200px" src="resources/images/bont/legend.png" />
+			</div>
+			<div id="main" class="m-t-20"
+				style="width: 950px; height: 800px; float: left;"></div>
+		</div>
+	</div>
 	<iframe id="id_iframe" name="nm_iframe" style="display: none;"></iframe>
 
 </body>
-
+<script type="text/javascript">
+	LoadECRelationGraph("突发事件本体", "main");
+</script>
 </html>

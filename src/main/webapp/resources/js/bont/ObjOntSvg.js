@@ -19,11 +19,6 @@ $(document).ready(function() {
 			svgDiv.appendChild(svgElem);
 			var rectclass = "drawrect";
 			
-			if(role != "isbuilder"){
-				ecNotEditable();
-				conceptNotEditable();
-			}
-			
 			updateConceptList();
 			for(var temp in conceptList){
 				if(temp=="remove")
@@ -86,8 +81,6 @@ $(document).ready(function() {
 					})
 
 			$("#objOntReload").click(function() {
-				console.log(objOntLatListGV.size());
-				console.log(conceptListGV.size());
 				var svgid = "svgId";
 				objOntLatListGV.removeAll();
 				cleanSVG();
@@ -138,11 +131,9 @@ $(document).ready(function() {
 				}
 				drawLatLink(svgElem,objOntLatListGV,"svgId");
 				
-				console.log(objOntLatListGV.size());
-				console.log(conceptListGV.size());
 				
 				//上下文菜单
-				if(role == "isbuilder"){
+				if(role == "builder"){
 					var options = {
 							items : [ {
 								header : '功能菜单'
@@ -159,7 +150,6 @@ $(document).ready(function() {
 										tempG = gList[j];
 										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
 											gid = tempG.getAttribute("id");
-											console.log(gid);
 											break;
 										}
 									}
@@ -179,7 +169,6 @@ $(document).ready(function() {
 										tempG = gList[j];
 										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
 											gid = tempG.getAttribute("id");
-											console.log(gid);
 											break;
 										}
 									}
@@ -196,7 +185,6 @@ $(document).ready(function() {
 										tempG = gList[j];
 										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
 											gid = tempG.getAttribute("id");
-											console.log(gid);
 											break;
 										}
 									}
@@ -206,7 +194,6 @@ $(document).ready(function() {
 								text : '返回',
 								onclick : function(eve) {
 									$('#contextify-menu').attr('display','none');
-									//console.log(eve.target.parentNode.parentNode.getAttribute('data-contextify-id'));
 								}
 							}, ]
 						};
@@ -238,7 +225,6 @@ $(document).ready(function() {
 								text : '返回',
 								onclick : function(eve) {
 									$('#contextify-menu').attr('display','none');
-									//console.log(eve.target.parentNode.parentNode.getAttribute('data-contextify-id'));
 								}
 							}, ]
 						};
@@ -320,7 +306,6 @@ $(document).ready(function() {
 			})
 			
 			InitConceptSubGraph();
-			
 			
 })
 
@@ -471,8 +456,6 @@ function showObjFormConPar(gList, objDelStatusGV) {
 				additionnum++;
 				var att = keyarray[i];
 				var valu = resultList[keyarray[i]];
-				console.log(att);
-				console.log(valu);
 				var liid = "li" + additionnum;
 				idarray.push(additionnum);
 				var proid = "pro" + liid;
@@ -499,7 +482,6 @@ function showObjFormConPar(gList, objDelStatusGV) {
 				$("input#" + attid).val(valu);
 			}
 		} else if (objDelStatusGV == "del") {
-			// console.log("objOntOidStr" + objOntOidStr);
 			var ontName;
 			var input = {};
 			input["ontname"] = preontname;
@@ -507,7 +489,6 @@ function showObjFormConPar(gList, objDelStatusGV) {
 			input["latsid"] = gid;
 			var inputstr = JSON.stringify(input);
 			var delurl = "objOntAction!deleteLatByMongo.action";
-			console.log(delurl);
 			$.ajax({
 				url : delurl,
 				type : "post",
@@ -563,7 +544,6 @@ function drawLatLink(svgElem,list,svgId) {
 				if(parentList[z]=="root") continue;
 				var lineA = DrawConLine(parentList[z], temp.latname,svgId);
 				if(typeof lineA != "undefined" && lineA != null){
-					console.log(lineA);
 					svgElem.appendChild(lineA);
 				}
 			}
@@ -642,7 +622,6 @@ function showObjFormConParRewrite(gList , dci , objDelStatusGV)/*dci:data-contex
 		tempG = gList[j];
 		if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
 			gid = tempG.getAttribute("id");
-			console.log(gid);
 		}
 	}
 	$('li.addli').remove();
@@ -669,7 +648,7 @@ function showObjFormConParRewrite(gList , dci , objDelStatusGV)/*dci:data-contex
 		updateAssertElement(objOntLat.latname);*/
 		
 		updateECInfo(objOntLat.latname);
-		updateObjElement(objOntLat.latname);
+		//updateObjElement(objOntLat.latname);
 		/*var objLatList = queryLatList("obj_ont_lat");
 		var sval='';
 		for(var i=0;i<objLatList.length;i++){
@@ -767,7 +746,6 @@ function showConceptFormConPar(gList , dci , objDelStatusGV)/*dci:data-contextif
 				inputStr : inputstr
 			},
 			success:function(data){
-				console.log(data);
 				var resultList = $.parseJSON(data.additionStr);
 				additionnum = 0;
 				var keyarray = new Array();
@@ -779,8 +757,6 @@ function showConceptFormConPar(gList , dci , objDelStatusGV)/*dci:data-contextif
 					addProVal();
 					var pro = keyarray[i];
 					var attr = resultList[keyarray[i]];
-					console.log(pro);
-					console.log(attr);
 					$("#proli"+additionnum.toString()).val(pro);
 					$("#attli"+additionnum.toString()).val(attr);
 				}
@@ -909,9 +885,16 @@ function InitconceptWin(){
 			saveWindow.document.write("<img src='" + svgImage
 					+ "' alt='from canvas'/>");
 	});
+	
+	$('#conceptAdd').click(function(){
+		$('#conceptlatname').prop('readOnly',false);
+		addition=0;
+		objDelStatusGV = 'add';
+		formReset("conceptEditForm");
+		$('#conceptEditWin').show();
+	})
 			
 	$('#conceptReload').click(function(){
-		console.log("Reload Concept");
 		conceptListGV.removeAll();
 		cleanSVGid(svgid);
 		conceptListGV = queryConceptLatList();
@@ -960,7 +943,7 @@ function InitconceptWin(){
 		drawLatLink(csvgElem,conceptListGV,"conceptSvg");
 		
 		//上下文菜单
-		if(role=="isbuilder"){
+		if(role=="builder"){
 			var conceptoptions = {
 					items : [ {
 						header : '功能菜单'
@@ -996,7 +979,6 @@ function InitconceptWin(){
 					}, {
 						text : '删除概念',
 						onclick : function(eve) {
-							console.log("删除概念")
 							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
 							var gList = csvgElem.getElementsByTagName("g")
 							var gid;
@@ -1079,7 +1061,6 @@ function queryConceptLatList() {
 function addProVal(){
 	if($('#divproval').children().length>=4)
 		return;
-	console.log("create");
     additionnum++;
     idarray.push(additionnum);
     var liid = "li" + additionnum;
@@ -1087,7 +1068,6 @@ function addProVal(){
     var attid = "att" + liid;
     $('div#divproval').append("<li class=\"addli\" id=\"" + liid + "\"><input class=\"cpro\" required=\"required\" id=\"" + proid + "\"><input required=\"required\" class=\"cval\" id=\"" + attid + "\"><img class=\"delattr\" id=\"" + liid + "\" src=\"resources/images/delete.png\"></img></li>");
     $('img#' + liid).click(function() {
-        console.log("delete");
         $('li#' + liid).remove();
         var temp = liid.substr(liid.length - 1);
         var index = idarray.indexOf(parseInt(temp));
@@ -1097,7 +1077,6 @@ function addProVal(){
 
 function addObj(){
 	objnum++;
-	console.log("addObjElement");
 	$('#objFormItem').append("<div class=\"form-col\" id=\"col"+ objnum.toString() +"\"><ul><li class=\"objname\"></li><li>数量：</li><li><select name=\"amount\" class=\"sActAmout\" id=\"sAmount"+objnum.toString()+"\"><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"少许\">少许</option><option value=\"近半\">近半</option><option value=\"半\">半</option><option value=\"多半\">多半</option><option value=\"大量\">大量</option></select></li>"+
 							"<li>所属概念：</li>"+
 							"<li><select name=\"conceptsid\" class=\"sActConcept\" id=\"sConcept"+objnum.toString()+"\"></select></li><li>语言称谓：</li><li><input name=\"lane\" class=\"iActLE\" id=\"iLE"+objnum.toString()+"\" type=\"text\"></li></ul></div>");
@@ -1107,7 +1086,6 @@ function addObj(){
 		$('#sConcept'+objnum).append("<option value=\"" + temp + "\">"+ temp +"</option>");
 	}*/
 	for(var i=0;i<conceptListGV.size();i++){
-		console.log(conceptListGV.size());
 		$('#sConcept'+objnum).append("<option value=\"" + conceptListGV.get(i).latname + "\">"+ conceptListGV.get(i).latname +"</option>");
 	}
 	
@@ -1130,7 +1108,6 @@ function updateObjElement(evelatname){
 	var input = {};
 	input["ontname"]=preontname;
 	input["evelatname"]=evelatname;
-	console.log(preontname+" "+evelatname);
 	var leoival = "";
 	var inputstr=JSON.stringify(input);
 	$.ajax({
@@ -1146,11 +1123,9 @@ function updateObjElement(evelatname){
 				for(var i=0;i<tempList.length;i++){
 					addObj();
 					var temp = tempList[i];
-					console.log(temp);
 					$("#sAmount"+objnum.toString()).val(temp["amount"]);
 					var sc = "#sConcept"+objnum.toString();
 					var scv = temp["conceptlatname"];
-					console.log(sc+" "+scv);
 					$("#sConcept"+objnum.toString()).val(scv);
 					$("#iLE"+objnum.toString()).val(temp["lane"]);
 					leoival += " 对象"+objnum.toString()+": "+ scv;
@@ -1182,7 +1157,6 @@ function updateActionElement(evelatname){
 		success:function(data){
 			if(data.resultStr!=""){
 				var temp = $.parseJSON(data.resultStr);
-				console.log(temp);
 				$('#sDegree').val(temp.degree);
 				$('#iTool').val(temp.tool);
 				$('#iMethod').val(temp.method);
@@ -1206,7 +1180,6 @@ function updateEnvElement(evelatname){
 		success:function(data){
 			if(data.resultStr!=""){
 				var temp = $.parseJSON(data.resultStr);
-				console.log(temp);
 				$('#envsConcept').val(temp.conceptlatname);
 				$('#iEnvlane').val(temp.envlane);
 				$('label#leei').text(temp.conceptlatname+temp.envlane);
@@ -1230,7 +1203,6 @@ function updateLanElement(evelatname){
 		success:function(data){
 			if(data.resultStr!=""){
 				var temp = $.parseJSON(data.resultStr);
-				console.log(temp);
 				$('#lelei').text(temp.triggerwords+temp.collocation);
 				$('#iTriggerWords').val(temp.triggerwords);
 				$('#iCollocation').val(temp.collocation);
@@ -1252,10 +1224,8 @@ function updateAssertElement(evelatname){
 			inputStr:inputstr,
 		},
 		success:function(data){
-			console.log(data);
 			if(data.resultStr!=""){
 				var temp = $.parseJSON(data.resultStr);
-				console.log(temp);
 				$('#leasi').text("前置状态"+temp.prestate+"中间断言"+temp.massert+"后置状态"+temp.poststate);
 				$('#iPrestate').val(temp.prestate);
 				$('#iMassert').val(temp.massert);
@@ -1317,11 +1287,9 @@ function reloadConceptSubGraph(conceptname){
 		return;
 	}
 	
-	console.log("Reload ConceptSubGraph");
 	conceptSubGraphList.removeAll();
 	cleanSVGid(svgid);
 	conceptSubGraphList = queryConceptSubGraphList(conceptname);
-	console.log(conceptSubGraphList);
 	
 	conceptListGV.removeAll();
 	conceptListGV = queryConceptLatList();
@@ -1333,9 +1301,7 @@ function reloadConceptSubGraph(conceptname){
 	var y = 50;
 	
 	for(var i=0 ; i < conceptListGV.size();i++){
-		console.log(conceptListGV.get(i).latname);
 		if(conceptListGV.get(i).latname == conceptname){
-			console.log(i);
 			var conceptParentList = conceptListGV.get(i).parentlatname.split(",");
 			for(var z=0;z<conceptParentList.length;z++){
 				var ontname = {};
@@ -1438,11 +1404,6 @@ function updateECInfo(latname){
 			var envstr = $.parseJSON(data.envInfo);
 			var assertstr = $.parseJSON(data.assertInfo);
 			var lanstr = $.parseJSON(data.lanInfo);
-			console.log(actionstr);
-			console.log(timestr);
-			console.log(envstr);
-			console.log(assertstr);
-			console.log(lanstr);
 			
 			if(actionstr!=null){
 				var temp = actionstr;
@@ -1475,6 +1436,25 @@ function updateECInfo(latname){
 				$('#lelei').text("触发词:"+temp.triggerwords+" 搭配:"+temp.collocation);
 				$('#iTriggerWords').val(temp.triggerwords);
 				$('#iCollocation').val(temp.collocation);
+			}
+			
+			objnum=0;
+			var tempList = $.parseJSON(data.objInfo);
+			var leoival ="";
+			for(var i=0;i<tempList.length;i++){
+				addObj();
+				var temp = tempList[i];
+				$("#sAmount"+objnum.toString()).val(temp["amount"]);
+				var sc = "#sConcept"+objnum.toString();
+				var scv = temp["conceptlatname"];
+				$("#sConcept"+objnum.toString()).val(scv);
+				$("#iLE"+objnum.toString()).val(temp["lane"]);
+				leoival += " 对象"+objnum.toString()+": "+ scv;
+			}
+			console.log(leoival);
+			$('#leoi').text(leoival);
+			if(objnum==0){
+				addObj();
 			}
 		}
 	})

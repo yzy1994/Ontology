@@ -76,8 +76,8 @@
 		<property name="securityManager" ref="securityManager" />
 
 		<property name="loginUrl" value="/pages/login/Login.jsp" />
-		<property name="successUrl" value="/login_success.jsp" />
-		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
+		<!-- <property name="successUrl" value="/pages/index.jsp" /> -->
+		<property name="unauthorizedUrl" value="/pages/unauthorized.jsp" />
 
 		<property name="filterChainDefinitions">
 			<value>
@@ -85,6 +85,7 @@
 				/pages/drawont/Bont.jsp = authc
 				/pages/label/label.jsp = authc
 				/pages/drawont/OntoEdit.jsp = authc
+				/pages/admin/** = roles[administrator]
 			</value>
 		</property>
 	</bean>
@@ -92,8 +93,6 @@
 	<!-- <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" 
 		depends-on="lifecycleBeanPostProcessor"/> <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"> 
 		<property name="securityManager" ref="securityManager"/> </bean> -->
-
-
 
 	<aop:config proxy-target-class="true"></aop:config>
 	<bean

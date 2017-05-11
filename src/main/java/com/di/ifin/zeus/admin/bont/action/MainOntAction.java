@@ -24,6 +24,8 @@ import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 import com.shu.global.Global;
 
+import net.sf.json.JSONObject;
+
 @Controller("mainOntAction")
 public class MainOntAction extends ActionSupport {
 	private String inputStr;
@@ -122,6 +124,7 @@ public class MainOntAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	@Deprecated
 	public String delOnt() {
 		latservice.removeByOntname("eve_ont_lat", this.ontname);
 		latservice.removeByOntname("peo_ont_lat", this.ontname);
@@ -147,6 +150,14 @@ public class MainOntAction extends ActionSupport {
 		ontinfo.setOid(oid);
 		ontservice.addOnt(ontinfo);
 		resultStr = "success";
+		return SUCCESS;
+	}
+	
+	public String editOnt(){
+		JSONObject json = JSONObject.fromObject(inputStr);
+		String ontname = json.getString("ontname");
+		String field =json.getString("field");
+		
 		return SUCCESS;
 	}
 

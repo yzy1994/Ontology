@@ -15,7 +15,7 @@ $(document).ready(function(){
 		var temp = templist[i];
 		$("tbody#tbo").append("<tr><td><a class=\"bont\" id="+temp.name+" href=\"pages/drawont/Bont.jsp\">"+temp.name+"</a></td><td>"+temp.field+"</td>" +
 				"<td><button type=\"button\" class=\"button  btn-danger delbtn\" id=\""+temp.name+"\">删除本体</button>"
-				+"&nbsp<button type=\"button\" class=\"button  btn-info exportbtn\" id=\""+temp.name+"\">导出本体</button></td>"+"</tr>");
+				+"&nbsp<button type=\"button\" class=\"button  btn-primary exportbtn\" id=\""+temp.name+"\">导出本体</button>&nbsp<button type=\"button\" class=\"button  btn-info infobtn\" id=\""+temp.name+"\">编辑本体<button></td>"+"</tr>");
 		elements[temp.name]=temp.element;
 	}
 	
@@ -23,8 +23,15 @@ $(document).ready(function(){
 	$('#delalert').hide();
 	$('button#addOnt').click(function(){
 		$('#dealObjOntLat').show();
+		$('#ontname').prop('readOnly',false);
 	})
 	
+	$('button.infobtn').click(function(){
+		$('#dealObjOntLat').show();
+		$('#ontname').val($(this).parent().parent().children().get(0).textContent);
+		$('#ontfield').val($(this).parent().parent().children().get(1).textContent);
+		$('#ontname').prop('readOnly',true);
+	})
 	
 	//导出本体
 	$('button.exportbtn').click(function(){
@@ -104,6 +111,8 @@ $(document).ready(function(){
 		}
 		$('#delalert').show();	
 	})
+	
+	$('')
 	
 	$('#importo').click(function(){
 		alert('请选择文件');

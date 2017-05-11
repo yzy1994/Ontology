@@ -221,4 +221,5 @@ window.onload = window.onresize = function ()
 	letWinDraggable('conceptSubgraphWinTitle', 'conceptSubgraphWin');
 	letWinDraggable('assertTitle', 'assertElementEdit');
 	letWinDraggable('languageTitle', 'languageElementEdit');
+	letWinDraggable('ecRelationTitle', 'ecRelationWin');
 })

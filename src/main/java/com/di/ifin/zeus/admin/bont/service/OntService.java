@@ -14,4 +14,6 @@ public interface OntService {
 	public void addOnt(OntInfo ontinfo);
 	
 	public OntInfo findInfoByName(String ontname);
+	
+	public void editOnt(String ontname,String field);
 }
