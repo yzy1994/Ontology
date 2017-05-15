@@ -35,7 +35,7 @@
 			<img id="titleImgId"
 				src="resources/images/navigation_images/head-background1.png" />
 		</div>
-		<div class="container list-wrap w-1140">
+		<div class="list-wrap w-1140 m-t-20">
 			<h3>事件关系管理</h3>
 			<button class="btn btn-success" id="new_ecr" data-toggle="modal"
 				data-target="#myModal">新建</button>

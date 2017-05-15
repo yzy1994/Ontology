@@ -6,7 +6,7 @@ function LoadECRelationGraph(ontname,echartsDivId){
 	$.ajax({
 		url : "echartsAction!getChartData.action",
 		type : "post",
-		async : false,
+		async : true,
 		data : {
 			inputStr : inputstr
 		},

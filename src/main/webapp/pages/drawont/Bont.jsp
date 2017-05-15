@@ -1,4 +1,3 @@
-<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
@@ -45,11 +44,8 @@
 
 <script type="text/javascript" src="resources/js/svg.min.js"></script>
 <script type="text/javascript" src="resources/js/svg.draggable.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-	crossorigin="anonymous"></script> -->
-<script type="text/javascript" src="resources/js/echarts.js"></script>
 <script src="//cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.svg.js"></script>
 <script type="text/javascript" src="resources/js/jquery.svgdom.js"></script>
@@ -63,8 +59,6 @@
 <script type="text/javascript" src="resources/js/leftmenu/LeftMenu.js"></script>
 <script type="text/javascript" src="resources/js/tab/Tab.js"></script>
 <script type="text/javascript" src="resources/js/bont/setCookie.js"></script>
-
-<script type="text/javascript" src="resources/js/bont/ecGraph.js"></script>
 
 <script type="text/javascript" src="resources/js/bont/ObjOntWin.js"></script>
 <script type="text/javascript" src="resources/js/bont/ObjOntSvg.js"></script>
@@ -99,115 +93,98 @@
 		</div>
 		<jsp:include page="/pages/common/nav.jsp" />
 		<div class="row m-t-20 w-1140">
-			<div class="col-xs-2">
+			<div class="col-xs-3">
 				<div class="leftsidebar_box">
 					<div class="line"></div>
 
 					<dl class="channel">
-						<dt>
-							事件类层次图<img src="resources/images/leftmenu/select_xl01.png">
-						</dt>
 						<shiro:lacksRole name="builder">
-							<dd class="first_dd">
-								<label id="EveOnt" class="viewOnt">查看</label>
-							</dd>
+							<dt id="EveOnt" class="viewOnt">查看事件类层次图</dt>
 						</shiro:lacksRole>
 						<shiro:hasRole name="builder">
-							<dd>
-								<label id="EveOnt" class="editOnt">编辑</label>
-							</dd>
+							<dt id="EveOnt" class="editOnt">编辑事件类层次图</dt>
 						</shiro:hasRole>
 					</dl>
 
 					<dl class="system_log" id="概念">
-						<dt>
-							概念层次图<img src="resources/images/leftmenu/select_xl01.png">
-						</dt>
 						<shiro:lacksRole name="builder">
-							<dd class="first_dd">
-								<label id="Concept" class="viewOnt">查看</label>
-							</dd>
+							<dt id="Concept" class="viewOnt">查看概念层次图</dt>
 						</shiro:lacksRole>
 						<shiro:hasRole name="builder">
-							<dd>
-								<label id="Concept" class="editOnt">编辑</label>
-							</dd>
+							<dt id="Concept" class="editOnt">编辑概念层次图</dt>
 						</shiro:hasRole>
 					</dl>
 
 					<dl class="cloud">
-						<dt>
-							非分类关系图<img src="resources/images/leftmenu/select_xl01.png">
-						</dt>
-						<dd class="first_dd">
-							<label id="ecRelation">查看</label>
-						</dd>
+						<dt id="ecRelation">非分类关系图</dt>
 					</dl>
 
 				</div>
 			</div>
-			<div class="col-xs-10">
-				<div class="uldiv">
-					<ul id="tabs">
-						<li><a href="#" name="#tab0">事件本体</a></li>
-						<li><a href="#" name="#tab1">事件</a></li>
-						<li><a href="#" name="#tab2">断言</a></li>
-						<li><a href="#" name="#tab3">对象</a></li>
-						<li><a href="#" name="#tab4">时间</a></li>
-						<li><a href="#" name="#tab5">环境</a></li>
-						<li><a href="#" name="#tab6">语言表现</a></li>
-					</ul>
-					<div>
-						<div id="content">
-							<div id="tab0">
-								<img id="EOimg" src="resources/images/bont/EO.png" />
-							</div>
-							<div id="tab1">
-								<h2>事件</h2>
-								<p>事件指在某个特定的时间和环境下发生的、由若干角色参与、表现出若干动作特征的一件事情形式上，
-									事件可表示为e，定义为一个六元组：e一(A，O，T，V，P，L)其中，事件六元组中的元素称为事件要素，
-									分别表示动作、对象、时间、环境、断言、语言表现。</p>
-							</div>
-							<div id="tab2">
-								<h2>断言要素</h2>
-								<p>断言描述的是事件的作用。前置条件表示的是事件发生 之前的状态特点，也是事件发生的条件。中间断言表示事件
-									进行过程中的状态特点，也就是在开始后和结束前各状态共 同的特点。后置条件是事件结束状态的特点。</p>
-							</div>
-							<div id="tab3">
-								<h2>对象要素</h2>
-								<p>对象是事件的主要参与者，是事件中的主导作用者或被改变者。
-									对象可分为主体和客体。主体是主导者，是事件中的主角，有时是事 件的制造者或期望事件发生者客体是事件中的被动者。按照分工，
-									事件中的对象分为不同的角色，例如“选举”事件，其中有主持组织 者、监票者、投票者、候选人、当选者、落选者。事件的对象一般是
-									第一实体，但也可能又是事件，也可能是关系。还有的事件的对象是 有关联的事件集合。对于特定的事件类，对象是有约束的，例如选举
-									事件的组织者可以是人或组织。利用这些约束，可以判断句子中的主 语或宾语。其他要素也有约束，也可以利用。</p>
-							</div>
-							<div id="tab4">
-								<h2>事件要素</h2>
-								<p>每个事件都必须发生在一个时间段内。事件有开始、发展、 结束。时间段由绝对时间表示，也可以用相对时间表示，也就是
-									用另一个事件的时问的相对偏差表示。</p>
-							</div>
-							<div id="tab5">
-								<h2>环境要素</h2>
-								<p>任何事件必然发生在一定的环境中。环境由多 个实体按照特定的关系组成。例如“上课”事件的环
-									境有教室，教室内有黑板、讲台、课桌、椅子等， 这些东西是有序存在的。环境要素中的实体与对象
-									要素中的实体都是事件涉及的，还有动作要素中的 工具。为什么有的属于对象要素、有的属于环境要
-									素、有的属于动作要素?关键在于它们在事件中的 地位和作用。环境要素中的实体是相对静止的，在
-									事件中几乎是不变的，或者虽然变化，但并不重要。 而动作要素的工具中的实体是运动的，是对事件的
-									实施有重要作用的。对象要素中的实体是最重要的， 或者是事件的主角，或者是事件的驱动者，或者是 事件的主要被改变者。</p>
-							</div>
-							<div id="tab6">
-								<h2>语言表现要素</h2>
-								<p>将事件与语言分离有很多优点。事件是客观的， 本来就不依赖于语言。语言是人类为了交流各自知道
-									的事件发生而创造出来的符号表示，因而事件就有了 语言特性。交流和思考离不开语言，然而很多研究工
-									作往往将它们混为一谈。混为一谈的研究方法容易把 问题搞复杂。事件的语言表现是随着语言的变化而变
-									化的。同一个事件，对于不同的语言有不同的表现， 即使对于同一个语言，也会有不同的表现。语言表现
-									的主要内容是核心词。核心词是对于事件的称谓、对 于事件中各角色的称谓、对时问和环境的描述格式、
-									对各要素结合的描述格式。语言表现可以用文法表示， 也可以用规则表示，或用模板表示。</p>
-							</div>
-						</div>
+			<div class="col-xs-9">
+
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a href="#eopic" data-toggle="tab">
+							事件本体 </a></li>
+					<li><a href="#tab0" data-toggle="tab">事件</a></li>
+					<li><a href="#tab6" data-toggle="tab">动作</a></li>
+					<li><a href="#tab1" data-toggle="tab">对象</a></li>
+					<li><a href="#tab2" data-toggle="tab">时间</a></li>
+					<li><a href="#tab3" data-toggle="tab">环境</a></li>
+					<li><a href="#tab5" data-toggle="tab">断言</a></li>
+					<li><a href="#tab4" data-toggle="tab">语言表现</a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content h-600">
+					<div class="tab-pane fade in active" id="eopic">
+						<img id="EOimg" src="resources/images/bont/EO.png" />
+					</div>
+					<div class="tab-pane fade" id="tab0">
+						<h2>事件</h2>
+						<p>事件指在某个特定的时间和环境下发生的、由若干角色参与、表现出若干动作特征的一件事情形式上，
+							事件可表示为e，定义为一个六元组：e一(A，O，T，V，P，L)其中，事件六元组中的元素称为事件要素，
+							分别表示动作、对象、时间、环境、断言、语言表现。</p>
+					</div>
+					<div class="tab-pane fade" id="tab1">
+						<h2>对象要素</h2>
+						<p>对象是事件的主要参与者，是事件中的主导作用者或被改变者。 对象可分为主体和客体。主体是主导者，是事件中的主角，有时是事
+							件的制造者或期望事件发生者客体是事件中的被动者。按照分工， 事件中的对象分为不同的角色，例如“选举”事件，其中有主持组织
+							者、监票者、投票者、候选人、当选者、落选者。事件的对象一般是 第一实体，但也可能又是事件，也可能是关系。还有的事件的对象是
+							有关联的事件集合。对于特定的事件类，对象是有约束的，例如选举 事件的组织者可以是人或组织。利用这些约束，可以判断句子中的主
+							语或宾语。其他要素也有约束，也可以利用。</p>
+					</div>
+					<div class="tab-pane fade" id="tab2">
+						<h2>时间要素</h2>
+						<p>每个事件都必须发生在一个时间段内。事件有开始、发展、 结束。时间段由绝对时间表示，也可以用相对时间表示，也就是
+							用另一个事件的时问的相对偏差表示。</p>
+					</div>
+					<div class="tab-pane fade" id="tab3">
+						<h2>环境要素</h2>
+						<p>任何事件必然发生在一定的环境中。环境由多 个实体按照特定的关系组成。例如“上课”事件的环
+							境有教室，教室内有黑板、讲台、课桌、椅子等， 这些东西是有序存在的。环境要素中的实体与对象
+							要素中的实体都是事件涉及的，还有动作要素中的 工具。为什么有的属于对象要素、有的属于环境要
+							素、有的属于动作要素?关键在于它们在事件中的 地位和作用。环境要素中的实体是相对静止的，在
+							事件中几乎是不变的，或者虽然变化，但并不重要。 而动作要素的工具中的实体是运动的，是对事件的
+							实施有重要作用的。对象要素中的实体是最重要的， 或者是事件的主角，或者是事件的驱动者，或者是 事件的主要被改变者。</p>
+					</div>
+					<div class="tab-pane fade" id="tab4">
+						<h2>语言表现要素</h2>
+						<p>将事件与语言分离有很多优点。事件是客观的， 本来就不依赖于语言。语言是人类为了交流各自知道
+							的事件发生而创造出来的符号表示，因而事件就有了 语言特性。交流和思考离不开语言，然而很多研究工
+							作往往将它们混为一谈。混为一谈的研究方法容易把 问题搞复杂。事件的语言表现是随着语言的变化而变
+							化的。同一个事件，对于不同的语言有不同的表现， 即使对于同一个语言，也会有不同的表现。语言表现
+							的主要内容是核心词。核心词是对于事件的称谓、对 于事件中各角色的称谓、对时问和环境的描述格式、
+							对各要素结合的描述格式。语言表现可以用文法表示， 也可以用规则表示，或用模板表示。</p>
+					</div>
+					<div class="tab-pane fade" id="tab5">
+						<h2>断言要素</h2>
+						<p>断言描述的是事件的作用。前置条件表示的是事件发生 之前的状态特点，也是事件发生的条件。中间断言表示事件
+							进行过程中的状态特点，也就是在开始后和结束前各状态共 同的特点。后置条件是事件结束状态的特点。</p>
+					</div>
+					<div class="tab-pane fade" id="tab6">
+						<h2>动作要素</h2>
+						<p>动作要素描述事件的变化过程及其特征，是对程度，方式，方法，工具等的描述，例如快慢，使用什么，根据什么等等。</p>
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<jsp:include page="/pages/common/foot.jsp" />
@@ -656,6 +633,8 @@
 	<iframe id="id_iframe" name="nm_iframe" style="display: none;"></iframe>
 
 </body>
+<script type="text/javascript" src="resources/js/echarts.js"></script>
+<script type="text/javascript" src="resources/js/bont/ecGraph.js"></script>
 <script type="text/javascript">
 	LoadECRelationGraph("突发事件本体", "main");
 </script>

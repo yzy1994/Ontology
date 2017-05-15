@@ -27,7 +27,7 @@
 	<div class="container">
 		<img id="titleImgId"
 			src="resources/images/navigation_images/head-background1.png" />
-		<div class="list-wrap">
+		<div class="list-wrap w-1140">
 			<table class="table table-bordered m-t-20">
 				<tr>
 					<th><h3>后台管理</h3></th>

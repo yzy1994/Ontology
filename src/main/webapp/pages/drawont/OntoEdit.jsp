@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 	String path = request.getContextPath();
 	// 获得本项目的地址(例如: http://localhost:8080/MyApp/)赋值给basePath变量 
@@ -77,6 +78,24 @@
 							<td>应用领域</td>
 							<td>操作</td>
 						</tr>
+						<s:iterator value="ontlist" id="r" status="st">
+							<tr>
+								<td><a class="bont" id="<s:property escape="0" value="name"/>" href="pages/drawont/Bont.jsp" >
+										<s:property escape="0" value="name" />
+									</a>
+								</td>
+								<td>
+									<s:property escape="0" value="field"/>
+								</td>
+								<td>
+									<shiro:hasRole name="builder"><button type="button" class="button  btn-danger delbtn" id="<s:property escape="0" value="name"/>">删除本体</button></shiro:hasRole>
+									&nbsp
+									<button type="button" class="button  btn-primary exportbtn" id="<s:property escape="0" value="name"/>">导出本体</button>
+									&nbsp
+									<button type="button" class="button  btn-info infobtn" id="<s:property escape="0" value="name"/>">编辑本体</button>
+								</td>
+							</tr>
+						</s:iterator>
 					</tbody>
 				</table>
 			</div>

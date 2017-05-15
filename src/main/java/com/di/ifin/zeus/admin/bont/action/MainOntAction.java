@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.jdom.Document;
@@ -15,6 +18,7 @@ import org.jdom.input.SAXBuilder;
 import org.springframework.stereotype.Controller;
 
 import com.di.ifin.zeus.admin.bont.pojo.OntInfo;
+import com.di.ifin.zeus.admin.bont.pojo.OntLat;
 import com.di.ifin.zeus.admin.bont.service.GlobalMongoService;
 import com.di.ifin.zeus.admin.bont.service.LatService;
 import com.di.ifin.zeus.admin.bont.service.OntService;
@@ -56,6 +60,16 @@ public class MainOntAction extends ActionSupport {
 
 	public String getMsgStr() {
 		return this.msgStr;
+	}
+	
+	private List<OntInfo> ontlist;
+	
+	public List<OntInfo> getOntlist() {
+		return ontlist;
+	}
+
+	public void setOntlist(List<OntInfo> ontlist) {
+		this.ontlist = ontlist;
 	}
 
 	@Inject
@@ -113,8 +127,19 @@ public class MainOntAction extends ActionSupport {
 	}
 
 	public String queryOntInfo() {
-		List<OntInfo> list = ontservice.findall();
-		resultStr = gsonTemp.toJson(list);
+		try {
+			ontlist = ontservice.findall();
+			resultStr = gsonTemp.toJson(ontlist);
+			HttpServletRequest request = ServletActionContext.getRequest();
+			HttpServletResponse response = ServletActionContext.getResponse();
+			request.getRequestDispatcher("/pages/drawont/OntoEdit.jsp").forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
 
@@ -186,4 +211,5 @@ public class MainOntAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+
 }

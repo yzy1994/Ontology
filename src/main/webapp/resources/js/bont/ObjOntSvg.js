@@ -787,8 +787,9 @@ function delOntLatRewrite(gid,collectionName){
 		success : function(data) {
 			if(data.operateMsg=="existcn"){
 				alert("该节点存在子节点,不能删除");
+			}else{
+				$("#objOntReload").click();
 			}
-			$("#objOntReload").click();
 		}
 	});
 }
@@ -1029,7 +1030,7 @@ function InitconceptWin(){
 function queryConceptLatList() {
 	var tempList;
 	var list = new ArrayList();
-	var url = "objOntAction!queryConceptLat.action";
+	var url = conceptFindUrl;
 	$.ajax({
 		url : url,
 		type : "post",

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var templist;
+	/*var templist;
 	var delontname="";
 	var elements ={};
 	$.ajax({
@@ -17,7 +17,7 @@ $(document).ready(function(){
 				"<td><button type=\"button\" class=\"button  btn-danger delbtn\" id=\""+temp.name+"\">删除本体</button>"
 				+"&nbsp<button type=\"button\" class=\"button  btn-primary exportbtn\" id=\""+temp.name+"\">导出本体</button>&nbsp<button type=\"button\" class=\"button  btn-info infobtn\" id=\""+temp.name+"\">编辑本体<button></td>"+"</tr>");
 		elements[temp.name]=temp.element;
-	}
+	}*/
 	
 	$('#dealObjOntLat').hide();
 	$('#delalert').hide();
@@ -27,10 +27,7 @@ $(document).ready(function(){
 	})
 	
 	$('button.infobtn').click(function(){
-		$('#dealObjOntLat').show();
-		$('#ontname').val($(this).parent().parent().children().get(0).textContent);
-		$('#ontfield').val($(this).parent().parent().children().get(1).textContent);
-		$('#ontname').prop('readOnly',true);
+		document.getElementById(this.id).click();
 	})
 	
 	//导出本体
@@ -99,8 +96,6 @@ $(document).ready(function(){
 	
 	$('a.bont').click(function(){
 		$.cookie('ontname',this.id);
-		$.cookie('element',elements[this.id]);
-		
 	})
 	
 	$('button.delbtn').click(function(){

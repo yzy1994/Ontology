@@ -3,22 +3,21 @@ var conceptList = [];
 var role = "";
 preontname="突发事件本体";
 $(document).ready(function() {
-			conceptListGV = queryConceptLatList();
-			updateConceptList();
+			//conceptListGV = queryConceptLatList();
 			preontname = $.cookie('ontname');
 
 			var fadeTime = 100;
 			var slideTime = 200;
-			$("label.viewOnt").click(function(){
+			$(".viewOnt").click(function(){
 				role = "notbuilder";
 				ecNotEditable();
 				conceptNotEditable();
 			})
-			$("label.editOnt").click(function(){
+			$(".editOnt").click(function(){
 				role = "builder";
 			})
 			
-			$("label#ObjOnt").click(function() {
+			$("#ObjOnt").click(function() {
 				whichOnt = 'obj_ont_lat';
 				$('li#liconcept').show();
 				if ($("#objOntWin").is(":hidden")) {
@@ -30,12 +29,10 @@ $(document).ready(function() {
 					$('#objOntWin').slideUp(slideTime);
 				}
 			});
-			$("label#EveOnt").click(function() {
+			$("#EveOnt").click(function() {
 				whichOnt = ELTN;
 				$('li#liconcept').hide();
 				$('#objOntWin > div.title > h2').text('事件类层次图');
-				$('#objOntWin').css("top","100px");
-				$('#objOntWin').css("left","100px");
 				
 				/*
 				 * $('li#peopleElement').show(); $('li#objElement').show();
@@ -51,11 +48,10 @@ $(document).ready(function() {
 				}
 			});
 
-			$('label#Concept').click(function() {
+			$('#Concept').click(function() {
 				whichOnt = CTN;
 				$('li#liconcept').hide();
 				if ($("#conceptSvgWin").is(":hidden")) {
-					$('#conceptReload').click();
 					$('#conceptReload').click();
 					$('#conceptSvgWin').fadeIn(fadeTime);
 				} else {
@@ -72,14 +68,13 @@ $(document).ready(function() {
 			}*/
 			/* <option value="audi">Audi</option> */
 			
-			$('label#ecRelation').click(function(){
+			$('#ecRelation').click(function(){
 				$('#ecRelationWin').show();
 			})
 			
 			$('#ecRelationWinClose').click(function(){
 				$('#ecRelationWin').hide();
 			})			
-			
 });
 
 
