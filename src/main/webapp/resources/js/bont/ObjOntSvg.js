@@ -7,6 +7,9 @@ var csgrgBrush;
 
 $(document).ready(function() {
 			$("#draggable").draggable();
+			role = $.cookie('role');
+			preontname = $.cookie('ontname');
+			$('.ontname').text("\""+preontname+"\"");
 			var showLayerList;
 			var svgDiv = document.getElementById('objOntSvg');
 			var svgElem = document.createElementNS(xmlns, "svg");
@@ -19,20 +22,56 @@ $(document).ready(function() {
 			svgDiv.appendChild(svgElem);
 			var rectclass = "drawrect";
 			
-			updateConceptList();
-			for(var temp in conceptList){
-				if(temp=="remove")
-					continue;
-				$('#envsConcept').append("<option value=\"" + temp + "\">"+ temp +"</option>");
-			}
 
+			//img:hover显示提示信息
+			$('.usefulimg').hover(function(){
+				$('#hint').show();
+				$('#hint').css('left',event.pageX-50);
+				$('#hint').css('top',event.pageY+5);
+				
+			},function(){
+				$('#hint').hide();
+			})
+			
+			$('#objOntAdd').hover(function(){
+				$('#hint-text').text("插入事件类");
+			})
+			$('#objOntZoomout').hover(function(){
+				$('#hint-text').text("放大层次图");
+			})
+			$('#objOntZoomin').hover(function(){
+				$('#hint-text').text("缩小层次图");
+			})
+			$('#objOntReload').hover(function(){
+				$('#hint-text').text("刷新层次图");
+			})
+			$('#objOntPrinter').hover(function(){
+				$('#hint-text').text("下载层次图");
+			})
+			$('#conceptAdd').hover(function(){
+				$('#hint-text').text("插入概念");
+			})
+			$('#conceptZoomout').hover(function(){
+				$('#hint-text').text("放大层次图");
+			})
+			$('#conceptZoomin').hover(function(){
+				$('#hint-text').text("缩小层次图");
+			})
+			$('#conceptReload').hover(function(){
+				$('#hint-text').text("刷新层次图");
+			})
+			$('#conceptPrinter').hover(function(){
+				$('#hint-text').text("下载层次图");
+			})
+			//
+			
 			$("#objOntAdd").click(function() {
 				//$('img#addAttribute').show();
 				$('img#addAttribute').hide();
 				$("li#lisubmit").show();
 				objDelStatusGV = "add";
-				formRest();
-				$('#dealObjOntLat').fadeIn(fadeTime);
+				formReset("addECForm");
+				$('#addECWin').fadeIn(fadeTime);
 				$('#dealObjOntLatHide').slideDown(slideTime);
 			})
 			
@@ -153,9 +192,10 @@ $(document).ready(function() {
 											break;
 										}
 									}
-									formRest();
-									$('#dealObjOntLat').fadeIn(fadeTime);
-									$('#ecparentlatname').val(gid);
+									formReset("addECForm")
+									$('#addECWin').fadeIn(fadeTime);
+									console.log(gid);
+									$('#addecparentlatname').val(gid);
 								}
 							}, {
 								text : '编辑事件类',
@@ -172,8 +212,7 @@ $(document).ready(function() {
 											break;
 										}
 									}
-									$('#ecname').text(gid);
-									$('.ecname').text(gid);
+									$('.ecname').text("\""+gid+"\"");
 								}
 							}, {
 								text : '删除事件类',
@@ -257,9 +296,14 @@ $(document).ready(function() {
 								+ "' alt='from canvas'/>");
 					});
 			
+			$('#addECWinClose').click(function(){
+				$('#addECWin').fadeOut(fadeTime);
+			})
+			
 			$('#eveOntWinClose').click(function(){
 				$('#dealObjOntLat').fadeOut(fadeTime);
 				$('#ecname').text('');
+				ResetECInfo();
 				formReset("actionElementForm");
 				formReset("timeElementForm");
 				formReset("envElementForm");
@@ -614,7 +658,6 @@ function queryOntLatList(whichont) {
 
 //编辑事件类
 function showObjFormConParRewrite(gList , dci , objDelStatusGV)/*dci:data-contextify-id objDelStatusGV:'edit'/'find'*/ {
-	ResetECInfo();
 	$('#eclatname').prop('readOnly',true);
 	
 	var gid;
@@ -691,7 +734,6 @@ function showObjFormConParRewrite(gList , dci , objDelStatusGV)/*dci:data-contex
 		$('label#lee').click(function(){
 			//环境要素编辑窗口
 			$('#envElementEdit').show();
-			$('#ecname').text(objOntLat.latname);
 			$('#ecname').attr('evesid',objOntLat.latSid);
 		})
 		
@@ -1044,6 +1086,11 @@ function queryConceptLatList() {
 			}
 		}
 	})
+	conceptList = [];
+	for(var i=0;i<tempList.length;i++){
+		temp = tempList[i];
+		conceptList[temp.latname]=temp.parentlatname;
+	}
 	for (var i = 0; i < tempList.length; i++) {
 		var temp = tempList[i];
 		var concept = new ObjOntLat();
@@ -1081,11 +1128,11 @@ function addObj(){
 	$('#objFormItem').append("<div class=\"form-col\" id=\"col"+ objnum.toString() +"\"><ul><li class=\"objname\"></li><li>数量：</li><li><select name=\"amount\" class=\"sActAmout\" id=\"sAmount"+objnum.toString()+"\"><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"少许\">少许</option><option value=\"近半\">近半</option><option value=\"半\">半</option><option value=\"多半\">多半</option><option value=\"大量\">大量</option></select></li>"+
 							"<li>所属概念：</li>"+
 							"<li><select name=\"conceptsid\" class=\"sActConcept\" id=\"sConcept"+objnum.toString()+"\"></select></li><li>语言称谓：</li><li><input name=\"lane\" class=\"iActLE\" id=\"iLE"+objnum.toString()+"\" type=\"text\"></li></ul></div>");
-	/*for(var temp in conceptList){
+	for(var temp in conceptList){
 		if(temp=="remove")
 			continue;
 		$('#sConcept'+objnum).append("<option value=\"" + temp + "\">"+ temp +"</option>");
-	}*/
+	}
 	for(var i=0;i<conceptListGV.size();i++){
 		$('#sConcept'+objnum).append("<option value=\"" + conceptListGV.get(i).latname + "\">"+ conceptListGV.get(i).latname +"</option>");
 	}
@@ -1239,6 +1286,7 @@ function updateAssertElement(evelatname){
 function updateConceptList(){
 	conceptList = [];
 	var clist = queryConceptList();
+	conceptList = [];
 	for(var i=0;i<clist.length;i++){
 		temp = clist[i];
 		conceptList[temp.latname]=temp.parentlatname;

@@ -1,8 +1,11 @@
 package com.edu.shu.ai.ontology.user.action;
 
 
+import java.net.URLDecoder;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -11,6 +14,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
+import org.apache.struts.action.ActionServlet;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,10 +70,9 @@ public class UserAction extends ActionSupport {
 	}
 
 	public String login() throws Exception{
-		
 		Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-		
+		HttpServletResponse response = ServletActionContext.getResponse();
 		try{
 			subject.login(token);
 		}catch(Exception e){
@@ -78,19 +81,23 @@ public class UserAction extends ActionSupport {
 		}
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if(WebUtils.getSavedRequest(request)==null){
-			this.url = "/pages/index.jsp";
+			this.url = "index.html";
 			return SUCCESS;
 		}
 		String s = WebUtils.getSavedRequest(request).getRequestUrl();		
 		if(!s.isEmpty()&&!s.equals("")&&!(s==null)){
-			this.url = s.substring(9);
+			this.url = s.substring(10);
+			if(this.url.equals("tool/bont.html"))
+				this.url = "tool/ontoedit.html";
 		}else{
-			this.url = "/pages/index.jsp";
+			this.url = "index.html";
 		}
+		response.sendRedirect(url);
 		return SUCCESS;
 	}
 
 	public String logout() throws Exception{  
+		HttpServletResponse response = ServletActionContext.getResponse();
 	    Subject subject = SecurityUtils.getSubject();  
 	    if (subject.isAuthenticated()) {  
 	        subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存  
@@ -98,7 +105,8 @@ public class UserAction extends ActionSupport {
 	            LOG.debug("用户" + username + "退出登录");  
 	        }  
 	    }  
-	    this.url = "/pages/index.jsp";
+	    this.url = "index.html";
+	    response.sendRedirect(url);
 	    return SUCCESS;
 	}  
 	

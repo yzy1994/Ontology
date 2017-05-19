@@ -163,7 +163,7 @@ window.onload = window.onresize = function ()
 
 {
 
-	var oDrag = document.getElementById("objOntWin");
+	/*var oDrag = document.getElementById("objOntWin");
 	var oTitle = get.byClass("title", oDrag)[0];
 	var oL = get.byClass("resizeL", oDrag)[0];
 	var oT = get.byClass("resizeT", oDrag)[0];
@@ -188,7 +188,7 @@ window.onload = window.onresize = function ()
 	
 	oDrag.style.left = (document.documentElement.clientWidth - oDrag.offsetWidth) / 2 + "px";
 	oDrag.style.top = (document.documentElement.clientHeight - oDrag.offsetHeight) / 2 + "px";
-    $("#objOntWin").hide();
+    $("#objOntWin").hide();*/
 }
 	//可拖拽元素div 窗口div
 	function letWinDraggable(wt,w){
@@ -222,4 +222,5 @@ window.onload = window.onresize = function ()
 	letWinDraggable('assertTitle', 'assertElementEdit');
 	letWinDraggable('languageTitle', 'languageElementEdit');
 	letWinDraggable('ecRelationTitle', 'ecRelationWin');
+	letWinDraggable('objOntWinTitle', 'objOntWin');
 })

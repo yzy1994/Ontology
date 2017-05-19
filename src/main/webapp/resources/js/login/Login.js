@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	$('#username').val("admin3");
+	$('#username').val("admin2");
 	$('#password').val("123");
 	
 	$('#loginBT').click(function() {

@@ -31,7 +31,7 @@
 		<jsp:include page="/pages/common/nav.jsp" />
 		<div class="div3 w-1140">
 			<div class="col-xs-3 m-t-20">
-				<a href="mainOntAction!queryOntInfo"><img class="img2"
+				<a href="tool/ontoedit.html"><img class="img2"
 					src="resources/images/navigation_images/list-icon1.png"></img></a>
 				<div class="m-t-20">
 					<p class="description">
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<div class="col-xs-3 m-t-20">
-				<a href="pages/label/label.jsp"><img class="img2"
+				<a href="tool/label.html"><img class="img2"
 					src="resources/images/navigation_images/list-icon2.png"></img></a>
 				<div class="m-t-20">
 					<p class="description">
@@ -49,7 +49,7 @@
 				</div>
 			</div>
 			<div class="col-xs-3 m-t-20">
-				<a href="pages/corpus_profile.jsp"><img class="img2"
+				<a href="corpus.html"><img class="img2"
 					src="resources/images/navigation_images/list-icon3.png"></img></a>
 				<div class="m-t-20">
 					<p class="description">
@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<div class="col-xs-3 m-t-20">
-				<a href="referenceAction"><img class="img2"
+				<a href="reference.html"><img class="img2"
 					src="resources/images/navigation_images/list-icon4.png"></img></a>
 				<div class="m-t-20">
 					<p class="description">

@@ -1,13 +1,39 @@
 var whichOnt;
 var conceptList = [];
 var role = "";
-preontname="突发事件本体";
+preontname="";
 $(document).ready(function() {
 			//conceptListGV = queryConceptLatList();
-			preontname = $.cookie('ontname');
-
+			$("#objOntWin").css('top','20%');
+			$("#objOntWin").css('left','20%')
 			var fadeTime = 100;
 			var slideTime = 200;
+			//-
+			whichOnt = ELTN;
+			$('#objOntReload').click();
+			//-
+			whichOnt = CTN;
+			$('#conceptReload').click();
+			//-
+			
+			for(var temp in conceptList){
+				if(temp=="remove")
+					continue;
+				$('#envsConcept').append("<option value=\"" + temp + "\">"+ temp +"</option>");
+			}
+			
+			$('#ontname').text("\""+preontname+"\"");
+			
+			$('#user-guide').click(function(){
+				$('.guide-article').show();
+			})
+			
+			$("#about_ontology").click(function(){
+				window.location.href="tool/about_ontology.html"; 
+			})
+			
+			
+			
 			$(".viewOnt").click(function(){
 				role = "notbuilder";
 				ecNotEditable();
@@ -22,7 +48,7 @@ $(document).ready(function() {
 				$('li#liconcept').show();
 				if ($("#objOntWin").is(":hidden")) {
 					// $("#objOnt").show();
-					$('#objOntReload').click();
+					//$('#objOntReload').click();
 					$('#objOntWin').fadeIn(fadeTime);
 				} else {
 					// $("#objOnt").hide();
@@ -31,28 +57,22 @@ $(document).ready(function() {
 			});
 			$("#EveOnt").click(function() {
 				whichOnt = ELTN;
+				$('#conceptSvgWin').slideUp(slideTime);
+				$('#ecRelationWin').slideUp(slideTime);
 				$('li#liconcept').hide();
-				$('#objOntWin > div.title > h2').text('事件类层次图');
-				
-				/*
-				 * $('li#peopleElement').show(); $('li#objElement').show();
-				 * $('li#envElement').show();
-				 */
 				if ($("#objOntWin").is(":hidden")) {
-					// $("#objOnt").show();
-					$('#objOntReload').click();
 					$('#objOntWin').fadeIn(fadeTime);
 				} else {
-					// $("#objOnt").hide();
 					$('#objOntWin').slideUp(slideTime);
 				}
 			});
 
 			$('#Concept').click(function() {
 				whichOnt = CTN;
+				$('#objOntWin').slideUp(slideTime);
+				$('#ecRelationWin').slideUp(slideTime);
 				$('li#liconcept').hide();
 				if ($("#conceptSvgWin").is(":hidden")) {
-					$('#conceptReload').click();
 					$('#conceptSvgWin').fadeIn(fadeTime);
 				} else {
 					$('#conceptSvgWin').slideUp(slideTime);
@@ -69,12 +89,21 @@ $(document).ready(function() {
 			/* <option value="audi">Audi</option> */
 			
 			$('#ecRelation').click(function(){
-				$('#ecRelationWin').show();
+				$('#objOntWin').slideUp(slideTime);
+				$('#conceptSvgWin').slideUp(slideTime);
+				if($('#ecRelationWin').is(":hidden")){
+					$('#ecRelationWin').fadeIn(fadeTime);
+				}else{
+					$('#ecRelationWin').slideUp(slideTime);
+				}
 			})
 			
 			$('#ecRelationWinClose').click(function(){
 				$('#ecRelationWin').hide();
-			})			
+			})
+			$('#objOntWinClose').click(function(){
+				$('#objOntWin').hide();
+			})
 });
 
 

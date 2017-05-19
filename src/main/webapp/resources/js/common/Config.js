@@ -1,7 +1,7 @@
 //Total config
 
 //objOnt config
-var objOntUrl = "http://localhost:8080/Ontology/pages/drawont/Bont.jsp";
+var objOntUrl = "http://localhost:8080/Ontology/tool/bont.html";
 var latLigColor = "190,228,251";
 var latDeeColor = "160,217,251";
 var latStroke = "58,179,251";

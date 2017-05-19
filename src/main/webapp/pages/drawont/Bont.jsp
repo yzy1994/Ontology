@@ -92,11 +92,10 @@
 				src="resources/images/navigation_images/head-background2.png" />
 		</div>
 		<jsp:include page="/pages/common/nav.jsp" />
-		<div class="row m-t-20 w-1140">
+		<div class="row m-t-20 clearfix">
 			<div class="col-xs-3">
 				<div class="leftsidebar_box">
-					<div class="line"></div>
-
+					<!-- <div class="line"></div> -->
 					<dl class="channel">
 						<shiro:lacksRole name="builder">
 							<dt id="EveOnt" class="viewOnt">查看事件类层次图</dt>
@@ -119,70 +118,71 @@
 						<dt id="ecRelation">非分类关系图</dt>
 					</dl>
 
+
+
 				</div>
 			</div>
 			<div class="col-xs-9">
-
-				<ul id="myTab" class="nav nav-tabs">
-					<li class="active"><a href="#eopic" data-toggle="tab">
-							事件本体 </a></li>
-					<li><a href="#tab0" data-toggle="tab">事件</a></li>
-					<li><a href="#tab6" data-toggle="tab">动作</a></li>
-					<li><a href="#tab1" data-toggle="tab">对象</a></li>
-					<li><a href="#tab2" data-toggle="tab">时间</a></li>
-					<li><a href="#tab3" data-toggle="tab">环境</a></li>
-					<li><a href="#tab5" data-toggle="tab">断言</a></li>
-					<li><a href="#tab4" data-toggle="tab">语言表现</a></li>
-				</ul>
-				<div id="myTabContent" class="tab-content h-600">
-					<div class="tab-pane fade in active" id="eopic">
-						<img id="EOimg" src="resources/images/bont/EO.png" />
-					</div>
-					<div class="tab-pane fade" id="tab0">
-						<h2>事件</h2>
-						<p>事件指在某个特定的时间和环境下发生的、由若干角色参与、表现出若干动作特征的一件事情形式上，
-							事件可表示为e，定义为一个六元组：e一(A，O，T，V，P，L)其中，事件六元组中的元素称为事件要素，
-							分别表示动作、对象、时间、环境、断言、语言表现。</p>
-					</div>
-					<div class="tab-pane fade" id="tab1">
-						<h2>对象要素</h2>
-						<p>对象是事件的主要参与者，是事件中的主导作用者或被改变者。 对象可分为主体和客体。主体是主导者，是事件中的主角，有时是事
-							件的制造者或期望事件发生者客体是事件中的被动者。按照分工， 事件中的对象分为不同的角色，例如“选举”事件，其中有主持组织
-							者、监票者、投票者、候选人、当选者、落选者。事件的对象一般是 第一实体，但也可能又是事件，也可能是关系。还有的事件的对象是
-							有关联的事件集合。对于特定的事件类，对象是有约束的，例如选举 事件的组织者可以是人或组织。利用这些约束，可以判断句子中的主
-							语或宾语。其他要素也有约束，也可以利用。</p>
-					</div>
-					<div class="tab-pane fade" id="tab2">
-						<h2>时间要素</h2>
-						<p>每个事件都必须发生在一个时间段内。事件有开始、发展、 结束。时间段由绝对时间表示，也可以用相对时间表示，也就是
-							用另一个事件的时问的相对偏差表示。</p>
-					</div>
-					<div class="tab-pane fade" id="tab3">
-						<h2>环境要素</h2>
-						<p>任何事件必然发生在一定的环境中。环境由多 个实体按照特定的关系组成。例如“上课”事件的环
-							境有教室，教室内有黑板、讲台、课桌、椅子等， 这些东西是有序存在的。环境要素中的实体与对象
-							要素中的实体都是事件涉及的，还有动作要素中的 工具。为什么有的属于对象要素、有的属于环境要
-							素、有的属于动作要素?关键在于它们在事件中的 地位和作用。环境要素中的实体是相对静止的，在
-							事件中几乎是不变的，或者虽然变化，但并不重要。 而动作要素的工具中的实体是运动的，是对事件的
-							实施有重要作用的。对象要素中的实体是最重要的， 或者是事件的主角，或者是事件的驱动者，或者是 事件的主要被改变者。</p>
-					</div>
-					<div class="tab-pane fade" id="tab4">
-						<h2>语言表现要素</h2>
-						<p>将事件与语言分离有很多优点。事件是客观的， 本来就不依赖于语言。语言是人类为了交流各自知道
-							的事件发生而创造出来的符号表示，因而事件就有了 语言特性。交流和思考离不开语言，然而很多研究工
-							作往往将它们混为一谈。混为一谈的研究方法容易把 问题搞复杂。事件的语言表现是随着语言的变化而变
-							化的。同一个事件，对于不同的语言有不同的表现， 即使对于同一个语言，也会有不同的表现。语言表现
-							的主要内容是核心词。核心词是对于事件的称谓、对 于事件中各角色的称谓、对时问和环境的描述格式、
-							对各要素结合的描述格式。语言表现可以用文法表示， 也可以用规则表示，或用模板表示。</p>
-					</div>
-					<div class="tab-pane fade" id="tab5">
-						<h2>断言要素</h2>
-						<p>断言描述的是事件的作用。前置条件表示的是事件发生 之前的状态特点，也是事件发生的条件。中间断言表示事件
-							进行过程中的状态特点，也就是在开始后和结束前各状态共 同的特点。后置条件是事件结束状态的特点。</p>
-					</div>
-					<div class="tab-pane fade" id="tab6">
-						<h2>动作要素</h2>
-						<p>动作要素描述事件的变化过程及其特征，是对程度，方式，方法，工具等的描述，例如快慢，使用什么，根据什么等等。</p>
+				<div>
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="active"><a href="#tab0" data-toggle="tab">操作指南</a></li>
+						<li><a href="#tab1" data-toggle="tab">关于事件本体</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content clearfix list-wrap">
+						<div class="tab-pane fade in active m-t-20" id="tab0">
+							<div class="artical-title">
+								当前操作的本体: <i><span class="ontname"></span></i>
+							</div>
+							<hr>
+							<div class="artical-title">编辑事件类层次图</div>
+							<div class="markdown">创建（修改）事件类，建立事件类之间的层次关系（上下位关系）。</div>
+							<div class="artical-title">编辑概念层次图</div>
+							<div class="markdown">建立事件本体中的概念，并且建立概念之间的层次关系，事件类中包含的人物、对象（物体）、地点都属于概念。</div>
+							<div class="artical-title">非分类关系图</div>
+							<div class="markdown">建立事件本体中事件类之间的非分类关系，例如事件类和事件类之间的因果关系、跟随关系、组成关系、并发关系等。</div>
+							<div class="artical-title">其他</div>
+							<div class="markdown">正在开发中。。。</div>
+						</div>
+						<div class="tab-pane fade m-t-20" id="tab1">
+							<img id="EOimg" src="resources/images/bont/EO.png" />
+							<div class="artical-title">事件</div>
+							<div class="markdown">
+								事件指在某个特定的时间和环境下发生的、由若干角色参与、表现出若干动作特征的一件事情形式上，
+								事件可表示为e，定义为一个六元组：e一(A，O，T，V，P，L)其中，事件六元组中的元素称为事件要素，
+								分别表示动作、对象、时间、环境、断言、语言表现。</div>
+							<div class="artical-title">对象要素</div>
+							<div class="markdown">对象是事件的主要参与者，是事件中的主导作用者或被改变者。
+								对象可分为主体和客体。主体是主导者，是事件中的主角，有时是事 件的制造者或期望事件发生者客体是事件中的被动者。按照分工，
+								事件中的对象分为不同的角色，例如“选举”事件，其中有主持组织 者、监票者、投票者、候选人、当选者、落选者。事件的对象一般是
+								第一实体，但也可能又是事件，也可能是关系。还有的事件的对象是 有关联的事件集合。对于特定的事件类，对象是有约束的，例如选举
+								事件的组织者可以是人或组织。利用这些约束，可以判断句子中的主 语或宾语。其他要素也有约束，也可以利用。</div>
+							<div class="artical-title">时间要素</div>
+							<div class="markdown">每个事件都必须发生在一个时间段内。事件有开始、发展、
+								结束。时间段由绝对时间表示，也可以用相对时间表示，也就是 用另一个事件的时问的相对偏差表示。</div>
+							<div class="artical-title">环境要素</div>
+							<div class="markdown">任何事件必然发生在一定的环境中。环境由多
+								个实体按照特定的关系组成。例如“上课”事件的环 境有教室，教室内有黑板、讲台、课桌、椅子等，
+								这些东西是有序存在的。环境要素中的实体与对象 要素中的实体都是事件涉及的，还有动作要素中的
+								工具。为什么有的属于对象要素、有的属于环境要 素、有的属于动作要素?关键在于它们在事件中的
+								地位和作用。环境要素中的实体是相对静止的，在 事件中几乎是不变的，或者虽然变化，但并不重要。
+								而动作要素的工具中的实体是运动的，是对事件的 实施有重要作用的。对象要素中的实体是最重要的，
+								或者是事件的主角，或者是事件的驱动者，或者是 事件的主要被改变者。</div>
+							<div class="artical-title">语言表现要素</div>
+							<div class="markdown">将事件与语言分离有很多优点。事件是客观的，
+								本来就不依赖于语言。语言是人类为了交流各自知道 的事件发生而创造出来的符号表示，因而事件就有了
+								语言特性。交流和思考离不开语言，然而很多研究工 作往往将它们混为一谈。混为一谈的研究方法容易把
+								问题搞复杂。事件的语言表现是随着语言的变化而变 化的。同一个事件，对于不同的语言有不同的表现，
+								即使对于同一个语言，也会有不同的表现。语言表现 的主要内容是核心词。核心词是对于事件的称谓、对
+								于事件中各角色的称谓、对时问和环境的描述格式、 对各要素结合的描述格式。语言表现可以用文法表示，
+								也可以用规则表示，或用模板表示。</div>
+							<div class="artical-title">断言要素</div>
+							<div class="markdown">断言描述的是事件的作用。前置条件表示的是事件发生
+								之前的状态特点，也是事件发生的条件。中间断言表示事件 进行过程中的状态特点，也就是在开始后和结束前各状态共
+								同的特点。后置条件是事件结束状态的特点。</div>
+							<div class="artical-title">动作要素</div>
+							<div class="markdown">
+								动作要素描述事件的变化过程及其特征，是对程度，方式，方法，工具等的描述，例如快慢，使用什么，根据什么等等。</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -193,14 +193,16 @@
 	<div id="buttomDiv"></div>
 
 	<div id="objOntWin">
-		<div class="title">
-			<h2></h2>
-			<div>
-				<a class="min" href="javascript:;" title="最小化"></a> <a class="max"
-					href="javascript:;" title="最大化"></a> <a class="revert"
-					href="javascript:;" title="还原"></a> <a class="close"
-					href="javascript:;" title="关闭"></a>
-			</div>
+		<div class="title draggable" id="objOntWinTitle">
+			<h3>
+				<i><span class="ontname"></span></i>事件类层次图
+				<h3>
+					<div>
+						<a class="min" href="javascript:;" title="最小化"></a> <a class="max"
+							href="javascript:;" title="最大化"></a> <a class="revert"
+							href="javascript:;" title="还原"></a> <a class="close"
+							href="javascript:;" id="objOntWinClose" title="关闭"></a>
+					</div>
 		</div>
 		<div class="resizeL"></div>
 		<div class="resizeT"></div>
@@ -213,7 +215,8 @@
 		<div class="content">
 			<div class="objOntToolMenu">
 				<shiro:hasRole name="builder">
-					<img id="objOntAdd" src="resources/images/common/add.png">
+					<img id="objOntAdd" class="usefulimg"
+						src="resources/images/common/add.png">
 				</shiro:hasRole>
 
 				<img src="resources/images/common/gap.png" class="gap"></img>
@@ -231,15 +234,19 @@
 				<img src="resources/images/common/gap.png" class="gap"></img> <img
 					id="objOntFind" src="resources/images/common/find.png"> <img
 					src="resources/images/common/gap.png" class="gap"> --%>
-				</img> <img id="objOntZoomout" src="resources/images/common/zoomout.png">
-				<img src="resources/images/common/gap.png" class="gap"></img> <img
-					id="objOntZoomin" src="resources/images/common/zoomin.png"> <img
+				</img> <img id="objOntZoomout" class="usefulimg"
+					src="resources/images/common/zoomout.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img> <img
-					id="objOntReload" src="resources/images/common/reload.png"> <img
+					id="objOntZoomin" class="usefulimg"
+					src="resources/images/common/zoomin.png"> <img
+					src="resources/images/common/gap.png" class="gap"></img> <img
+					id="objOntReload" class="usefulimg"
+					src="resources/images/common/reload.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img>
 				<!-- <img
 					id="objOntClean" src="resources/images/common/save.png"> -->
-				<img id="objOntPrinter" src="resources/images/common/printer.png">
+				<img id="objOntPrinter" class="usefulimg"
+					src="resources/images/common/printer.png">
 			</div>
 			<div id="objOntSvg"></div>
 		</div>
@@ -249,7 +256,7 @@
 		<div class="dealObjOntLat-poptit">
 			<a href="javascript:;" title="关闭" id="eveOntWinClose" class="close">×</a>
 			<div id="eveTitle" class="draggable">
-				<h2>事件类操作</h2>
+				<h3>事件类操作</h3>
 			</div>
 		</div>
 		<div>
@@ -261,18 +268,17 @@
 						required="required" id="objLatSid"></li> -->
 
 					<li id="liname" class="lielement"><label for="eclatname">事件类名称:</label>
-						<input name="eclatname" type="text" placeholder="latname"
-						required="required" id="eclatname"></li>
+						<input name="eclatname" type="text" required="required"
+						id="eclatname"></li>
 
 					<li id="liparent" class="lielement"><label
 						for="ecparentlatname">父类名称:</label> <input name="ecparentlatname"
-						type="text" placeholder="o1,o2,o3" required="required"
-						id="ecparentlatname"> <span class="form_hint">正确格式为：latname1,latname2,latname3</span></li>
+						type="text" required="required" id="ecparentlatname"> <span
+						class="form_hint">正确格式为：latname1,latname2,latname3</span></li>
 
 					<li id="linote" class="lielement"><label for="eclatnote"
 						id="noteLB">备注:</label> <input value="note.." name="eclatnote"
-						type="text" placeholder="latnote" required="required"
-						id="eclatnote"></li>
+						type="text" required="required" id="eclatnote"></li>
 
 					<li id="liea" class="lielement"><label id="lea">动作要素:</label>
 						<label id="leai" style="width: 300px;"></label></li>
@@ -302,9 +308,9 @@
 			<a href="javascript:;" title="关闭" id="actionElementWinClose"
 				class="close">×</a>
 			<div id="actionTitle" class="draggable">
-				<h2 id="showTitle">
-					<span id="aecname" class="ecname"></span>事件类动作要素编辑
-				</h2>
+				<h3 id="showTitle">
+					<i><span id="aecname" class="ecname"></span></i>事件类动作要素编辑
+				</h3>
 			</div>
 		</div>
 		<div>
@@ -321,11 +327,10 @@
 						</select></li>
 
 						<li class="lielement"><label>使用工具:</label> <input name="tool"
-							type="text" placeholder="tool" required="required" id="iTool"></li>
+							type="text" required="required" id="iTool"></li>
 
 						<li class="lielement"><label>使用方法:</label> <input
-							name="method" type="text" placeholder="method"
-							required="required" id="iMethod"></li>
+							name="method" type="text" required="required" id="iMethod"></li>
 					</ul>
 				</div>
 				<li id="lisubmit">
@@ -341,9 +346,9 @@
 			<a href="javascript:;" title="关闭" id="objElementWinClose"
 				class="close">×</a>
 			<div id="objTitle" class="draggable">
-				<h2 id="showTitle">
-					<span id="ecname" class="ecname"></span>事件类对象要素编辑
-				</h2>
+				<h3 id="showTitle">
+					<i><span class="ecname"></span></i>事件类对象要素编辑
+				</h3>
 			</div>
 		</div>
 		<div>
@@ -389,9 +394,9 @@
 			<a href="javascript:;" title="关闭" id="timeElementWinClose"
 				class="close">×</a>
 			<div id="timeTitle" class="draggable">
-				<h2 id="showTitle">
-					<span id="tecname" class="ecname"></span>事件类时间要素编辑
-				</h2>
+				<h3 id="showTitle">
+					<i><span class="ecname"></span></i>事件类时间要素编辑
+				</h3>
 			</div>
 		</div>
 		<div>
@@ -429,9 +434,9 @@
 			<a href="javascript:;" title="关闭" id="envElementWinClose"
 				class="close">×</a>
 			<div id="envTitle" class="draggable">
-				<h2 id="showTitle">
-					<span id="ecname" class="ecname"></span>事件类环境要素编辑
-				</h2>
+				<h3 id="showTitle">
+					<i><span id="ecname" class="ecname"></span></i>事件类环境要素编辑
+				</h3>
 			</div>
 		</div>
 		<div>
@@ -458,9 +463,9 @@
 			<a href="javascript:;" title="关闭" id="assertElementWinClose"
 				class="close">×</a>
 			<div id="assertTitle" class="draggable">
-				<h2 id="showTitle">
-					<span id="ecname" class="ecname"></span>事件类断言要素编辑
-				</h2>
+				<h3 id="showTitle">
+					<i><span id="ecname" class="ecname"></span></i>事件类断言要素编辑
+				</h3>
 			</div>
 		</div>
 		<div>
@@ -469,16 +474,13 @@
 				<div id="assertFormItem">
 					<ul>
 						<li class="lielement"><label>前置状态:</label> <input
-							name="prestate" type="text" placeholder="前置状态"
-							required="required" id="iPrestate"></li>
+							name="prestate" type="text" required="required" id="iPrestate"></li>
 
 						<li class="lielement"><label>中间断言:</label> <input
-							name="massert" type="text" placeholder="中间断言" required="required"
-							id="iMassert"></li>
+							name="massert" type="text" required="required" id="iMassert"></li>
 
 						<li class="lielement"><label>后置状态:</label> <input
-							name="poststate" type="text" placeholder="后置状态"
-							required="required" id="iPoststate"></li>
+							name="poststate" type="text" required="required" id="iPoststate"></li>
 
 					</ul>
 				</div>
@@ -496,9 +498,9 @@
 			<a href="javascript:;" title="关闭" id="languageElementWinClose"
 				class="close">×</a>
 			<div id="languageTitle" class="draggable">
-				<h2 id="showTitle">
-					<span id="ecname" class="ecname"></span>事件类语言表现要素编辑
-				</h2>
+				<h3 id="showTitle">
+					<i><span id="ecname" class="ecname"></span></i>事件类语言表现要素编辑
+				</h3>
 			</div>
 		</div>
 		<div>
@@ -507,11 +509,10 @@
 				<div id="languageFormItem">
 					<ul>
 						<li class="lielement"><label>触发词集合:</label> <input
-							name="language" type="text" placeholder="" required="required"
+							name="language" type="text" required="required"
 							id="iTriggerWords"></li>
 						<li class="lielement"><label> 搭配:</label> <input
-							name="language" type="text" placeholder="" required="required"
-							id="iCollocation"></li>
+							name="language" type="text" required="required" id="iCollocation"></li>
 					</ul>
 				</div>
 				<li id="lisubmit">
@@ -524,7 +525,9 @@
 
 	<div id="conceptSvgWin" class="conceptSvgWinc">
 		<div class="title draggable" id="conceptWinTitle">
-			<h2>概念层次图</h2>
+			<h3>
+				<i><span class="ontname"></span></i>概念层次图
+			</h3>
 			<div>
 				<a id="conceptSvgWinClose" class="conceptSvgWinClosec"
 					href="javascript:;" title="关闭"></a>
@@ -534,7 +537,8 @@
 		<div class="content">
 			<div class="objOntToolMenu">
 				<shiro:hasRole name="builder">
-					<img id="conceptAdd" src="resources/images/common/add.png">
+					<img id="conceptAdd" class="usefulimg"
+						src="resources/images/common/add.png">
 				</shiro:hasRole>
 
 				<img src="resources/images/common/gap.png" class="gap"></img>
@@ -552,15 +556,19 @@
 				<img src="resources/images/common/gap.png" class="gap"></img> <img
 					id="conceptFind" src="resources/images/common/find.png"> <img
 					src="resources/images/common/gap.png" class="gap"> --%>
-				</img> <img id="conceptZoomout" src="resources/images/common/zoomout.png">
-				<img src="resources/images/common/gap.png" class="gap"></img> <img
-					id="conceptZoomin" src="resources/images/common/zoomin.png">
-				<img src="resources/images/common/gap.png" class="gap"></img> <img
-					id="conceptReload" src="resources/images/common/reload.png">
-				<img src="resources/images/common/gap.png" class="gap"></img>
+				</img> <img id="conceptZoomout" class="usefulimg"
+					src="resources/images/common/zoomout.png"> <img
+					src="resources/images/common/gap.png" class="gap"></img> <img
+					id="conceptZoomin" class="usefulimg"
+					src="resources/images/common/zoomin.png"> <img
+					src="resources/images/common/gap.png" class="gap"></img> <img
+					id="conceptReload" class="usefulimg"
+					src="resources/images/common/reload.png"> <img
+					src="resources/images/common/gap.png" class="gap"></img>
 				<!-- <img
 					id="conceptClean" src="resources/images/common/save.png">  -->
-				<img id="conceptPrinter" src="resources/images/common/printer.png">
+				<img id="conceptPrinter" class="usefulimg"
+					src="resources/images/common/printer.png">
 			</div>
 		</div>
 		<div id="conceptSvgDiv"></div>
@@ -571,7 +579,7 @@
 			<a href="javascript:;" title="关闭" id="conceptEditWinClose"
 				class="close">×</a>
 			<div id="conceptTitle" class="draggable">
-				<h2>概念编辑窗口</h2>
+				<h3>概念编辑窗口</h3>
 			</div>
 		</div>
 		<div>
@@ -583,13 +591,13 @@
 						required="required" id="conceptlatsid"></li> -->
 
 					<li id="liname" class="lielement"><label for="latname">概念名称:</label>
-						<input name="latname" type="text" placeholder="latname"
-						required="required" id="conceptlatname"></li>
+						<input name="latname" type="text" required="required"
+						id="conceptlatname"></li>
 
 					<li id="liparent" class="lielement"><label
 						for="cparentlatname">父概念名:</label> <input name="parentsid"
-						type="text" placeholder="c1,c2,c3" required="required"
-						id="conceptparentlatname"> <span class="form_hint">正确格式为：c1,c2,c3</span></li>
+						type="text" required="required" id="conceptparentlatname">
+						<span class="form_hint">正确格式为：c1,c2,c3</span></li>
 					<div id="divproval"></div>
 
 					<li id="lisubmit">
@@ -605,7 +613,7 @@
 
 	<div class="conceptSvgWinc" id="conceptSubgraphWin">
 		<div class="title draggable" id="conceptSubgraphWinTitle">
-			<h2>概念子图</h2>
+			<h3>概念子图</h3>
 			<div>
 				<a id="conceptSubgraphWinClose" class="conceptSvgWinClosec"
 					href="javascript:;" title="关闭"></a>
@@ -616,26 +624,73 @@
 
 	<div class="conceptSvgWinc" id="ecRelationWin">
 		<div class="title draggable" id="ecRelationTitle">
-			<h2>事件本体非分类关系图</h2>
+			<h3>
+				<i><span class="ontname"></span></i>非分类关系图
+			</h3>
 			<div>
 				<a id="ecRelationWinClose" class="conceptSvgWinClosec"
 					href="javascript:;" title="关闭"></a>
 			</div>
 		</div>
-		<div style="width: 1200px; height: 500px; overflow: auto;">
+		<div style="width: 1000px; height: 500px; overflow: auto;">
 			<div style="width: 200px; float: left;" class="m-t-20">
 				<img width="200px" src="resources/images/bont/legend.png" />
 			</div>
 			<div id="main" class="m-t-20"
-				style="width: 950px; height: 800px; float: left;"></div>
+				style="width: 770px; height: 600px; float: left;"></div>
 		</div>
 	</div>
+	<div id="hint">
+		<dl>
+			<dt>
+				<span class="arrow"></span>
+			</dt>
+			<dd class="hint-text" id="hint-text"></dd>
+		</dl>
+	</div>
+
+	<div class="dealObjOntLat-popover" id="addECWin">
+		<div class="dealObjOntLat-poptit">
+			<a href="javascript:;" title="关闭" id="addECWinClose" class="close">×</a>
+			<div id="addECWinTitle" class="draggable">
+				<h3>新建事件类</h3>
+			</div>
+		</div>
+		<div>
+			<form id="addECForm" class="contact_form" method="post"
+				name="contact_form" action="" target="nm_iframe">
+				<ul>
+					<!-- <li id="lisid" class="lielement"><label for="objLatSid">事件类编号:</label>
+						<input name="objLatSid" type="text" placeholder="o1"
+						required="required" id="objLatSid"></li> -->
+					<li id="liname" class="lielement"><label for="eclatname">事件类名称:</label>
+						<input name="eclatname" type="text" required="required"
+						id="addeclatname"></li>
+					<li id="liparent" class="lielement"><label
+						for="ecparentlatname">父类名称:</label> <input name="ecparentlatname"
+						type="text" required="required" id="addecparentlatname"> <span
+						class="form_hint">正确格式为：latname1,latname2,latname3</span></li>
+					<li id="linote" class="lielement"><label for="eclatnote"
+						id="noteLB">备注:</label> <input value="note.." name="eclatnote"
+						type="text" required="required" id="addeclatnote"></li>
+					<li id="lisubmit">
+						<button class="submit" type="submit" id="saveObj">保存</button>
+						<button class="submit" type="reset" id="resetObj">重置</button> <input
+						name="objOid" type="text" id="objOid" style="display: none">
+					</li>
+
+				</ul>
+			</form>
+		</div>
+	</div>
+
 	<iframe id="id_iframe" name="nm_iframe" style="display: none;"></iframe>
 
 </body>
-<script type="text/javascript" src="resources/js/echarts.js"></script>
+<script src="https://cdn.bootcss.com/echarts/3.5.4/echarts.min.js"></script>
 <script type="text/javascript" src="resources/js/bont/ecGraph.js"></script>
 <script type="text/javascript">
 	LoadECRelationGraph("突发事件本体", "main");
+	//$('#objOntReload').click();
 </script>
 </html>

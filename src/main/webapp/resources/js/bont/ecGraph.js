@@ -38,28 +38,50 @@ function LoadECRelationGraph(ontname,echartsDivId){
 					type : 'graph',
 					layout : 'force',
 					force : {
-						repulsion : 1000,
+						repulsion : 600,
 						gravity : 0.1,
 						edgeLength : 80,
 					},
 					symbol : 'roundRect',
-					symbolSize : [80,40],
+					symbolSize : [48,28],
 					lineStyle:{
 						normal : {
-							color: '#000000',
+							color: '#000',
 			                width: 1,
 			                opacity: 1
 						}
 					},
-					roam : true,
-					draggable : true,
-					label : {
-						normal : {
-							show : true
+					label:{
+						normal :{
+							show: true,
+							offset: [0,-2],
+							textStyle: {
+								color: "#000",
+								fontStyle: 'normal',
+								fontSize: 10
+							},
 						}
 					},
+					roam : true,
+					draggable : true,
 					edgeSymbol : [ 'pin', 'arrow' ],
 					edgeSymbolSize : [ 10, 15 ],
+					itemStyle:{
+						normal:{
+							color: {
+								type: 'radial',
+							    x: 0.5,
+							    y: 0.5,
+							    r: 1,
+							    colorStops: [{
+							        offset: 0, color: '#fff' // color at 0% position
+							    }, {
+							        offset: 1, color: 'rgb(58,179,251)' // color at 100% position
+							    }],
+							    globalCoord: false // false by default
+							},
+						}
+					},
 					edgeLabel : {
 						normal : {
 							textStyle : {

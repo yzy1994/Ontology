@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>  
+  
+<!DOCTYPE urlrewrite  
+    PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"  
+    "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">  
+  
+<urlrewrite>  
+  
+    <rule>  
+       <from>/tool/ontoedit.html</from>  
+       <to>/mainOntAction_queryOntInfo</to>  
+    </rule>  
+  	
+  	<rule>
+  		<from>/reference.html</from>
+  		<to>/referenceAction</to>
+  	</rule>
+  	
+  	<rule>
+  		<from>/corpus.html</from>
+  		<to>/pages/corpus_profile.jsp</to>
+  	</rule>
+  	
+  	<rule>
+  		<from>/index.html</from>
+  		<to>/pages/index.jsp</to>
+  	</rule>
+  	
+  	<rule>
+  		<from>/tool/label.html</from>
+  		<to>/pages/label/label.jsp</to>
+  	</rule>
+  	
+  	<rule>
+  		<from>/tool/bont.html</from>
+  		<to>/pages/drawont/Bont.jsp</to>
+  	</rule>
+  	
+  	<rule>
+		<from>/tool/about_ontology.html</from>
+		<to>/pages/drawont/about_ontology.jsp</to>
+  	</rule>
+  
+</urlrewrite> 

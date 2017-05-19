@@ -55,6 +55,8 @@ body {
 	display: inline-block;
 	float: left;
 	padding: 3px;
+	overflow: hidden;
+	height: 25px;
 }
 
 .contact_form input {

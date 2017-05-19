@@ -51,6 +51,13 @@ $(document).ready(function() {
     	$('#languageElementWinClose').click();
     	return false;
     })
+    
+    //添加事件类表单提交
+    $('#addECForm').bind('submit',function(){
+    	addECSubmit(this);
+    	$('#addECWinClose').click();
+    	return false;
+    })
 });
 
 // 将form转为AJAX提交
@@ -372,4 +379,28 @@ function languageEditSubmit(frm){
     		updateLanElement($('#ecname').text());
     	}
     })
+}
+
+function addECSubmit(frm){
+	var input = {};
+	input["ontname"] = preontname;
+	input["collection"] = whichOnt;
+	input["latname"] = $('#addeclatname').val();
+	input["parentlatname"] = $('#addecparentlatname').val();
+	input["latnote"] = $('#addeclatnote').val();
+	var inputstr = JSON.stringify(input);
+	var act=ecEditUrl;
+	
+	$.ajax({
+        url: act,
+        type: frm.method,
+        async: true,
+        data: {
+            inputStr: inputstr,
+        },
+        success: function(data){
+        	$('#dealObjOntLat').hide();
+        	$('#objOntReload').click();
+        }
+    });
 }

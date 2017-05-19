@@ -295,87 +295,60 @@ public class ObjOntAction extends ActionSupport {
 	 * this.objOntLatStr = gsonTemp.toJson(objOntLat); return SUCCESS; }
 	 */
 
-	/*public String createEveOntLat() {
-		System.out.println("objOntLatStr" + objOntLatStr);
-		EveOntLat eveOntLat = gsonTemp.fromJson(objOntLatStr, new TypeToken<EveOntLat>() {
-		}.getType());
-
-		boolean isName = eveOntLatService.checkLatName(eveOntLat.getLatname());
-		boolean isSid = eveOntLatService.checkLatSid(eveOntLat.getLatsid());
-		if (isName && isSid) {
-			operateMsg = OperateMsg.create.CONNAMESID.toString();
-		} else if (isName) {
-			operateMsg = OperateMsg.create.CONNAME.toString();
-		} else if (isSid) {
-			operateMsg = OperateMsg.create.CONSID.toString();
-		} else {
-			eveOntLatService.createOntLat(eveOntLat);
-			// System.out.println("Id" + eveOntLat.getOid());
-			this.objOntLatStr = gsonTemp.toJson(eveOntLat);
-			operateMsg = OperateMsg.create.CRESUC.toString();
-		}
-		return SUCCESS;
-	}
-
-	public String createEnvOntLat() {
-		System.out.println("objOntLatStr" + objOntLatStr);
-		EnvOntLat envOntLat = gsonTemp.fromJson(objOntLatStr, new TypeToken<EnvOntLat>() {
-		}.getType());
-
-		boolean isName = envOntLatService.checkLatName(envOntLat.getLatname());
-		boolean isSid = envOntLatService.checkLatSid(envOntLat.getLatsid());
-		if (isName && isSid) {
-			operateMsg = OperateMsg.create.CONNAMESID.toString();
-		} else if (isName) {
-			operateMsg = OperateMsg.create.CONNAME.toString();
-		} else if (isSid) {
-			operateMsg = OperateMsg.create.CONSID.toString();
-		} else {
-			envOntLatService.createOntLat(envOntLat);
-			// System.out.println("Id" + eveOntLat.getOid());
-			this.objOntLatStr = gsonTemp.toJson(envOntLat);
-			operateMsg = OperateMsg.create.CRESUC.toString();
-		}
-		return SUCCESS;
-	}
-
-	public String updateEnvOntLat() {
-		System.out.println("objOntLatStr" + objOntLatStr);
-		EnvOntLat envOntLat = gsonTemp.fromJson(objOntLatStr, new TypeToken<EnvOntLat>() {
-		}.getType());
-		envOntLatService.updateOntLat(envOntLat);
-		operateMsg = OperateMsg.create.CRESUC.toString();
-		return SUCCESS;
-	}
-
-	public String updateEveOntLat() {
-		System.out.println("objOntLatStr" + objOntLatStr);
-		EveOntLat eveOntLat = gsonTemp.fromJson(objOntLatStr, new TypeToken<EveOntLat>() {
-		}.getType());
-		eveOntLatService.updateOntLat(eveOntLat);
-		operateMsg = OperateMsg.create.CRESUC.toString();
-		return SUCCESS;
-	}
-
-	public String createPeoOntLat() {
-		System.err.println("createPeoOntLat");
-		System.err.println("objOntLatStr" + objOntLatStr);
-		PeoOntLat peoOntLat = gsonTemp.fromJson(objOntLatStr, new TypeToken<PeoOntLat>() {
-		}.getType());
-		System.err.println("objOntLatStr" + objOntLatStr);
-		peoOntLatService.createOntLat(peoOntLat);
-		this.objOntLatStr = gsonTemp.toJson(peoOntLat);
-		operateMsg = OperateMsg.create.CRESUC.toString();
-		return SUCCESS;
-	}
-
-	public String updatePeoOntLat() {
-		PeoOntLat peoOntLat = gsonTemp.fromJson(objOntLatStr, new TypeToken<PeoOntLat>() {
-		}.getType());
-		peoOntLatService.updateOntLat(peoOntLat);
-		operateMsg = OperateMsg.create.CRESUC.toString();
-		return SUCCESS;
-	}*/
+	/*
+	 * public String createEveOntLat() { System.out.println("objOntLatStr" +
+	 * objOntLatStr); EveOntLat eveOntLat = gsonTemp.fromJson(objOntLatStr, new
+	 * TypeToken<EveOntLat>() { }.getType());
+	 * 
+	 * boolean isName = eveOntLatService.checkLatName(eveOntLat.getLatname());
+	 * boolean isSid = eveOntLatService.checkLatSid(eveOntLat.getLatsid()); if
+	 * (isName && isSid) { operateMsg = OperateMsg.create.CONNAMESID.toString();
+	 * } else if (isName) { operateMsg = OperateMsg.create.CONNAME.toString(); }
+	 * else if (isSid) { operateMsg = OperateMsg.create.CONSID.toString(); }
+	 * else { eveOntLatService.createOntLat(eveOntLat); //
+	 * System.out.println("Id" + eveOntLat.getOid()); this.objOntLatStr =
+	 * gsonTemp.toJson(eveOntLat); operateMsg =
+	 * OperateMsg.create.CRESUC.toString(); } return SUCCESS; }
+	 * 
+	 * public String createEnvOntLat() { System.out.println("objOntLatStr" +
+	 * objOntLatStr); EnvOntLat envOntLat = gsonTemp.fromJson(objOntLatStr, new
+	 * TypeToken<EnvOntLat>() { }.getType());
+	 * 
+	 * boolean isName = envOntLatService.checkLatName(envOntLat.getLatname());
+	 * boolean isSid = envOntLatService.checkLatSid(envOntLat.getLatsid()); if
+	 * (isName && isSid) { operateMsg = OperateMsg.create.CONNAMESID.toString();
+	 * } else if (isName) { operateMsg = OperateMsg.create.CONNAME.toString(); }
+	 * else if (isSid) { operateMsg = OperateMsg.create.CONSID.toString(); }
+	 * else { envOntLatService.createOntLat(envOntLat); //
+	 * System.out.println("Id" + eveOntLat.getOid()); this.objOntLatStr =
+	 * gsonTemp.toJson(envOntLat); operateMsg =
+	 * OperateMsg.create.CRESUC.toString(); } return SUCCESS; }
+	 * 
+	 * public String updateEnvOntLat() { System.out.println("objOntLatStr" +
+	 * objOntLatStr); EnvOntLat envOntLat = gsonTemp.fromJson(objOntLatStr, new
+	 * TypeToken<EnvOntLat>() { }.getType());
+	 * envOntLatService.updateOntLat(envOntLat); operateMsg =
+	 * OperateMsg.create.CRESUC.toString(); return SUCCESS; }
+	 * 
+	 * public String updateEveOntLat() { System.out.println("objOntLatStr" +
+	 * objOntLatStr); EveOntLat eveOntLat = gsonTemp.fromJson(objOntLatStr, new
+	 * TypeToken<EveOntLat>() { }.getType());
+	 * eveOntLatService.updateOntLat(eveOntLat); operateMsg =
+	 * OperateMsg.create.CRESUC.toString(); return SUCCESS; }
+	 * 
+	 * public String createPeoOntLat() { System.err.println("createPeoOntLat");
+	 * System.err.println("objOntLatStr" + objOntLatStr); PeoOntLat peoOntLat =
+	 * gsonTemp.fromJson(objOntLatStr, new TypeToken<PeoOntLat>() {
+	 * }.getType()); System.err.println("objOntLatStr" + objOntLatStr);
+	 * peoOntLatService.createOntLat(peoOntLat); this.objOntLatStr =
+	 * gsonTemp.toJson(peoOntLat); operateMsg =
+	 * OperateMsg.create.CRESUC.toString(); return SUCCESS; }
+	 * 
+	 * public String updatePeoOntLat() { PeoOntLat peoOntLat =
+	 * gsonTemp.fromJson(objOntLatStr, new TypeToken<PeoOntLat>() {
+	 * }.getType()); peoOntLatService.updateOntLat(peoOntLat); operateMsg =
+	 * OperateMsg.create.CRESUC.toString(); return SUCCESS; }
+	 */
 
 	// 概念和事件类的CRUD
 	public String queryLatByMongo() {
@@ -724,9 +697,13 @@ public class ObjOntAction extends ActionSupport {
 	public String upsertEC() {
 		OntLat o = gsonTemp.fromJson(inputStr, new TypeToken<OntLat>() {
 		}.getType());
-		latservice.removeByLatname(Global.eventclass, o.getOntname(), o.getLatname());
-		latservice.insert(Global.eventclass, o);
-		this.operateMsg = "update";
+		if (o.getLatname() == null || o.getParentlatname() == null) {
+			this.operateMsg = "error";
+		} else {
+			latservice.removeByLatname(Global.eventclass, o.getOntname(), o.getLatname());
+			latservice.insert(Global.eventclass, o);
+			this.operateMsg = "update";
+		}
 		return SUCCESS;
 	}
 
@@ -757,9 +734,9 @@ public class ObjOntAction extends ActionSupport {
 
 		OntLat ol = latservice.queryByLatname(Global.eventclass, ontname, evelatname).get(0);
 		this.setResultStr(gsonTemp.toJson(ol));
-		
+
 		List<ObjLat> list = objelementservice.queryObjElement(ontname, evelatname);
-		if(list.size()==0)
+		if (list.size() == 0)
 			this.setObjInfo("");
 		else
 			this.setObjInfo(gsonTemp.toJson(list));
@@ -803,5 +780,4 @@ public class ObjOntAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	
 }

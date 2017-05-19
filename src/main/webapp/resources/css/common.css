@@ -119,7 +119,15 @@
 
 
 
+
+
+
+
 :rotate(359deg)
+
+
+
+
 
 
 
@@ -130,7 +138,15 @@ transform
 
 
 
+
+
+
+
 :rotate(359deg)
+
+
+
+
 
 
 
@@ -149,7 +165,15 @@ keyframes fa-spin { 0{
 
 
 
+
+
+
+
 :rotate(359deg)
+
+
+
+
 
 
 
@@ -160,7 +184,15 @@ transform
 
 
 
+
+
+
+
 :rotate(359deg)
+
+
+
+
 
 
 
@@ -2341,35 +2373,67 @@ audio, canvas, progress, video {
 audio
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 [
 controls
 ]
 
+
+
  
+
+
 
 ){
 display
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 none
+
+
+
+
 
 
 ;
 height
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -2433,24 +2497,48 @@ img {
 svg
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 :root
 
+
+
  
+
+
 
 ){
 overflow
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 hidden
+
+
+
+
 
 
 
@@ -6237,43 +6325,79 @@ tbody.collapse.in {
 .btn
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 :first-child
 
+
+
  
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
+
+
  
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 .dropdown-toggle
 
 
+
+
 	
+
+
 
 ){
 border-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -6286,43 +6410,83 @@ border-radius
 .btn
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
+
+
  
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 .dropdown-toggle
 
+
+
  
+
+
 
 ){
 border-top-right-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 border-bottom-right-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -6331,17 +6495,33 @@ border-bottom-right-radius
 .btn
 
 
+
+
+
+
 :last-child
+
+
+
+
 
 
 :not
 
+
+
  
+
+
 
 (
 :first-child
 
+
+
  
+
+
 
 ),
 .btn-group
@@ -6349,31 +6529,59 @@ border-bottom-right-radius
 .dropdown-toggle
 
 
+
+
+
+
 :not
+
+
 
 
 	
 
+
+
 (
 :first-child
 
+
+
  
+
+
 
 ){
 border-top-left-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 border-bottom-left-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -6457,32 +6665,60 @@ border-bottom-left-radius
 .btn
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 :first-child
 
+
+
  
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
+
+
  
+
+
 
 ){
 border-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -6491,45 +6727,89 @@ border-radius
 .btn
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
+
+
  
+
+
 
 ){
 border-top-right-radius
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 4
 px
+
+
+
+
 
 
 ;
 border-bottom-right-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 border-bottom-left-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -6538,44 +6818,88 @@ border-bottom-left-radius
 .btn
 
 
+
+
+
+
 :last-child
+
+
+
+
 
 
 :not
 
+
+
  
+
+
 
 (
 :first-child
 
+
+
  
+
+
 
 ){
 border-top-left-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 border-top-right-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 border-bottom-left-radius
 
 
+
+
+
+
 :
+
+
 
  
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -6698,83 +7022,155 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 .input-group
 
+
+
  
+
+
 
 .form-control
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 :first-child
 
+
+
  
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
+
+
  
+
+
 
 ),
 .input-group-addon
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 :first-child
 
+
+
  
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
+
+
  
+
+
 
 ),
 .input-group-btn
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 :first-child
 
+
+
  
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
+
+
  
+
+
 
 ){
 border-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -6815,9 +7211,17 @@ border-radius
 
 .input-group
 
+
+
  
 
+
+
 .form-control
+
+
+
+
 
 
 :first-child
@@ -6825,9 +7229,17 @@ border-radius
 .input-group-addon
 
 
+
+
+
+
 :first-child
 ,
 .input-group-btn
+
+
+
+
 
 
 :first-child
@@ -6835,6 +7247,10 @@ border-radius
 .btn
 ,
 .input-group-btn
+
+
+
+
 
 
 :first-child
@@ -6844,6 +7260,10 @@ border-radius
 .btn
 ,
 .input-group-btn
+
+
+
+
 
 
 :first-child
@@ -6853,20 +7273,36 @@ border-radius
 .input-group-btn
 
 
+
+
+
+
 :last-child
 >
 .btn-group
 
 
+
+
+
+
 :not
+
+
 
 
 	
 
+
+
 (
 :last-child
 
+
+
  
+
+
 
 )>
 .btn
@@ -6874,46 +7310,86 @@ border-radius
 .input-group-btn
 
 
+
+
+
+
 :last-child
 >
 .btn
 
 
+
+
+
+
 :not
 
+
+
  
+
+
 
 (
 :last-child
 
 
+
+
 	
+
+
 
 )
 :not
 
+
+
  
+
+
 
 (
 .dropdown-toggle
 
+
+
  
+
+
 
 ){
 border-top-right-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0;
 border-bottom-right-radius
 
 
+
+
+
+
 :
 
+
+
  
+
+
 
 0
 }
@@ -10054,11 +10530,12 @@ body {
 	padding-top: 20px;
 	color: #ffffff;
 }
-.h-600{
-	height:600px;
+
+.h-600 {
+	height: 600px;
 }
 
-.button{
+.button {
 	display: inline-block;
 	padding: 6px 12px;
 	margin-bottom: 0;
@@ -10078,4 +10555,17 @@ body {
 	background-image: none;
 	border: 1px solid transparent;
 	border-radius: 4px
+}
+
+.title {
+	padding-left: 20px;
+	border-bottom: 1px solid #A1B4B0;
+	height: 40px;
+}
+
+.copyright {
+	background-image: url(../images/common/copyright.png);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	padding-top: 5px;
 }

@@ -1,24 +1,4 @@
 $(document).ready(function(){
-	/*var templist;
-	var delontname="";
-	var elements ={};
-	$.ajax({
-		url : "mainOntAction!queryOntInfo.action",
-		type : "post",
-		async : false,
-		data : {},
-		success : function(data) {
-			templist = $.parseJSON(data.resultStr);
-		}
-	});
-	for (var i = 0; i < templist.length; i++) {
-		var temp = templist[i];
-		$("tbody#tbo").append("<tr><td><a class=\"bont\" id="+temp.name+" href=\"pages/drawont/Bont.jsp\">"+temp.name+"</a></td><td>"+temp.field+"</td>" +
-				"<td><button type=\"button\" class=\"button  btn-danger delbtn\" id=\""+temp.name+"\">删除本体</button>"
-				+"&nbsp<button type=\"button\" class=\"button  btn-primary exportbtn\" id=\""+temp.name+"\">导出本体</button>&nbsp<button type=\"button\" class=\"button  btn-info infobtn\" id=\""+temp.name+"\">编辑本体<button></td>"+"</tr>");
-		elements[temp.name]=temp.element;
-	}*/
-	
 	$('#dealObjOntLat').hide();
 	$('#delalert').hide();
 	$('button#addOnt').click(function(){
@@ -26,8 +6,16 @@ $(document).ready(function(){
 		$('#ontname').prop('readOnly',false);
 	})
 	
-	$('button.infobtn').click(function(){
-		document.getElementById(this.id).click();
+	$('.infobtn').click(function(){
+		$.cookie('role','notbuilder');
+		$.cookie('ontname',this.id);
+		window.location.href=('tool/bont.html');
+	})
+	
+	$('.editbtn').click(function(){
+		$.cookie('role','builder');
+		$.cookie('ontname',this.id);
+		window.location.href=('tool/bont.html');
 	})
 	
 	//导出本体
@@ -94,9 +82,6 @@ $(document).ready(function(){
 		window.location.reload();
 	})
 	
-	$('a.bont').click(function(){
-		$.cookie('ontname',this.id);
-	})
 	
 	$('button.delbtn').click(function(){
 		delontname=this.id;

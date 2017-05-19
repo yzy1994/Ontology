@@ -84,7 +84,9 @@
 				<!-- /pages/buildont/buildont.jsp=authc,roles[builder] -->
 				/pages/drawont/Bont.jsp = authc
 				/pages/label/label.jsp = authc
+				/mainOntAction!queryOntInfo = authc
 				/pages/drawont/OntoEdit.jsp = authc
+				/tool/** = authc
 				/pages/admin/** = roles[administrator]
 			</value>
 		</property>

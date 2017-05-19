@@ -80,19 +80,23 @@
 						</tr>
 						<s:iterator value="ontlist" id="r" status="st">
 							<tr>
-								<td><a class="bont" id="<s:property escape="0" value="name"/>" href="pages/drawont/Bont.jsp" >
+								<td>
 										<s:property escape="0" value="name" />
-									</a>
 								</td>
 								<td>
 									<s:property escape="0" value="field"/>
 								</td>
 								<td>
-									<shiro:hasRole name="builder"><button type="button" class="button  btn-danger delbtn" id="<s:property escape="0" value="name"/>">删除本体</button></shiro:hasRole>
+									<shiro:hasRole name="builder"><button type="button" class="button  btn-danger delbtn" id="<s:property escape="0" value="name"/>">删除本体</button>
 									&nbsp
+									<button type="button" class="button  btn-info editbtn" id="<s:property escape="0" value="name"/>">编辑本体</button>
+									&nbsp
+									</shiro:hasRole>
+									<shiro:lacksRole name="builder">
+									<button type="button" class="button  btn-info infobtn" id="<s:property escape="0" value="name"/>">查看本体</button>
+									&nbsp
+									</shiro:lacksRole>
 									<button type="button" class="button  btn-primary exportbtn" id="<s:property escape="0" value="name"/>">导出本体</button>
-									&nbsp
-									<button type="button" class="button  btn-info infobtn" id="<s:property escape="0" value="name"/>">编辑本体</button>
 								</td>
 							</tr>
 						</s:iterator>

@@ -121,3 +121,40 @@ div.draggable{
 	overflow: auto;
     height: 480px;
 }
+
+.guide-article{
+    padding: 0 20px 20px 20px;
+    display: none;
+}
+.artical-title {
+    color: #3e485c;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0 20px 20px 20px;
+}
+.markdown {
+    line-height: 30px;
+    font-size: 16px;
+    padding: 0 20px 20px 20px;
+}
+.arrow{
+    margin:0 auto;
+    margin-top:-5px;
+    display:block;
+    width:10px;
+    height:10px;
+    background:#222222;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+}
+#hint{
+	width: 100px;
+	display: none;
+	z-index: 999;
+	position:absolute;
+}
+#hint dl{
+	background: #222222;
+	text-align: center;
+	color: #ffffff;
+}
