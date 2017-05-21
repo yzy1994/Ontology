@@ -41,4 +41,12 @@ public class EnvElementServiceImpl implements EnvElementService {
 		return "suc";
 	}
 
+	@Override
+	public String remove(String ontname, String evelatname) {
+		// TODO Auto-generated method stub
+		Criteria c = Criteria.where("evelatname").is(evelatname).andOperator(Criteria.where("ontname").is(ontname));
+		mongoTemplate.remove(new Query(c),collectionName);
+		return null;
+	}
+
 }

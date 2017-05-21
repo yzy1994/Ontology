@@ -39,5 +39,13 @@ public class LanguageElementServiceImpl implements LanguageElementService{
 		mongoTemplate.remove(new Query(c), collectionName);
 		mongoTemplate.insert(languagelat, collectionName);
 	}
+
+	@Override
+	public String remove(String ontname, String evelatname) {
+		// TODO Auto-generated method stub
+		Criteria c = Criteria.where("evelatname").is(evelatname).andOperator(Criteria.where("ontname").is(ontname));
+		mongoTemplate.remove(new Query(c),collectionName);
+		return null;
+	}
 	
 }

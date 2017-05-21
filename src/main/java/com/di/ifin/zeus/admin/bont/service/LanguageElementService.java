@@ -6,4 +6,6 @@ public interface LanguageElementService {
 	public LanguageLat query(String ontname,String evelatname);
 	
 	public void upsert(LanguageLat languagelat);
+	
+	public String remove(String ontname, String evelatname);
 }

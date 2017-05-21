@@ -1,7 +1,7 @@
 //Total config
 
 //objOnt config
-var objOntUrl = "http://localhost:8080/Ontology/tool/bont.html";
+var objOntUrl = "tool/bont.html";
 var latLigColor = "190,228,251";
 var latDeeColor = "160,217,251";
 var latStroke = "58,179,251";
@@ -47,8 +47,8 @@ var zoomMulList = [ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2,
 		1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 ];
 var orgZoomIndex = 9;
 var curZoomIndex = 9;
-var maxZoomIndex = 19;
-var minZoomIndex = 0;
+var maxZoomIndex = 11;
+var minZoomIndex = 7;
 var orgZoomMul = zoomMulList[orgZoomIndex];
 // zoom arg end
 // toplinkNode arg start

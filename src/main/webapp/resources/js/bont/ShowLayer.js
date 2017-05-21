@@ -10,4 +10,7 @@ function ShowLayer(layer) {
 	this.size = function() {
 		return ontLatList.size();
 	}
+	this.contains = function(elem){
+		return ontLatList.contains(elem);
+	}
 }

@@ -77,4 +77,14 @@ public class ObjElementServiceImpl implements ObjElementService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String removeAll(String ontname, String evelatname) {
+		// TODO Auto-generated method stub
+		Criteria c = Criteria.where("evelatname").is(evelatname).andOperator(Criteria.where("ontname").is(ontname));
+		mongoTemplate.remove(new Query(c),collectionName);
+		return null;
+	}
+
+
 }

@@ -5,351 +5,373 @@ var csgdefs;
 var csgmarker;
 var csgrgBrush;
 
+//ecSvg
+var ecSvgHeight = 600;
+var ecSvgWidth = 1200;
+var ecSvgZoomIndex = 9;
+var ecShowLayerList;
+
+
+//conceptSvg
+var cSvgHeight = 600;
+var cSvgWidth = 1200;
+var cSvgZoomIndex = 9;
+
 $(document).ready(function() {
-			$("#draggable").draggable();
-			role = $.cookie('role');
-			preontname = $.cookie('ontname');
-			$('.ontname').text("\""+preontname+"\"");
-			var showLayerList;
-			var svgDiv = document.getElementById('objOntSvg');
-			var svgElem = document.createElementNS(xmlns, "svg");
-			var defs = document.createElementNS(xmlns, "defs");
-			var marker = DrawMarker();
-			var rgBrush = RGBrush();
-			defs.appendChild(rgBrush);
-			defs.appendChild(marker);
-			svgElem.appendChild(defs);
-			svgDiv.appendChild(svgElem);
-			var rectclass = "drawrect";
-			
+	$("#draggable").draggable();
+	role = $.cookie('role');
+	preontname = $.cookie('ontname');
+	$('.ontname').text("\""+preontname+"\"");
+	var showLayerList;
+	var svgDiv = document.getElementById('objOntSvg');
+	var svgElem = document.createElementNS(xmlns, "svg");
+	var defs = document.createElementNS(xmlns, "defs");
+	var marker = DrawMarker();
+	var rgBrush = RGBrush();
+	defs.appendChild(rgBrush);
+	defs.appendChild(marker);
+	svgElem.appendChild(defs);
+	svgDiv.appendChild(svgElem);
+	var rectclass = "drawrect";
+	
 
-			//img:hover显示提示信息
-			$('.usefulimg').hover(function(){
-				$('#hint').show();
-				$('#hint').css('left',event.pageX-50);
-				$('#hint').css('top',event.pageY+5);
-				
-			},function(){
-				$('#hint').hide();
-			})
-			
-			$('#objOntAdd').hover(function(){
-				$('#hint-text').text("插入事件类");
-			})
-			$('#objOntZoomout').hover(function(){
-				$('#hint-text').text("放大层次图");
-			})
-			$('#objOntZoomin').hover(function(){
-				$('#hint-text').text("缩小层次图");
-			})
-			$('#objOntReload').hover(function(){
-				$('#hint-text').text("刷新层次图");
-			})
-			$('#objOntPrinter').hover(function(){
-				$('#hint-text').text("下载层次图");
-			})
-			$('#conceptAdd').hover(function(){
-				$('#hint-text').text("插入概念");
-			})
-			$('#conceptZoomout').hover(function(){
-				$('#hint-text').text("放大层次图");
-			})
-			$('#conceptZoomin').hover(function(){
-				$('#hint-text').text("缩小层次图");
-			})
-			$('#conceptReload').hover(function(){
-				$('#hint-text').text("刷新层次图");
-			})
-			$('#conceptPrinter').hover(function(){
-				$('#hint-text').text("下载层次图");
-			})
-			//
-			
-			$("#objOntAdd").click(function() {
-				//$('img#addAttribute').show();
-				$('img#addAttribute').hide();
-				$("li#lisubmit").show();
-				objDelStatusGV = "add";
-				formReset("addECForm");
-				$('#addECWin').fadeIn(fadeTime);
-				$('#dealObjOntLatHide').slideDown(slideTime);
-			})
-			
-			$("#objOntDel").click(function(eve) {
-				objDelStatusGV = "del";
-				var gList = svgElem.getElementsByTagName("g");
-				showObjFormConPar(gList, objDelStatusGV);
-			})
+	//img:hover显示提示信息
+	$('.usefulimg').hover(function(){
+		$('#hint').show();
+		$('#hint').css('left',event.pageX-50);
+		$('#hint').css('top',event.pageY+5);
+		
+	},function(){
+		$('#hint').hide();
+	})
+	
+	$('#objOntAdd').hover(function(){
+		$('#hint-text').text("插入事件类");
+	})
+	$('.zoomoutImg').hover(function(){
+		$('#hint-text').text("放大层次图");
+	})
+	$('.zoominImg').hover(function(){
+		$('#hint-text').text("缩小层次图");
+	})
+	$('.reloadImg').hover(function(){
+		$('#hint-text').text("刷新层次图");
+	})
+	$('.printImg').hover(function(){
+		$('#hint-text').text("下载层次图");
+	})
+	$('#conceptAdd').hover(function(){
+		$('#hint-text').text("插入概念");
+	})
+	//
+	
+	$("#objOntAdd").click(function() {
+		//$('img#addAttribute').show();
+		$('img#addAttribute').hide();
+		$("li#lisubmit").show();
+		objDelStatusGV = "add";
+		formReset("addECForm");
+		$('#addECWin').fadeIn(fadeTime);
+		$('#dealObjOntLatHide').slideDown(slideTime);
+	})
+	
+	$("#objOntDel").click(function(eve) {
+		objDelStatusGV = "del";
+		var gList = svgElem.getElementsByTagName("g");
+		showObjFormConPar(gList, objDelStatusGV);
+	})
 
-			$('#objOntEdit').click(function() {
-				$('img#addAttribute').show();
-				objDelStatusGV = "edit";
-				$("li#lisubmit").show();
-				var gList = svgElem.getElementsByTagName("g");
-				showObjFormConPar(gList, objDelStatusGV);
-			})
-			$('#objOntFind').click(function() {
-				$('img#addAttribute').hide();
-				objDelStatusGV = "find";
-				$("li#lisubmit").hide();
-				var gList = svgElem.getElementsByTagName("g");
-				showObjFormConPar(gList, objDelStatusGV);
-				$("img.delattr").hide();
-			})
+	$('#objOntEdit').click(function() {
+		$('img#addAttribute').show();
+		objDelStatusGV = "edit";
+		$("li#lisubmit").show();
+		var gList = svgElem.getElementsByTagName("g");
+		showObjFormConPar(gList, objDelStatusGV);
+	})
+	$('#objOntFind').click(function() {
+		$('img#addAttribute').hide();
+		objDelStatusGV = "find";
+		$("li#lisubmit").hide();
+		var gList = svgElem.getElementsByTagName("g");
+		showObjFormConPar(gList, objDelStatusGV);
+		$("img.delattr").hide();
+	})
 
-			$('#objOntZoomout').click(
-					function() {
-						if (curZoomIndex > minZoomIndex) {
-							curZoomIndex--;
-						}
-						var zoomMul = zoomMulList[curZoomIndex];
-						svgElem.setAttributeNS(null, "viewBox", "0 0 "
-								+ svgWidth * zoomMul + " " + svgHeight
-								* zoomMul);
-					})
+	$('#objOntZoomout').click(function() {
+		if (ecSvgZoomIndex > minZoomIndex) {
+			ecSvgZoomIndex--;
+		}
+		var zoomMul = zoomMulList[ecSvgZoomIndex];
+		svgElem.setAttributeNS(null, "viewBox", "0 0 "
+				+ ecSvgWidth * zoomMul + " " + ecSvgHeight
+				* zoomMul);
+		svgElem.setAttributeNS(null, "width" , ecSvgWidth/zoomMul);
+		svgElem.setAttributeNS(null, "height" , ecSvgHeight/zoomMul);
+	})
 
-			$('#objOntZoomin').click(
-					function() {
-						if (curZoomIndex < maxZoomIndex) {
-							curZoomIndex++;
-						}
-						var zoomMul = zoomMulList[curZoomIndex];
-						svgElem.setAttributeNS(null, "viewBox", "0 0 "
-								+ svgWidth * zoomMul + " " + svgHeight
-								* zoomMul);
-					})
+	$('#objOntZoomin').click(function() {
+		if (ecSvgZoomIndex < maxZoomIndex) {
+			ecSvgZoomIndex++;
+		}
+		var zoomMul = zoomMulList[ecSvgZoomIndex];
+		svgElem.setAttributeNS(null, "viewBox", "0 0 "
+				+ ecSvgWidth * zoomMul + " " + ecSvgHeight
+				* zoomMul);
+		svgElem.setAttributeNS(null, "width" , ecSvgWidth/zoomMul);
+		svgElem.setAttributeNS(null, "height" , ecSvgHeight/zoomMul);
+	})
 
-			$("#objOntReload").click(function() {
-				var svgid = "svgId";
-				objOntLatListGV.removeAll();
-				cleanSVG();
-				objOntLatListGV = queryOntLatList(whichOnt);
-				showLayerList = createShowLayer(objOntLatListGV);
-				// calculate the svg viewBox
-				var maxCount = 0;
-				for (var e = 0; e < showLayerList.size(); e++) {
-					var tempLayer = showLayerList.get(e);
-					if (tempLayer.size() > maxCount) {
-						maxCount = tempLayer.size();
+	$("#objOntReload").click(function() {
+		var svgid = "svgId";
+		objOntLatListGV.removeAll();
+		cleanSVG();
+		objOntLatListGV = queryOntLatList(whichOnt);
+		ecShowLayerList = createShowLayer(objOntLatListGV);
+		// calculate the svg viewBox
+		var maxCount = 0;
+		for (var e = 0; e < ecShowLayerList.size(); e++) {
+			var tempLayer = ecShowLayerList.get(e);
+			if (tempLayer.size() > maxCount) {
+				maxCount = tempLayer.size();
+			}
+		}
+		
+		var maxLayerCount = ecShowLayerList.size();
+		// showLayerList.size();
+		var maxSvgWidth = ((blockWidth + xGrap) * maxCount + totalXGrap )*1.3;
+		var maxSvgHeight = ((blockHeight + yGrap) * maxLayerCount + totalYGrap) *1.1;
+		if (maxSvgWidth > ecSvgWidth)
+			ecSvgWidth = maxSvgWidth;
+		if (maxSvgHeight > ecSvgHeight)
+			ecSvgHeight = maxSvgHeight;
+		
+		initSVGView(ecShowLayerList.size(), svgElem, maxCount,svgid,ecSvgWidth,ecSvgHeight);
+		$('#showDivHide').fadeIn(fadeTime);
+		$('#showDiv').slideDown(slideTime);
+		
+		DrawLat(svgElem,ecShowLayerList,maxCount,rectclass);
+		
+		drawLatLink(svgElem,objOntLatListGV,"svgId");
+		
+		/*for(var l=0;l<ecShowLayerList.size();l++){
+			var tempLayer = ecShowLayerList.get(l)
+			var rowCount = tempLayer.size();
+			var locList = NewCreLoc(maxCount, rowCount);
+			var y = l * (blockHeight + yGrap) + startY;
+			for(var m=0;m<tempLayer.size();m++){
+				var tempCls = tempLayer.get(m);
+				var drawOntLat = new DrawOntLat(tempCls);
+				drawOntLat.locX = locList[m] * (blockWidth + xGrap);
+				drawOntLat.locY = y;
+				var g = drawOntLat.drawLat(rectclass);
+				svgElem.appendChild(g);
+			}
+		}*/
+		
+			/*var showOrder = 0;
+			for (var i = 0; i <= maxCount; i++) {
+				var flag = 0;
+				for (var m = 0; m < locList.length; m++) {
+					if (i == locList[m]) {
+						flag = 1;
+						break;
 					}
 				}
-				
-				initSVGView(showLayerList.size(), svgElem, maxCount,svgid);
-				$('#showDivHide').fadeIn(fadeTime);
-				$('#showDiv').slideDown(slideTime);
-				for (var j = 0; j < showLayerList.size(); j++) {
-					var tempLayer = showLayerList.get(j);
-					var rowCount = tempLayer.size();
-					var locList = CreLoc(maxCount, rowCount);
-					var y = j * (blockHeight + yGrap) + startY;
-					var showOrder = 0;
-					for (var i = 0; i <= maxCount; i++) {
-						var flag = 0;
-						for (var m = 0; m < locList.length; m++) {
-							if (i == locList[m]) {
-								flag = 1;
-								break;
-							}
+				if (flag == 1) {
+					var tempCls;
+					for (var p = 0; p < tempLayer.size(); p++) {
+						if (tempLayer.get(p).showOrder == showOrder) {
+							tempCls = tempLayer.get(p);
+							showOrder++;
+							break;
 						}
-						if (flag == 1) {
-							var tempCls;
-							for (var p = 0; p < tempLayer.size(); p++) {
-								if (tempLayer.get(p).showOrder == showOrder) {
-									tempCls = tempLayer.get(p);
-									showOrder++;
+					}
+					console.log(tempCls);
+					var drawOntLat = new DrawOntLat(tempCls);
+					drawOntLat.locX = i * (blockWidth + xGrap);
+					drawOntLat.locY = y;
+					var g = drawOntLat.drawLat(rectclass);
+					svgElem.appendChild(g);
+				}
+			}*/
+		
+		//上下文菜单
+		if(role == "builder"){
+			var options = {
+					items : [ {
+						header : '功能菜单'
+					}, 
+					{
+						text : '插入子事件类',
+						onclick : function(eve){
+							$('#eclatname').prop('readOnly',false);
+							objDelStatusGV = 'add';
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = svgElem.getElementsByTagName("g")
+							var gid;
+							for (var j = 0; j < gList.length; j++) {
+								tempG = gList[j];
+								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+									gid = tempG.getAttribute("id");
 									break;
 								}
 							}
-							var drawOntLat = new DrawOntLat(tempCls);
-							drawOntLat.locX = i * (blockWidth + xGrap);
-							drawOntLat.locY = y;
-							var g = drawOntLat.drawLat(rectclass);
-							svgElem.appendChild(g);
+							formReset("addECForm")
+							$('#addECWin').fadeIn(fadeTime);
+							console.log(gid);
+							$('#addecparentlatname').val(gid);
 						}
-					}
-				}
-				drawLatLink(svgElem,objOntLatListGV,"svgId");
-				
-				
-				//上下文菜单
-				if(role == "builder"){
-					var options = {
-							items : [ {
-								header : '功能菜单'
-							}, 
-							{
-								text : '插入子事件类',
-								onclick : function(eve){
-									$('#eclatname').prop('readOnly',false);
-									objDelStatusGV = 'add';
-									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-									var gList = svgElem.getElementsByTagName("g")
-									var gid;
-									for (var j = 0; j < gList.length; j++) {
-										tempG = gList[j];
-										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-											gid = tempG.getAttribute("id");
-											break;
-										}
-									}
-									formReset("addECForm")
-									$('#addECWin').fadeIn(fadeTime);
-									console.log(gid);
-									$('#addecparentlatname').val(gid);
+					}, {
+						text : '编辑事件类',
+						onclick : function(eve) {
+							objDelStatusGV = 'edit';
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = svgElem.getElementsByTagName("g");
+							showObjFormConParRewrite(gList,dci , "find");
+							var gid;
+							for (var j = 0; j < gList.length; j++) {
+								tempG = gList[j];
+								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+									gid = tempG.getAttribute("id");
+									break;
 								}
-							}, {
-								text : '编辑事件类',
-								onclick : function(eve) {
-									objDelStatusGV = 'edit';
-									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-									var gList = svgElem.getElementsByTagName("g");
-									showObjFormConParRewrite(gList,dci , "find");
-									var gid;
-									for (var j = 0; j < gList.length; j++) {
-										tempG = gList[j];
-										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-											gid = tempG.getAttribute("id");
-											break;
-										}
-									}
-									$('.ecname').text("\""+gid+"\"");
+							}
+							$('.ecname').text("\""+gid+"\"");
+						}
+					}, {
+						text : '删除事件类',
+						onclick : function(eve) {
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = svgElem.getElementsByTagName("g")
+							var gid;
+							for (var j = 0; j < gList.length; j++) {
+								tempG = gList[j];
+								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+									gid = tempG.getAttribute("id");
+									break;
 								}
-							}, {
-								text : '删除事件类',
-								onclick : function(eve) {
-									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-									var gList = svgElem.getElementsByTagName("g")
-									var gid;
-									for (var j = 0; j < gList.length; j++) {
-										tempG = gList[j];
-										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-											gid = tempG.getAttribute("id");
-											break;
-										}
-									}
-									delOntLatRewrite(gid,ELTN);
+							}
+							delOntLatRewrite(gid,ELTN);
+						}
+					}, {
+						text : '返回',
+						onclick : function(eve) {
+							$('#contextify-menu').attr('display','none');
+						}
+					}, ]
+				};
+		}
+		else{
+			var options = {
+					items : [ {
+						header : '功能菜单'
+					}, 
+					{
+						text : '查看事件类',
+						onclick : function(eve) {
+							objDelStatusGV = 'edit';
+							var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
+							var gList = svgElem.getElementsByTagName("g");
+							showObjFormConParRewrite(gList,dci , "find");
+							var gid;
+							for (var j = 0; j < gList.length; j++) {
+								tempG = gList[j];
+								if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
+									gid = tempG.getAttribute("id");
+									break;
 								}
-							}, {
-								text : '返回',
-								onclick : function(eve) {
-									$('#contextify-menu').attr('display','none');
-								}
-							}, ]
-						};
-				}
-				else{
-					var options = {
-							items : [ {
-								header : '功能菜单'
-							}, 
-							{
-								text : '查看事件类',
-								onclick : function(eve) {
-									objDelStatusGV = 'edit';
-									var dci=eve.target.parentNode.parentNode.getAttribute('data-contextify-id');
-									var gList = svgElem.getElementsByTagName("g");
-									showObjFormConParRewrite(gList,dci , "find");
-									var gid;
-									for (var j = 0; j < gList.length; j++) {
-										tempG = gList[j];
-										if (tempG.firstChild.getAttribute('data-contextify-id') == dci) {
-											gid = tempG.getAttribute("id");
-											break;
-										}
-									}
-									$('#ecname').text(gid);
-									$('.ecname').text(gid);
-								}
-							}, {
-								text : '返回',
-								onclick : function(eve) {
-									$('#contextify-menu').attr('display','none');
-								}
-							}, ]
-						};
-					
-				}
-				$('.drawrect').contextify(options);
+							}
+							$('#ecname').text(gid);
+							$('.ecname').text(gid);
+						}
+					}, {
+						text : '返回',
+						onclick : function(eve) {
+							$('#contextify-menu').attr('display','none');
+						}
+					}, ]
+				};
+			
+		}
+		$('.drawrect').contextify(options);
+	});
+
+	$("#objOntClean").click(function() {
+		cleanSVG();
+	})
+
+	$("#objOntPrinter").click(
+			function() {
+				var svgDiv = document.getElementById('objOntSvg');
+				var svgHtml = svgDiv.innerHTML;
+				var canvasDiv = document.createElement('div');
+				canvasDiv.setAttribute("width", svgWidth);
+				canvasDiv.setAttribute("height", svgHeight);
+				var canvas = document.createElement('canvas');
+				canvas.setAttribute("id", "canvasId");
+				canvas.setAttribute("width", svgWidth);
+				canvas.setAttribute("height", svgHeight);
+				canvasDiv.appendChild(canvas);
+				canvg(canvas, svgHtml);
+				var svgImage = canvas.toDataURL("image/png");
+				var saveWindow = window.open('about:blank',
+						'image from canvas');
+				saveWindow.document.write("<img src='" + svgImage
+						+ "' alt='from canvas'/>");
 			});
-
-			$("#objOntClean").click(function() {
-				cleanSVG();
-			})
-
-			$("#objOntPrinter").click(
-					function() {
-						var svgDiv = document.getElementById('objOntSvg');
-						var svgHtml = svgDiv.innerHTML;
-						var canvasDiv = document.createElement('div');
-						canvasDiv.setAttribute("width", svgWidth);
-						canvasDiv.setAttribute("height", svgHeight);
-						var canvas = document.createElement('canvas');
-						canvas.setAttribute("id", "canvasId");
-						canvas.setAttribute("width", svgWidth);
-						canvas.setAttribute("height", svgHeight);
-						canvasDiv.appendChild(canvas);
-						canvg(canvas, svgHtml);
-						var svgImage = canvas.toDataURL("image/png");
-						var saveWindow = window.open('about:blank',
-								'image from canvas');
-						saveWindow.document.write("<img src='" + svgImage
-								+ "' alt='from canvas'/>");
-					});
-			
-			$('#addECWinClose').click(function(){
-				$('#addECWin').fadeOut(fadeTime);
-			})
-			
-			$('#eveOntWinClose').click(function(){
-				$('#dealObjOntLat').fadeOut(fadeTime);
-				$('#ecname').text('');
-				ResetECInfo();
-				formReset("actionElementForm");
-				formReset("timeElementForm");
-				formReset("envElementForm");
-				formReset("assertElementForm");
-				formReset("languageElementForm");
-				
-			})
-			$('#objElementWinClose').click(function(){
-				$('#objElementEdit').fadeOut(fadeTime);
-				objnum=0;
-				$('.form-col').remove();
-			})
-			$('#timeElementWinClose').click(function(){
-				$('#timeElementEdit').fadeOut(fadeTime);
-			})
-			$('#actionElementWinClose').click(function(){
-				$('#actionElementEdit').fadeOut(fadeTime);
-			})
-			
-			$('#envElementWinClose').click(function(){
-				$('#envElementEdit').fadeOut(fadeTime);
-			})
-			
-			$('#assertElementWinClose').click(function(){
-				$('#assertElementEdit').fadeOut(fadeTime);
-			})
-			
-			$('#languageElementWinClose').click(function(){
-				$('#languageElementEdit').fadeOut(fadeTime);
-			})
-			
-			InitconceptWin();
-			
-			$('#conceptimgadd').click(function(){
-				addProVal();
-			})
-			
-			$('#addobj').click(function(){
-				addObj();
-			})
-			
-			$('#removeobj').click(function(){
-				removeObj();
-			})
-			
-			InitConceptSubGraph();
+	
+	$('#addECWinClose').click(function(){
+		$('#addECWin').fadeOut(fadeTime);
+	})
+	
+	$('#eveOntWinClose').click(function(){
+		$('#dealObjOntLat').fadeOut(fadeTime);
+		$('#ecname').text('');
+		ResetECInfo();
+		formReset("actionElementForm");
+		formReset("timeElementForm");
+		formReset("envElementForm");
+		formReset("assertElementForm");
+		formReset("languageElementForm");
+		
+	})
+	$('#objElementWinClose').click(function(){
+		$('#objElementEdit').fadeOut(fadeTime);
+	})
+	$('#timeElementWinClose').click(function(){
+		$('#timeElementEdit').fadeOut(fadeTime);
+	})
+	$('#actionElementWinClose').click(function(){
+		$('#actionElementEdit').fadeOut(fadeTime);
+	})
+	
+	$('#envElementWinClose').click(function(){
+		$('#envElementEdit').fadeOut(fadeTime);
+	})
+	
+	$('#assertElementWinClose').click(function(){
+		$('#assertElementEdit').fadeOut(fadeTime);
+	})
+	
+	$('#languageElementWinClose').click(function(){
+		$('#languageElementEdit').fadeOut(fadeTime);
+	})
+	
+	InitconceptWin();
+	
+	$('#conceptimgadd').click(function(){
+		addProVal();
+	})
+	
+	$('#addobj').click(function(){
+		addObj();
+	})
+	
+	$('#removeobj').click(function(){
+		removeObj();
+	})
+	
+	InitConceptSubGraph();
 			
 })
 
@@ -418,7 +440,7 @@ function createShowLayer(tempList) {
 		if (tempecls.grand > maxGrand)
 			maxGrand = tempecls.grand;
 	}
-	for (var j = 0; j <= maxGrand; j++) {
+	/*for (var j = 0; j <= maxGrand; j++) {
 		var showLayer = new ShowLayer(j);
 		var showOrder = 0;
 		for (var k = 0; k < tempList.size(); k++) {
@@ -430,6 +452,53 @@ function createShowLayer(tempList) {
 			}
 		}
 		showLayerList.add(showLayer);
+	}*/
+	
+	for(var j=0;j<=maxGrand;j++){
+		var showLayer = new ShowLayer(j);
+		showLayerList.add(showLayer);
+	}
+	var rootList = new ArrayList();
+	
+	for(var j=0;j<tempList.size();j++){
+		if(tempList.get(j).parentlatname == "root")
+			rootList.add(tempList.get(j));
+	}
+
+	var showOrder = 0;
+	
+	
+	for(var j=0;j<rootList.size();j++){
+		var root = rootList.get(j);
+		var layerList = new Array();
+		for(var k=0;k<=maxGrand;k++){
+			layerList[k] = new ShowLayer(k);
+		}
+		layerList[0].add(root);
+		for (var l = 0; l < layerList.length; l++) {
+			for (var n = 0; n < layerList[l].size(); n++) {
+				temp = layerList[l].get(n);
+				if (!showLayerList.get(l).contains(temp)) {
+					temp.setShowOrder(showOrder);
+					showLayerList.get(l).add(temp);
+					showOrder++;
+				}
+				for (var m = 0; m < tempList.size(); m++) {
+					if (l == maxGrand)
+						continue;
+					/*if (tempList.get(m).parentlatname == temp.latname)
+						layerList[l + 1].add(tempList.get(m));*/
+					var parents = tempList.get(m).parentlatname.split(",");
+					for(var pnum=0;pnum<parents.length;pnum++){
+						if(parents[pnum]==temp.latname){
+							layerList[l + 1].add(tempList.get(m));
+							break;
+						}
+							
+					}
+				}
+			}
+		}
 	}
 	return showLayerList;
 }
@@ -559,17 +628,9 @@ function cleanSVGid(svgid) {
 	$("#"+svgid).find("line").remove();
 }
 
-function initSVGView(size, svgElem, maxCount,svgid) {
-	var maxLayerCount = size;
-	// showLayerList.size();
-	var maxSvgWidth = (blockWidth + xGrap) * maxCount + totalXGrap;
-	var maxSvgHeight = (blockHeight + yGrap) * maxLayerCount + totalYGrap;
-	if (maxSvgWidth > svgWidth)
-		svgWidth = maxSvgWidth;
-	if (maxSvgHeight > svgHeight)
-		svgHeight = maxSvgHeight;
-	svgElem.setAttributeNS(null, "viewBox", "0 0 " + svgWidth * orgZoomMul
-			+ " " + svgHeight * orgZoomMul);
+function initSVGView(size, svgElem, maxCount,svgid,svgWidth,svgHeight) {
+	svgElem.setAttributeNS(null, "viewBox", "0 0 " + svgWidth
+			+ " " + svgHeight);
 	svgElem.setAttributeNS(null, "width", svgWidth);
 	svgElem.setAttributeNS(null, "id", svgid);
 	svgElem.setAttributeNS(null, "height", svgHeight);
@@ -630,11 +691,13 @@ function queryOntLatList(whichont) {
 	for (var i = 0; i < tempList.length; i++) {
 		var temp = tempList[i];
 		var objlat = new ObjOntLat();
+		
 		/*
 		 * objOntLat.latSid = temp.latSid; objOntLat.latName = temp.latName;
 		 * objOntLat.parentSid = temp.parentSid; objOntLat.latNote =
 		 * temp.latNote;
 		 */
+		
 		objlat.latsid = (typeof (temp.latSid) == "undefined") ? temp.latsid
 				: temp.latSid;
 		objlat.latname = (typeof (temp.latName) == "undefined") ? temp.latname
@@ -643,9 +706,11 @@ function queryOntLatList(whichont) {
 				: temp.parentSid;
 		objlat.latnote = (typeof (temp.latNote) == "undefined") ? temp.latnote
 				: temp.latNote;
+		
 		/*objOntLat.peoElement = temp.peoElement;
 		objOntLat.objElement = temp.objElement;
 		objOntLat.envElement = temp.envElement;*/
+		
 		objOntLatListGV.add(objlat);
 	}
 	for (var j = 0; j < objOntLatListGV.size(); j++) {
@@ -718,7 +783,6 @@ function showObjFormConParRewrite(gList , dci , objDelStatusGV)/*dci:data-contex
 		})
 		
 		$('label#leo').click(function(){
-			updateObjElement(objOntLat.latname);
 			$('#objElementEdit').show();
 			$('#aecname').text(objOntLat.latname);
 			$('#aecname').attr('evesid',objOntLat.latSid);
@@ -889,25 +953,28 @@ function InitconceptWin(){
 		$('.delattr').click();
 	})
 	
-	$('#conceptZoomout').click(
-					function() {
-						if (curZoomIndex > minZoomIndex) {
-							curZoomIndex--;
-						}
-						var zoomMul = zoomMulList[curZoomIndex];
-						csvgElem.setAttributeNS(null, "viewBox", "0 0 "
-								+ svgWidth * zoomMul + " " + svgHeight
-								* zoomMul);
-					})
+	$('#conceptZoomout').click(function() {
+		if (cSvgZoomIndex > minZoomIndex) {
+			cSvgZoomIndex--;
+		}
+		var zoomMul = zoomMulList[cSvgZoomIndex];
+		csvgElem.setAttributeNS(null, "viewBox", "0 0 "
+				+ cSvgWidth * zoomMul + " " + cSvgHeight
+				* zoomMul);
+		csvgElem.setAttributeNS(null, "height", cSvgHeight / zoomMul); 
+		csvgElem.setAttributeNS(null, "width", cSvgWidth / zoomMul); 
+	})
 
 	$('#conceptZoomin').click(function() {
-		if (curZoomIndex < maxZoomIndex) {
-			curZoomIndex++;
+		if (cSvgZoomIndex < maxZoomIndex) {
+			cSvgZoomIndex++;
 		}
-		var zoomMul = zoomMulList[curZoomIndex];
+		var zoomMul = zoomMulList[cSvgZoomIndex];
 		csvgElem.setAttributeNS(null, "viewBox", "0 0 "
-				+ svgWidth * zoomMul + " " + svgHeight
+				+ cSvgWidth * zoomMul + " " + cSvgHeight
 					* zoomMul);
+		csvgElem.setAttributeNS(null, "height", cSvgHeight / zoomMul); 
+		csvgElem.setAttributeNS(null, "width", cSvgWidth / zoomMul); 
 	})
 	
 	$("#conceptPrinter").click(function() {
@@ -950,39 +1017,10 @@ function InitconceptWin(){
 				maxCount = tempLayer.size();
 			}
 		}
-		initSVGView(cshowLayerList.size(), csvgElem, maxCount,svgid);
+		initSVGView(cshowLayerList.size(), csvgElem, maxCount,svgid,cSvgWidth,cSvgHeight);
 		
-		for (var j = 0; j < cshowLayerList.size(); j++) {
-			var tempLayer = cshowLayerList.get(j);
-			var rowCount = tempLayer.size();
-			var locList = CreLoc(maxCount, rowCount);
-			var y = j * (blockHeight + yGrap) + startY;
-			var showOrder = 0;
-			for (var i = 0; i <= maxCount; i++) {
-				var flag = 0;
-				for (var m = 0; m < locList.length; m++) {
-					if (i == locList[m]) {
-						flag = 1;
-						break;
-					}
-				}
-				if (flag == 1) {
-					var tempCls;
-					for (var p = 0; p < tempLayer.size(); p++) {
-						if (tempLayer.get(p).showOrder == showOrder) {
-							tempCls = tempLayer.get(p);
-							showOrder++;
-							break;
-						}
-					}
-					var drawOntLat = new DrawOntLat(tempCls);
-					drawOntLat.locX = i * (blockWidth + xGrap);
-					drawOntLat.locY = y;
-					var g = drawOntLat.drawLat(rectclass);
-					csvgElem.appendChild(g);
-				}
-			}
-		}
+		DrawLat(csvgElem,cshowLayerList,maxCount,rectclass);
+		
 		drawLatLink(csvgElem,conceptListGV,"conceptSvg");
 		
 		//上下文菜单
@@ -1544,4 +1582,40 @@ function conceptNotEditable(){
 	$('.cpro').prop('readOnly',true);
 	$('.cval').prop('readOnly',true);
 	$('#conceptimgadd').hide();
+}
+
+function NewCreLoc(maxCount, rowCount) {
+	var midLoc = Math.floor(maxCount / 2) + 1
+	var locList = new Array();
+	var step = 1;
+	var count = maxCount;
+	while(rowCount < count/2){
+		count /= 2;
+		step *= 2;
+	}
+	
+	for(var i = 0 ;i< rowCount ;i++){
+		locList[i] = step * (i+1);
+	}
+	if(rowCount == 1)
+		locList[0] = midLoc;
+	
+	return locList;
+}
+
+function DrawLat(svgElem,showLayerList,maxCount,rectclass){
+	for(var l=0;l<showLayerList.size();l++){
+		var tempLayer = showLayerList.get(l)
+		var rowCount = tempLayer.size();
+		var locList = NewCreLoc(maxCount, rowCount);
+		var y = l * (blockHeight + yGrap) + startY;
+		for(var m=0;m<tempLayer.size();m++){
+			var tempCls = tempLayer.get(m);
+			var drawOntLat = new DrawOntLat(tempCls);
+			drawOntLat.locX = locList[m] * (blockWidth + xGrap);
+			drawOntLat.locY = y;
+			var g = drawOntLat.drawLat(rectclass);
+			svgElem.appendChild(g);
+		}
+	}
 }

@@ -19,11 +19,13 @@ import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
 import org.springframework.stereotype.Controller;
 
+import com.di.ifin.zeus.admin.bont.pojo.ECRelation;
 import com.di.ifin.zeus.admin.bont.pojo.ObjLat;
 import com.di.ifin.zeus.admin.bont.pojo.OntInfo;
 import com.di.ifin.zeus.admin.bont.pojo.OntLat;
 import com.di.ifin.zeus.admin.bont.service.ActionElementService;
 import com.di.ifin.zeus.admin.bont.service.AssertionElementService;
+import com.di.ifin.zeus.admin.bont.service.ECRelationService;
 import com.di.ifin.zeus.admin.bont.service.EnvElementService;
 import com.di.ifin.zeus.admin.bont.service.GlobalMongoService;
 import com.di.ifin.zeus.admin.bont.service.LanguageElementService;
@@ -75,6 +77,10 @@ public class FileDownAction extends ActionSupport {
 	@Inject
 	@Named("LanguageElementService")
 	private LanguageElementService languageElementService;
+	
+	@Inject
+	@Named("ECRelationService")
+	private ECRelationService ecrelationService;
 
 	Gson gsonTemp = new GsonBuilder().disableHtmlEscaping().create();
 	InputStream fileInputStream;
@@ -166,6 +172,15 @@ public class FileDownAction extends ActionSupport {
 			eve_lats.addContent(eve_lat);
 		}
 		root.addContent(eve_lats);
+		
+		Element ec_rs = new Element("ec_relationships");
+		List<ECRelation> ecrlist = ecrelationService.queryECRelation(ontname);
+		for(ECRelation ecr:ecrlist){
+			Element eecr = new Element("ec_relationship");
+			OntLatUtil.injectElementFromObject(eecr, ecr);
+			ec_rs.addContent(eecr);
+		}
+		root.addContent(ec_rs);
 
 		XMLOutputter XMLOut = new XMLOutputter();
 

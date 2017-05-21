@@ -80,6 +80,8 @@ public class OntLatUtil {
 		return map;
 	}
 
+	
+	//e xml元素 lat Object
 	public static void injectElementFromObject(Element e, Object lat) {
 		String jsonstring = gsonTemp.toJson(lat);
 		JSONObject json1 = JSONObject.fromObject(jsonstring);

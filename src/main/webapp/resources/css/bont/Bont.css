@@ -117,10 +117,6 @@ div.draggable{
 	font-size: large;
     padding: 10px;
 }
-#conceptSvg{
-	overflow: auto;
-    height: 480px;
-}
 
 .guide-article{
     padding: 0 20px 20px 20px;

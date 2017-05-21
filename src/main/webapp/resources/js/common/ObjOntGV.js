@@ -8,6 +8,7 @@ var conceptSubGraphList = new ArrayList();
 // 0 is none,1 is add,2 is find,3 is edit ,4 is del
 var objDelStatusGV = 0;
 
+//actionURL
 var ecFindUrl = "objOntAction!queryAllEC.action";
 
 var ecEditUrl = "objOntAction!upsertEC.action";

@@ -15,5 +15,7 @@ public interface ObjElementService {
 	
 	public String delObjElement(String evelatname,String ontname);
 
-	String removeObjElement(String objsid, String evelatname);
+	public String removeObjElement(String objsid, String evelatname);
+	
+	public String removeAll(String ontname, String evelatname);
 }

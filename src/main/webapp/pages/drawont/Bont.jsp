@@ -234,18 +234,18 @@
 				<img src="resources/images/common/gap.png" class="gap"></img> <img
 					id="objOntFind" src="resources/images/common/find.png"> <img
 					src="resources/images/common/gap.png" class="gap"> --%>
-				</img> <img id="objOntZoomout" class="usefulimg"
+				</img> <img id="objOntZoomout" class="usefulimg zoomoutImg"
 					src="resources/images/common/zoomout.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img> <img
-					id="objOntZoomin" class="usefulimg"
+					id="objOntZoomin" class="usefulimg zoominImg"
 					src="resources/images/common/zoomin.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img> <img
-					id="objOntReload" class="usefulimg"
+					id="objOntReload" class="usefulimg reloadImg"
 					src="resources/images/common/reload.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img>
 				<!-- <img
 					id="objOntClean" src="resources/images/common/save.png"> -->
-				<img id="objOntPrinter" class="usefulimg"
+				<img id="objOntPrinter" class="usefulimg printImg"
 					src="resources/images/common/printer.png">
 			</div>
 			<div id="objOntSvg"></div>
@@ -556,18 +556,18 @@
 				<img src="resources/images/common/gap.png" class="gap"></img> <img
 					id="conceptFind" src="resources/images/common/find.png"> <img
 					src="resources/images/common/gap.png" class="gap"> --%>
-				</img> <img id="conceptZoomout" class="usefulimg"
+				</img> <img id="conceptZoomout" class="usefulimg zoomoutImg"
 					src="resources/images/common/zoomout.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img> <img
-					id="conceptZoomin" class="usefulimg"
+					id="conceptZoomin" class="usefulimg zoominImg"
 					src="resources/images/common/zoomin.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img> <img
-					id="conceptReload" class="usefulimg"
+					id="conceptReload" class="usefulimg reloadImg"
 					src="resources/images/common/reload.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img>
 				<!-- <img
 					id="conceptClean" src="resources/images/common/save.png">  -->
-				<img id="conceptPrinter" class="usefulimg"
+				<img id="conceptPrinter" class="usefulimg printImg"
 					src="resources/images/common/printer.png">
 			</div>
 		</div>
@@ -632,7 +632,7 @@
 					href="javascript:;" title="关闭"></a>
 			</div>
 		</div>
-		<div style="width: 1000px; height: 500px; overflow: auto;">
+		<div style="width: 1000px; height: 490px; overflow: auto;">
 			<div style="width: 200px; float: left;" class="m-t-20">
 				<img width="200px" src="resources/images/bont/legend.png" />
 			</div>

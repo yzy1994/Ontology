@@ -6,4 +6,6 @@ public interface EnvElementService {
 	public EnvLat queryEnvLat(String ontname,String evelatname);
 	
 	public String editEnvLat(EnvLat e);
+	
+	public String remove(String ontname, String evelatname);
 }
