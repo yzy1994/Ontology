@@ -159,10 +159,7 @@ function resize(oParent, handle, isLeft, isTop, lockX, lockY)
 		return false;
 	}
 };
-window.onload = window.onresize = function ()
-
-{
-
+window.onload = window.onresize = function (){
 	/*var oDrag = document.getElementById("objOntWin");
 	var oTitle = get.byClass("title", oDrag)[0];
 	var oL = get.byClass("resizeL", oDrag)[0];
@@ -190,6 +187,7 @@ window.onload = window.onresize = function ()
 	oDrag.style.top = (document.documentElement.clientHeight - oDrag.offsetHeight) / 2 + "px";
     $("#objOntWin").hide();*/
 }
+
 	//可拖拽元素div 窗口div
 	function letWinDraggable(wt,w){
 		$('#'+wt).mousedown(

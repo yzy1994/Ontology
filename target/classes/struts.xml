@@ -115,7 +115,9 @@
 		</action>
 		
 		<action name="ecRelationAction_*" class="ecRelationAction" method="{1}">
-			
+		</action>
+		
+		<action name="userEditCommentAction_*" class="userEditCommentAction" method="{1}">
 		</action>
 	</package>
 

@@ -2,35 +2,38 @@ package com.di.ifin.zeus.admin.bont.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 
+import com.di.ifin.zeus.admin.bont.pojo.AccessRecord;
 import com.di.ifin.zeus.admin.bont.pojo.ActionLat;
 import com.di.ifin.zeus.admin.bont.pojo.AssertionLat;
 import com.di.ifin.zeus.admin.bont.pojo.ConceptLat;
-import com.di.ifin.zeus.admin.bont.pojo.ECRelation;
-import com.di.ifin.zeus.admin.bont.pojo.ECRelationDef;
+import com.di.ifin.zeus.admin.bont.pojo.ECEditComment;
 import com.di.ifin.zeus.admin.bont.pojo.EnvLat;
-import com.di.ifin.zeus.admin.bont.pojo.EnvOntLat;
-import com.di.ifin.zeus.admin.bont.pojo.EveOntLat;
 import com.di.ifin.zeus.admin.bont.pojo.LanguageLat;
-import com.di.ifin.zeus.admin.bont.pojo.Node;
+import com.di.ifin.zeus.admin.bont.pojo.LatnameToX;
 import com.di.ifin.zeus.admin.bont.pojo.ObjLat;
 import com.di.ifin.zeus.admin.bont.pojo.OntLat;
 import com.di.ifin.zeus.admin.bont.pojo.OntLatWithOntName;
 import com.di.ifin.zeus.admin.bont.pojo.Paper;
-import com.di.ifin.zeus.admin.bont.pojo.PeoOntLat;
 import com.di.ifin.zeus.admin.bont.pojo.Researcher;
 import com.di.ifin.zeus.admin.bont.pojo.TimeLat;
+import com.di.ifin.zeus.admin.bont.pojo.zTreeNode;
+import com.di.ifin.zeus.admin.bont.service.AccessRecordService;
 import com.di.ifin.zeus.admin.bont.service.ActionElementService;
 import com.di.ifin.zeus.admin.bont.service.AssertionElementService;
 import com.di.ifin.zeus.admin.bont.service.ConceptLatService;
-import com.di.ifin.zeus.admin.bont.service.ECRelationService;
+import com.di.ifin.zeus.admin.bont.service.ECEditCommentService;
 import com.di.ifin.zeus.admin.bont.service.EnvElementService;
 import com.di.ifin.zeus.admin.bont.service.EnvOntLatService;
 import com.di.ifin.zeus.admin.bont.service.EveOntLatService;
@@ -42,7 +45,6 @@ import com.di.ifin.zeus.admin.bont.service.PaperService;
 import com.di.ifin.zeus.admin.bont.service.PeoOntLatService;
 import com.di.ifin.zeus.admin.bont.service.ResearcherService;
 import com.di.ifin.zeus.admin.bont.service.TimeElementService;
-import com.di.ifin.zeus.admin.bont.util.OperateMsg;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -65,6 +67,10 @@ public class ObjOntAction extends ActionSupport {
 	 * 
 	 * @Named("objOntLatService") private ObjOntLatService objOntLatService;
 	 */
+
+	@Inject
+	@Named("ECEditCommentService")
+	private ECEditCommentService eceditcommentservice;
 
 	@Inject
 	@Named("eveOntLatService")
@@ -121,6 +127,10 @@ public class ObjOntAction extends ActionSupport {
 	@Inject
 	@Named("ResearcherService")
 	private ResearcherService researcherService;
+
+	@Inject
+	@Named("AccessRecordService")
+	private AccessRecordService accessrecordservice;
 
 	Gson gsonTemp = new GsonBuilder().disableHtmlEscaping().create();
 	private String objOntLatStr;
@@ -567,6 +577,16 @@ public class ObjOntAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String UpdateConceptX() {
+		JSONObject json = JSONObject.fromObject(inputStr);
+		List<LatnameToX> list = gsonTemp.fromJson(json.getString("nodes"), new TypeToken<ArrayList<LatnameToX>>() {
+		}.getType());
+		for (LatnameToX ltx : list) {
+			conceptlatservice.UpdateXByLatname(ltx.getLatname(), ltx.getX());
+		}
+		return SUCCESS;
+	}
+
 	// 动作要素的CRUD
 	public String queryActionLat() {
 		JSONObject json = JSONObject.fromObject(inputStr);
@@ -699,19 +719,60 @@ public class ObjOntAction extends ActionSupport {
 		}.getType());
 		if (o.getLatname() == null || o.getParentlatname() == null) {
 			this.operateMsg = "error";
-		} else {
-			latservice.removeByLatname(Global.eventclass, o.getOntname(), o.getLatname());
-			latservice.insert(Global.eventclass, o);
-			this.operateMsg = "update";
+			return SUCCESS;
 		}
+
+		String[] parents = o.getParentlatname().split(",");
+		for (int i = 0; i < parents.length; i++) {
+			if (parents[i].equals("root"))
+				continue;
+			if (parents[i].equals(o.getLatname())
+					|| latservice.queryByLatname(Global.eventclass, o.getOntname(), parents[i]) == null) {
+				this.operateMsg = "nosuchparent";
+				return SUCCESS;
+			}
+		}
+		latservice.removeByLatname(Global.eventclass, o.getOntname(), o.getLatname());
+		latservice.insert(Global.eventclass, o);
+		this.operateMsg = "update";
 		return SUCCESS;
 	}
 
 	public String insertEC() {
 		OntLat o = gsonTemp.fromJson(inputStr, new TypeToken<OntLat>() {
 		}.getType());
+		Integer x = 100;
+
+		if (o.getLatname() == null || o.getParentlatname() == null) {
+			this.operateMsg = "error";
+			return SUCCESS;
+		}
+
+		String[] parents = o.getParentlatname().split(",");
+		for (int i = 0; i < parents.length; i++) {
+			if (parents[i] == o.getLatname()
+					|| latservice.queryByLatname(Global.eventclass, o.getOntname(), parents[i]) == null) {
+				this.operateMsg = "nosuchparent";
+				return SUCCESS;
+			}
+			if (i == 0)
+				x = latservice.queryByLatname(Global.eventclass, o.getOntname(), parents[i]).getX();
+		}
+		o.setX(x);
+
 		o.setLatsid("e" + globalMongoService.getid(Global.evelatsid).toString());
 		latservice.insert(Global.eventclass, o);
+		ActionLat actionLat = new ActionLat(o.getOntname(), o.getLatname(), "缓缓", "无约束", "无约束");
+		actionelementservice.upsert(actionLat);
+		AssertionLat assertlat = new AssertionLat(o.getOntname(), o.getLatname(), "无约束", "无约束", "无约束");
+		assertionElementService.upsert(assertlat);
+		TimeLat timelat = new TimeLat(o.getOntname(), o.getLatname(), "任意", "无约束");
+		timeelementservice.editTimeElement(timelat);
+		EnvLat envlat = new EnvLat(o.getOntname(), o.getLatname(), "物质", "无约束");
+		envElementService.editEnvLat(envlat);
+		LanguageLat lanlat = new LanguageLat(o.getOntname(), o.getLatname(), "未定义", "无约束");
+		languageElementService.upsert(lanlat);
+
 		return SUCCESS;
 	}
 
@@ -727,12 +788,48 @@ public class ObjOntAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	// 获取zTree的 JSON/SimpleData
+	public String queryECInzTreeData() {
+		JSONObject json = JSONObject.fromObject(inputStr);
+		String ontname = json.getString("ontname");
+		List<OntLat> list;
+		
+		if(ontname.equals("Concept")){
+			list = latservice.queryall(Global.concept);
+		}
+		else{
+			list = latservice.queryall(Global.eventclass, ontname);
+		}
+
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<zTreeNode> resultList = new ArrayList<zTreeNode>();
+
+		map.put("root", 0);
+		int mapid = 0;
+
+		for (OntLat ontlat : list) {
+			mapid++;
+			map.put(ontlat.getLatname(), mapid);
+		}
+
+		for (OntLat ontlat : list) {
+			String latname = ontlat.getLatname();
+			String parentname = ontlat.getParentlatname().split(",")[0];
+			int pId = (map.get(parentname) != null) ? map.get(parentname) : 0;
+			int id = (map.get(latname) != null) ? map.get(latname) : 0;
+			resultList.add(new zTreeNode(id, pId, latname));
+		}
+
+		this.resultStr = gsonTemp.toJson(resultList);
+		return SUCCESS;
+	}
+
 	public String queryECInfo() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
 		String evelatname = json.getString("evelatname");
 
-		OntLat ol = latservice.queryByLatname(Global.eventclass, ontname, evelatname).get(0);
+		OntLat ol = latservice.queryByLatname(Global.eventclass, ontname, evelatname);
 		this.setResultStr(gsonTemp.toJson(ol));
 
 		List<ObjLat> list = objelementservice.queryObjElement(ontname, evelatname);
@@ -759,6 +856,17 @@ public class ObjOntAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String UpdateECX() {
+		JSONObject json = JSONObject.fromObject(inputStr);
+		String ontname = json.getString("ontname");
+		List<LatnameToX> list = gsonTemp.fromJson(json.getString("nodes"), new TypeToken<ArrayList<LatnameToX>>() {
+		}.getType());
+		for (LatnameToX ltx : list) {
+			latservice.updateXByLatname(Global.eventclass, ontname, ltx.getLatname(), ltx.getX());
+		}
+		return SUCCESS;
+	}
+
 	// 研究团队和文献内容
 	public String queryAllResearcher() {
 		List<Researcher> list = researcherService.queryAllResearcher();
@@ -777,6 +885,29 @@ public class ObjOntAction extends ActionSupport {
 		} else {
 			this.resultStr = "";
 		}
+		return SUCCESS;
+	}
+
+	// --------------------------
+	public String insertRecord() {
+		AccessRecord ar = gsonTemp.fromJson(inputStr, new TypeToken<AccessRecord>() {
+		}.getType());
+		accessrecordservice.insert(ar);
+		return SUCCESS;
+	}
+
+	// 修改建议
+	public String insertECEditComment() {
+		Subject subject = SecurityUtils.getSubject();
+		String username = subject.getPrincipal().toString();
+		JSONObject json = JSONObject.fromObject(inputStr);
+		String ontname = json.getString("ontname");
+		String latname = json.getString("latname");
+		String comment = json.getString("comment");
+		if (ontname.isEmpty() || latname.isEmpty() || comment.isEmpty())
+			return SUCCESS;
+		ECEditComment eccomment = new ECEditComment(ontname, latname, username, comment);
+		eceditcommentservice.insertComment(eccomment);
 		return SUCCESS;
 	}
 

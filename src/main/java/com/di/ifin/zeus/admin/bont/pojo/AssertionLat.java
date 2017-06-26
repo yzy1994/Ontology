@@ -47,4 +47,16 @@ public class AssertionLat {
 	public void setEvelatname(String evelatname) {
 		this.evelatname = evelatname;
 	}
+	
+	public AssertionLat(){
+		
+	}
+	
+	public AssertionLat(String ontname,String latname,String prestate,String massert,String poststate){
+		this.ontname = ontname;
+		this.evelatname = latname;
+		this.prestate = prestate;
+		this.massert = massert;
+		this.poststate = poststate;
+	}
 }

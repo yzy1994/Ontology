@@ -14,7 +14,7 @@
 <head>
 <link rel="shortcut icon" href="resources/images/title.ico"
 	type="image/x-icon" />
-<title>My JSP 'mjolnir.jsp' starting page</title>
+<title>文本事件标注工具</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
@@ -28,6 +28,7 @@
 	type="text/css" />
 <link href="resources/css/jquery.autocomplete.css" rel="stylesheet"
 	type="text/css" />
+<link href="resources/css/index.css" rel="stylesheet">
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -330,7 +331,6 @@
 		<div id="rightDiv">
 			<div id="rightTab"></div>
 		</div>
-		<div id="buttomDiv"></div>
 
 		<div class="theme-popover" id="downloadDiv">
 			<div class="theme-poptit">

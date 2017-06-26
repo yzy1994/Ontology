@@ -87,7 +87,7 @@
 				/mainOntAction!queryOntInfo = authc
 				/pages/drawont/OntoEdit.jsp = authc
 				/tool/** = authc
-				/pages/admin/** = roles[administrator]
+				/pages/admin/** = roles[builder]
 			</value>
 		</property>
 	</bean>

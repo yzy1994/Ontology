@@ -49,7 +49,7 @@
 				</div>
 			</div>
 
-			<div class="list-wrap">
+			<div class="list-wrap w-1140 m-t-20">
 				<b class="top-title">主要研究项目：</b>
 				<dl id="ontologyitems" class="items clearfix">
 					<dd class="col-xs-12">
@@ -66,7 +66,7 @@
 							2006/01-2008/12</p>
 					</dd>
 					<dd class="col-xs-12">
-						<p>5. 国家自然科学基金面上项目，60275022，面向本体的形式概念分析扩展模型和算法，
+						<p>5. 国家自然科学基金面上项目，60275022，分布式概念格数学模型及算法研究，
 							2003/01-2005/12</p>
 					</dd>
 				</dl>
@@ -82,7 +82,7 @@
 						</dd> -->
 						<s:iterator value="plist" id="p" status="st">
 							<dd class="paper col-xs-12">
-								<a href="<s:property escape="0" value="path"/>"><s:property escape="0" value="pname"/></a>
+								<a href="http://47.92.7.239/ontology/<s:property escape="0" value="path"/>"><s:property escape="0" value="pname"/></a>
 							</dd>
 						</s:iterator>
 					</dl>

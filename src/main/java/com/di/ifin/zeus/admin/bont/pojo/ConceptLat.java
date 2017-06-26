@@ -5,6 +5,8 @@ public class ConceptLat {
 	private String latname;
 
 	private String parentlatname;
+	
+	private Integer x;
 
 	/*public void setLatsid(String latsid) {
 		this.latsid = latsid;
@@ -34,5 +36,13 @@ public class ConceptLat {
 
 	public void setParentlatname(String parentlatname) {
 		this.parentlatname = parentlatname;
+	}
+
+	public Integer getX() {
+		return x;
+	}
+
+	public void setX(Integer x) {
+		this.x = x;
 	}
 }

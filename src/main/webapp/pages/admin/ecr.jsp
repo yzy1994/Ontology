@@ -66,6 +66,9 @@
 					</s:iterator>
 				</tbody>
 			</table>
+			<div>
+				<s:property escape="0" value="pagerCode"/>
+			</div>
 			<h3>事件关系定义管理</h3>
 			<table class="table table-bordered m-t-20">
 				<thead>
@@ -139,11 +142,6 @@
 							</div>
 						</form>
 					</div>
-					<!-- <div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-						</button>
-						<button type="button" class="btn btn-primary">提交更改</button>
-					</div> -->
 				</div>
 			</div>
 		</div>

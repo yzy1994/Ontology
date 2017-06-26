@@ -2,6 +2,7 @@ function LoadECRelationGraph(ontname,echartsDivId){
 	var myChart = echarts.init(document.getElementById(echartsDivId));
 	var input = {};
 	input["ontname"] = ontname;
+	input["latname"] = "";
 	var inputstr = JSON.stringify(input);
 	$.ajax({
 		url : "echartsAction!getChartData.action",
@@ -95,7 +96,53 @@ function LoadECRelationGraph(ontname,echartsDivId){
 				} ]
 			};
 			myChart.setOption(option, true);
+			var options = {
+					items : [{
+						header : '功能菜单'
+					},
+					{
+						text : '添加事件类关系',
+						onclick : function(eve){
+							$('#myModal').modal();
+						}
+					},],
+					action: "contextmenu",
+			};
+			$('#main').contextify(options);
 		}
 	})
-	
 }
+$('#ecr_form').bind('submit',function() {
+	if($('#rid').val()==""||$('#source').val()==""||$('#target').val()==""||$('#ontname').val()==""){
+		alert('请将表单填写完整!!')
+	}else{
+		input = {};
+		input["ecrid"] = 0;
+		input["rid"]=$('#rid').val();
+		input["target"]=$('#target').val();
+		input["source"]=$('#source').val();
+		input["ontname"]=$('#ontname').val();
+		console.log(input);
+		inputstr = JSON.stringify(input);
+		$.ajax({
+			url: "ecRelationAction!upsertECRelation",
+	        type: "post",
+	        async: true,
+	        data: {
+	            inputStr: inputstr,
+	        },
+	        success: function(data){
+	        	LoadECRelationGraph(preontname, "main");
+	        	$('#rid').val('');
+	        	$('#source').val('');
+	        	$('#target').val('');
+	        	$('#myModal').modal('hide');
+	        }
+		})
+	}
+	return false;
+});
+$(document).ready(function(){
+	$('#ontname').val(preontname);
+	LoadECRelationGraph(preontname, "main");
+})

@@ -4,6 +4,7 @@ public class OntInfo {
 	private String oid;
 	private String name;
 	private String field;
+	private String topec;
 
 	public String getName() {
 		return name;
@@ -29,4 +30,11 @@ public class OntInfo {
 		this.oid = oid;
 	}
 
+	public String getTopec() {
+		return topec;
+	}
+
+	public void setTopec(String topec) {
+		this.topec = topec;
+	}
 }

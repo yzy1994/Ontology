@@ -12,7 +12,9 @@ public class OntLat {
 	private String parentlatname;
 
 	private String latnote;
-
+	
+	private Integer x;
+	
 	public OntLat() {
 
 	}
@@ -69,4 +71,14 @@ public class OntLat {
 		this.setParentlatname(parentlatname);
 		this.setLatnote(latnote);
 	}
+
+	public Integer getX() {
+		return x;
+	}
+
+	public void setX(Integer x) {
+		this.x = x;
+	}
+
+
 }

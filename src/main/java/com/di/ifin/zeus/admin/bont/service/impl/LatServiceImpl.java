@@ -110,35 +110,45 @@ public class LatServiceImpl implements LatService {
 	public void updateByLatname(String collection, String ontname, String latname, Map<String, String> map,
 			Map<String, String> mapadd) {
 		// TODO Auto-generated method stub
-		return ;
-	}	
+		return;
+	}
 
 	@Override
-	public List<OntLat> queryByLatname(String collection, String ontname, String latname) {
+	public OntLat queryByLatname(String collection, String ontname, String latname) {
 		// TODO Auto-generated method stub
 		Criteria c = Criteria.where("ontname").is(ontname).andOperator(Criteria.where("latname").is(latname));
-		return mongoTemplate.find(new Query(c), OntLat.class, collection);
+		List<OntLat> list = mongoTemplate.find(new Query(c), OntLat.class, collection);
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
 	}
 
 	@Override
 	public void updateByLatname(String collection, String ontname, String latname, Map<String, String> mapadd) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean IsExistChildren(String collection, String ontname, String latname) {
 		// TODO Auto-generated method stub
 		List<OntLat> list = this.queryall(collection, ontname);
-		for(OntLat ol:list){
-			String [] ap = ol.getParentlatname().split(",");
-			for(String p:ap){
-				if(p.equals(latname))
+		for (OntLat ol : list) {
+			String[] ap = ol.getParentlatname().split(",");
+			for (String p : ap) {
+				if (p.equals(latname))
 					return true;
 			}
 		}
 		return false;
 	}
 
+	@Override
+	public void updateXByLatname(String collection, String ontname, String latname, Integer x) {
+		// TODO Auto-generated method stub
+		Criteria c = Criteria.where("ontname").is(ontname).andOperator(Criteria.where("latname").is(latname));
+		mongoTemplate.updateFirst(new Query(c), new Update().set("x", x), collection);
+	}
 
 }

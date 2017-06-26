@@ -56,4 +56,5 @@ public class TimeLat {
 	public void setEvelatname(String evelatname) {
 		this.evelatname = evelatname;
 	}
+	
 }

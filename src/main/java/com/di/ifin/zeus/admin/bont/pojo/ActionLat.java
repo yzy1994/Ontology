@@ -1,20 +1,18 @@
 package com.di.ifin.zeus.admin.bont.pojo;
 
 public class ActionLat {
-	/*private String actionsid;*/
+	/* private String actionsid; */
 	private String ontname;
 	private String evelatname;
 	private String degree;
 	private String tool;
 	private String method;
 
-	/*public String getActionsid() {
-		return this.actionsid;
-	}
-
-	public void setId(String actionsid) {
-		this.actionsid = actionsid;
-	}*/
+	/*
+	 * public String getActionsid() { return this.actionsid; }
+	 * 
+	 * public void setId(String actionsid) { this.actionsid = actionsid; }
+	 */
 
 	public String getOntname() {
 		return ontname;
@@ -54,5 +52,17 @@ public class ActionLat {
 
 	public void setEvelatname(String evelatname) {
 		this.evelatname = evelatname;
+	}
+
+	public ActionLat() {
+
+	}
+
+	public ActionLat(String ontname, String latname, String degree, String tool, String method) {
+		this.ontname = ontname;
+		this.evelatname = latname;
+		this.degree = degree;
+		this.tool = tool;
+		this.method = method;
 	}
 }

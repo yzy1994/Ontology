@@ -151,10 +151,7 @@ public class MainOntAction extends ActionSupport {
 
 	@Deprecated
 	public String delOnt() {
-		latservice.removeByOntname("eve_ont_lat", this.ontname);
-		latservice.removeByOntname("peo_ont_lat", this.ontname);
-		latservice.removeByOntname("obj_ont_lat", this.ontname);
-		latservice.removeByOntname("env_ont_lat", this.ontname);
+		
 		msgStr = ontservice.delOntByName(this.ontname);
 		return SUCCESS;
 	}
@@ -174,7 +171,17 @@ public class MainOntAction extends ActionSupport {
 		String oid = "o" + globalMongoService.getid(Global.ontid).toString();
 		ontinfo.setOid(oid);
 		ontservice.addOnt(ontinfo);
-		resultStr = "success";
+
+		if(latservice.queryall(Global.eventclass, ontinfo.getName()).isEmpty()){
+			OntLat object = new OntLat();
+			object.setLatname(ontinfo.getTopec());
+			object.setLatnote("");
+			object.setOntname(ontinfo.getName());
+			object.setParentlatname("root");
+			object.setX(500);
+			latservice.insert(Global.eventclass, object);
+			resultStr = "success";
+		}
 		return SUCCESS;
 	}
 	

@@ -6,7 +6,5 @@ function getParam() {
 }
 $(document).ready(function() {
 	var ontname = getParam();
-	ontname="突发事件本体";
-	console.log(ontname);
-	$.cookie('ontname',ontname);
+	$.cookie('ontname');
 })

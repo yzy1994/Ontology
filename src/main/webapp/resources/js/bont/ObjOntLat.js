@@ -1,7 +1,7 @@
 function ObjOntLat() {
 	var latsid
 	var latname;
-	var parentsid;
+	var parentlatname;
 	var latnote;
 /*	var peoElement;
 	var objElement;

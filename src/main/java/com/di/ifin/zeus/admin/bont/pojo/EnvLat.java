@@ -37,4 +37,14 @@ public class EnvLat {
 	public void setEnvlane(String envlane) {
 		this.envlane = envlane;
 	}
+	
+	public EnvLat(){
+		
+	}
+	public EnvLat(String ontname,String latname,String conceptlatname,String envlane){
+		this.ontname = ontname;
+		this.evelatname = latname;
+		this.conceptlatname = conceptlatname;
+		this.envlane = envlane;
+	}
 }

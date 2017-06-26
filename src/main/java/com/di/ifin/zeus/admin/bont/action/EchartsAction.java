@@ -70,6 +70,7 @@ public class EchartsAction extends ActionSupport {
 	public String getChartData() {
 		JSONObject json = JSONObject.fromObject(inputStr);
 		String ontname = json.getString("ontname");
+		String latname = json.getString("latname");
 
 		List<ECRelationDef> list1 = ecrelationService.queryECRelationDef();
 		if (list1.size() != 0) {
@@ -78,7 +79,13 @@ public class EchartsAction extends ActionSupport {
 			this.setResultStr("");
 		}
 
-		List<ECRelation> list2 = ecrelationService.queryECRelation(ontname);
+		List<ECRelation> list2;
+		if(latname.equals("")){
+			list2 = ecrelationService.queryECRelation(ontname);
+		}
+		else{
+			list2 = ecrelationService.queryECRelationByLatname(ontname, latname);
+		}
 		List<Link> resultlist = OntLatUtil.toLinkList(list2, list1);
 		if (resultlist.size() != 0) {
 			this.setLinks(gsonTemp.toJson(resultlist));
@@ -100,43 +107,10 @@ public class EchartsAction extends ActionSupport {
 			}
 			this.setNodes(gsonTemp.toJson(list3));
 		} else {
-			this.setNodes("[]");
-		}
-		return SUCCESS;
-	}
-
-	public String queryECR() {
-		JSONObject json = JSONObject.fromObject(inputStr);
-		String ontname = json.getString("ontname");
-		String latname = json.getString("latname");
-		List<ECRelationDef> list1 = ecrelationService.queryECRelationDef();
-		if (list1.size() != 0) {
-			this.setResultStr(gsonTemp.toJson(list1));
-		} else {
-			this.setResultStr("");
-		}
-		List<ECRelation> list2 = ecrelationService.queryECRelationByLatname(ontname, latname);
-		List<Link> resultlist = OntLatUtil.toLinkList(list2, list1);
-		if (list2.size() == 0) {
-			this.setNodes("[]");
-			this.setLinks("[]");
-		} else {
-			this.setLinks(gsonTemp.toJson(resultlist));
-			List<String> nodelist = new ArrayList<String>();
-			for (ECRelation ecr : list2) {
-				if (!nodelist.contains(ecr.getSource()))
-					nodelist.add(ecr.getSource());
-				if (!nodelist.contains(ecr.getTarget()))
-					nodelist.add(ecr.getTarget());
-			}
-
 			List<Node> list3 = new ArrayList<Node>();
-			for (String s : nodelist) {
-				list3.add(new Node(s));
-			}
+			list3.add(new Node(latname));
 			this.setNodes(gsonTemp.toJson(list3));
 		}
-
 		return SUCCESS;
 	}
 

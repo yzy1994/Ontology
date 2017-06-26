@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
 	// 获得本项目的地址(例如: http://localhost:8080/MyApp/)赋值给basePath变量 
@@ -21,8 +21,6 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
 <link rel="stylesheet" href="resources/css/buildont/label.css" />
 <link href="resources/css/TabPanel.css" rel="stylesheet" type="text/css" />
 <link href="resources/css/leftTab.css" rel="stylesheet" type="text/css" />
@@ -37,19 +35,26 @@
 <link rel="stylesheet" href="resources/css/bont/Bont.css" />
 <link rel="stylesheet" href="resources/css/bont/ObjOntLatForm.css" />
 
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
 <link href="resources/css/index.css" rel="stylesheet">
 <link href="resources/css/common.css" rel="stylesheet">
 
 
 <script type="text/javascript" src="resources/js/common/ArrayList.js"></script>
 <script type="text/javascript" src="resources/js/common/ObjOntGV.js"></script>
-<script type="text/javascript" src="resources/js/jquery-1.8.0.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="resources/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="resources/js/bont/DraggableWin.js"></script>
 <script type="text/javascript" src="resources/js/bont/ontoedit/load.js"></script>
 <script type="text/javascript"
 	src="resources/js/bont/ontoedit/addont.js"></script>
 <script type="text/javascript" src="resources/js/bont/ontoedit/form.js"></script>
-<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="resources/js/ajaxfileupload.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -64,8 +69,10 @@
 			<b class="top-title">本体管理</b>
 
 			<div class="ontform m-t-20">
-				<shiro:hasRole name="builder"><button type="button" class="button  btn-success" id="addOnt">新建本体</button>
-				<button type="button" class="button  btn-success" id="importo">导入本体</button></shiro:hasRole>
+				<shiro:hasRole name="builder">
+					<button type="button" class="button  btn-success" id="addOnt">新建本体</button>
+					<button type="button" class="button  btn-success" id="importo">导入本体</button>
+				</shiro:hasRole>
 			</div>
 			<!-- <input
 						type="file" name="file" id="file" /> <label class="newOnt"
@@ -80,24 +87,22 @@
 						</tr>
 						<s:iterator value="ontlist" id="r" status="st">
 							<tr>
-								<td>
-										<s:property escape="0" value="name" />
-								</td>
-								<td>
-									<s:property escape="0" value="field"/>
-								</td>
-								<td>
-									<shiro:hasRole name="builder"><button type="button" class="button  btn-danger delbtn" id="<s:property escape="0" value="name"/>">删除本体</button>
+								<td><s:property escape="0" value="name" /></td>
+								<td><s:property escape="0" value="field" /></td>
+								<td><shiro:hasRole name="builder">
+										<button type="button" class="button  btn-danger delbtn"
+											id="<s:property escape="0" value="name"/>">删除本体</button>
 									&nbsp
-									<button type="button" class="button  btn-info editbtn" id="<s:property escape="0" value="name"/>">编辑本体</button>
+									<button type="button" class="button  btn-info editbtn"
+											id="<s:property escape="0" value="name"/>">编辑本体</button>
 									&nbsp
-									</shiro:hasRole>
-									<shiro:lacksRole name="builder">
-									<button type="button" class="button  btn-info infobtn" id="<s:property escape="0" value="name"/>">查看本体</button>
+									</shiro:hasRole> <shiro:lacksRole name="builder">
+										<button type="button" class="button  btn-info infobtn"
+											id="<s:property escape="0" value="name"/>">查看本体</button>
 									&nbsp
 									</shiro:lacksRole>
-									<button type="button" class="button  btn-primary exportbtn" id="<s:property escape="0" value="name"/>">导出本体</button>
-								</td>
+									<button type="button" class="button  btn-primary exportbtn"
+										id="<s:property escape="0" value="name"/>">导出本体</button></td>
 							</tr>
 						</s:iterator>
 					</tbody>
@@ -105,49 +110,71 @@
 			</div>
 		</div>
 
-		<div class="dealObjOntLat-popover" id="dealObjOntLat"
-			style="width: 400px; height: 280px; display: block;">
-			<div class="dealObjOntLat-poptit">
-				<a href="javascript:;" title="关闭" class="close" id="dealclose">×</a>
-				<h3 id="showTitle">创建本体</h3>
-			</div>
-			<div>
-				<form id="objOntLatForm" class="contact_form" method="post"
-					name="contact_form">
-					<ul>
-						<li id="liname"><label for="ontname">本体名称:</label> <input
-							name="ontname" type="text" placeholder="o1" required="required"
-							id="ontname"></li>
-
-						<li id="lifield"><label for="ontfield">应用领域:</label> <input
-							name="ontfield" type="text" placeholder="参与者" required="required"
-							id="ontfield"></li>
-
-						<button class="submit" type="submit" id="saveOnt">保存</button>
-						<button class="submit" type="reset" id="resetOnt">重置</button>
-						</li>
-
-					</ul>
-				</form>
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">新建事件本体</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" role="form" id="ontInfoForm">
+							<div class="form-group">
+								<label for="name" class="col-sm-2 control-label">本体名称:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="name"
+										placeholder="ontology name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="field" class="col-sm-2 control-label">应用领域:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="field"
+										placeholder="field">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="latname" class="col-sm-2 control-label">顶层事件类:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="latname"
+										placeholder="latname">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-8 col-sm-10">
+									<button type="reset" class="button btn-info">重置</button>
+									&nbsp
+									<button type="submit" class="button btn-success">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="dealObjOntLat-popover" id="delalert"
-			style="width: 400px; height: 280px; display: block;">
-			<div class="dealObjOntLat-poptit">
-				<a href="javascript:;" title="关闭" class="close" id="dclose">×</a>
-				<h3>对话框</h3>
+		<div class="modal fade" id="removeModal" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title">对话框</h4>
+					</div>
+					<div class="modal-body">
+						<h5>确定要删除这个本体吗?</h5>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="button btn-info" data-dismiss="modal">取消</button>
+						&nbsp<button type="button" class="button btn-primary" id="delsubmit">确定</button>
+					</div>
+				</div>
 			</div>
-			<div>
-				<p>确定要删除这个本体吗?</p>
-			</div>
-			<form id="delOntForm" class="contact_form" method="post"
-				name="contact_form">
-				<li>
-					<button class="submit" type="submit" id="delsubmit">确定</button>
-					<button class="submit" type="input" id="delcancel">取消</button>
-				</li>
-			</form>
 		</div>
 		<jsp:include page="/pages/common/foot.jsp" />
 	</div>

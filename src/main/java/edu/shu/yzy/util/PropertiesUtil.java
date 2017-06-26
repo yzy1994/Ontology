@@ -18,4 +18,22 @@ public class PropertiesUtil {
 		return prop.getProperty(key);
 	}
 	
+	public static String getNextAndPrevious(int page,int pageSize,int totalPage,String url,String ontname){
+		StringBuffer result = new StringBuffer();
+		result.append("<ul class='pager'>");
+		if(page==1){
+			result.append("<li class='disabled'><a href='#'>Previous</a></li>");
+		}else{
+			result.append("<li><a href="+ url + "?ontname=" + ontname + "&page=" + (page-1) + ">Previous</a></li>");			
+		}
+		result.append("&nbsp;&nbsp;");
+		if(page == totalPage){
+			result.append("<li class='disabled'><a href='#'>Next</a></li>");
+		}else{
+			result.append("<li><a href="+ url + "?ontname=" + ontname + "&page=" + (page+1) + ">Next</a></li>");			
+		}
+		result.append("</ul>");
+		
+		return result.toString();
+	}
 }

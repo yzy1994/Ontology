@@ -25,8 +25,6 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
 <link
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -41,7 +39,10 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/bottom/Bottom.css" media="all">
 <link rel="stylesheet" href="resources/css/bont/Bont.css" />
+<link rel="stylesheet" href="resources/css/zTreeStyle/zTreeStyle.css" />
 
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script type="text/javascript" src="resources/js/common/UserInfo.js"></script>
 <script type="text/javascript" src="resources/js/svg.min.js"></script>
 <script type="text/javascript" src="resources/js/svg.draggable.js"></script>
 <script src="//cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
@@ -58,7 +59,6 @@
 <script type="text/javascript" src="resources/js/common/ObjOntGV.js"></script>
 <script type="text/javascript" src="resources/js/leftmenu/LeftMenu.js"></script>
 <script type="text/javascript" src="resources/js/tab/Tab.js"></script>
-<script type="text/javascript" src="resources/js/bont/setCookie.js"></script>
 
 <script type="text/javascript" src="resources/js/bont/ObjOntWin.js"></script>
 <script type="text/javascript" src="resources/js/bont/ObjOntSvg.js"></script>
@@ -83,6 +83,10 @@
 
 <script src="resources/js/jquery.contextify.js" type="text/javascript"></script>
 
+<script type="text/javascript"
+	src="resources/js/zTree/jquery.ztree.all.js"></script>
+
+
 
 </head>
 <body>
@@ -92,7 +96,7 @@
 				src="resources/images/navigation_images/head-background2.png" />
 		</div>
 		<jsp:include page="/pages/common/nav.jsp" />
-		<div class="row m-t-20 clearfix">
+		<div class="row m-t-20 clearfix w-1140" style="width: 1170px">
 			<div class="col-xs-3">
 				<div class="leftsidebar_box">
 					<!-- <div class="line"></div> -->
@@ -127,6 +131,8 @@
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="#tab0" data-toggle="tab">操作指南</a></li>
 						<li><a href="#tab1" data-toggle="tab">关于事件本体</a></li>
+						<li><a href="#tab3" data-toggle="tab">事件层次图目录结构</a></li>
+						<!-- <li><a href="#tab2" data-toggle="tab">概念层次图目录结构</a></li> -->
 					</ul>
 					<div id="myTabContent" class="tab-content clearfix list-wrap">
 						<div class="tab-pane fade in active m-t-20" id="tab0">
@@ -183,6 +189,22 @@
 							<div class="markdown">
 								动作要素描述事件的变化过程及其特征，是对程度，方式，方法，工具等的描述，例如快慢，使用什么，根据什么等等。</div>
 						</div>
+						<div class="tab-pane fade m-t-20" id="tab3">
+							<div class="artical-title">事件层次图目录结构</div>
+							<div class="content_wrap" style="padding-bottom: 20px;">
+								<div class="zTreeDemoBackground left">
+									<ul id="ec_Catalog" class="ztree"></ul>
+								</div>
+							</div>
+						</div>
+						<!-- <div class="tab-pane fade m-t-20" id="tab2">
+                            <div class="artical-title">概念层次图目录结构</div>
+                            <div class="content_wrap" style="padding-bottom: 20px;">
+                                <div class="zTreeDemoBackground left">
+                                    <ul id="c_Catalog" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div> -->
 					</div>
 				</div>
 			</div>
@@ -198,10 +220,10 @@
 				<i><span class="ontname"></span></i>事件类层次图
 				<h3>
 					<div>
-						<a class="min" href="javascript:;" title="最小化"></a> <a class="max"
-							href="javascript:;" title="最大化"></a> <a class="revert"
-							href="javascript:;" title="还原"></a> <a class="close"
-							href="javascript:;" id="objOntWinClose" title="关闭"></a>
+						<!-- <a class="min" href="javascript:;" title="最小化"></a> -->
+						<a class="max" href="javascript:;" title="最大化"></a> <a
+							class="revert" href="javascript:;" title="还原"></a> <a
+							class="close" href="javascript:;" id="objOntWinClose" title="关闭"></a>
 					</div>
 		</div>
 		<div class="resizeL"></div>
@@ -243,8 +265,10 @@
 					id="objOntReload" class="usefulimg reloadImg"
 					src="resources/images/common/reload.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img>
-				<!-- <img
-					id="objOntClean" src="resources/images/common/save.png"> -->
+				<shiro:hasRole name="builder">
+					<img id="objOntSaver" class="usefulimg saveImg"
+						src="resources/images/common/save.png">
+				</shiro:hasRole>
 				<img id="objOntPrinter" class="usefulimg printImg"
 					src="resources/images/common/printer.png">
 			</div>
@@ -293,9 +317,9 @@
 					<li id="liele" class="lielement"><label id="lele">语言表现要素:</label>
 						<label id="lelei" style="width: 300px;"></label></li>
 					<li id="lisubmit">
-						<button class="submit" type="submit" id="saveObj">保存</button>
-						<button class="submit" type="reset" id="resetObj">重置</button> <input
-						name="objOid" type="text" id="objOid" style="display: none">
+						<button class="btn btn-info" type="submit" id="saveObj">保存</button>
+						<button class="btn btn-info" type="reset" id="resetObj">重置</button>
+						<input name="objOid" type="text" id="objOid" style="display: none">
 					</li>
 
 				</ul>
@@ -334,8 +358,8 @@
 					</ul>
 				</div>
 				<li id="lisubmit">
-					<button class="submit" type="submit" id="saveAction">保存</button>
-					<button class="submit" type="reset" id="resetAction">重置</button>
+					<button class="btn btn-info" type="submit" id="saveAction">保存</button>
+					<button class="btn btn-info" type="reset" id="resetAction">重置</button>
 				</li>
 			</form>
 		</div>
@@ -381,9 +405,9 @@
 					</div> -->
 				</div>
 				<li id="lisubmit">
-					<button class="submit" type="submit" id="saveObj">保存</button>
-					<button class="submit" type="reset" id="resetObj">重置</button> <input
-					name="objOid" type="text" id="objOid" style="display: none">
+					<button class="btn btn-info" type="submit" id="saveObj">保存</button>
+					<button class="btn btn-info" type="reset" id="resetObj">重置</button>
+					<input name="objOid" type="text" id="objOid" style="display: none">
 				</li>
 			</form>
 		</div>
@@ -408,6 +432,7 @@
 								<option value="某类时间约束">某类时间约束</option>
 						</select></li>
 						<li><lable>延续长度：</lable> <select name="length" id="tsLength">
+								<option value="无约束">无约束</option>
 								<option value="几分钟">几分钟</option>
 								<option value="几秒钟">几秒钟</option>
 								<option value="几小时">几小时</option>
@@ -416,13 +441,15 @@
 								<option value="几月">几月</option>
 								<option value="几年">几年</option>
 								<option value="几世纪">几世纪</option>
+								<option value="短暂">短暂</option>
+								<option value="漫长">漫长</option>
 						</select></li>
 					</ul>
 				</div>
 				<li id="lisubmit">
-					<button class="submit" type="submit" id="saveObj">保存</button>
-					<button class="submit" type="reset" id="resetObj">重置</button> <input
-					name="objOid" type="text" id="objOid" style="display: none">
+					<button class="btn btn-info" type="submit" id="saveObj">保存</button>
+					<button class="btn btn-info" type="reset" id="resetObj">重置</button>
+					<input name="objOid" type="text" id="objOid" style="display: none">
 				</li>
 			</form>
 		</div>
@@ -450,8 +477,8 @@
 						required="required"></li>
 				</div>
 				<li id="lisubmit">
-					<button class="submit" type="submit" id="saveEnv">保存</button>
-					<button class="submit" type="reset" id="resetEnv">重置</button>
+					<button class="btn btn-info" type="submit" id="saveEnv">保存</button>
+					<button class="btn btn-info" type="reset" id="resetEnv">重置</button>
 				</li>
 			</form>
 		</div>
@@ -485,8 +512,8 @@
 					</ul>
 				</div>
 				<li id="lisubmit">
-					<button class="submit" type="submit" id="saveAssert">保存</button>
-					<button class="submit" type="reset" id="resetAssert">重置</button>
+					<button class="btn btn-info" type="submit" id="saveAssert">保存</button>
+					<button class="btn btn-info" type="reset" id="resetAssert">重置</button>
 				</li>
 			</form>
 		</div>
@@ -516,8 +543,8 @@
 					</ul>
 				</div>
 				<li id="lisubmit">
-					<button class="submit" type="submit" id="saveLanguage">保存</button>
-					<button class="submit" type="reset" id="resetLanguage">重置</button>
+					<button class="btn btn-info" type="submit" id="saveLanguage">保存</button>
+					<button class="btn btn-info" type="reset" id="resetLanguage">重置</button>
 				</li>
 			</form>
 		</div>
@@ -565,8 +592,10 @@
 					id="conceptReload" class="usefulimg reloadImg"
 					src="resources/images/common/reload.png"> <img
 					src="resources/images/common/gap.png" class="gap"></img>
-				<!-- <img
-					id="conceptClean" src="resources/images/common/save.png">  -->
+				<shiro:hasRole name="builder">
+					<img id="conceptSaver" class="usefulimg saveImg"
+						src="resources/images/common/save.png">
+				</shiro:hasRole>
 				<img id="conceptPrinter" class="usefulimg printImg"
 					src="resources/images/common/printer.png">
 			</div>
@@ -601,8 +630,8 @@
 					<div id="divproval"></div>
 
 					<li id="lisubmit">
-						<button class="submit" type="submit" id="saveConcept">保存</button>
-						<button class="submit" type="reset" id="resetConcept">重置</button>
+						<button class="btn btn-info" type="submit" id="saveConcept">保存</button>
+						<button class="btn btn-info" type="reset" id="resetConcept">重置</button>
 						<img src="resources/images/add.png" id="conceptimgadd" />
 					</li>
 
@@ -674,9 +703,9 @@
 						id="noteLB">备注:</label> <input value="note.." name="eclatnote"
 						type="text" required="required" id="addeclatnote"></li>
 					<li id="lisubmit">
-						<button class="submit" type="submit" id="saveObj">保存</button>
-						<button class="submit" type="reset" id="resetObj">重置</button> <input
-						name="objOid" type="text" id="objOid" style="display: none">
+						<button class="btn btn-info" type="submit" id="saveObj">保存</button>
+						<button class="btn btn-info" type="reset" id="resetObj">重置</button>
+						<input name="objOid" type="text" id="objOid" style="display: none">
 					</li>
 
 				</ul>
@@ -686,11 +715,95 @@
 
 	<iframe id="id_iframe" name="nm_iframe" style="display: none;"></iframe>
 
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">新建事件类关系</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form" id="ecr_form">
+						<div class="form-group">
+							<label for="rid" class="col-sm-2 control-label">rid:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="rid"
+									placeholder="输入关系ID">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="source" class="col-sm-2 control-label">source:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="source"
+									placeholder="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="target" class="col-sm-2 control-label">target:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="target"
+									placeholder="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="ontname" class="col-sm-2 control-label">ontname:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="ontname"
+									placeholder="">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-8 col-sm-10">
+								<button type="reset" class="btn btn-info">重置</button>
+								<button type="submit" class="btn btn-success">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="commentModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">修改建议</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form" id="comment_form">
+						<div class="form-group">
+							<label for="rid" class="col-sm-2 control-label">事件类名:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="commentLatname"
+									readonly="true">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="ontname" class="col-sm-2 control-label">修改建议:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="commentContent"
+									placeholder="">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-8 col-sm-10">
+								<button type="reset" class="btn btn-info">重置</button>
+								<button type="submit" class="btn btn-success">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script src="https://cdn.bootcss.com/echarts/3.5.4/echarts.min.js"></script>
 <script type="text/javascript" src="resources/js/bont/ecGraph.js"></script>
-<script type="text/javascript">
-	LoadECRelationGraph("突发事件本体", "main");
-	//$('#objOntReload').click();
-</script>
+<script type="text/javascript" src="resources/js/bont/Catalog.js"></script>
 </html>

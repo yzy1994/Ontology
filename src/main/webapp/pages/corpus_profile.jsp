@@ -17,11 +17,14 @@
 <link rel="shortcut icon" href="resources/images/title.ico"
 	type="image/x-icon" />
 <meta charset="UTF-8">
-<title>事件本体研究团队</title>
+<title>事件本体以及突发事件语料库--CEC</title>
 <link href="resources/css/index.css" rel="stylesheet">
 <link href="resources/css/common.css" rel="stylesheet">
+<script src="//cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+<link href="resources/css/common/sidebar.css" rel="stylesheet">
+<script type="text/javascript" src="resources/js/common/sidebar.js"></script>
 </head>
-<body>
+<body style="padding-left: 260px">
 	<div class="container">
 		<div>
 			<img id="titleImgId"
@@ -46,7 +49,7 @@
 						<li><h4>
 								<a href="https://github.com/daselab/CEEC-Corpus"><b>环境污染语料库下载地址</b></a>
 							</h4></li>
-						<li><h4>目录</h4></li>
+						<!-- <li><h4>目录</h4></li>
 						<li><a href="pages/corpus_profile.jsp#cec语料库引用"><h5>CEC语料库引用方式</h5></a></li>
 						<li><a href="pages/corpus_profile.jsp#什么是本体"><h5>什么是本体?</h5></a></li>
 						<li><a href="pages/corpus_profile.jsp#什么是事件"><h5>什么是事件?</h5></a></li>
@@ -54,7 +57,7 @@
 						<li><a href="pages/corpus_profile.jsp#事件本体的定义是什么"><h5>事件本体的定义是什么？</h5></a></li>
 						<li><a href="pages/corpus_profile.jsp#cec如何构建"><h5>CEC如何构建？</h5></a></li>
 						<li><a href="pages/corpus_profile.jsp#主要标签图结构图"><h5>主要标签图结构图</h5></a></li>
-						<li><a href="pages/corpus_profile.jsp#cec标注统计"><h5>CEC标注统计</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#cec标注统计"><h5>CEC标注统计</h5></a></li> -->
 					</ul>
 				</div>
 				<div id="article-content" class="article-content">
@@ -163,7 +166,31 @@
 					</div>
 				</div>
 			</div>
+			<div class="sidebar-toggle">
+				<div class="sidebar-toggle-line-wrap">
+					<span class="sidebar-toggle-line" id="sidebar-line-first"></span> <span
+						class="sidebar-toggle-line" id="sidebar-line-middle"></span> <span
+						class="sidebar-toggle-line" id="sidebar-line-last"></span>
+				</div>
+			</div>
+			<aside class="sidebar">
+				<div class="sidebar-inner">
 
+					<ul>
+						<li><h4>目录</h4></li>
+					</ul>
+					<ol>
+						<li><a href="pages/corpus_profile.jsp#cec语料库引用"><h5>1.CEC语料库引用方式</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#什么是本体"><h5>2.什么是本体?</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#什么是事件"><h5>3.什么是事件?</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#事件的定义是什么"><h5>4.事件的定义是什么？</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#事件本体的定义是什么"><h5>5.事件本体的定义是什么？</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#cec如何构建"><h5>6.CEC如何构建？</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#主要标签图结构图"><h5>7.主要标签图结构图</h5></a></li>
+						<li><a href="pages/corpus_profile.jsp#cec标注统计"><h5>8.CEC标注统计</h5></a></li>
+					</ol>
+				</div>
+			</aside>
 		</div>
 		<jsp:include page="/pages/common/foot.jsp" />
 </body>

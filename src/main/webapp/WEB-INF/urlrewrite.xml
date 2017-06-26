@@ -40,5 +40,5 @@
 		<from>/tool/about_ontology.html</from>
 		<to>/pages/drawont/about_ontology.jsp</to>
   	</rule>
-  
+  	
 </urlrewrite> 

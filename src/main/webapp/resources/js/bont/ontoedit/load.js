@@ -2,34 +2,32 @@ $(document).ready(function(){
 	$('#dealObjOntLat').hide();
 	$('#delalert').hide();
 	$('button#addOnt').click(function(){
-		$('#dealObjOntLat').show();
+		$('#addModal').modal();
 		$('#ontname').prop('readOnly',false);
 	})
+	
+	var path = document.URL;
+	var projectpath = document.location.pathname.substring(1);
+	var projectname = projectpath.substring(0,projectpath.indexOf("/"));
+	var base = path.substring(0,path.indexOf(document.location.pathname))
 	
 	$('.infobtn').click(function(){
 		$.cookie('role','notbuilder');
 		$.cookie('ontname',this.id);
-		window.location.href=('tool/bont.html');
+		window.location.href=(base + "/" + projectname +'/tool/bont.html');
 	})
 	
 	$('.editbtn').click(function(){
 		$.cookie('role','builder');
+		console.log(this.id);
 		$.cookie('ontname',this.id);
-		window.location.href=('tool/bont.html');
+		window.location.href=(base + "/" + projectname +'/tool/bont.html');
 	})
 	
 	//导出本体
 	$('button.exportbtn').click(function(){
 		var ontname = this.id;
 		var url= "filedownload.action"+"?ontname="+ ontname;
-		/*$.ajax({
-			url : url,
-			type : "post",
-			async : false,
-			data : "",
-			success : function(data) {
-			}
-		});*/
 		var form = $("<form>");
 		form.attr("style","display:none");
 		form.attr("target","");
@@ -89,10 +87,8 @@ $(document).ready(function(){
 			alert("不能删除系统默认本体")
 			return ;
 		}
-		$('#delalert').show();	
+		$('#removeModal').modal();
 	})
-	
-	$('')
 	
 	$('#importo').click(function(){
 		alert('请选择文件');

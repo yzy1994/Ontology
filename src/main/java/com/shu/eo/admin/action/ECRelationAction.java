@@ -23,8 +23,12 @@ import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 import com.shu.global.Global;
 
+import edu.shu.yzy.util.PropertiesUtil;
+
 @Controller("ecRelationAction")
 public class ECRelationAction extends ActionSupport {
+	private static final int pageSize = 5;
+	
 	private List<ECRelation> relationList;
 
 	public List<ECRelation> getRelationList() {
@@ -56,6 +60,10 @@ public class ECRelationAction extends ActionSupport {
 	private String rid;
 
 	private Integer ecrid;
+	
+	private int page;
+	
+	private String pagerCode;
 
 	public Integer getEcrid() {
 		return ecrid;
@@ -106,6 +114,22 @@ public class ECRelationAction extends ActionSupport {
 	public void setInputStr(String inputStr) {
 		this.inputStr = inputStr;
 	}
+	
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+	
+	public String getPagerCode() {
+		return pagerCode;
+	}
+
+	public void setPagerCode(String pagerCode) {
+		this.pagerCode = pagerCode;
+	}
 
 	@Inject
 	@Named("ECRelationService")
@@ -121,14 +145,20 @@ public class ECRelationAction extends ActionSupport {
 
 	public String queryList() {
 		try {
+			if("null".equals(String.valueOf(page))||page==0) page=1;
 			if (ontname == null || ontname == "")
 				this.ontname = ontService.findall().get(0).getName();
-			this.relationList = ecrelationService.queryECRelation(ontname);
-
+			List<ECRelation> tempList = ecrelationService.queryECRelation(ontname);
+			int totalPage=tempList.size()%pageSize==0?tempList.size()/pageSize:tempList.size()/pageSize+1;
+			page = (totalPage<page)?totalPage:page;
+			this.relationList = tempList.subList((page-1)*pageSize, Math.min(page*pageSize, tempList.size()));			
 			this.relationDefList = ecrelationService.queryECRelationDef();
-
+			
 			HttpServletRequest request = ServletActionContext.getRequest();
 			HttpServletResponse response = ServletActionContext.getResponse();
+			String url = request.getRequestURI();
+			this.pagerCode = PropertiesUtil.getNextAndPrevious(page, pageSize, totalPage, url, ontname);
+		
 			request.getRequestDispatcher("/pages/admin/ecr.jsp").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block

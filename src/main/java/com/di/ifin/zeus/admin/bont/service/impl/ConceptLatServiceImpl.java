@@ -68,4 +68,10 @@ public class ConceptLatServiceImpl implements ConceptLatService {
 		return false;
 	}
 
+	@Override
+	public void UpdateXByLatname(String latname, Integer x) {
+		// TODO Auto-generated method stub
+		mongoTemplate.updateFirst(new Query(Criteria.where("latname").is(latname)), new Update().set("x", x), collectionName);
+	}
+
 }

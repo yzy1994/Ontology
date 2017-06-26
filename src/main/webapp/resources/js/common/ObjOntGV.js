@@ -15,6 +15,8 @@ var ecEditUrl = "objOntAction!upsertEC.action";
 
 var ecDelurl = "objOntAction!removeEC.action";
 
+var ecInsertUrl = "objOntAction!insertEC.action"
+
 var ecInfoEditUrl = "objOntAction!queryECInfo.action";
 
 var timeElementEditUrl = "objOntAction!editTimeLat.action";
@@ -57,9 +59,12 @@ var researcherFindUrl = "objOntAction!queryAllResearcher.action";
 
 var paperFindUrl = "objOntAction!queryAllPaper.action";
 
+var addEditCommentUrl = "objOntAction!insertECEditComment.action";
+
 var conLineList = new ArrayList();
 
-//表名
+
 var CTN = "concept";
 var ELTN = "eve_ont_lat";
+//表名
 var timeelement = "time_element";

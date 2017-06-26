@@ -40,5 +40,6 @@ $(document).ready(function(){
 	});
 	$('#new_ecr').click(function(){
 		ecredit = 0;
+		
 	})
 })

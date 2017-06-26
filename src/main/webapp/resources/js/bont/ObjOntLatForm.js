@@ -58,6 +58,12 @@ $(document).ready(function() {
     	$('#addECWinClose').click();
     	return false;
     })
+    
+    //添加修改意见
+    $('#comment_form').bind('submit',function(){
+    	addCommentSubmit(this);
+    	return false;
+    })
 });
 
 // 将form转为AJAX提交
@@ -163,7 +169,7 @@ function timeElementSubmit(frm) {
     var act = timeElementEditUrl;
     var input = {};
     input["ontname"] = preontname;
-    input["evelatname"] = $('#tecname').text();
+    input["evelatname"] = $('#ecname').text();
     input["start"]=$('#tsStart').val();
     input["length"]=$('#tsLength').val();
     var inputstr = JSON.stringify(input);
@@ -186,7 +192,7 @@ function timeElementSubmit(frm) {
         	else{
         		$('#timeElementEdit').hide();
         		formReset("timeElementForm");
-        		updateTimeElement($("#tecname").text())
+        		updateECInfo($("#ecname").text());
         	}
         }
     });
@@ -220,7 +226,7 @@ function Submit(frm) {
         	else{
         		$('#timeElementEdit').hide();
         		formReset("timeElementForm");
-        		updateTimeElement($("#tecname").attr('evesid'))
+        		updateTimeElement($("#ecname").attr('evesid'))
         	}
         }
     });
@@ -310,7 +316,7 @@ function actionEditSubmit(frm){
         success: function(data){
         	console.log(data);
         	formReset("actionElementForm");
-    		updateActionElement($("#ecname").text());
+        	updateECInfo($("#ecname").text());
         }
     });
 }
@@ -331,7 +337,7 @@ function envEditSubmit(frm){
     	},
     	success:function(data){
     		formReset("envElementForm");
-    		updateEnvElement($('#ecname').text());
+    		updateECInfo($("#ecname").text());
     	}
     })
 }
@@ -354,7 +360,7 @@ function assertEditSubmit(frm){
     	success:function(data){
     		//...
     		formReset("assertElementForm");
-    		updateAssertElement($('#ecname').text());
+    		updateECInfo($("#ecname").text());
     	}
     })
 }
@@ -376,7 +382,7 @@ function languageEditSubmit(frm){
     	success:function(data){
     		//...
     		formReset("languageElementForm");
-    		updateLanElement($('#ecname').text());
+    		updateECInfo($("#ecname").text());
     	}
     })
 }
@@ -389,7 +395,7 @@ function addECSubmit(frm){
 	input["parentlatname"] = $('#addecparentlatname').val();
 	input["latnote"] = $('#addeclatnote').val();
 	var inputstr = JSON.stringify(input);
-	var act=ecEditUrl;
+	var act=ecInsertUrl;
 	
 	$.ajax({
         url: act,
@@ -403,4 +409,24 @@ function addECSubmit(frm){
         	$('#objOntReload').click();
         }
     });
+}
+
+function addCommentSubmit(frm){
+	var input = {};
+	input["ontname"] = preontname;
+	input["latname"] = $('#commentLatname').val();
+	input["comment"] = $('#commentContent').val();
+	inputstr = JSON.stringify(input);
+	$.ajax({
+		url : addEditCommentUrl,
+		type : frm.method,
+		async : true,
+		data: {
+			inputStr : inputstr,
+		},
+		success:function(data){
+			$('#commentContent').val('');
+			$('#commentModal').modal('hide')
+		}
+	})
 }

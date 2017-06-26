@@ -24,10 +24,12 @@ public interface LatService {
 
 	void updateByLatname(String collection,String ontname,String latname, Map<String, String> mapadd);
 	
-	List<OntLat> queryByLatname(String collection,String ontname,String latname);
+	OntLat queryByLatname(String collection,String ontname,String latname);
 
 	void updateByLatname(String collection, String ontname, String latname, Map<String, String> map,
 			Map<String, String> mapadd);
 	
 	boolean IsExistChildren(String collection,String ontname,String latname);
+	
+	void updateXByLatname(String collection, String ontname, String latname , Integer x);
 }

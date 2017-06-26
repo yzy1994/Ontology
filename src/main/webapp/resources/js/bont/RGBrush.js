@@ -1,6 +1,6 @@
-function RGBrush() {
+function RGBrush(brushId) {
 	var rgbrush = document.createElementNS(xmlns, "radialGradient");
-	rgbrush.setAttribute("id", "rgBrush");
+	rgbrush.setAttribute("id", brushId); //"rgBrush"
 	rgbrush.setAttribute("cx", "50%");
 	rgbrush.setAttribute("cy", "50%");
 	rgbrush.setAttribute("r", "50%");

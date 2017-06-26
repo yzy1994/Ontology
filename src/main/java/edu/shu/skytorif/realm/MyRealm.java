@@ -1,5 +1,8 @@
 package edu.shu.skytorif.realm;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -11,13 +14,20 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.shu.eo.admin.service.UserService;
+import com.shu.eo.admin.user.pojo.User;
+
 import edu.shu.skytorif.mapper.UserMapper;
-import edu.shu.skytorif.pojo.User;
 
 public class MyRealm extends AuthorizingRealm{
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Inject
+	@Named("UserService")
+	private UserService userservice;
+	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// TODO Auto-generated method stub
@@ -25,11 +35,10 @@ public class MyRealm extends AuthorizingRealm{
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		
 		try {
-			info.setRoles(userMapper.getRolenamesByUsername(username));
-			info.setStringPermissions(userMapper.getPernamesByUsername(username));
-			
-			System.out.println(userMapper.getRolenamesByUsername(username));
-			System.out.println(userMapper.getPernamesByUsername(username));
+			info.setRoles(userservice.getRolenamesByUsername(username));
+			//info.setStringPermissions(userMapper.getPernamesByUsername(username));
+			//System.out.println(userMapper.getRolenamesByUsername(username));
+			//System.out.println(userMapper.getPernamesByUsername(username));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,7 +51,7 @@ public class MyRealm extends AuthorizingRealm{
 		String username = (String) token.getPrincipal();
 		User user = null;
 		try {
-			user = userMapper.getUserByUsername(username);
+			user = userservice.getUserByUsername(username);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

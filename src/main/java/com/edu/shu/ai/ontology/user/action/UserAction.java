@@ -1,36 +1,33 @@
 package com.edu.shu.ai.ontology.user.action;
 
 
-import java.net.URLDecoder;
-
-import javax.servlet.ServletRequest;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
-import org.apache.struts.action.ActionServlet;
 import org.apache.struts2.ServletActionContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.shu.eo.admin.service.UserService;
 
-import edu.shu.skytorif.mapper.UserMapper;
-import edu.shu.skytorif.pojo.User;
 
 @SuppressWarnings("serial")
 @Controller("userAction")
 public class UserAction extends ActionSupport {
 	
-	@Autowired
-	private UserMapper userMapper;
+	/*@Autowired
+	private UserMapper userMapper;*/
+	
+	@Inject
+	@Named("UserService")
+	UserService userservice;
 	
 	private String username;
 	private String password;
@@ -122,8 +119,8 @@ public class UserAction extends ActionSupport {
 			System.out.println("wu quanxian!!");
 		}
 		
-		User user = userMapper.getUserByUsername("admin1");
-		System.out.println("dfasfadf:" + user.getPassword() );
+		//User user = userMapper.getUserByUsername("admin1");
+		//System.out.println("dfasfadf:" + user.getPassword() );
 		return SUCCESS;
 
 	}

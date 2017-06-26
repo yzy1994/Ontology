@@ -2,16 +2,16 @@ function DrawOntLat(ontLat) {
 	var locX;
 	var locY;
 
-	DrawOntLat.prototype.drawLat = function(rectclass) {
+	DrawOntLat.prototype.drawLat = function(rectclass,BrushId) {
 		var g = this.drawLatGro(ontLat.latname, ontLat.oid, this.locX,
-				this.locY, "fal");
+				this.locY, "fal",rectclass);
 		var textStr = ontLat.latname;
 		var num = textStr.length;
 		var len = num * fontsize;
 		var recwid = Math.round(len + widSup);
 
 		var drawLatRec = this.drawLatRec(recwid, recHei, rx, ry, latStroke,
-				"url(" + objOntUrl + "#rgBrush)", this.locX, this.locY,rectclass);
+				"url(" + objOntUrl + "#"+ BrushId +")", this.locX, this.locY,rectclass);
 		
 		
 		// var drawLatRec = this.drawLatRec(recwid, recHei, rx, ry, latStroke,
@@ -43,13 +43,14 @@ function DrawOntLat(ontLat) {
 		drawLatRec.addEventListener("dblclick", select);
 		return g;
 	}
-	DrawOntLat.prototype.drawLatGro = function(id, oid, locX, locY, isSel) {
+	DrawOntLat.prototype.drawLatGro = function(id, oid, locX, locY, isSel,rectclass) {
 		var g = document.createElementNS(xmlns, "g");
 		g.setAttribute("id", id);
 		g.setAttribute("oid", oid);
 		g.setAttribute("x", locX);
 		g.setAttribute("y", locY);
 		g.setAttribute("isSel", isSel);
+		g.setAttribute("class", rectclass);
 		return g;
 	}
 	DrawOntLat.prototype.drawLatText = function(locX, locY, devX, devY, content) {
@@ -65,7 +66,7 @@ function DrawOntLat(ontLat) {
 	DrawOntLat.prototype.drawLatRec = function(width, height, rx, ry, stroke,
 			fill, locX, locY,rectclass) {
 		var rect = document.createElementNS(xmlns, "rect");
-		rect.setAttribute("class",rectclass);
+		//rect.setAttribute("class",rectclass);
 		rect.setAttribute("width", width);
 		rect.setAttribute("height", height);
 		rect.setAttribute("rx", rx);
@@ -78,12 +79,13 @@ function DrawOntLat(ontLat) {
 	}
 	DrawOntLat.prototype.drawLatLinkNode = function(locX, locY, radius, type) {
 		var circle = document.createElementNS(xmlns, "circle");
-		circle.setAttribute("stroke", "red");
-		circle.setAttribute("fill", "red");
+		circle.setAttribute("stroke", "black");
+		circle.setAttribute("fill", "black");
 		circle.setAttribute("cx", locX);
 		circle.setAttribute("cy", locY);
 		circle.setAttribute("r", radius);
 		circle.setAttribute("type", type);
+		circle.setAttribute("opacity","0");
 		return circle;
 	}
 }

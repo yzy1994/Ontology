@@ -35,8 +35,13 @@
 				<tr>
 					<th><a href="ecRelationAction!queryList">事件本体关系管理</a></th>
 				</tr>
+				
+				<tr>
+					<th><a href="userEditCommentAction!queryList">用户修改意见管理</a></th>
+				</tr>
 			</table>
 		</div>
+		
 		<jsp:include page="/pages/common/foot.jsp" />
 	</div>
 </body>

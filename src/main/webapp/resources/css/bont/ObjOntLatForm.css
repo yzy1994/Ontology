@@ -107,11 +107,10 @@ body {
 		center;
 }
 
-.contact_form input:required:valid, .contact_form textarea:required:valid
-	{
+.contact_form input:required:valid, .contact_form textarea:required:valid{
 	background: #fff url(../../images/common/valid.png) no-repeat 98% center;
-	box-shadow: 0 0 5px #5cd053;
-	border-color: #28921f;
+	box-shadow: 0 0 5px #66ddff;
+	border-color: #44bbff;
 }
 
 .contact_form input:focus:invalid, .contact_form textarea:focus:invalid
@@ -147,7 +146,7 @@ body {
 }
 
 .contact_form input:required:valid+.form_hint {
-	background: #28921f;
+	background: #44bbff;
 }
 
 .contact_form input:required:valid+.form_hint::before {
@@ -231,10 +230,10 @@ li.lielement{
     border: 1px solid #aaa;
 }
 select{
-	background: #5da227 0px 0px;
+	background: #33ccff 0px 0px;
     color: #ffffff;
     font-size: 14px;
-    border: #69a52e 1px solid;
+    border: #44bbff 1px solid;
     padding: 2px;
     width: 80px;
 }

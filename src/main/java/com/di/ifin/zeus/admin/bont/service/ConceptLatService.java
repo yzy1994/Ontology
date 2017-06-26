@@ -15,4 +15,6 @@ public interface ConceptLatService {
 	public boolean IsExists(String latname);
 	
 	public boolean IsExistsChildNode(String latname);
+	
+	public void UpdateXByLatname(String latname,Integer x);
 }

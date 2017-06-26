@@ -18,8 +18,8 @@ function DrawConLine(startId, endId,svgId) {
 		lineA.setAttribute("y1", startY);
 		lineA.setAttribute("x2", endX);
 		lineA.setAttribute("y2", endY);
-		lineA.setAttribute("stroke", "red");
-		lineA.setAttribute("stroke-width", "1.5");
+		lineA.setAttribute("stroke", "black");
+		lineA.setAttribute("stroke-width", "1");
 		lineA.setAttribute("marker-end", "url(" + objOntUrl + "#arrow)");
 		conLineList.add(lineA);
 		return lineA;

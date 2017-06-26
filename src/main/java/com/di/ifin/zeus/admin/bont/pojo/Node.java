@@ -17,8 +17,8 @@ public class Node {
 	public Node(String name) {
 		this.name = name;
 		Integer[] i = new Integer[2];
-		i[0] = name.length() * 12 + 24;
-		i[1] = 24;
+		i[0] = name.length() * 12 + 28;
+		i[1] = 28;
 		this.setSymbolSize(i);
 	}
 
