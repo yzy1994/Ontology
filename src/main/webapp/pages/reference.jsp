@@ -82,7 +82,7 @@
 						</dd> -->
 						<s:iterator value="plist" id="p" status="st">
 							<dd class="paper col-xs-12">
-								<a href="http://47.92.7.239/ontology/<s:property escape="0" value="path"/>"><s:property escape="0" value="pname"/></a>
+								<a href="/<s:property escape="0" value="path"/>"><s:property escape="0" value="pname"/></a>
 							</dd>
 						</s:iterator>
 					</dl>

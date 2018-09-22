@@ -479,9 +479,9 @@ function createShowLayer(tempList) {
 					/*if (tempList.get(m).parentlatname == temp.latname)
 						layerList[l + 1].add(tempList.get(m));*/
 					var parents = tempList.get(m).parentlatname.split(",");
-						if(parents[0]==temp.latname){
-								layerList[l + 1].add(tempList.get(m));
-						}
+					if(parents[0]==temp.latname){
+						layerList[l + 1].add(tempList.get(m));
+					}
 							
 				}
 			}

@@ -3,12 +3,12 @@ package com.di.ifin.zeus.admin.bont.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
+import org.springframework.stereotype.Repository;
 
 import com.di.ifin.zeus.admin.bont.dao.ObjOntLatDao;
 import com.di.ifin.zeus.admin.bont.pojo.ObjOntLat;
 
-@Named("objOntLatDao")
+@Repository("objOntLatDao")
 public class ObjOntLatDaoImpl  implements ObjOntLatDao {
 
 	@SuppressWarnings("unchecked")

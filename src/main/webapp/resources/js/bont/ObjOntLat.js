@@ -3,9 +3,6 @@ function ObjOntLat() {
 	var latname;
 	var parentlatname;
 	var latnote;
-/*	var peoElement;
-	var objElement;
-	var envElement;*/
 	
 	var grand;
 	var showOrder;

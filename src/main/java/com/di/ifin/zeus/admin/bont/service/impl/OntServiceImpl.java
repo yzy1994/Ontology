@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import com.di.ifin.zeus.admin.bont.dao.OntDao;
 import com.di.ifin.zeus.admin.bont.pojo.OntInfo;
 import com.di.ifin.zeus.admin.bont.service.OntService;
 import com.mongodb.WriteResult;
@@ -18,43 +19,30 @@ import com.shu.global.Global;
 @Named("OntService")
 public class OntServiceImpl implements OntService {
 	@Autowired
-	private MongoTemplate mongoTemplate;
-
-	private static String collection = Global.ont_info;
-
-	public void setMongoTemplate(MongoTemplate mongoTemplate) {
-		this.mongoTemplate = mongoTemplate;
-	}
+	private OntDao ontDao;
 
 	public List<OntInfo> findall() {
-		List<OntInfo> list = mongoTemplate.findAll(OntInfo.class, "ont_info");
-		return list;
+		return ontDao.queryAll();
 	}
 
 	public String delOntByName(String ontname) {
-		// TODO Auto-generated method stub
-		WriteResult wr = mongoTemplate.remove(new Query(Criteria.where("name").is(ontname)), OntServiceImpl.collection);
-		return wr.toString();
+		return ontDao.delOntByName(ontname);
 	}
 
 	public void addOnt(OntInfo ontinfo) {
-		mongoTemplate.insert(ontinfo, collection);
+		ontDao.addOnt(ontinfo);
 	}
 
 	public boolean findByName(String ontname) {
-		// TODO Auto-generated method stub
-		return mongoTemplate.exists(new Query(Criteria.where("name").is(ontname)), collection);
+		return ontDao.isExistByName(ontname);
 	}
 
 	public OntInfo findInfoByName(String ontname) {
-		OntInfo result = mongoTemplate.find(new Query(Criteria.where("name").is(ontname)),OntInfo.class, collection).get(0);
-		return result;
+		return ontDao.findInfoByName(ontname);
 	}
 
 	@Override
 	public void editOnt(String ontname, String field) {
-		// TODO Auto-generated method stub
-		Criteria c = Criteria.where("ontname").is(ontname);
-		mongoTemplate.updateFirst(new Query(c), new Update().set("field", field), collection);
+		ontDao.editOnt(ontname, field);
 	}
 }

@@ -55,16 +55,13 @@ public class XmlUtil {
 	public static void createXMl(List list, Element root) throws Exception {
 		if (list.size() > 0) {
 			Object obj = list.get(0);
-			Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(obj
-					.getClass());
+			Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(obj.getClass());
 			for (int i = 0; i < list.size(); i++) {
 				Object objTemp = list.get(i);
-				Element element = root.addElement(obj.getClass()
-						.getSimpleName());
+				Element element = root.addElement(obj.getClass().getSimpleName());
 				for (int j = 0; j < fieldAllArray.length; j++) {
 					Field tempField = fieldAllArray[j];
-					Object value = BaseReflectUtils.invokeGetMethod(objTemp,
-							tempField, null);
+					Object value = BaseReflectUtils.invokeGetMethod(objTemp, tempField, null);
 					if (value != null && !value.toString().equals("")) {
 						String type = tempField.getType().getName();
 						String prefixType = type.substring(0, 3);
@@ -74,28 +71,20 @@ public class XmlUtil {
 							XmlUtil.createXMl(tempList, element);
 						} else if (prefixType.equals("com")) {
 
-							Element element2 = element.addElement(value
-									.getClass().getSimpleName());
+							Element element2 = element.addElement(value.getClass().getSimpleName());
 
-							Field fieldAllArray2[] = BaseReflectUtils
-									.getAllFieldFromClass(value.getClass());
+							Field fieldAllArray2[] = BaseReflectUtils.getAllFieldFromClass(value.getClass());
 							for (int k = 0; k < fieldAllArray2.length; k++) {
 								Field tempField2 = fieldAllArray2[k];
-								Object value2 = BaseReflectUtils
-										.invokeGetMethod(value, tempField2,
-												null);
-								if (value2 != null
-										&& !value2.toString().equals("")) {
-									String type2 = tempField2.getType()
-											.getName();
-									Element tempElement2 = element2
-											.addElement(tempField2.getName());
+								Object value2 = BaseReflectUtils.invokeGetMethod(value, tempField2, null);
+								if (value2 != null && !value2.toString().equals("")) {
+									String type2 = tempField2.getType().getName();
+									Element tempElement2 = element2.addElement(tempField2.getName());
 									tempElement2.setText(value2.toString());
 								}
 							}
 						} else {
-							Element tempElement = element.addElement(tempField
-									.getName());
+							Element tempElement = element.addElement(tempField.getName());
 							tempElement.setText(value.toString());
 						}
 					}
@@ -104,18 +93,16 @@ public class XmlUtil {
 		}
 	}
 
-	public static void createXMl(List list, Element root,String nodeName) throws Exception {
+	public static void createXMl(List list, Element root, String nodeName) throws Exception {
 		if (list.size() > 0) {
 			Object obj = list.get(0);
-			Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(obj
-					.getClass());
+			Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(obj.getClass());
 			for (int i = 0; i < list.size(); i++) {
 				Object objTemp = list.get(i);
 				Element element = root.addElement(nodeName);
 				for (int j = 0; j < fieldAllArray.length; j++) {
 					Field tempField = fieldAllArray[j];
-					Object value = BaseReflectUtils.invokeGetMethod(objTemp,
-							tempField, null);
+					Object value = BaseReflectUtils.invokeGetMethod(objTemp, tempField, null);
 					if (value != null && !value.toString().equals("")) {
 						String type = tempField.getType().getName();
 						String prefixType = type.substring(0, 3);
@@ -125,28 +112,20 @@ public class XmlUtil {
 							XmlUtil.createXMl(tempList, element);
 						} else if (prefixType.equals("com")) {
 
-							Element element2 = element.addElement(value
-									.getClass().getSimpleName());
+							Element element2 = element.addElement(value.getClass().getSimpleName());
 
-							Field fieldAllArray2[] = BaseReflectUtils
-									.getAllFieldFromClass(value.getClass());
+							Field fieldAllArray2[] = BaseReflectUtils.getAllFieldFromClass(value.getClass());
 							for (int k = 0; k < fieldAllArray2.length; k++) {
 								Field tempField2 = fieldAllArray2[k];
-								Object value2 = BaseReflectUtils
-										.invokeGetMethod(value, tempField2,
-												null);
-								if (value2 != null
-										&& !value2.toString().equals("")) {
-									String type2 = tempField2.getType()
-											.getName();
-									Element tempElement2 = element2
-											.addElement(tempField2.getName());
+								Object value2 = BaseReflectUtils.invokeGetMethod(value, tempField2, null);
+								if (value2 != null && !value2.toString().equals("")) {
+									String type2 = tempField2.getType().getName();
+									Element tempElement2 = element2.addElement(tempField2.getName());
 									tempElement2.setText(value2.toString());
 								}
 							}
 						} else {
-							Element tempElement = element.addElement(tempField
-									.getName());
+							Element tempElement = element.addElement(tempField.getName());
 							tempElement.setText(value.toString());
 						}
 					}
@@ -154,6 +133,7 @@ public class XmlUtil {
 			}
 		}
 	}
+
 	public static void main(String[] args) throws Exception {
 		String filePath = "E:\\EventEntity.xls";
 		// PartiEntity p1 = new PartiEntity();
@@ -186,8 +166,7 @@ public class XmlUtil {
 		//
 		// partiModleList.add(partiModle);
 		// partiModleList.add(partiModle2);
-		partiClassList = XmlUtil.xls2String(filePath,
-				"com.eo.eventclass.ethqk2.EventClass");
+		partiClassList = XmlUtil.xls2String(filePath, "com.eo.eventclass.ethqk2.EventClass");
 
 		String filePath2 = "D:\\EventClass.xml";
 		XmlUtil.multiWrite(partiClassList, filePath2);
@@ -266,39 +245,33 @@ public class XmlUtil {
 		// }
 	}
 
-	public static List analyzeXml(String filePath, String nodeName,
-			String className, String fieldType, String ontType)
-			throws DocumentException, ClassNotFoundException,
-			InstantiationException, IllegalAccessException,
+	public static List analyzeXml(String filePath, String nodeName, String className, String fieldType, String ontType)
+			throws DocumentException, ClassNotFoundException, InstantiationException, IllegalAccessException,
 			NoSuchMethodException, ParseException, InvocationTargetException {
 		List resultList = new ArrayList();
 		String prefix = "//";
-		List<Element> tempNodeList = ERutil.readXml(filePath, nodeName,
-				fieldType, ontType);
+		List<Element> tempNodeList = ERutil.readXml(filePath, nodeName, fieldType, ontType);
 		// List tempNodeList=JdomUtil.queryElementByXPath();
 		System.out.println(tempNodeList.size());
 		getObjectList(tempNodeList, resultList, className);
 		return resultList;
 	}
 
-	public static List analyzeXml(String filePath, String nodeName,
-			String className) throws DocumentException, ClassNotFoundException,
-			InstantiationException, IllegalAccessException,
+	public static List analyzeXml(String filePath, String nodeName, String className)
+			throws DocumentException, ClassNotFoundException, InstantiationException, IllegalAccessException,
 			NoSuchMethodException, ParseException, InvocationTargetException {
 		List resultList = new ArrayList();
 		String prefix = "//";
-		List<Element> tempNodeList = ERutil
-				.readXml(filePath, prefix + nodeName);
+		List<Element> tempNodeList = ERutil.readXml(filePath, prefix + nodeName);
 		// List tempNodeList=JdomUtil.queryElementByXPath();
 		System.out.println(tempNodeList.size());
 		getObjectList(tempNodeList, resultList, className);
 		return resultList;
 	}
 
-	public static List analyzeXml(String filePath) throws DocumentException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException, NoSuchMethodException, ParseException,
-			InvocationTargetException {
+	public static List analyzeXml(String filePath)
+			throws DocumentException, ClassNotFoundException, InstantiationException, IllegalAccessException,
+			NoSuchMethodException, ParseException, InvocationTargetException {
 		String prefix = "//";
 		String nodeName = "root";
 
@@ -310,19 +283,16 @@ public class XmlUtil {
 			Element root = nodeList.get(0);
 			String className = root.attributeValue("className");
 			String simpleName = BaseReflectUtils.getSimpleName(className);
-			List<Element> tempNodeList = ERutil.readXml(filePath, prefix
-					+ simpleName);
+			List<Element> tempNodeList = ERutil.readXml(filePath, prefix + simpleName);
 
 			getObjectList(tempNodeList, resultList, className);
 		}
 		return resultList;
 	}
 
-	public static void getObjectList(List<Element> tempNodeList,
-			List resultList, String className) throws DocumentException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException, NoSuchMethodException, ParseException,
-			InvocationTargetException {
+	public static void getObjectList(List<Element> tempNodeList, List resultList, String className)
+			throws DocumentException, ClassNotFoundException, InstantiationException, IllegalAccessException,
+			NoSuchMethodException, ParseException, InvocationTargetException {
 		// String simpleName = BaseReflectUtils.getSimpleName(className);
 
 		for (int i = 0; i < tempNodeList.size(); i++) {
@@ -330,8 +300,7 @@ public class XmlUtil {
 
 			Class tempClass = Class.forName(className);
 			Object obj = tempClass.newInstance();
-			Field fieldAllArray[] = BaseReflectUtils
-					.getAllFieldFromClass(tempClass);
+			Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(tempClass);
 
 			for (int j = 0; j < fieldAllArray.length; j++) {
 
@@ -339,19 +308,15 @@ public class XmlUtil {
 				String type = tempField.getType().getName();
 				String prefixType = type.substring(0, 3);
 				if (type.equals("java.util.List")) {
-					ParameterizedType pType = (ParameterizedType) tempField
-							.getGenericType();
-					String entityType = pType.getActualTypeArguments()[0]
-							.getTypeName();
-					String simpleName = BaseReflectUtils
-							.getSimpleName(entityType);
+					ParameterizedType pType = (ParameterizedType) tempField.getGenericType();
+					String entityType = pType.getActualTypeArguments()[0].getTypeName();
+					String simpleName = BaseReflectUtils.getSimpleName(entityType);
 					List<Element> nodeList1 = element.elements(simpleName);
 					List resultList1 = new ArrayList();
 
 					XmlUtil.getObjectList(nodeList1, resultList1, entityType);
 
-					BaseReflectUtils
-							.ivokeSetMethod(obj, tempField, resultList1);
+					BaseReflectUtils.ivokeSetMethod(obj, tempField, resultList1);
 				} else if (prefixType.equals("com")) {
 
 					Class tempClass2 = Class.forName(type);
@@ -360,14 +325,11 @@ public class XmlUtil {
 					Element element2 = element.element(simpleName2);
 					Object obj2 = tempClass2.newInstance();
 
-					Field fieldAllArray2[] = BaseReflectUtils
-							.getAllFieldFromClass(tempClass2);
+					Field fieldAllArray2[] = BaseReflectUtils.getAllFieldFromClass(tempClass2);
 					for (int k = 0; k < fieldAllArray2.length; k++) {
 						Field tempField2 = fieldAllArray2[k];
-						String value = element2.elementText(tempField2
-								.getName());
-						BaseReflectUtils
-								.ivokeSetMethod(obj2, tempField2, value);
+						String value = element2.elementText(tempField2.getName());
+						BaseReflectUtils.ivokeSetMethod(obj2, tempField2, value);
 					}
 					BaseReflectUtils.ivokeSetMethod(obj, tempField, obj2);
 				} else {
@@ -401,13 +363,11 @@ public class XmlUtil {
 							Object temp = resultList.get(m);
 
 							String contract = "";
-							Field fieldAllArray2[] = BaseReflectUtils
-									.getAllFieldFromClass(temp.getClass());
+							Field fieldAllArray2[] = BaseReflectUtils.getAllFieldFromClass(temp.getClass());
 							for (int k = 0; k < fieldAllArray2.length; k++) {
 								Field field = fieldAllArray2[k];
 								if (field.getName().contains("Name")) {
-									contract = (String) BaseReflectUtils
-											.invokeGetMethod(temp, field, null);
+									contract = (String) BaseReflectUtils.invokeGetMethod(temp, field, null);
 								}
 							}
 							List list = new ArrayList();
@@ -419,14 +379,9 @@ public class XmlUtil {
 									String type = tempField.getType().getName();
 
 									if (type.equals("java.util.List")) {
-										list = (List) BaseReflectUtils
-												.invokeGetMethod(temp,
-														tempField, null);
-										ParameterizedType pType = (ParameterizedType) tempField
-												.getGenericType();
-										entityType = pType
-												.getActualTypeArguments()[0]
-												.getTypeName();
+										list = (List) BaseReflectUtils.invokeGetMethod(temp, tempField, null);
+										ParameterizedType pType = (ParameterizedType) tempField.getGenericType();
+										entityType = pType.getActualTypeArguments()[0].getTypeName();
 										break;
 									}
 								}
@@ -440,16 +395,12 @@ public class XmlUtil {
 										Object tempEntity = list.get(n);
 										String contract2 = "";
 										Field fieldAllArray3[] = BaseReflectUtils
-												.getAllFieldFromClass(tempEntity
-														.getClass());
+												.getAllFieldFromClass(tempEntity.getClass());
 										for (int k = 0; k < fieldAllArray3.length; k++) {
 											Field field = fieldAllArray3[k];
-											if (field.getName()
-													.contains("Name")) {
-												contract2 = (String) BaseReflectUtils
-														.invokeGetMethod(
-																tempEntity,
-																field, null);
+											if (field.getName().contains("Name")) {
+												contract2 = (String) BaseReflectUtils.invokeGetMethod(tempEntity, field,
+														null);
 											}
 										}
 
@@ -458,19 +409,13 @@ public class XmlUtil {
 											// .getNumber() + 1);
 											for (int k = 0; k < fieldAllArray3.length; k++) {
 												Field field = fieldAllArray3[k];
-												if (field.getName().contains(
-														"number")) {
+												if (field.getName().contains("number")) {
 													Integer value = (Integer) BaseReflectUtils
-															.invokeGetMethod(
-																	tempEntity,
-																	field, null) + 1;
+															.invokeGetMethod(tempEntity, field, null) + 1;
 
 													// field.set(object, value);
-													BaseReflectUtils
-															.ivokeSetMethod(
-																	tempEntity,
-																	field,
-																	value.toString());
+													BaseReflectUtils.ivokeSetMethod(tempEntity, field,
+															value.toString());
 												}
 											}
 											flag2 = true;
@@ -494,13 +439,11 @@ public class XmlUtil {
 						if (flag == false) {
 							Class classTemp = Class.forName(className1);
 							Object object = classTemp.newInstance();
-							Field fieldAllArray[] = BaseReflectUtils
-									.getAllFieldFromClass(classTemp);
+							Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(classTemp);
 							for (int k = 0; k < fieldAllArray.length; k++) {
 								Field field = fieldAllArray[k];
 								if (field.getName().contains("Name")) {
-									BaseReflectUtils.ivokeSetMethod(object,
-											field, className);
+									BaseReflectUtils.ivokeSetMethod(object, field, className);
 									break;
 								}
 							}
@@ -520,11 +463,9 @@ public class XmlUtil {
 		return resultList;
 	}
 
-	private static void addEntity(String entityName, Object temp)
-			throws Exception {
+	private static void addEntity(String entityName, Object temp) throws Exception {
 
-		Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(temp
-				.getClass());
+		Field fieldAllArray[] = BaseReflectUtils.getAllFieldFromClass(temp.getClass());
 		String entityType = "";
 		for (int j = 0; j < fieldAllArray.length; j++) {
 
@@ -532,8 +473,7 @@ public class XmlUtil {
 			String type = tempField.getType().getName();
 
 			if (type.equals("java.util.List")) {
-				ParameterizedType pType = (ParameterizedType) tempField
-						.getGenericType();
+				ParameterizedType pType = (ParameterizedType) tempField.getGenericType();
 				entityType = pType.getActualTypeArguments()[0].getTypeName();
 				break;
 			}
@@ -541,20 +481,17 @@ public class XmlUtil {
 
 		Class classTemp = Class.forName(entityType);
 		Object object = classTemp.newInstance();
-		Field fieldAllArray2[] = BaseReflectUtils
-				.getAllFieldFromClass(classTemp);
+		Field fieldAllArray2[] = BaseReflectUtils.getAllFieldFromClass(classTemp);
 		for (int k = 0; k < fieldAllArray2.length; k++) {
 			Field field = fieldAllArray2[k];
 			if (field.getName().contains("Name")) {
 				BaseReflectUtils.ivokeSetMethod(object, field, entityName);
 			}
 			if (field.getName().contains("number")) {
-				Integer value = (Integer) BaseReflectUtils.invokeGetMethod(
-						object, field, null) + 1;
+				Integer value = (Integer) BaseReflectUtils.invokeGetMethod(object, field, null) + 1;
 
 				// field.set(object, value);
-				BaseReflectUtils
-						.ivokeSetMethod(object, field, value.toString());
+				BaseReflectUtils.ivokeSetMethod(object, field, value.toString());
 			}
 		}
 
@@ -564,8 +501,7 @@ public class XmlUtil {
 			String type = tempField.getType().getName();
 
 			if (type.equals("java.util.List")) {
-				List list = (List) BaseReflectUtils.invokeGetMethod(temp,
-						tempField, null);
+				List list = (List) BaseReflectUtils.invokeGetMethod(temp, tempField, null);
 				list.add(object);
 				break;
 			}
@@ -583,15 +519,14 @@ public class XmlUtil {
 			file.delete();
 	}
 
-	public static void removeXMLNode(String filePath, String nodeName,
-			String nodeValue) throws IOException {
+	public static void removeXMLNode(String filePath, String nodeName, String nodeValue) throws IOException {
 		ERutil.removeXMLNode(filePath, nodeName, nodeValue);
 
 	}
 
-	public static void insertXMLNode(String filePath,String nodeName, OntInfo ontInfo,
-			String fieldType, String ontType) throws Exception {
-		List<OntInfo> ontInfoList=new ArrayList<OntInfo>();
+	public static void insertXMLNode(String filePath, String nodeName, OntInfo ontInfo, String fieldType,
+			String ontType) throws Exception {
+		List<OntInfo> ontInfoList = new ArrayList<OntInfo>();
 		ontInfoList.add(ontInfo);
 		XMLWriter writer = null;// 声明写XML的对象
 		SAXReader reader = new SAXReader();
@@ -602,14 +537,15 @@ public class XmlUtil {
 		doc = ERutil.getDocument(filePath);
 		Element element = ERutil.readXml(doc, fieldType, ontType);
 		// @SuppressWarnings("unchecked")
-		createXMl(ontInfoList,element,"eventCls");
+		createXMl(ontInfoList, element, "eventCls");
 		writer = new XMLWriter(new FileWriter(file), format);
 		writer.write(doc);
 		writer.close();
 	}
-	public static void insertXMLNode(String filePath, OntInfo ontInfo,
-			String fieldType, String ontType) throws Exception {
-		List<OntInfo> ontInfoList=new ArrayList<OntInfo>();
+
+	public static void insertXMLNode(String filePath, OntInfo ontInfo, String fieldType, String ontType)
+			throws Exception {
+		List<OntInfo> ontInfoList = new ArrayList<OntInfo>();
 		ontInfoList.add(ontInfo);
 		XMLWriter writer = null;// 声明写XML的对象
 		SAXReader reader = new SAXReader();
@@ -620,7 +556,7 @@ public class XmlUtil {
 		doc = ERutil.getDocument(filePath);
 		Element element = ERutil.readXml(doc, fieldType, ontType);
 		// @SuppressWarnings("unchecked")
-		createXMl(ontInfoList,element,"eventCls");
+		createXMl(ontInfoList, element, "eventCls");
 		writer = new XMLWriter(new FileWriter(file), format);
 		writer.write(doc);
 		writer.close();

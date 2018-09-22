@@ -20,9 +20,6 @@ import com.shu.eo.admin.user.pojo.User;
 import edu.shu.skytorif.mapper.UserMapper;
 
 public class MyRealm extends AuthorizingRealm{
-
-	@Autowired
-	private UserMapper userMapper;
 	
 	@Inject
 	@Named("UserService")

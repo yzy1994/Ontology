@@ -2,10 +2,8 @@ package com.di.ifin.zeus.admin.bont.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,14 +33,11 @@ import com.di.ifin.zeus.admin.bont.service.AssertionElementService;
 import com.di.ifin.zeus.admin.bont.service.ConceptLatService;
 import com.di.ifin.zeus.admin.bont.service.ECEditCommentService;
 import com.di.ifin.zeus.admin.bont.service.EnvElementService;
-import com.di.ifin.zeus.admin.bont.service.EnvOntLatService;
-import com.di.ifin.zeus.admin.bont.service.EveOntLatService;
 import com.di.ifin.zeus.admin.bont.service.GlobalMongoService;
 import com.di.ifin.zeus.admin.bont.service.LanguageElementService;
 import com.di.ifin.zeus.admin.bont.service.LatService;
 import com.di.ifin.zeus.admin.bont.service.ObjElementService;
 import com.di.ifin.zeus.admin.bont.service.PaperService;
-import com.di.ifin.zeus.admin.bont.service.PeoOntLatService;
 import com.di.ifin.zeus.admin.bont.service.ResearcherService;
 import com.di.ifin.zeus.admin.bont.service.TimeElementService;
 import com.google.gson.Gson;
@@ -71,18 +66,6 @@ public class ObjOntAction extends ActionSupport {
 	@Inject
 	@Named("ECEditCommentService")
 	private ECEditCommentService eceditcommentservice;
-
-	@Inject
-	@Named("eveOntLatService")
-	private EveOntLatService eveOntLatService;
-
-	@Inject
-	@Named("envOntLatService")
-	private EnvOntLatService envOntLatService;
-
-	@Inject
-	@Named("peoOntLatService")
-	private PeoOntLatService peoOntLatService;
 
 	@Inject
 	@Named("LatService")
@@ -444,6 +427,7 @@ public class ObjOntAction extends ActionSupport {
 	}
 
 	//
+	@Deprecated
 	public String queryLatBySid() {
 		this.additionStr = "";
 		JSONObject json = JSONObject.fromObject(inputStr);
